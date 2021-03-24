@@ -39,16 +39,7 @@ export default function MainContainer() {
     <Paper className={classes.root}>
     <Grid container spacing={3}>
       <Grid item xs={3}>
-
-
-            <Typography component="h5" variant="h5">
-              Live From Space
-            </Typography>
-            <Typography variant="subtitle1" color="textSecondary">
-              Mac Miller
-            </Typography>
-
-
+        <SideContainer/>
       </Grid>
       <Grid item xs={9}>
 
