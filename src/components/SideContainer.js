@@ -7,12 +7,14 @@ import Card from '@material-ui/core/Card';
 import Link from '@material-ui/core/Link';
 import WeaponCard from './WeaponCard.js';
 import ModCard from './ModCard.js';
+import { Column, Row, Item } from '@mui-treasury/components/flex';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     // display: 'flex',
     // flexDirection: 'column',
     // minHeight: '100vh',
+    paddingLeft: 60,
   },
   main: {
     // marginTop: theme.spacing(8),
@@ -31,13 +33,14 @@ export default function SideContainer() {
 
   return (
     <div className={classes.root}>
-
-      <Typography variant="body1">Loadout</Typography>
-      <div>
-        <WeaponCard loadoutClass={'primary'}/>
-        <WeaponCard loadoutClass={'secondary'}/>
-        <ModCard/>
-      </div>
+      <Column>
+        <Item>
+          <Typography variant="body1">Loadout</Typography>
+        </Item>
+        <Item>
+          <WeaponCard loadoutClass={'primary'}/>
+        </Item>
+      </Column>
     </div>
   );
 }

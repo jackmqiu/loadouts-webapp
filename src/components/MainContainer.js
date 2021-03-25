@@ -9,10 +9,10 @@ import Image from '../Img/Loadout.jpeg';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: '600px',
-    height: '400px',
+    width: '960px',
+    height: '600px',
     backgroundImage: `url(${Image})`,
-    backgroundSize: '600px 400px',
+    backgroundSize: '960px 600px',
     backgroundRepeat: 'no-repeat',
   },
 
