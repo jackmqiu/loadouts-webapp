@@ -36,11 +36,11 @@ const useStyles = makeStyles({
   }
 });
 
-export default function WeaponCard({gun}) {
+export default function WeaponCard({gun, toggleDrawer}) {
   const classes = useStyles();
 
   return (
-    <Card className={classes.root}>
+    <Card className={classes.root} onClick={() => {toggleDrawer()}}>
 
       <Column gap={.5}>
         <Row >

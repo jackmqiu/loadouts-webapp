@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function SideContainer({loadoutState}) {
+export default function SideContainer({loadoutState, toggleDrawer}) {
   const classes = useStyles();
 
   return (
@@ -39,8 +39,8 @@ export default function SideContainer({loadoutState}) {
 
           </Typography>
         </Item>
-        <WeaponCard gun={loadoutState.primary}/>
-        <WeaponCard gun={loadoutState.secondary}/>
+        <WeaponCard gun={loadoutState.primary} toggleDrawer={toggleDrawer}/>
+        <WeaponCard gun={loadoutState.secondary} toggleDrawer={toggleDrawer}/>
       </Column>
     </div>
   );

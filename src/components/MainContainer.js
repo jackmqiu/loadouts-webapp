@@ -31,14 +31,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function MainContainer({loadoutState}) {
+export default function MainContainer({loadoutState, toggleDrawer}) {
   const classes = useStyles();
-  
+
   return (
     <Paper className={classes.root}>
     <Grid container spacing={3}>
       <Grid item xs={3}>
-        <SideContainer loadoutState={loadoutState}/>
+        <SideContainer loadoutState={loadoutState} toggleDrawer={toggleDrawer}/>
       </Grid>
       <Grid item xs={9}>
 
