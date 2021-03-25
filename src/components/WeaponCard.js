@@ -15,7 +15,21 @@ const useStyles = makeStyles({
   root: {
     width: 200,
     height: 110,
+    backgroundColor: '#141819'
   },
+  weaponStatus: {
+    fontSize: '0.75rem',
+    color: '#4F8A99',
+  },
+  weaponClass: {
+    fontSize: '0.75rem',
+    color: '#727676',
+  },
+  weaponImg: {
+    padding: '0px 20px 0px 20px',
+    maxWidth: '100%',
+    display: 'flex',
+  }
 });
 
 export default function WeaponCard() {
@@ -24,22 +38,33 @@ export default function WeaponCard() {
   return (
     <Card className={classes.root}>
 
-      <Column>
-        <Row>
-          <Item position='left'> Primary Weapon </Item>
+      <Column gap={.5}>
+        <Row >
+          <Item position='left'>
+            <div className={classes.weaponStatus}>Primary Weapon</div>
+          </Item>
+        </Row>
+        <Row gap={'inherit'}>
+          <Item positon='left'>
+            <div className={classes.weaponClass}>AK-47</div>
+          </Item>
         </Row>
         <Row>
-          <Item positon='left'> AK-47 </Item>
+          <Item className={classes.weaponImg}>
+            <CardMedia
+              component="img"
+              alt="Contemplative Reptile"
+              image='https://i.imgur.com/tWaWwc1.png'
+            />
+          </Item>
         </Row>
-        <CardMedia
-          component="img"
-          alt="Contemplative Reptile"
-          image='https://i.imgur.com/P7p7MxW.png'
-        />
-
-        <Row>
-          <Item> Assault Rifle </Item>
-          <Item positon='right'> G & G </Item>
+        <Row position={'bottom'}>
+          <Item>
+            <div className={classes.weaponClass}>Assault Rifle</div>
+          </Item>
+          <Item position='right'>
+            <div className={classes.weaponClass}>G&G</div>
+          </Item>
         </Row>
       </Column>
     </Card>
