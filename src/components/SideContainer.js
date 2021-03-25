@@ -1,13 +1,14 @@
 import React from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Card from '@material-ui/core/Card';
 import Link from '@material-ui/core/Link';
 import WeaponCard from './WeaponCard.js';
 import ModCard from './ModCard.js';
 import { Column, Row, Item } from '@mui-treasury/components/flex';
+import 'fontsource-roboto';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,26 +21,27 @@ const useStyles = makeStyles((theme) => ({
     // marginTop: theme.spacing(8),
     // marginBottom: theme.spacing(2),
   },
-  // leftContainer: {
-  //   padding: theme.spacing(10, 2),
-  //   marginRight: 'auto',
-  //   backgroundColor:
-  //     theme.palette.type === 'light' ? theme.palette.grey[200] : theme.palette.grey[800],
-  // },
+  loadoutTitle: {
+    color: '#4F8A99',
+    padding: '5px 0 25px 0',
+    // fontFamily: 'Raleway',
+  }
 }));
 
-export default function SideContainer() {
+
+export default function SideContainer({loadoutState}) {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
       <Column>
-        <Item>
-          <Typography variant="body1">Loadout</Typography>
+        <Item className={classes.loadoutTitle}>
+          <Typography variant="h4">
+
+          </Typography>
         </Item>
-        <Item>
-          <WeaponCard loadoutClass={'primary'}/>
-        </Item>
+        <WeaponCard gun={loadoutState.primary}/>
+        <WeaponCard gun={loadoutState.secondary}/>
       </Column>
     </div>
   );

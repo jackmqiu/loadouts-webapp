@@ -10,12 +10,16 @@ import Typography from '@material-ui/core/Typography';
 import Image from '../Img/gun_image_1.png';
 import { useCoverCardMediaStyles } from '@mui-treasury/styles/cardMedia/cover';
 import { Column, Row, Item } from '@mui-treasury/components/flex';
+import backgroundImage from '../Img/dotted_background.png';
 
 const useStyles = makeStyles({
   root: {
     width: 200,
     height: 110,
-    backgroundColor: '#141819'
+    backgroundImage: `url(${backgroundImage})`,
+    backgroundSize: '200px 200px',
+    backgroundColor: 'transparent',
+    margin: 5,
   },
   weaponStatus: {
     fontSize: '0.75rem',
@@ -32,7 +36,7 @@ const useStyles = makeStyles({
   }
 });
 
-export default function WeaponCard() {
+export default function WeaponCard({gun}) {
   const classes = useStyles();
 
   return (
@@ -46,7 +50,7 @@ export default function WeaponCard() {
         </Row>
         <Row gap={'inherit'}>
           <Item positon='left'>
-            <div className={classes.weaponClass}>AK-47</div>
+            <div className={classes.weaponClass}>{gun.name}</div>
           </Item>
         </Row>
         <Row>
@@ -60,10 +64,10 @@ export default function WeaponCard() {
         </Row>
         <Row position={'bottom'}>
           <Item>
-            <div className={classes.weaponClass}>Assault Rifle</div>
+            <div className={classes.weaponClass}>{gun.class}</div>
           </Item>
           <Item position='right'>
-            <div className={classes.weaponClass}>G&G</div>
+            <div className={classes.weaponClass}>{gun.manufacturer}</div>
           </Item>
         </Row>
       </Column>
