@@ -44,12 +44,13 @@ function App() {
       },
     });
   };
-  const setClass = (weaponSelection, weaponClass) => {
+  const setClass = (event) => {
+    console.log('setClass', event.target.value)
     setLoadoutState({
       ...loadoutState,
-      [weaponSelection]: {
-        ...loadoutState[weaponSelection],
-        class: weaponClass,
+      [drawerState.weaponSelection]: {
+        ...loadoutState[drawerState.weaponSelection],
+        class: event.target.value,
       }
     })
   };
@@ -65,7 +66,7 @@ function App() {
             onChange={setClass}
             label="Class"
             inputProps={{
-              name: 'Class',
+              name: 'class',
               id: 'outlined-class-native-simple',
             }}
           >
