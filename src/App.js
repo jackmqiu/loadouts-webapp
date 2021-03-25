@@ -26,7 +26,7 @@ function App() {
   return (
     <div className="App" >
       <MainContainer loadoutState={loadoutState} toggleDrawer={toggleDrawer}/>
-      <Drawer anchor={'bottom'} open={drawerState} >
+      <Drawer anchor={'bottom'} open={drawerState} onClose={() => {toggleDrawer()}}>
         drawer
       </Drawer>
     </div>
