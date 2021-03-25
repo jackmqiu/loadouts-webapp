@@ -8,7 +8,6 @@ import Link from '@material-ui/core/Link';
 import WeaponCard from './WeaponCard.js';
 import ModCard from './ModCard.js';
 import { Column, Row, Item } from '@mui-treasury/components/flex';
-import 'fontsource-roboto';
 
 const useStyles = makeStyles((theme) => ({
   root: {
