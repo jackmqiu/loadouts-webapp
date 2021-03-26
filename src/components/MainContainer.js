@@ -24,18 +24,33 @@ class MainContainer extends React.Component {
 
 
   render() {
-    const {loadoutState, toggleDrawer, classes } = this.props;
+    const {loadoutState, toggleDrawer, classes, backImage } = this.props;
+    console.log('backImage', backImage);
     return (
-      <Paper className={classes.root}>
-      <Grid container spacing={3}>
-        <Grid item xs={3}>
-          <SideContainer loadoutState={loadoutState} toggleDrawer={toggleDrawer}/>
-        </Grid>
-        <Grid item xs={9}>
+      <div>
+      { backImage ?
+        <div className={classes.root} style={{ backgroundImage: `url(${backImage['data_url']})` }}>
+        <Grid container spacing={3}>
+          <Grid item xs={3}>
+            <SideContainer loadoutState={loadoutState} toggleDrawer={toggleDrawer}/>
+          </Grid>
+          <Grid item xs={9}>
 
+          </Grid>
         </Grid>
-      </Grid>
-      </Paper>
+        </div>
+        : <div className={classes.root} style={{ backgroundImage: `url(${Image})` }}>
+        <Grid container spacing={3}>
+          <Grid item xs={3}>
+            <SideContainer loadoutState={loadoutState} toggleDrawer={toggleDrawer}/>
+          </Grid>
+          <Grid item xs={9}>
+
+          </Grid>
+        </Grid>
+        </div>
+      }
+      </div>
     );
   }
 }
