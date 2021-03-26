@@ -1,15 +1,31 @@
 
 import './App.css';
 import MainContainer from './components/MainContainer.js';
-import React, { useState, useEffect } from "react";
-import Drawer from '@material-ui/core/Drawer';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import NativeSelect from '@material-ui/core/NativeSelect';
+import React, { useState, useEffect, createRef, useRef } from "react";
+import { useScreenshot, createFileName } from 'use-react-screenshot'
+import {
+  Select,
+  Button,
+  NativeSelect,
+  FormControl,
+  FormHelperText,
+  InputLabel,
+  Drawer,
+} from '@material-ui/core';
 
 function App() {
+  const capture = createRef(null)
+  const [image, takeScreenshot] = useScreenshot()
+  const getImage = () => {
+    takeScreenshot(capture.current).then(download);
+    console.log('image', capture.current);
+  }
+  const download = (image, { name = "my_loadout1", extension = "jpg" } = {}) => {
+    const a = document.createElement("a");
+    a.href = image;
+    a.download = createFileName(extension, name);
+    a.click();
+  };
   const [loadoutState, setLoadoutState] = useState({
     primary: {
       name: 'AK-47',
@@ -54,9 +70,12 @@ function App() {
       }
     })
   };
+
   return (
     <div className="App" >
-      <MainContainer loadoutState={loadoutState} toggleDrawer={toggleDrawer}/>
+      <div ref={capture}>
+        <MainContainer loadoutState={loadoutState} toggleDrawer={toggleDrawer} />
+      </div>
       <Drawer anchor={'bottom'} open={drawerState.open} onClose={() => {toggleDrawer('primary')}}>
         <FormControl variant="outlined">
           <InputLabel htmlFor="outlined-age-native-simple">Gun</InputLabel>
@@ -77,6 +96,8 @@ function App() {
           </Select>
         </FormControl>
       </Drawer>
+       <Button variant="contained" onClick={getImage}>Export</Button>
+       <img width={100} src={image} alt={'Screenshot'} />
     </div>
   );
 }

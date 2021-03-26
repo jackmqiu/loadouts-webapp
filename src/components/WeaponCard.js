@@ -11,6 +11,7 @@ import Image from '../Img/gun_image_1.png';
 import { useCoverCardMediaStyles } from '@mui-treasury/styles/cardMedia/cover';
 import { Column, Row, Item } from '@mui-treasury/components/flex';
 import backgroundImage from '../Img/dotted_background.png';
+import gunImage from '../Img/gun_image_1.png';
 
 const useStyles = makeStyles({
   root: {
@@ -58,7 +59,7 @@ export default function WeaponCard({gun, toggleDrawer, weaponSelection}) {
             <CardMedia
               component="img"
               alt="Contemplative Reptile"
-              image='https://i.imgur.com/tWaWwc1.png'
+              image={gunImage}
             />
           </Item>
         </Row>
