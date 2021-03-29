@@ -1,6 +1,7 @@
 
 import './App.css';
 import MainContainer from './components/MainContainer.js';
+import MenuBar from './components/MenuBar.js';
 import React, { useState, useEffect, createRef, useRef } from "react";
 import ImageUploader from 'react-images-upload';
 import ImageUploading from 'react-images-uploading';
@@ -88,7 +89,7 @@ function App() {
 
   return (
     <div className="App" >
-
+      <MenuBar/>
       <Drawer anchor={'bottom'} open={drawerState.open} onClose={() => {toggleDrawer('primary')}}>
         <FormControl variant="outlined">
           <InputLabel htmlFor="outlined-age-native-simple">Gun</InputLabel>
