@@ -2,6 +2,7 @@
 import './App.css';
 import MainContainer from './components/MainContainer.js';
 import MenuBar from './components/MenuBar.js';
+import DrawerContainer from './components/DrawerContainer.js';
 import React, { useState, useEffect, createRef, useRef } from "react";
 import ImageUploader from 'react-images-upload';
 import ImageUploading from 'react-images-uploading';
@@ -23,7 +24,19 @@ function App() {
   const [image, takeScreenshot] = useScreenshot();
   const [backImage, uploadBackImage] = useState(null);
   const [images, setImages] = useState([]);
+  const [drawerState, toggleDrawerState] = useState({
+    open: false,
+    weaponSelection: 'primary',
+  });
 
+  const toggleDrawer = (weaponSelection) => {
+    toggleDrawerState({
+      open: !drawerState.open,
+      weaponSelection: weaponSelection,
+    });
+    console.log('toggleDrawer ', weaponSelection, drawerState.weaponSelection);
+
+  };
   const getImage = () => {
     takeScreenshot(capture.current).then(download);
     console.log('image', capture.current);
@@ -54,19 +67,7 @@ function App() {
       manufacturer: 'Action Army',
     },
   });
-  const [drawerState, toggleDrawerState] = useState({
-    open: false,
-    weaponSelection: 'primary',
-  });
 
-  const toggleDrawer = (weaponSelection) => {
-    toggleDrawerState({
-      open: !drawerState.open,
-      weaponSelection: weaponSelection,
-    });
-    console.log('toggleDrawer ', weaponSelection, drawerState.weaponSelection);
-
-  };
   const setGun = (weaponSelection, gun) => {
     setLoadoutState({
       ...loadoutState,
@@ -90,26 +91,13 @@ function App() {
   return (
     <div className="App" >
       <MenuBar/>
-      <Drawer anchor={'bottom'} open={drawerState.open} onClose={() => {toggleDrawer('primary')}}>
-        <FormControl variant="outlined">
-          <InputLabel htmlFor="outlined-age-native-simple">Gun</InputLabel>
-          <Select
-            native
-            value={loadoutState[drawerState.weaponSelection].class}
-            onChange={setClass}
-            label="Class"
-            inputProps={{
-              name: 'class',
-              id: 'outlined-class-native-simple',
-            }}
-          >
-            <option aria-label="None" value="" />
-            <option value={'assault'}>Assault Rifle</option>
-            <option value={'smg'}>SMG</option>
-            <option value={'pistol'}>Pistol</option>
-          </Select>
-        </FormControl>
-      </Drawer>
+       <DrawerContainer
+        setClass={setClass}
+        setGun={setGun}
+        loadoutState={loadoutState}
+        drawerState={drawerState}
+        toggleDrawer={toggleDrawer}
+      />
        <Button variant="contained" onClick={getImage}>Export</Button>
        <ImageUploading
         multiple
