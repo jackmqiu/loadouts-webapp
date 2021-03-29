@@ -115,7 +115,7 @@ function App() {
         multiple
         value={images}
         onChange={onChange}
-        maxNumber={2}
+        maxNumber={1}
         dataURLKey="data_url"
        >
         {({
