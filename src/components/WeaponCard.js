@@ -11,7 +11,37 @@ import Image from '../Img/gun_image_1.png';
 import { useCoverCardMediaStyles } from '@mui-treasury/styles/cardMedia/cover';
 import { Column, Row, Item } from '@mui-treasury/components/flex';
 import backgroundImage from '../Img/dotted_background.png';
-import gunImage from '../Img/gun_image_1.png';
+import {
+  ak47,
+  nineteenEleven,
+  mac10,
+  mp5,
+  mp7,
+  krissVector,
+  fnScar,
+  m4,
+  glock,
+  sig,
+  beretta,
+  desertEagle
+} from '../Img';
+import { useWideCardMediaStyles } from '@mui-treasury/styles/cardMedia/wide';
+
+const gunImageTable = {
+  ak47: ak47,
+  '1911': nineteenEleven,
+  'MAC-10': mac10,
+  MP5: mp5,
+  MP7: mp7,
+  'KRISS Vector': krissVector,
+  'AK-47': ak47,
+  'SCAR-17': fnScar,
+  M4: m4,
+  Glock: glock,
+  Sig: sig,
+  Beretta: beretta,
+  'Desert Eagle': desertEagle,
+}
 
 const useStyles = makeStyles({
   root: {
@@ -30,15 +60,28 @@ const useStyles = makeStyles({
     fontSize: '0.75rem',
     color: '#727676',
   },
+  weaponItem: {
+    display: 'block'
+  },
   weaponImg: {
     padding: '0px 20px 0px 20px',
     maxWidth: '100%',
     display: 'flex',
+    maxHeight: 50,
+  },
+  pistolImg: {
+    padding: '0px 60px 0px 60px',
+    maxWidth: '100%',
+    display: 'flex',
+    maxHeight: 50,
   }
+
 });
 
 export default function WeaponCard({gun, toggleDrawer, weaponSelection}) {
   const classes = useStyles();
+  const wideCardMediaStyles = useWideCardMediaStyles();
+  console.log('gun.gunimage', gun.gunImage);
 
   return (
     <Card className={classes.root} onClick={() => {toggleDrawer(weaponSelection)}}>
@@ -55,11 +98,11 @@ export default function WeaponCard({gun, toggleDrawer, weaponSelection}) {
           </Item>
         </Row>
         <Row>
-          <Item className={classes.weaponImg}>
+          <Item className={classes.pistolImg}>
             <CardMedia
               component="img"
               alt="Contemplative Reptile"
-              image={gunImage}
+              image={gunImageTable[gun.gunName]}
             />
           </Item>
         </Row>

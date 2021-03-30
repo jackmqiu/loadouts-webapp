@@ -29,11 +29,13 @@ function App() {
       gunName: 'AK-47',
       class: 'Assault Rifle',
       manufacturer: 'G&G',
+      gunImage: 'Img/AK-47.png',
     },
     secondary: {
-      gunName: 'AAP-01',
+      gunName: '1911',
       class: 'Pistol',
       manufacturer: 'Action Army',
+      gunImage: 'Img/1911.png',
     },
   });
   const [drawerState, toggleDrawerState] = useState({
