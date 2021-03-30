@@ -24,6 +24,18 @@ function App() {
   const [image, takeScreenshot] = useScreenshot();
   const [backImage, uploadBackImage] = useState(null);
   const [images, setImages] = useState([]);
+  const [loadoutState, setLoadoutState] = useState({
+    primary: {
+      gunName: 'AK-47',
+      class: 'Assault Rifle',
+      manufacturer: 'G&G',
+    },
+    secondary: {
+      gunName: 'AAP-01',
+      class: 'Pistol',
+      manufacturer: 'Action Army',
+    },
+  });
   const [drawerState, toggleDrawerState] = useState({
     open: false,
     weaponSelection: 'primary',
@@ -32,7 +44,7 @@ function App() {
   const toggleDrawer = (weaponSelection) => {
     toggleDrawerState({
       open: !drawerState.open,
-      weaponSelection: weaponSelection,
+      weaponSelection: weaponSelection, //primary or secondary
     });
     console.log('toggleDrawer ', weaponSelection, drawerState.weaponSelection);
 
@@ -55,18 +67,7 @@ function App() {
     console.log(imageList, addUpdateIndex);
     setImages(imageList);
   };
-  const [loadoutState, setLoadoutState] = useState({
-    primary: {
-      name: 'AK-47',
-      class: 'Assault Rifle',
-      manufacturer: 'G&G',
-    },
-    secondary: {
-      name: 'AAP-01',
-      class: 'Pistol',
-      manufacturer: 'Action Army',
-    },
-  });
+
 
   const setGun = (weaponSelection, gun) => {
     setLoadoutState({
@@ -95,6 +96,7 @@ function App() {
         setClass={setClass}
         setGun={setGun}
         loadoutState={loadoutState}
+        setLoadoutState={setLoadoutState}
         drawerState={drawerState}
         toggleDrawer={toggleDrawer}
       />

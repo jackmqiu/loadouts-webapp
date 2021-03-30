@@ -51,7 +51,7 @@ export default function WeaponCard({gun, toggleDrawer, weaponSelection}) {
         </Row>
         <Row gap={'inherit'}>
           <Item positon='left'>
-            <div className={classes.weaponClass}>{gun.name}</div>
+            <div className={classes.weaponClass}>{gun.gunName}</div>
           </Item>
         </Row>
         <Row>
