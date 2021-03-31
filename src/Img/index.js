@@ -5,6 +5,8 @@ export { default as desertEagle } from './Desert-eagle-50.png';
 export { default as glock } from './Glock-x16.png';
 export { default as krissVector } from './kriss-vector.png';
 export { default as m4 } from './M4.png';
+export { default as m16 } from './M16.png';
+export { default as ar15 } from './AR15.png';
 export { default as mac10 } from './MAC-10.png';
 export { default as mp5 } from './MP5.png';
 export { default as mp7 } from './MP7.png';

@@ -5,7 +5,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import SideContainer from './SideContainer.js';
 import Grid from '@material-ui/core/Grid';
-import Image from '../Img/LoadoutTest.jpeg';
+import Image from '../Img/LoadoutTest.jpg';
 
 const styles = {
   root: {

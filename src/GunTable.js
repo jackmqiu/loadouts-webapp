@@ -37,6 +37,14 @@ const GunTable = {
         m4: {
           name: 'M4',
           imgUrl: 'Img/M4.png',
+        },
+        ar15: {
+          name: 'AR-15',
+          imgUrl: 'Img/M4.png',
+        },
+        m16: {
+          name: 'M16',
+          imgUrl: 'Img/M4.png',
         }
       }
     },

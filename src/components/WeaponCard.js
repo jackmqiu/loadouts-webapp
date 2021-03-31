@@ -11,6 +11,7 @@ import Image from '../Img/gun_image_1.png';
 import { useCoverCardMediaStyles } from '@mui-treasury/styles/cardMedia/cover';
 import { Column, Row, Item } from '@mui-treasury/components/flex';
 import backgroundImage from '../Img/dotted_background.png';
+import KeyTable from '../KeyTable.js';
 import {
   ak47,
   nineteenEleven,
@@ -20,6 +21,8 @@ import {
   krissVector,
   fnScar,
   m4,
+  m16,
+  ar15,
   glock,
   sig,
   beretta,
@@ -37,6 +40,8 @@ const gunImageTable = {
   'AK-47': ak47,
   'SCAR-17': fnScar,
   M4: m4,
+  M16: m16,
+  'AR-15': ar15,
   Glock: glock,
   Sig: sig,
   Beretta: beretta,
@@ -63,7 +68,7 @@ const useStyles = makeStyles({
   weaponItem: {
     display: 'block'
   },
-  weaponImg: {
+  assaultImg: {
     padding: '0px 20px 0px 20px',
     maxWidth: '100%',
     display: 'flex',
@@ -74,8 +79,13 @@ const useStyles = makeStyles({
     maxWidth: '100%',
     display: 'flex',
     maxHeight: 50,
-  }
-
+  },
+  smgImg: {
+    padding: '0px 60px 0px 60px',
+    maxWidth: '100%',
+    display: 'flex',
+    maxHeight: 50,
+  },
 });
 
 export default function WeaponCard({gun, toggleDrawer, weaponSelection}) {
@@ -98,7 +108,7 @@ export default function WeaponCard({gun, toggleDrawer, weaponSelection}) {
           </Item>
         </Row>
         <Row>
-          <Item className={classes.pistolImg}>
+          <Item className={classes[`${KeyTable[gun.class]}Img`]}>
             <CardMedia
               component="img"
               alt="Contemplative Reptile"

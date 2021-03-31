@@ -26,8 +26,8 @@ function App() {
   const [images, setImages] = useState([]);
   const [loadoutState, setLoadoutState] = useState({
     primary: {
-      gunName: 'AK-47',
-      class: 'Assault Rifle',
+      gunName: 'AR-15',
+      class: 'Assault',
       manufacturer: 'G&G',
       gunImage: 'Img/AK-47.png',
     },
