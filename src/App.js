@@ -4,6 +4,8 @@ import MainContainer from './components/MainContainer.js';
 import MenuBar from './components/MenuBar.js';
 import DrawerContainer from './components/DrawerContainer.js';
 import React, { useState, useEffect, createRef, useRef } from "react";
+import ReactGA from 'react-ga';
+
 import ImageUploader from 'react-images-upload';
 import ImageUploading from 'react-images-uploading';
 
@@ -18,6 +20,9 @@ import {
   InputLabel,
   Drawer,
 } from '@material-ui/core';
+
+const TRACKING_ID = "G-F4LSKD8M8H";
+ReactGA.initialize(TRACKING_ID);
 
 function App() {
   const capture = createRef(null);
@@ -44,6 +49,10 @@ function App() {
   });
 
   const toggleDrawer = (weaponSelection) => {
+    ReactGA.event({
+      category: 'Action',
+      action: 'toggleDrawer'
+    });
     toggleDrawerState({
       open: !drawerState.open,
       weaponSelection: weaponSelection, //primary or secondary
@@ -52,10 +61,18 @@ function App() {
 
   };
   const getImage = () => {
+    ReactGA.event({
+      category: 'Action',
+      action: 'downloadLoadout'
+    });
     takeScreenshot(capture.current).then(download);
     console.log('image', capture.current);
   }
   const onDrop = (picture) => {
+    ReactGA.event({
+      category: 'Action',
+      action: 'uploadPic'
+    });
     uploadBackImage(picture);
   }
   const download = (image, { name = "my_loadout1", extension = "jpg" } = {}) => {
@@ -72,6 +89,10 @@ function App() {
 
 
   const setGun = (weaponSelection, gun) => {
+    ReactGA.event({
+      category: 'Action',
+      action: 'setGun'
+    });
     setLoadoutState({
       ...loadoutState,
       [weaponSelection]: {
@@ -81,6 +102,10 @@ function App() {
     });
   };
   const setClass = (event) => {
+    ReactGA.event({
+      category: 'Action',
+      action: 'setClass'
+    });
     console.log('setClass', event.target.value)
     setLoadoutState({
       ...loadoutState,

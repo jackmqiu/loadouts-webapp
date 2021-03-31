@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import ReactGA from 'react-ga';
 import {
   Select,
   Button,
@@ -10,6 +11,9 @@ import {
 } from '@material-ui/core';
 import gunTable from '../GunTable.js';
 import keyTable from '../KeyTable.js';
+
+const TRACKING_ID = "G-F4LSKD8M8H";
+ReactGA.initialize(TRACKING_ID);
 
 const DrawerContainer = ({
   currentClass,
@@ -27,13 +31,20 @@ const DrawerContainer = ({
     weaponSelection: '',
   });
   const selectClass = (event) => {
+    ReactGA.event({
+      category: 'Action',
+      action: 'inDrawerSelectClass'
+    });
     updateSelectionState({
       ...selectionState,
       class: event.target.value
     })
   }
   const submitSelectionState = (event) => {
-    console.log('submitSelectionState', event.target.value);
+    ReactGA.event({
+      category: 'Action',
+      action: 'inDrawerSubmitSelectionState',
+    });
     setLoadoutState({
       ...loadoutState,
       [drawerState.weaponSelection]: {

@@ -14,6 +14,9 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
+import ReactGA from 'react-ga';
+const TRACKING_ID = "G-F4LSKD8M8H";
+ReactGA.initialize(TRACKING_ID);
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -88,19 +91,35 @@ export default function PrimarySearchAppBar() {
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
   const handleProfileMenuOpen = (event) => {
+    ReactGA.event({
+      category: 'Action',
+      action: 'profileMenuOpen'
+    });
     setAnchorEl(event.currentTarget);
   };
 
   const handleMobileMenuClose = () => {
+    ReactGA.event({
+      category: 'Action',
+      action: 'mobileMenuClose'
+    });
     setMobileMoreAnchorEl(null);
   };
 
   const handleMenuClose = () => {
+    ReactGA.event({
+      category: 'Action',
+      action: 'profileMenuClose'
+    });
     setAnchorEl(null);
     handleMobileMenuClose();
   };
 
   const handleMobileMenuOpen = (event) => {
+    ReactGA.event({
+      category: 'Action',
+      action: 'mobileMenuOpen'
+    });
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
@@ -149,7 +168,7 @@ export default function PrimarySearchAppBar() {
     <div className={classes.grow}>
       <AppBar position="static">
         <Toolbar>
-          
+
           <Typography className={classes.title} variant="h6" noWrap>
             Loadouts
           </Typography>
