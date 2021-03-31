@@ -32,10 +32,10 @@ const KeyTable = {
   'Sig': 'sig',
   'Beretta': 'beretta',
   'Desert Eagle': 'desertEagle',
-  primary: 'Primary',
-  secondary: 'Secondary',
-  'Primary': 'primary',
-  'Secondary': 'secondary',
+  primary: 'Primary Weapon',
+  secondary: 'Secondary Weapon',
+  'Primary Weapon': 'primary',
+  'Secondary Weapon': 'secondary',
 }
 
 export default KeyTable;

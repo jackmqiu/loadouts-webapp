@@ -38,7 +38,7 @@ const gunImageTable = {
   MP7: mp7,
   'KRISS Vector': krissVector,
   'AK-47': ak47,
-  'SCAR-17': fnScar,
+  'FN-SCAR': fnScar,
   M4: m4,
   M16: m16,
   'AR-15': ar15,
@@ -88,18 +88,18 @@ const useStyles = makeStyles({
   },
 });
 
-export default function WeaponCard({gun, toggleDrawer, weaponSelection}) {
+export default function WeaponCard({gun, toggleDrawer, loadoutCardClass}) {
   const classes = useStyles();
   const wideCardMediaStyles = useWideCardMediaStyles();
   console.log('gun.gunimage', gun.gunImage);
 
   return (
-    <Card className={classes.root} onClick={() => {toggleDrawer(weaponSelection)}}>
+    <Card className={classes.root} onClick={() => {toggleDrawer(loadoutCardClass)}}>
 
       <Column gap={.5}>
         <Row >
           <Item position='left'>
-            <div className={classes.weaponStatus}>Primary Weapon</div>
+            <div className={classes.weaponStatus}>{KeyTable[loadoutCardClass]}</div>
           </Item>
         </Row>
         <Row gap={'inherit'}>
@@ -121,7 +121,7 @@ export default function WeaponCard({gun, toggleDrawer, weaponSelection}) {
             <div className={classes.weaponClass}>{gun.class}</div>
           </Item>
           <Item position='right'>
-            <div className={classes.weaponClass}>{gun.manufacturer}</div>
+            <div className={classes.weaponClass}>--</div>
           </Item>
         </Row>
       </Column>

@@ -24,14 +24,14 @@ const GunTable = {
     },
     assault: {
       name: 'Assault',
-      list: ['AK-47', 'SCAR-17', 'M4'],
+      list: ['AK-47', 'FN-SCAR', 'M4'],
       guns: {
         ak47: {
           name: 'AK-47',
           imgUrl: 'Img/AK-47.png',
         },
         scar17: {
-          name: 'SCAR-17',
+          name: 'FN-SCAR',
           imgUrl: 'Img/SCAR-17.png',
         },
         m4: {

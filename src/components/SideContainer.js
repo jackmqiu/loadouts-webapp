@@ -39,8 +39,8 @@ export default function SideContainer({loadoutState, toggleDrawer}) {
 
           </Typography>
         </Item>
-        <WeaponCard gun={loadoutState.primary} weaponSelection={'primary'} toggleDrawer={toggleDrawer}/>
-        <WeaponCard gun={loadoutState.secondary} weaponSelection={'secondary'} toggleDrawer={toggleDrawer}/>
+        <WeaponCard gun={loadoutState.primary} loadoutCardClass={'primary'} toggleDrawer={toggleDrawer}/>
+        <WeaponCard gun={loadoutState.secondary} loadoutCardClass={'secondary'} toggleDrawer={toggleDrawer}/>
       </Column>
     </div>
   );
