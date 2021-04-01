@@ -9,10 +9,10 @@ import Image from '../Img/LoadoutTest.jpg';
 
 const styles = {
   root: {
-    width: '960px',
+    width: '900px',
     height: '600px',
     backgroundImage: `url(${Image})`,
-    backgroundSize: '960px 600px',
+    backgroundSize: '900px 600px',
     backgroundRepeat: 'no-repeat',
   },
 };
@@ -25,7 +25,6 @@ class MainContainer extends React.Component {
 
   render() {
     const {loadoutState, toggleDrawer, classes, backImage } = this.props;
-    console.log('backImage', backImage);
     return (
       <div>
       { backImage ?

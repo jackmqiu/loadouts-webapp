@@ -128,7 +128,7 @@ export default function WeaponCard({gun, toggleDrawer, loadoutCardClass}) {
             <div className={classes.weaponClass}>{gun.class}</div>
           </Item>
           <Item position='right'>
-            <div className={classes.weaponClass}>--</div>
+            <div className={classes.weaponClass}></div>
           </Item>
         </Row>
       </Column>
