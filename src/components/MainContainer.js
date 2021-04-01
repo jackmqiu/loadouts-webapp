@@ -14,6 +14,7 @@ const styles = {
     backgroundImage: `url(${Image})`,
     backgroundSize: '900px 600px',
     backgroundRepeat: 'no-repeat',
+    overflow: 'auto',
   },
 };
 
@@ -26,7 +27,7 @@ class MainContainer extends React.Component {
   render() {
     const {loadoutState, toggleDrawer, classes, backImage } = this.props;
     return (
-      <div>
+      <div className={classes.root}>
       { backImage ?
         <div className={classes.root} style={{ backgroundImage: `url(${backImage['data_url']})` }}>
         <Grid container spacing={3}>

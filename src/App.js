@@ -4,6 +4,7 @@ import MainContainer from './components/MainContainer.js';
 import MenuBar from './components/MenuBar.js';
 import DrawerContainer from './components/DrawerContainer.js';
 import React, { useState, useEffect, createRef, useRef } from "react";
+import { makeStyles } from '@material-ui/core/styles';
 import ReactGA from 'react-ga';
 
 import ImageUploader from 'react-images-upload';
@@ -24,7 +25,16 @@ import {
 const TRACKING_ID = "G-F4LSKD8M8H";
 ReactGA.initialize(TRACKING_ID);
 
-function App() {
+const useStyles = makeStyles({
+  mainContainer: {
+    width: '900px',
+    height: '600px',
+    overflow: 'auto',
+  },
+});
+
+const App = () => {
+  const classes = useStyles();
   const capture = createRef(null);
   const [image, takeScreenshot] = useScreenshot();
   const [backImage, uploadBackImage] = useState(null);
@@ -66,7 +76,6 @@ function App() {
       action: 'downloadLoadout'
     });
     takeScreenshot(capture.current).then(download);
-    console.log('image', capture.current);
   }
   const onDrop = (picture) => {
     ReactGA.event({
@@ -146,7 +155,7 @@ function App() {
         }) => (
           // write your building UI
           <div>
-          <div ref={capture}>
+          <div className={classes.mainContainer} ref={capture}>
             <MainContainer loadoutState={loadoutState} toggleDrawer={toggleDrawer} backImage={imageList[0]} />
           </div>
           <div className="upload__image-wrapper">
