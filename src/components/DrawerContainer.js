@@ -12,7 +12,7 @@ import {
 import gunTable from '../GunTable.js';
 import keyTable from '../KeyTable.js';
 
-const TRACKING_ID = "G-F4LSKD8M8H";
+const TRACKING_ID = "UA-193462319-2";
 ReactGA.initialize(TRACKING_ID);
 
 const DrawerContainer = ({

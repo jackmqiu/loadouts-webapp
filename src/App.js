@@ -22,8 +22,9 @@ import {
   Drawer,
 } from '@material-ui/core';
 
-const TRACKING_ID = "G-F4LSKD8M8H";
+const TRACKING_ID = "UA-193462319-2";
 ReactGA.initialize(TRACKING_ID);
+ReactGA.pageview(window.location.pathname + window.location.search);
 
 const useStyles = makeStyles({
   mainContainer: {
