@@ -165,7 +165,7 @@ const App = () => {
               onClick={onImageUpload}
               {...dragProps}
             >
-              Click or Drop here
+              Click to Add or Drop Your Image Here
             </button>
             &nbsp;
             <button onClick={onImageRemoveAll}>Remove all images</button>
