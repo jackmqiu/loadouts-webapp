@@ -64,6 +64,11 @@ const useStyles = makeStyles({
   weaponClass: {
     fontSize: '0.75rem',
     color: '#727676',
+    position: 'fixed',
+  },
+  weaponName: {
+    fontSize: '0.75rem',
+    color: '#727676',
   },
   weaponItem: {
     display: 'block'
@@ -104,7 +109,7 @@ export default function WeaponCard({gun, toggleDrawer, loadoutCardClass}) {
         </Row>
         <Row gap={'inherit'}>
           <Item positon='left'>
-            <div className={classes.weaponClass}>{gun.gunName}</div>
+            <div className={classes.weaponName}>{gun.gunName}</div>
           </Item>
         </Row>
         <Row>
