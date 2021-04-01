@@ -50,7 +50,7 @@ const GunTable = {
     },
     pistol: {
       name: 'Pistol',
-      list: ['1911', 'Glock', 'Sig', 'Beretta', 'Desert Eagle'],
+      list: ['1911', 'Glock', 'Sig', 'Beretta', 'Desert Eagle', 'AAP-01'],
       guns: {
         1911: {
           name: '1911',
@@ -71,6 +71,9 @@ const GunTable = {
         desertEagle: {
           name: 'Desert Eagle',
           imgUrl: 'Img/Desert-eagle-50.png',
+        },
+        aap01: {
+          name: 'AAP-01',
         }
       }
     },

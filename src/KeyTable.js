@@ -16,6 +16,8 @@ const KeyTable = {
   sig: 'Sig',
   beretta: 'Beretta',
   desertEagle: 'Desert Eagle',
+  aap01: 'AAP-01',
+  'AAP-01': 'aap01',
   'SMG': 'smg',
   'Assault': 'assault',
   'Pistol': 'pistol',

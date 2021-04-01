@@ -26,12 +26,13 @@ import {
   glock,
   sig,
   beretta,
-  desertEagle
+  desertEagle,
+  aap01,
 } from '../Img';
 import { useWideCardMediaStyles } from '@mui-treasury/styles/cardMedia/wide';
 
 const gunImageTable = {
-  ak47: ak47,
+  'AK-47': ak47,
   '1911': nineteenEleven,
   'MAC-10': mac10,
   MP5: mp5,
@@ -46,6 +47,7 @@ const gunImageTable = {
   Sig: sig,
   Beretta: beretta,
   'Desert Eagle': desertEagle,
+  'AAP-01': aap01,
 }
 
 const useStyles = makeStyles({

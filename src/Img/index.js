@@ -12,3 +12,4 @@ export { default as mp5 } from './MP5.png';
 export { default as mp7 } from './MP7.png';
 export { default as fnScar } from './SCAR.png';
 export { default as sig } from './Sig.png';
+export { default as aap01 } from './AAP-01.png';

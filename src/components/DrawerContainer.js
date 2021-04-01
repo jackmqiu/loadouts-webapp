@@ -86,7 +86,7 @@ const DrawerContainer = ({
               id: 'outlined-class-native-simple',
             }}
           >
-            
+            <option aria-label="None" value="" />
             {gunTable.classes[selectionState.class].list.map((gun) =>
                 <option value={gun}>{gun}</option>
             )}
