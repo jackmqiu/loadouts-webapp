@@ -25,6 +25,8 @@ import {
 const TRACKING_ID = "UA-193462319-2";
 ReactGA.initialize(TRACKING_ID);
 ReactGA.pageview(window.location.pathname + window.location.search);
+const mixpanel = require('mixpanel-browser');
+mixpanel.init("fbbc7fb17f489f12483171381e8da3d2");
 
 const useStyles = makeStyles({
   mainContainer: {
@@ -64,6 +66,10 @@ const App = () => {
       category: 'Action',
       action: 'toggleDrawer'
     });
+    mixpanel.track(
+      'Action',
+      {"toggle": "toggleDrawer"}
+    );
     toggleDrawerState({
       open: !drawerState.open,
       weaponSelection: weaponSelection, //primary or secondary
@@ -76,6 +82,10 @@ const App = () => {
       category: 'Action',
       action: 'downloadLoadout'
     });
+    mixpanel.track(
+      'Download',
+      {"download": "downloadLoadout"}
+    );
     takeScreenshot(capture.current).then(download);
   }
   const onDrop = (picture) => {
@@ -83,6 +93,10 @@ const App = () => {
       category: 'Action',
       action: 'uploadPic'
     });
+    mixpanel.track(
+      'Action',
+      {"upload": "uploadPic"}
+    );
     uploadBackImage(picture);
   }
   const download = (image, { name = "my_loadout1", extension = "jpg" } = {}) => {
@@ -103,6 +117,10 @@ const App = () => {
       category: 'Action',
       action: 'setGun'
     });
+    mixpanel.track(
+      'Action',
+      {"set": "setGun"}
+    );
     setLoadoutState({
       ...loadoutState,
       [weaponSelection]: {
@@ -116,6 +134,10 @@ const App = () => {
       category: 'Action',
       action: 'setClass'
     });
+    mixpanel.track(
+      'Action',
+      {"set": "setClass"}
+    );
     console.log('setClass', event.target.value)
     setLoadoutState({
       ...loadoutState,
