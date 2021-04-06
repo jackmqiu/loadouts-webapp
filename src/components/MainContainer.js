@@ -15,14 +15,14 @@ const styles = {
     backgroundImage: `url(${Image})`,
     backgroundSize: '900px 600px',
     backgroundRepeat: 'no-repeat',
-    overflow: 'auto',
+    overflow: 'hidden',
   },
   overlay: {
     width: '100%',
     height: '600px',
-    position: 'fixed',
+    backgroundSize: '900px 600px',
     backgroundRepeat: 'no-repeat',
-
+    display: 'flex',
   }
 };
 
@@ -35,7 +35,7 @@ class MainContainer extends React.Component {
   render() {
     const {loadoutState, toggleDrawer, classes, backImage } = this.props;
     return (
-      <div className={classes.root}>
+      <div >
       { backImage ?
         <div className={classes.root} style={{ backgroundImage: `url(${backImage['data_url']})` }}>
           <div className={classes.overlay} style={{ backgroundImage: `url(${OverlayImage})`}}>
