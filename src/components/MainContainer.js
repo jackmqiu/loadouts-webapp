@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import SideContainer from './SideContainer.js';
 import Grid from '@material-ui/core/Grid';
 import Image from '../Img/LoadoutTest.jpg';
+import OverlayImage from '../Img/transparent-background.png';
 
 const styles = {
   root: {
@@ -14,8 +15,15 @@ const styles = {
     backgroundImage: `url(${Image})`,
     backgroundSize: '900px 600px',
     backgroundRepeat: 'no-repeat',
-    overflow: 'auto',
+    overflow: 'hidden',
   },
+  overlay: {
+    width: '100%',
+    height: '100%',
+    position: 'fixed',
+    backgroundRepeat: 'no-repeat',
+
+  }
 };
 
 class MainContainer extends React.Component {
@@ -30,14 +38,16 @@ class MainContainer extends React.Component {
       <div className={classes.root}>
       { backImage ?
         <div className={classes.root} style={{ backgroundImage: `url(${backImage['data_url']})` }}>
-        <Grid container spacing={3}>
-          <Grid item xs={3}>
-            <SideContainer loadoutState={loadoutState} toggleDrawer={toggleDrawer}/>
-          </Grid>
-          <Grid item xs={9}>
+          <div className={classes.overlay} style={{ backgroundImage: `url(${OverlayImage})`}}>
+            <Grid container spacing={3}>
+              <Grid item xs={3}>
+                <SideContainer loadoutState={loadoutState} toggleDrawer={toggleDrawer}/>
+              </Grid>
+              <Grid item xs={9}>
 
-          </Grid>
-        </Grid>
+              </Grid>
+            </Grid>
+          </div>
         </div>
         : <div className={classes.root} style={{ backgroundImage: `url(${Image})` }}>
         <Grid container spacing={3}>

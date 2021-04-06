@@ -8,6 +8,7 @@ import Link from '@material-ui/core/Link';
 import WeaponCard from './WeaponCard.js';
 import ModCard from './ModCard.js';
 import { Column, Row, Item } from '@mui-treasury/components/flex';
+import backgroundImage from '../Img/dotted_background.png';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,6 +25,14 @@ const useStyles = makeStyles((theme) => ({
     color: '#4F8A99',
     padding: '5px 0 20px 0',
     // fontFamily: 'Raleway',
+  },
+  watermark: {
+    width: 200,
+    height: 30,
+    backgroundImage: `url(${backgroundImage})`,
+    backgroundSize: '200px 200px',
+    backgroundColor: 'transparent',
+    margin: '15px 5px 5px 5px',
   }
 }));
 
@@ -34,11 +43,11 @@ export default function SideContainer({loadoutState, toggleDrawer}) {
   return (
     <div className={classes.root}>
       <Column>
-        <Item className={classes.loadoutTitle}>
-          <Typography variant="subtitle2">
+        <Card className={classes.watermark}>
+          <Typography className={classes.loadoutTitle} variant="subtitle2">
             {'loadouts.me'}
           </Typography>
-        </Item>
+        </Card>
         <WeaponCard gun={loadoutState.primary} loadoutCardClass={'primary'} toggleDrawer={toggleDrawer}/>
         <WeaponCard gun={loadoutState.secondary} loadoutCardClass={'secondary'} toggleDrawer={toggleDrawer}/>
       </Column>
