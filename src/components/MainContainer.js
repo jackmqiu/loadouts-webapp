@@ -15,11 +15,11 @@ const styles = {
     backgroundImage: `url(${Image})`,
     backgroundSize: '900px 600px',
     backgroundRepeat: 'no-repeat',
-    overflow: 'hidden',
+    overflow: 'auto',
   },
   overlay: {
     width: '100%',
-    height: '100%',
+    height: '600px',
     position: 'fixed',
     backgroundRepeat: 'no-repeat',
 
