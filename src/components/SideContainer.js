@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   },
   loadoutTitle: {
     color: '#4F8A99',
-    padding: '5px 0 25px 0',
+    padding: '5px 0 20px 0',
     // fontFamily: 'Raleway',
   }
 }));
@@ -35,8 +35,8 @@ export default function SideContainer({loadoutState, toggleDrawer}) {
     <div className={classes.root}>
       <Column>
         <Item className={classes.loadoutTitle}>
-          <Typography variant="h4">
-
+          <Typography variant="subtitle2">
+            {'loadouts.me'}
           </Typography>
         </Item>
         <WeaponCard gun={loadoutState.primary} loadoutCardClass={'primary'} toggleDrawer={toggleDrawer}/>
