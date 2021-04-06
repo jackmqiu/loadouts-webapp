@@ -6,6 +6,8 @@ import DrawerContainer from './components/DrawerContainer.js';
 import React, { useState, useEffect, createRef, useRef } from "react";
 import { makeStyles } from '@material-ui/core/styles';
 import ReactGA from 'react-ga';
+import { Column, Row, Item } from '@mui-treasury/components/flex';
+import Typography from '@material-ui/core/Typography';
 
 import ImageUploader from 'react-images-upload';
 import ImageUploading from 'react-images-uploading';
@@ -34,6 +36,8 @@ const useStyles = makeStyles({
     height: '600px',
     overflow: 'auto',
   },
+  button: {
+  }
 });
 
 const App = () => {
@@ -159,7 +163,7 @@ const App = () => {
         drawerState={drawerState}
         toggleDrawer={toggleDrawer}
       />
-       <Button variant="contained" onClick={getImage}>Export</Button>
+    <Button variant="contained" className={classes.button} onClick={getImage}>Export</Button>
        <ImageUploading
         multiple
         value={images}
@@ -204,6 +208,19 @@ const App = () => {
           </div>
         )}
       </ImageUploading>
+
+        <Typography>
+        1. Upload your own picture by clicking Click to Add
+
+
+        </Typography>
+      <Typography>
+        2. Click the loadout graphics to edit the backgroundSize
+      </Typography>
+      <Typography>
+        3. Export and enjoy!
+      </Typography>
+
     </div>
 
   );
