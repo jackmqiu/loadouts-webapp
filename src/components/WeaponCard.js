@@ -66,7 +66,7 @@ const useStyles = makeStyles({
   weaponClass: {
     fontSize: '0.75rem',
     color: '#727676',
-    position: 'fixed',
+    position: 'absolute',
   },
   weaponName: {
     fontSize: '0.75rem',
