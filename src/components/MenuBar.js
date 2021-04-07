@@ -2,6 +2,7 @@ import React from 'react';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
+import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
@@ -173,6 +174,9 @@ export default function PrimarySearchAppBar() {
           </Typography>
 
           <div className={classes.grow} />
+          <Button variant="contained" color="Secondary" href="https://www.surveymonkey.com/r/9NNQXNH">
+            Give Feedback
+          </Button>
           <div className={classes.sectionDesktop}>
 
             <IconButton
