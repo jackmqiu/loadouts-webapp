@@ -7,7 +7,7 @@ import Grid from '@material-ui/core/Grid';
 import Image from '../../Img/LoadoutTest.jpg';
 import OverlayImage from '../../Img/transparent-background.png';
 import ModCardRow from './ModCardRow';
-import WeaponCard from '../WeaponCard';
+import DetailWeaponCard from './DetailWeaponCard';
 
 const styles = {
   root: {
@@ -46,7 +46,7 @@ class SingleGunDetails extends React.Component {
               </Grid>
               <Grid item xs={3}/>
               <Grid item xs={6}>
-                <WeaponCard gun={gun} toggleDrawer={toggleDrawer} loadoutGunClass={'primary'}/>
+                <DetailWeaponCard gun={gun} toggleDrawer={toggleDrawer} loadoutGunClass={'primary'}/>
               </Grid>
               <Grid item xs={3}/>
               <Grid item xs={12}>
