@@ -32,6 +32,7 @@ const useStyles = makeStyles(() => ({
     width: 210,
     borderRadius: 8,
     boxShadow: 'none',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
     '&:hover': {
       boxShadow: `0 6px 12px 0 ${Color(color)
         .rotate(-12)
@@ -42,17 +43,17 @@ const useStyles = makeStyles(() => ({
   content: ({ color }) => {
     return {
       backgroundColor: color,
-      padding: '1rem 1.5rem 1.5rem',
+      padding: '.5rem .5rem .5rem',
+      opacity: 1,
     };
   },
   title: {
-    fontFamily: 'Keania One',
-    fontSize: '1.5rem',
+    fontSize: '1rem',
     color: '#fff',
     textAlign: 'left',
+    opacity: 1,
   },
   subtitle: {
-    fontFamily: 'Montserrat',
     color: '#fff',
     opacity: 0.87,
     marginTop: '0.5rem',
@@ -65,10 +66,10 @@ const useStyles = makeStyles(() => ({
 
 export const ModCardRow = React.memo(function SolidGameCard() {
   const gridStyles = useGridStyles();
-  const styles = useStyles({ color: '#203f52' });
-  const styles2 = useStyles({ color: '#4d137f' });
-  const styles3 = useStyles({ color: '#ff9900' });
-  const styles4 = useStyles({ color: '#34241e' });
+  const styles = useStyles({ color: '#848f64' });
+  const styles2 = useStyles({ color: '#848f64' });
+  const styles3 = useStyles({ color: '#a4a69c' });
+  const styles4 = useStyles({ color: '#848f64' });
   return (
     <>
       <Grid classes={gridStyles} container spacing={4} wrap={'nowrap'}>
