@@ -29,8 +29,8 @@ const useStyles = makeStyles(() => ({
     },
   },
   card: ({ color }) => ({
-    minWidth: 256,
-    borderRadius: 16,
+    width: 210,
+    borderRadius: 8,
     boxShadow: 'none',
     '&:hover': {
       boxShadow: `0 6px 12px 0 ${Color(color)
@@ -47,9 +47,9 @@ const useStyles = makeStyles(() => ({
   },
   title: {
     fontFamily: 'Keania One',
-    fontSize: '2rem',
+    fontSize: '1.5rem',
     color: '#fff',
-    textTransform: 'uppercase',
+    textAlign: 'left',
   },
   subtitle: {
     fontFamily: 'Montserrat',
@@ -85,7 +85,7 @@ export const ModCardRow = React.memo(function SolidGameCard() {
         <Grid item>
           <ModCard
             classes={styles2}
-            title={'Light/Laser'}
+            title={'Light'}
             subtitle={'--'}
             image={
               '../../Img/AK-47'
