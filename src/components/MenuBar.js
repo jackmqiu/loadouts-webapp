@@ -31,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('sm')]: {
       display: 'block',
     },
+    marginRight: 20,
   },
   search: {
     position: 'relative',
@@ -83,7 +84,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function PrimarySearchAppBar() {
+export default function PrimarySearchAppBar({ toggleDetails, detailsState }) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -172,7 +173,7 @@ export default function PrimarySearchAppBar() {
           <Typography className={classes.title} variant="h6" noWrap>
             Loadouts
           </Typography>
-
+          <Button variant='contained' color='Secondary'onClick={toggleDetails}>{detailsState.display ? 'Loadout' : 'Gun Detail'}</Button>
           <div className={classes.grow} />
           <Button variant="contained" color="Secondary" href="https://www.surveymonkey.com/r/9NNQXNH">
             Give Feedback

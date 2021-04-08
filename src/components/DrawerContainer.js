@@ -25,7 +25,6 @@ const DrawerContainer = ({
   loadoutState,
   setLoadoutState,
 }) => {
-  console.log('drawer loadoutState[drawerState.weaponSelection]', loadoutState[drawerState.weaponSelection]);
   const [selectionState, updateSelectionState] = useState({
     class: 'assault',
     weaponSelection: '',
