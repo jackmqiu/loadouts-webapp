@@ -11,12 +11,12 @@ import DetailWeaponCard from './DetailWeaponCard';
 
 const styles = {
   root: {
-    // width: '900px',
-    // height: '600px',
-    // backgroundImage: `url(${Image})`,
-    // backgroundSize: '900px 600px',
-    // backgroundRepeat: 'no-repeat',
-    // overflow: 'hidden',
+    width: '900px',
+    height: '600px',
+    backgroundImage: `url(${Image})`,
+    backgroundSize: '900px 600px',
+    backgroundRepeat: 'no-repeat',
+    
   },
   overlay: {
     width: '100%',

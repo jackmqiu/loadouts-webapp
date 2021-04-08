@@ -42,16 +42,15 @@ const useStyles = makeStyles(() => ({
   }),
   content: ({ color }) => {
     return {
-      backgroundColor: color,
+      backgroundColor: 'rgba(120, 128, 69, 0.5)',
       padding: '.5rem .5rem .5rem',
-      opacity: 1,
+      opacity: .5,
     };
   },
   title: {
     fontSize: '1rem',
     color: '#fff',
     textAlign: 'left',
-    opacity: 1,
   },
   subtitle: {
     color: '#fff',
