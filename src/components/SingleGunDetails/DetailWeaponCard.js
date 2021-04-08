@@ -52,8 +52,7 @@ const gunImageTable = {
 
 const useStyles = makeStyles({
   root: {
-    width: 200,
-    height: 110,
+    height: 180,
     backgroundImage: `url(${backgroundImage})`,
     backgroundSize: '200px 200px',
     backgroundColor: 'transparent',
