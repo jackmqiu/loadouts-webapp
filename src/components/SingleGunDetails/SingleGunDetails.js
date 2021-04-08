@@ -6,6 +6,8 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Image from '../../Img/LoadoutTest.jpg';
 import OverlayImage from '../../Img/transparent-background.png';
+import ModCardRow from './ModCardRow';
+import ModCardRow2 from './ModCardRow2';
 
 const styles = {
   root: {
@@ -39,12 +41,13 @@ class SingleGunDetails extends React.Component {
         <div className={classes.root} >
           <div className={classes.overlay} style={{ backgroundImage: `url(${OverlayImage})`}}>
             <Grid container spacing={3}>
-              <Grid item xs={9}>
-                Mods container
+              <Grid item xs={12}>
+                <ModCardRow/>
               </Grid>
-              <Grid item xs={3}>
+              <Grid item xs={12}>
+                <ModCardRow2/>
+              </Grid>
 
-              </Grid>
             </Grid>
           </div>
         </div>

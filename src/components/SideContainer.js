@@ -6,7 +6,6 @@ import Container from '@material-ui/core/Container';
 import Card from '@material-ui/core/Card';
 import Link from '@material-ui/core/Link';
 import WeaponCard from './WeaponCard.js';
-import ModCard from './ModCard.js';
 import { Column, Row, Item } from '@mui-treasury/components/flex';
 import backgroundImage from '../Img/dotted_background.png';
 
