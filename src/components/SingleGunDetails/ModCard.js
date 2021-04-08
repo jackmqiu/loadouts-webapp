@@ -56,22 +56,22 @@ const gunImageTable = {
   Light: light,
   Magazine: magazine,
   Rail: rail,
-  Scope: scope,
+  Optic: scope,
   Stock: stock,
   Trigger: trigger,
 }
 
-const ModCard = ({ classes, image, title, subtitle }) => {
+const ModCard = ({ classes, partName }) => {
   const mediaStyles = useFourThreeCardMediaStyles();
   return (
     <CardActionArea className={classes.actionArea}>
       <Card className={classes.card}>
-        <CardMedia classes={mediaStyles} image={gunImageTable[sig]} />
+        <CardMedia classes={mediaStyles} image={gunImageTable[partName]} />
         <CardContent className={classes.content}>
           <Typography className={classes.title} variant={'h2'}>
-            {title}
+            {partName}
           </Typography>
-          <Typography className={classes.subtitle}>{subtitle}</Typography>
+          <Typography className={classes.subtitle}>{}</Typography>
         </CardContent>
       </Card>
     </CardActionArea>

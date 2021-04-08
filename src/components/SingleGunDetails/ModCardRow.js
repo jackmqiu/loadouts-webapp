@@ -75,39 +75,26 @@ export const ModCardRow = React.memo(function SolidGameCard() {
         <Grid item>
           <ModCard
             classes={styles}
-            title={'Internals'}
-            subtitle={'--'}
-            image={
-              '../../Img/AK-47'
-            }
+            partName={'Internals'}
           />
         </Grid>
         <Grid item>
           <ModCard
             classes={styles2}
-            title={'Light'}
-            subtitle={'--'}
-            image={
-              '../../Img/AK-47'
-            }
+            partName={'Light'}
           />
         </Grid>
         <Grid item>
           <ModCard
             classes={styles3}
-            title={'Stock'}
-            subtitle={'--'}
+            partName={'Stock'}
             image={'../../Img/AK-47'}
           />
         </Grid>
         <Grid item>
           <ModCard
             classes={styles4}
-            title={'Optic'}
-            subtitle={'--'}
-            image={
-              '../../Img/AK-47'
-            }
+            partName={'Optic'}
           />
         </Grid>
       </Grid>
