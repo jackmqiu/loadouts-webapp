@@ -61,7 +61,49 @@ const gunImageTable = {
   Trigger: trigger,
 }
 
-const ModCard = ({ classes, partName }) => {
+const useStyles = makeStyles(() => ({
+  actionArea: {
+    borderRadius: 16,
+    transition: '0.2s',
+    '&:hover': {
+      transform: 'scale(1.1)',
+    },
+  },
+  card: ({ color }) => ({
+    width: 210,
+    borderRadius: 8,
+    boxShadow: 'none',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    '&:hover': {
+      boxShadow: `0 6px 12px 0 ${Color(color)
+        .rotate(-12)
+        .darken(0.2)
+        .fade(0.5)}`,
+    },
+  }),
+  content: ({ color }) => {
+    return {
+      backgroundColor: 'rgba(120, 128, 69, 0.5)',
+      padding: '.5rem .5rem .5rem',
+      opacity: .5,
+    };
+  },
+  title: {
+    fontSize: '1rem',
+    color: '#fff',
+    textAlign: 'left',
+  },
+  subtitle: {
+    color: '#fff',
+    opacity: 0.87,
+    marginTop: '0.5rem',
+    fontWeight: 500,
+    fontSize: 14,
+  },
+}));
+
+const ModCard = ({ partName }) => {
+  const classes = useStyles();
   const mediaStyles = useFourThreeCardMediaStyles();
   return (
     <CardActionArea className={classes.actionArea}>

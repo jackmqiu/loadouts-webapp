@@ -61,6 +61,69 @@ const App = () => {
       gunImage: 'Img/1911.png',
     },
   });
+  const [modsState, setModsState] = useState({
+    1: {
+      category: 'Internals',
+      active: false,
+      model: '',
+    },
+    2: {
+      category: 'Light',
+      active: false,
+      model: '',
+    },
+    3: {
+      category: 'Stock',
+      active: false,
+      model: '',
+    },
+    4: {
+      category: 'Optics',
+      active: false,
+      model: '',
+    },
+    5: {
+      category: '',
+      active: false,
+      model: '',
+    },
+    6: {
+      category: '',
+      active: false,
+      model: '',
+    },
+    7: {
+      category: '',
+      active: false,
+      model: '',
+    },
+    8: {
+      category: '',
+      active: false,
+      model: '',
+    },
+  });
+  const setMod = (modField, modModel, modCategory) => {
+    if (modCategory && modModel.length > 0) {
+      setModsState({
+        ...modsState,
+        [modField]: {
+          category: modCategory,
+          active: true,
+          model: modModel,
+        }
+      });
+    } else if (modCategory && modModel.length === 0) {
+      setModsState({
+        ...modsState,
+        [modField]: {
+          category: modCategory,
+          active: false,
+          model: modModel,
+        }
+      })
+    }
+  };
   const [drawerState, toggleDrawerState] = useState({
     open: false,
     weaponSelection: 'primary',
@@ -178,7 +241,7 @@ const App = () => {
         toggleDrawer={toggleDrawer}
       />
     { detailsState.display ?
-      <SingleGunDetails toggleDrawer={toggleDrawer} gun={loadoutState.primary} /> :
+      <SingleGunDetails modsState={modsState} toggleDrawer={toggleDrawer} gun={loadoutState.primary} setMod={setMod}/> :
         <div>
           <Button variant="contained" className={classes.button} onClick={getImage}>Export</Button>
            <ImageUploading
