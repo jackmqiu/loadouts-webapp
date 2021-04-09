@@ -11,18 +11,19 @@ import DetailWeaponCard from './DetailWeaponCard';
 
 const styles = {
   root: {
-    width: '900px',
-    height: '600px',
-    backgroundImage: `url(${Image})`,
-    backgroundSize: '900px 600px',
-    backgroundRepeat: 'no-repeat',
-    
+    // width: '100%',
+    // height: '100%',
+    // backgroundImage: `url(${Image})`,
+    // backgroundSize: '900px 600px',
+    // backgroundRepeat: 'no-repeat',
+    margin: '20 0 20 0',
   },
   overlay: {
     width: '100%',
     height: '600px',
     backgroundSize: '900px 600px',
     backgroundRepeat: 'no-repeat',
+
     display: 'flex',
   }
 };
@@ -44,11 +45,11 @@ class SingleGunDetails extends React.Component {
               <Grid item xs={12}>
                 <ModCardRow/>
               </Grid>
-              <Grid item xs={3}/>
-              <Grid item xs={6}>
+
+              <Grid item xs={12}>
                 <DetailWeaponCard gun={gun} toggleDrawer={toggleDrawer} loadoutGunClass={'primary'}/>
               </Grid>
-              <Grid item xs={3}/>
+
               <Grid item xs={12}>
                 <ModCardRow/>
               </Grid>

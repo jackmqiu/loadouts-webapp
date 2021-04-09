@@ -88,7 +88,6 @@ export const ModCardRow = React.memo(function SolidGameCard() {
           <ModCard
             classes={styles3}
             partName={'Stock'}
-            image={'../../Img/AK-47'}
           />
         </Grid>
         <Grid item>
