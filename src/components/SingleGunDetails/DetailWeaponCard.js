@@ -94,19 +94,14 @@ const useStyles = makeStyles({
   },
 });
 
-export default function WeaponCard({gun, toggleDrawer, loadoutCardClass}) {
+export default function WeaponCard({gun, toggleDrawer}) {
   const classes = useStyles();
   const wideCardMediaStyles = useWideCardMediaStyles();
 
   return (
-    <Card className={classes.root} onClick={() => {toggleDrawer(loadoutCardClass)}}>
+    <Card className={classes.root} onClick={() => {toggleDrawer('primary')}}>
 
       <Column gap={.5}>
-        <Row >
-          <Item position='left'>
-            <div className={classes.weaponStatus}>{KeyTable[loadoutCardClass]}</div>
-          </Item>
-        </Row>
         <Row gap={'inherit'}>
           <Item positon='left'>
             <div className={classes.weaponName}>{gun.gunName}</div>
