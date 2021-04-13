@@ -91,7 +91,7 @@ export default function SingleGunDetails ({modsState, toggleSingleGun, toggleDra
           partName={modsState[i+1].category}
           openModal={handleOpen}
           closeModal={handleClose}
-          id={i}
+          id={i+1}
         />
       </Grid>
     )
