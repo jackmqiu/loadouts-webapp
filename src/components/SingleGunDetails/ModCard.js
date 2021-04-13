@@ -102,7 +102,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const ModCard = ({ partName, openModal, closeModal, id }) => {
+const ModCard = ({ partName, modName, openModal, closeModal, id }) => {
   const classes = useStyles();
   const mediaStyles = useFourThreeCardMediaStyles();
   return (
@@ -113,7 +113,7 @@ const ModCard = ({ partName, openModal, closeModal, id }) => {
           <Typography className={classes.title} variant={'h2'}>
             {partName}
           </Typography>
-          <Typography className={classes.subtitle}>{}</Typography>
+          <Typography className={classes.subtitle}>{modName}</Typography>
         </CardContent>
       </Card>
     </CardActionArea>
