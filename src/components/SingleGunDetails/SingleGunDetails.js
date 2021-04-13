@@ -1,4 +1,4 @@
-import React from 'react';
+import { form, useState } from 'react';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import Paper from '@material-ui/core/Paper';
@@ -10,8 +10,9 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
+import TextField from '@material-ui/core/TextField';
 
-import ModsList from '../../ModsList';
+import ModsList from '../../ModsList.js';
 import Image from '../../Img/LoadoutTest.jpg';
 import OverlayImage from '../../Img/transparent-background.png';
 import ModCard from './ModCard';
@@ -42,16 +43,26 @@ const useStyles = makeStyles({
 
 export default function SingleGunDetails ({modsState, toggleSingleGun, toggleDrawer, gun, setMod})  {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
-  const [category, setCategory] = React.useState('');
+  const [open, setOpen] = useState(false);
+  const [category, setCategory] = useState('');
+  const [modText, setModText] = useState('');
+  const [modCardSelection, setActiveModCard] = useState(1);
   const handleCategorySelect = (event) => {
     setCategory(event.target.value);
   };
   const handleModelSubmit = (event) => {
-    setMod(event.target.id, category, event.target.value);
+    if (event.key === 'Enter') {
+      setMod(modCardSelection, category, event.target.value);
+      handleClose();
+      event.preventDefault();
+    }
   }
-  const handleOpen = () => {
-    console.log('openModal')
+  const handleTextChange = (event) => {
+    setModText(event.target.value);
+  }
+  const handleOpen = (modCardID) => {
+    console.log('handleOpen', modCardID);
+    setActiveModCard(modCardID);
     setOpen(true);
   };
   const handleClose = () => {
@@ -60,7 +71,6 @@ export default function SingleGunDetails ({modsState, toggleSingleGun, toggleDra
 
   const firstRow = [];
   for (let i = 0; i < 4; i++) {
-    console.log('firstRow', i, modsState[i]);
     firstRow.push(
       <Grid item xs={3}>
         <ModCard
@@ -80,11 +90,17 @@ export default function SingleGunDetails ({modsState, toggleSingleGun, toggleDra
           partName={modsState[i+1].category}
           openModal={handleOpen}
           closeModal={handleClose}
+          id={i}
         />
       </Grid>
     )
   }
-
+  const modsSelections = [];
+  for (let category of ModsList) {
+    modsSelections.push(
+      <MenuItem value={category} >{category}</MenuItem>
+    )
+  }
   return (
     <div >
     {
@@ -94,14 +110,12 @@ export default function SingleGunDetails ({modsState, toggleSingleGun, toggleDra
               {
                 firstRow
               }
-
             <Grid item xs={12}>
               <DetailWeaponCard gun={gun} toggleDrawer={toggleDrawer} loadoutGunClass={'primary'}/>
             </Grid>
             {
               secondRow
             }
-
           </Grid>
         </div>
         <Modal
@@ -110,6 +124,7 @@ export default function SingleGunDetails ({modsState, toggleSingleGun, toggleDra
 
         >
           <Paper>
+            <form onSubmit={() => {setMod(modCardSelection, category, modText)}}>
             <FormControl className={classes.formControl}>
               <InputLabel id="demo-simple-select-label">Category</InputLabel>
               <Select
@@ -119,12 +134,14 @@ export default function SingleGunDetails ({modsState, toggleSingleGun, toggleDra
                 onChange={handleCategorySelect}
               >
                 {
-                  ModsList.map((category) => {
-                    <MenuItem value={category}>{category}</MenuItem>
-                  })
+                  modsSelections
                 }
               </Select>
             </FormControl>
+            <FormControl>
+              <TextField id="standard-basic" label="Model" onChange={handleTextChange} onKeyPress={handleModelSubmit}/>
+            </FormControl>
+          </form>
           </Paper>
         </Modal>
       </div>

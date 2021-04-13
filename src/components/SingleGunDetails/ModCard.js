@@ -102,12 +102,12 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const ModCard = ({ partName, openModal, closeModal }) => {
+const ModCard = ({ partName, openModal, closeModal, id }) => {
   const classes = useStyles();
   const mediaStyles = useFourThreeCardMediaStyles();
   return (
     <CardActionArea onclassName={classes.actionArea}>
-      <Card className={classes.card} onClick={openModal}>
+      <Card className={classes.card} onClick={() => {openModal(id)}}>
         <CardMedia classes={mediaStyles} image={gunImageTable[partName]} />
         <CardContent className={classes.content}>
           <Typography className={classes.title} variant={'h2'}>

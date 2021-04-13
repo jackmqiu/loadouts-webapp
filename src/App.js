@@ -103,7 +103,8 @@ const App = () => {
       model: '',
     },
   });
-  const setMod = (modField, modModel, modCategory) => {
+  const setMod = (modField, modCategory, modModel) => {
+    console.log('setMod', modField, modModel, modCategory)
     if (modCategory && modModel.length > 0) {
       setModsState({
         ...modsState,

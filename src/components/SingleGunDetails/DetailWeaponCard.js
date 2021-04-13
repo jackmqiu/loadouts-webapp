@@ -97,7 +97,6 @@ const useStyles = makeStyles({
 export default function WeaponCard({gun, toggleDrawer, loadoutCardClass}) {
   const classes = useStyles();
   const wideCardMediaStyles = useWideCardMediaStyles();
-  console.log('gun.gunimage', gun.gunImage);
 
   return (
     <Card className={classes.root} onClick={() => {toggleDrawer(loadoutCardClass)}}>
