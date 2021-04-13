@@ -9,6 +9,8 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
+import { Column, Row, Item } from '@mui-treasury/components/flex';
+
 import { useFourThreeCardMediaStyles } from '@mui-treasury/styles/cardMedia/fourThree';
 import {
   ak47,
@@ -62,13 +64,7 @@ const gunImageTable = {
 }
 
 const useStyles = makeStyles(() => ({
-  actionArea: {
-    borderRadius: 16,
-    transition: '0.2s',
-    '&:hover': {
-      transform: 'scale(1.1)',
-    },
-  },
+
   card: ({ color }) => ({
     width: 210,
     borderRadius: 8,
@@ -100,23 +96,31 @@ const useStyles = makeStyles(() => ({
     fontWeight: 500,
     fontSize: 14,
   },
+  modImg: {
+    padding: '30px 60px 30px 60px',
+    maxWidth: '100%',
+    display: 'flex',
+    maxHeight: 50,
+  },
 }));
 
 const ModCard = ({ partName, modName, openModal, closeModal, id }) => {
   const classes = useStyles();
-  const mediaStyles = useFourThreeCardMediaStyles();
   return (
-    <CardActionArea onclassName={classes.actionArea}>
       <Card className={classes.card} onClick={() => {openModal(id)}}>
-        <CardMedia classes={mediaStyles} image={gunImageTable[partName]} />
+        <Row>
+          <Item className={classes.modImg}>
+            <CardMedia component="img" image={gunImageTable[partName]} />
+          </Item>
+        </Row>
         <CardContent className={classes.content}>
+
           <Typography className={classes.title} variant={'h2'}>
             {partName}
           </Typography>
           <Typography className={classes.subtitle}>{modName}</Typography>
         </CardContent>
       </Card>
-    </CardActionArea>
   );
 };
 
