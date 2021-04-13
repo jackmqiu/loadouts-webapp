@@ -35,6 +35,12 @@ import {
   scope,
   stock,
   trigger,
+  internals,
+  receiver,
+  tracer,
+  barrel,
+  sling,
+  hpa,
 } from '../../Img';
 
 const gunImageTable = {
@@ -61,6 +67,12 @@ const gunImageTable = {
   Optic: scope,
   Stock: stock,
   Trigger: trigger,
+  Internals: internals,
+  Receiver: receiver,
+  Tracer: tracer,
+  Barrel: barrel,
+  Sling: sling,
+  HPA: hpa,
 }
 
 const useStyles = makeStyles(() => ({
@@ -97,7 +109,7 @@ const useStyles = makeStyles(() => ({
     fontSize: 14,
   },
   modImg: {
-    padding: '30px 60px 30px 60px',
+    padding: '10px 60px 0px 60px',
     maxWidth: '100%',
     display: 'flex',
     maxHeight: 50,
@@ -113,11 +125,14 @@ const ModCard = ({ partName, modName, openModal, closeModal, id }) => {
             <CardMedia component="img" image={gunImageTable[partName]} />
           </Item>
         </Row>
-        <CardContent className={classes.content}>
-
+        <Row>
           <Typography className={classes.title} variant={'h2'}>
             {partName}
           </Typography>
+        </Row>
+        <CardContent className={classes.content}>
+
+
           <Typography className={classes.subtitle}>{modName}</Typography>
         </CardContent>
       </Card>

@@ -78,12 +78,12 @@ const App = () => {
       model: '',
     },
     4: {
-      category: 'Optics',
+      category: 'Tracer',
       active: false,
       model: '',
     },
     5: {
-      category: '',
+      category: 'Rail',
       active: false,
       model: '',
     },
