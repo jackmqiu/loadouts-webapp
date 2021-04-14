@@ -25,14 +25,16 @@ const useStyles = makeStyles({
     // backgroundImage: `url(${Image})`,
     // backgroundSize: '900px 600px',
     // backgroundRepeat: 'no-repeat',
-    margin: '20 0 20 0',
+
+  },
+  grid: {
+    margin: 1,
   },
   overlay: {
     width: '100%',
     height: '600px',
     backgroundSize: '900px 600px',
     backgroundRepeat: 'no-repeat',
-
     display: 'flex',
   },
   formControl: {
@@ -107,7 +109,7 @@ export default function SingleGunDetails ({modsState, toggleSingleGun, toggleDra
     {
       <div className={classes.root} >
         <div className={classes.overlay} style={{ backgroundImage: `url(${OverlayImage})`}}>
-          <Grid container spacing={3}>
+          <Grid container className={classes.grid} spacing={3}>
               {
                 firstRow
               }
