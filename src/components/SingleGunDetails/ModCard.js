@@ -82,6 +82,7 @@ const useStyles = makeStyles(() => ({
     width: 210,
     height: 210,
     borderRadius: 8,
+    margin: 10,
     boxShadow: 'none',
     position: 'relative',
     backgroundColor: 'rgba(0, 0, 0, 0.5)',

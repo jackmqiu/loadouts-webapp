@@ -72,7 +72,7 @@ export default function SingleGunDetails ({modsState, toggleSingleGun, toggleDra
   const firstRow = [];
   for (let i = 0; i < 4; i++) {
     firstRow.push(
-      <Grid item xs={3}>
+
         <ModCard
           id={i+1}
           partName={modsState[i+1].category}
@@ -80,20 +80,20 @@ export default function SingleGunDetails ({modsState, toggleSingleGun, toggleDra
           openModal={handleOpen}
           closeModal={handleClose}
         />
-      </Grid>
+
     )
   }
   const secondRow = [];
   for (let i = 4; i < 8; i++) {
     secondRow.push(
-      <Grid item xs={3}>
+
         <ModCard
           partName={modsState[i+1].category}
           openModal={handleOpen}
           closeModal={handleClose}
           id={i+1}
         />
-      </Grid>
+
     )
   }
   const modsSelections = [];
