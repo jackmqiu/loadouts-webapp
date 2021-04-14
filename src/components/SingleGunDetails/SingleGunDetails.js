@@ -32,7 +32,7 @@ const useStyles = makeStyles({
   },
   overlay: {
     width: '100%',
-    
+
     backgroundSize: '900px 800px',
     backgroundRepeat: 'no-repeat',
     display: 'flex',
@@ -43,7 +43,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function SingleGunDetails ({modsState, toggleSingleGun, toggleDrawer, gun, setMod})  {
+export default function SingleGunDetails ({modsState, toggleSingleGun, toggleDrawer, gun, setMod, mixpanel})  {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [category, setCategory] = useState('');
@@ -63,7 +63,10 @@ export default function SingleGunDetails ({modsState, toggleSingleGun, toggleDra
     setModText(event.target.value);
   }
   const handleOpen = (modCardID) => {
-    console.log('handleOpen', modCardID);
+    mixpanel.track(
+      'Action',
+      {"mod": "toggleMod"}
+    );
     setActiveModCard(modCardID);
     setOpen(true);
   };

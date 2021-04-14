@@ -253,6 +253,7 @@ const App = () => {
           toggleDrawer={toggleDrawer}
           gun={loadoutState.primary}
           setMod={setMod}
+          mixpanel={mixpanel}
         />
       </div> :
         <div>
