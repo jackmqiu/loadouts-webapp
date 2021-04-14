@@ -78,6 +78,8 @@ const gunImageTable = {
   Sling: sling,
   HPA: hpa,
   Select: crate,
+  Laser: laser,
+  Optics: optics,
   Other: crate,
 }
 
