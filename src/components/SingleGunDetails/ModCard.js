@@ -76,6 +76,7 @@ const gunImageTable = {
   Sling: sling,
   HPA: hpa,
   Select: crate,
+  Other: crate,
 }
 
 const useStyles = makeStyles(() => ({

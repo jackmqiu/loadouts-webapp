@@ -12,7 +12,7 @@ const ModsList = [
   'Sling',
   'Magazine',
   'HPA',
-  'other'
+  'Other'
 ];
 
 export default ModsList;
