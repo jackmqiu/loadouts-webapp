@@ -26,6 +26,9 @@ const useStyles = makeStyles((theme) => ({
   menuButton: {
     marginRight: theme.spacing(2),
   },
+  barButton: {
+    marginLeft: 8,
+  },
   title: {
     display: 'none',
     [theme.breakpoints.up('sm')]: {
@@ -84,7 +87,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function PrimarySearchAppBar({ toggleDetails, detailsState }) {
+export default function PrimarySearchAppBar({ toggleDetails, detailsState, getImage }) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -177,6 +180,9 @@ export default function PrimarySearchAppBar({ toggleDetails, detailsState }) {
           <div className={classes.grow} />
           <Button variant="contained" color="Secondary" href="https://www.surveymonkey.com/r/9NNQXNH">
             Give Feedback
+          </Button>
+          <Button className={classes.barButton} variant='contained' color='Secondary' onClick={getImage}>
+            Export
           </Button>
           <div className={classes.sectionDesktop}>
 

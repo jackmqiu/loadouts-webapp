@@ -37,6 +37,11 @@ const useStyles = makeStyles({
     height: '600px',
     overflow: 'auto',
   },
+  singleGunDetailsContainer: {
+    width: '920px',
+    height: '800px',
+    overflow: 'auto',
+  },
   button: {
   }
 });
@@ -232,7 +237,7 @@ const App = () => {
 
   return (
     <div className="App" >
-      <MenuBar toggleDetails={toggleDetails} detailsState={detailsState}/>
+      <MenuBar toggleDetails={toggleDetails} detailsState={detailsState} getImage={getImage}/>
        <DrawerContainer
         setClass={setClass}
         setGun={setGun}
@@ -242,7 +247,14 @@ const App = () => {
         toggleDrawer={toggleDrawer}
       />
     { detailsState.display ?
-      <SingleGunDetails modsState={modsState} toggleDrawer={toggleDrawer} gun={loadoutState.primary} setMod={setMod}/> :
+      <div ref={capture} className={classes.singleGunDetailsContainer}>
+        <SingleGunDetails
+          modsState={modsState}
+          toggleDrawer={toggleDrawer}
+          gun={loadoutState.primary}
+          setMod={setMod}
+        />
+      </div> :
         <div>
           <Button variant="contained" className={classes.button} onClick={getImage}>Export</Button>
            <ImageUploading

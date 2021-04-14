@@ -32,8 +32,8 @@ const useStyles = makeStyles({
   },
   overlay: {
     width: '100%',
-    height: '600px',
-    backgroundSize: '900px 600px',
+    
+    backgroundSize: '900px 800px',
     backgroundRepeat: 'no-repeat',
     display: 'flex',
   },
