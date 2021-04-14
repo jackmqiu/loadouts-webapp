@@ -73,7 +73,7 @@ const useStyles = makeStyles(() => ({
   },
   weaponClass: {
     fontSize: '1rem',
-    color: '#fff',
+    color: '#4F8A99',
     height: 20,
     bottom: 0,
     left: 0,
@@ -123,8 +123,7 @@ export default function WeaponCard({gun, toggleDrawer}) {
       <div className={classes.mediaContainer}>
         <img src={gunImageTable[gun.gunName]} height='100%'/>
       </div>
-        <Typography variant={'h2'} className={classes.weaponClass}>{gun.class}</Typography>
-        <div className={classes.weaponClass}></div>
+        <Typography variant={'h2'} className={classes.weaponClass}>Loadouts.me</Typography>
     </Card>
   );
 }
