@@ -5,6 +5,7 @@ import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
+import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
@@ -71,34 +72,43 @@ const useStyles = makeStyles(() => ({
     color: '#4F8A99',
   },
   weaponClass: {
-    fontSize: '0.75rem',
-    color: '#727676',
+    fontSize: '1rem',
+    color: '#fff',
+    height: 20,
+    bottom: 0,
+    left: 0,
     position: 'absolute',
   },
   weaponName: {
-    fontSize: '0.75rem',
-    color: '#727676',
+    marginTop: 1,
+    fontSize: '1rem',
+    color: '#fff',
+    height: 20,
+    textAlign: 'left',
   },
   weaponItem: {
     display: 'block'
   },
+  mediaContainer: {
+    height: 150,
+  },
   assaultImg: {
-    padding: '0px 20px 0px 20px',
-    maxWidth: '100%',
+    padding: '0px auto 0px auto',
+    maxWidth: '60%',
     display: 'flex',
-    maxHeight: 50,
+    maxHeight: 150,
   },
   pistolImg: {
     padding: '0px 60px 0px 60px',
     maxWidth: '100%',
     display: 'flex',
-    maxHeight: 50,
+    maxHeight: 150,
   },
   smgImg: {
     padding: '0px 60px 0px 60px',
     maxWidth: '100%',
     display: 'flex',
-    maxHeight: 50,
+    maxHeight: 150,
   },
 }));
 
@@ -108,31 +118,12 @@ export default function WeaponCard({gun, toggleDrawer}) {
 
   return (
     <Card className={classes.root} onClick={() => {toggleDrawer('primary')}}>
-
-      <Column gap={.5}>
-        <Row gap={'inherit'}>
-          <Item positon='left'>
-            <div className={classes.weaponName}>{gun.gunName}</div>
-          </Item>
-        </Row>
-        <Row>
-          <Item className={classes[`${KeyTable[gun.class]}Img`]}>
-            <CardMedia
-              component="img"
-              alt="Contemplative Reptile"
-              image={gunImageTable[gun.gunName]}
-            />
-          </Item>
-        </Row>
-        <Row position={'bottom'}>
-          <Item>
-            <div className={classes.weaponClass}>{gun.class}</div>
-          </Item>
-          <Item position='right'>
-            <div className={classes.weaponClass}></div>
-          </Item>
-        </Row>
-      </Column>
+      <Typography variant={'h2'} className={classes.weaponName}>{gun.gunName}</Typography>
+      <div className={classes.mediaContainer}>
+        <img src={gunImageTable[gun.gunName]} height='100%'/>
+      </div>
+        <Typography variant={'h2'} className={classes.weaponClass}>{gun.class}</Typography>
+        <div className={classes.weaponClass}></div>
     </Card>
   );
 }
