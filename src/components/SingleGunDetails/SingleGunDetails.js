@@ -91,6 +91,7 @@ export default function SingleGunDetails ({modsState, toggleSingleGun, toggleDra
 
         <ModCard
           partName={modsState[i+1].category}
+          modName={modsState[i+1].model}
           openModal={handleOpen}
           closeModal={handleClose}
           id={i+1}

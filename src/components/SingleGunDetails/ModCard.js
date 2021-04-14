@@ -153,11 +153,11 @@ const ModCard = ({ partName, modName, openModal, closeModal, id }) => {
               </Typography>
 
 
-          <CardContent className={classes.content}>
+          <div className={classes.content}>
 
 
             <Typography className={classes.subtitle}>{modName}</Typography>
-          </CardContent>
+          </div>
         </CardActionArea>
       </Card>
   );
