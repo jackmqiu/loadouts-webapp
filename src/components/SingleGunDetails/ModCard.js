@@ -42,6 +42,8 @@ import {
   sling,
   hpa,
   crate,
+  laser,
+  optics,
 } from '../../Img';
 
 const gunImageTable = {

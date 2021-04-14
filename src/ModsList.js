@@ -12,6 +12,8 @@ const ModsList = [
   'Sling',
   'Magazine',
   'HPA',
+  'Optics',
+  'Laser',
   'Other'
 ];
 
