@@ -79,8 +79,10 @@ const useStyles = makeStyles(() => ({
 
   card: ({ color }) => ({
     width: 210,
+    height: 210,
     borderRadius: 8,
     boxShadow: 'none',
+    position: 'relative',
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
     '&:hover': {
       boxShadow: `0 6px 12px 0 ${Color(color)
@@ -89,11 +91,20 @@ const useStyles = makeStyles(() => ({
         .fade(0.5)}`,
     },
   }),
+  cardActionArea: {
+    width: '100%',
+    height: '100%',
+    position: 'relative',
+  },
   content: ({ color }) => {
     return {
       backgroundColor: 'rgba(120, 128, 69, 0.5)',
       padding: '.5rem .5rem .5rem',
       opacity: .5,
+      height: 30,
+      width: '100%',
+      position: 'absolute',
+      bottom: 0,
     };
   },
   title: {
@@ -108,11 +119,11 @@ const useStyles = makeStyles(() => ({
     fontWeight: 500,
     fontSize: 14,
   },
-  modImg: {
-    padding: '10px 60px 0px 60px',
+  modImgItem: {
+    padding: '0% 20% 0% 20%',
     maxWidth: '100%',
     display: 'flex',
-    maxHeight: 50,
+    height: 100,
   },
 }));
 
@@ -120,21 +131,25 @@ const ModCard = ({ partName, modName, openModal, closeModal, id }) => {
   const classes = useStyles();
   return (
       <Card className={classes.card} onClick={() => {openModal(id)}}>
-        <Row>
-          <Item className={classes.modImg}>
-            <CardMedia component="img" image={gunImageTable[partName]} />
-          </Item>
-        </Row>
-        <Row>
-          <Typography className={classes.title} variant={'h2'}>
-            {partName}
-          </Typography>
-        </Row>
-        <CardContent className={classes.content}>
+        <CardActionArea className={classes.cardActionArea}>
+
+            <Row>
+              <Item className={classes.modImgItem}>
+                <CardMedia component="img" image={gunImageTable[partName]} />
+              </Item>
+            </Row>
+            <Row>
+              <Typography className={classes.title} variant={'h2'}>
+                {partName}
+              </Typography>
+            </Row>
+
+          <CardContent className={classes.content}>
 
 
-          <Typography className={classes.subtitle}>{modName}</Typography>
-        </CardContent>
+            <Typography className={classes.subtitle}>{modName}</Typography>
+          </CardContent>
+        </CardActionArea>
       </Card>
   );
 };
