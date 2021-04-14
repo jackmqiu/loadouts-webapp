@@ -1,5 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import Color from 'color';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
@@ -50,13 +51,21 @@ const gunImageTable = {
   'AAP-01': aap01,
 }
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(() => ({
   root: {
-    height: 180,
-    backgroundImage: `url(${backgroundImage})`,
-    backgroundSize: '200px 200px',
-    backgroundColor: 'transparent',
-    margin: 5,
+    width: 910,
+    height: 210,
+    borderRadius: 8,
+    margin: 10,
+    boxShadow: 'none',
+    position: 'relative',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    '&:hover': {
+      boxShadow: `0 6px 12px 0 ${Color(.5)
+        .rotate(-12)
+        .darken(0.2)
+        .fade(0.5)}`,
+    },
   },
   weaponStatus: {
     fontSize: '0.75rem',
@@ -92,7 +101,7 @@ const useStyles = makeStyles({
     display: 'flex',
     maxHeight: 50,
   },
-});
+}));
 
 export default function WeaponCard({gun, toggleDrawer}) {
   const classes = useStyles();
