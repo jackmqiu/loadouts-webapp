@@ -113,6 +113,8 @@ const useStyles = makeStyles(() => ({
     fontSize: '1rem',
     color: '#fff',
     textAlign: 'left',
+    margin: 2,
+    color: '#e1d862',
   },
   subtitle: {
     color: '#fff',
@@ -144,7 +146,7 @@ const ModCard = ({ partName, modName, openModal, closeModal, id }) => {
               </Item>
 
 
-              <Typography className={classes.title} variant={'h2'}>
+              <Typography className={classes.title} variant={'h3'}>
                 {partName}
               </Typography>
 
