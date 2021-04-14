@@ -41,6 +41,7 @@ import {
   barrel,
   sling,
   hpa,
+  crate,
 } from '../../Img';
 
 const gunImageTable = {
@@ -74,6 +75,7 @@ const gunImageTable = {
   Barrel: barrel,
   Sling: sling,
   HPA: hpa,
+  Select: crate,
 }
 
 const useStyles = makeStyles(() => ({

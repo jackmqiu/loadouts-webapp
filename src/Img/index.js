@@ -26,3 +26,4 @@ export { default as tracer } from './Tracer.png';
 export { default as receiver } from './Receiver.png';
 export { default as sling } from './Sling.png';
 export { default as hpa } from './HPA.png';
+export { default as crate } from './Crate.png';

@@ -88,17 +88,17 @@ const App = () => {
       model: '',
     },
     6: {
-      category: '',
+      category: 'Select',
       active: false,
       model: '',
     },
     7: {
-      category: '',
+      category: 'Select',
       active: false,
       model: '',
     },
     8: {
-      category: '',
+      category: 'Select',
       active: false,
       model: '',
     },
