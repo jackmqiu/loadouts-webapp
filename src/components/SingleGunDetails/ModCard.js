@@ -65,6 +65,7 @@ const gunImageTable = {
   Magazine: magazine,
   Rail: rail,
   Optic: scope,
+  Scope: scope,
   Stock: stock,
   Trigger: trigger,
   Internals: internals,
@@ -101,7 +102,7 @@ const useStyles = makeStyles(() => ({
       backgroundColor: 'rgba(120, 128, 69, 0.5)',
       padding: '.5rem .5rem .5rem',
       opacity: .5,
-      height: 30,
+      height: 25,
       width: '100%',
       position: 'absolute',
       bottom: 0,
@@ -121,9 +122,12 @@ const useStyles = makeStyles(() => ({
   },
   modImgItem: {
     padding: '0% 20% 0% 20%',
-    maxWidth: '100%',
-    display: 'flex',
+    maxHeight: '100%',
+    // display: 'flex',
     height: 100,
+  },
+  modImg: {
+    height: '120%',
   },
 }));
 
@@ -133,16 +137,16 @@ const ModCard = ({ partName, modName, openModal, closeModal, id }) => {
       <Card className={classes.card} onClick={() => {openModal(id)}}>
         <CardActionArea className={classes.cardActionArea}>
 
-            <Row>
+
               <Item className={classes.modImgItem}>
-                <CardMedia component="img" image={gunImageTable[partName]} />
+                <CardMedia className={classes.modImg} component="img" image={gunImageTable[partName]} />
               </Item>
-            </Row>
-            <Row>
+
+
               <Typography className={classes.title} variant={'h2'}>
                 {partName}
               </Typography>
-            </Row>
+
 
           <CardContent className={classes.content}>
 
