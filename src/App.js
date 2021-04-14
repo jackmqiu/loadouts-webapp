@@ -256,7 +256,6 @@ const App = () => {
         />
       </div> :
         <div>
-          <Button variant="contained" className={classes.button} onClick={getImage}>Export</Button>
            <ImageUploading
             multiple
             value={images}
