@@ -78,9 +78,10 @@ const useStyles = makeStyles(() => ({
     bottom: 0,
     left: 0,
     position: 'absolute',
+    margin: 2,
   },
   weaponName: {
-    marginTop: 1,
+    margin: 2,
     fontSize: '1rem',
     color: '#fff',
     height: 20,
