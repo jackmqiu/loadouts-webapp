@@ -254,6 +254,7 @@ const App = () => {
           gun={loadoutState.primary}
           setMod={setMod}
           mixpanel={mixpanel}
+          getImage={getImage}
         />
       </div> :
         <div>

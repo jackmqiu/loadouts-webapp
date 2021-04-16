@@ -108,7 +108,7 @@ const useStyles = makeStyles(() => ({
   content: ({ color }) => {
     return {
       backgroundColor: 'rgba(120, 128, 69, 0.5)',
-      padding: '.5rem .5rem .5rem',
+      padding: '.5rem .5rem .5rem .5rem',
       opacity: .5,
       height: 25,
       width: '100%',
@@ -157,12 +157,14 @@ const ModCard = ({ partName, modName, openModal, closeModal, id }) => {
                 {partName}
               </Typography>
 
+          <Item>
 
-          <div className={classes.content}>
+            <div className={classes.content}>
 
 
-            <Typography className={classes.subtitle}>{modName}</Typography>
-          </div>
+              <Typography className={classes.subtitle}>{modName}</Typography>
+            </div>
+          </Item>
         </CardActionArea>
       </Card>
   );

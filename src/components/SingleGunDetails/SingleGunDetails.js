@@ -11,12 +11,14 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 
 import ModsList from '../../ModsList.js';
 import Image from '../../Img/LoadoutTest.jpg';
 import OverlayImage from '../../Img/transparent-background.png';
 import ModCard from './ModCard';
 import DetailWeaponCard from './DetailWeaponCard';
+import LayoutTable from '../../LayoutTable';
 
 const useStyles = makeStyles({
   root: {
@@ -43,12 +45,13 @@ const useStyles = makeStyles({
   },
 });
 
-export default function SingleGunDetails ({modsState, toggleSingleGun, toggleDrawer, gun, setMod, mixpanel})  {
+export default function SingleGunDetails ({modsState, toggleSingleGun, toggleDrawer, gun, setMod, mixpanel, getImage})  {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [category, setCategory] = useState('');
   const [modText, setModText] = useState('');
   const [modCardSelection, setActiveModCard] = useState(1);
+  const [numMods, updateNumMods] = useState(1);
   const handleCategorySelect = (event) => {
     setCategory(event.target.value);
   };
@@ -74,9 +77,9 @@ export default function SingleGunDetails ({modsState, toggleSingleGun, toggleDra
     setOpen(false);
   };
 
-  const firstRow = [];
-  for (let i = 0; i < 4; i++) {
-    firstRow.push(
+  const modsGridItems = [];
+  for (let i = 0; i < numMods; i++) {
+    modsGridItems.push(
 
         <ModCard
           id={i+1}
@@ -88,20 +91,20 @@ export default function SingleGunDetails ({modsState, toggleSingleGun, toggleDra
 
     )
   }
-  const secondRow = [];
-  for (let i = 4; i < 8; i++) {
-    secondRow.push(
-
-        <ModCard
-          partName={modsState[i+1].category}
-          modName={modsState[i+1].model}
-          openModal={handleOpen}
-          closeModal={handleClose}
-          id={i+1}
-        />
-
-    )
-  }
+  // const secondRow = [];
+  // for (let i = 4; i < 8; i++) {
+  //   secondRow.push(
+  //
+  //       <ModCard
+  //         partName={modsState[i+1].category}
+  //         modName={modsState[i+1].model}
+  //         openModal={handleOpen}
+  //         closeModal={handleClose}
+  //         id={i+1}
+  //       />
+  //
+  //   )
+  // }
   const modsSelections = [];
   for (let category of ModsList) {
     modsSelections.push(
@@ -115,15 +118,30 @@ export default function SingleGunDetails ({modsState, toggleSingleGun, toggleDra
         <div className={classes.overlay} style={{ backgroundImage: `url(${OverlayImage})`}}>
           <Grid container className={classes.grid} spacing={3}>
               {
-                firstRow
+                modsGridItems
               }
             <Grid item xs={12}>
               <DetailWeaponCard gun={gun} toggleDrawer={toggleDrawer} loadoutGunClass={'primary'}/>
             </Grid>
-            {
-              secondRow
-            }
+
           </Grid>
+        </div>
+        <div>
+          {
+            numMods < 8 &&
+            <Button
+              variant="contained"
+              color="Primary"
+              onClick={() => {updateNumMods(numMods+1)}}>Add Mod</Button>
+          }
+          {
+            numMods > 0 &&
+            <Button
+              variant="contained"
+              color="Secondary"
+              onClick={() => {updateNumMods(numMods-1)}}>Remove Mod</Button>
+          }
+          <Button variant="contained" onClick={getImage}>Export</Button>
         </div>
         <Modal
           open={open}
