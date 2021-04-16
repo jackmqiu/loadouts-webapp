@@ -44,6 +44,9 @@ const useStyles = makeStyles({
     margin: '1rem',
     minWidth: 120,
   },
+  button: {
+    margin: 5,
+  }
 });
 
 export default function SingleGunDetails ({modsState, toggleSingleGun, toggleDrawer, gun, setMod, mixpanel})  {
@@ -153,6 +156,7 @@ export default function SingleGunDetails ({modsState, toggleSingleGun, toggleDra
           {
             numMods < 8 &&
             <Button
+              className={classes.button}
               variant="contained"
               color="Primary"
               onClick={() => {updateNumMods(numMods+1)}}>Add Mod</Button>
@@ -160,11 +164,12 @@ export default function SingleGunDetails ({modsState, toggleSingleGun, toggleDra
           {
             numMods > 0 &&
             <Button
+              className={classes.button}
               variant="contained"
               color="Secondary"
               onClick={() => {updateNumMods(numMods-1)}}>Remove Mod</Button>
           }
-          <Button variant="contained" onClick={getImage}>Export</Button>
+          <Button className={classes.button} variant="contained" onClick={getImage}>Export</Button>
         </div>
         <Modal
           open={open}

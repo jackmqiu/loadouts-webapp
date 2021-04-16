@@ -181,9 +181,6 @@ export default function PrimarySearchAppBar({ toggleDetails, detailsState, getIm
           <Button variant="contained" color="Secondary" href="https://www.surveymonkey.com/r/9NNQXNH">
             Give Feedback
           </Button>
-          <Button className={classes.barButton} variant='contained' color='Secondary' onClick={getImage}>
-            Export
-          </Button>
           <div className={classes.sectionDesktop}>
 
             <IconButton

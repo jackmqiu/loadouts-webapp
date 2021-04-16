@@ -40,6 +40,7 @@ const useStyles = makeStyles({
     overflow: 'auto',
   },
   button: {
+    margin: 5,
   }
 });
 
@@ -282,24 +283,21 @@ const App = () => {
                 <MainContainer loadoutState={loadoutState} toggleDrawer={toggleDrawer} backImage={imageList[0]} />
               </div>
               <div className="upload__image-wrapper">
-                <button
+                <Button
+                  className={classes.button}
+                  variant='contained'
+                  color='Primary'
                   style={isDragging ? { color: 'red' } : undefined}
                   onClick={onImageUpload}
                   {...dragProps}
                 >
                   Click to Add or Drop Your Image Here
-                </button>
+                </Button>
                 &nbsp;
-                <button onClick={onImageRemoveAll}>Remove all images</button>
-                {imageList.map((image, index) => (
-                  <div key={index} className="image-item">
-                    <img src={image['data_url']} alt="" width="100" />
-                    <div className="image-item__btn-wrapper">
-                      <button onClick={() => onImageUpdate(index)}>Update</button>
-                      <button onClick={() => onImageRemove(index)}>Remove</button>
-                    </div>
-                  </div>
-                ))}
+                <Button className={classes.button} color='Secondary' variant='contained' onClick={onImageRemoveAll}>Remove Image</Button>
+                  <Button className={classes.button} variant='contained' onClick={getImage}>
+                    Export
+                  </Button>
               </div>
               </div>
             )}
