@@ -68,6 +68,9 @@ const useStyles = makeStyles(() => ({
         .fade(0.5)}`,
     },
   },
+  actionArea: {
+    height: '100%',
+  },
   weaponStatus: {
     fontSize: '0.75rem',
     color: '#4F8A99',
@@ -79,10 +82,11 @@ const useStyles = makeStyles(() => ({
     bottom: 0,
     left: 0,
     position: 'absolute',
-    margin: 2,
+    margin: 5,
   },
   weaponName: {
-    margin: 2,
+    marginLeft: 5,
+    marginTop: -20,
     fontSize: '1rem',
     color: '#fff',
     height: 20,
@@ -120,11 +124,13 @@ export default function WeaponCard({gun, toggleDrawer}) {
 
   return (
     <Card className={classes.root} onClick={() => {toggleDrawer('primary')}}>
-      <Typography variant={'h2'} className={classes.weaponName}>{gun.gunName}</Typography>
-      <div className={classes.mediaContainer}>
-        <img src={gunImageTable[gun.gunName]} height='100%'/>
-      </div>
+      <CardActionArea className={classes.actionArea}>
+        <Typography variant={'h2'} className={classes.weaponName}>{gun.gunName}</Typography>
+        <div className={classes.mediaContainer}>
+          <img src={gunImageTable[gun.gunName]} height='100%'/>
+        </div>
         <Typography variant={'h2'} className={classes.weaponClass}>Loadouts.me</Typography>
+      </CardActionArea>
     </Card>
   );
 }
