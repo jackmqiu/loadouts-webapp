@@ -54,7 +54,7 @@ const gunImageTable = {
 
 const useStyles = makeStyles(() => ({
   root: {
-    width: 900,
+    width: 'auto',
     height: 210,
     borderRadius: 8,
     boxShadow: 'none',

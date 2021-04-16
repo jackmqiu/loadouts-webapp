@@ -86,7 +86,7 @@ const gunImageTable = {
 const useStyles = makeStyles(() => ({
 
   card: ({ color }) => ({
-    width: 210,
+    width: '100%',
     height: 210,
     borderRadius: 8,
     margin: 10,

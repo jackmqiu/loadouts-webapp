@@ -107,6 +107,11 @@ const App = () => {
       active: false,
       model: '',
     },
+    9: {
+      category: 'Select',
+      active: false,
+      model: '',
+    },
   });
   const setMod = (modField, modCategory, modModel) => {
     console.log('setMod', modField, modModel, modCategory)

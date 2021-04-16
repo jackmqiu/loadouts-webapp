@@ -78,18 +78,28 @@ export default function SingleGunDetails ({modsState, toggleSingleGun, toggleDra
   };
 
   const modsGridItems = [];
-  for (let i = 0; i < numMods; i++) {
-    modsGridItems.push(
-
-        <ModCard
-          id={i+1}
-          partName={modsState[i+1].category}
-          modName={modsState[i+1].model}
-          openModal={handleOpen}
-          closeModal={handleClose}
-        />
-
-    )
+  let j = 0;
+  for (let i = 0; i < numMods+1; i++) {
+    if (LayoutTable[numMods][i].type === 'mod') {
+      modsGridItems.push(
+        <Grid item xs={LayoutTable[numMods][i].gridItemWidth}>
+          <ModCard
+            id={i+1}
+            partName={modsState[j+1].category}
+            modName={modsState[j+1].model}
+            openModal={handleOpen}
+            closeModal={handleClose}
+            />
+        </Grid>
+      )
+      j++;
+    } else {
+      modsGridItems.push(
+        <Grid item xs={LayoutTable[numMods][i].gridItemWidth}>
+          <DetailWeaponCard gun={gun} toggleDrawer={toggleDrawer} loadoutGunClass={'primary'}/>
+        </Grid>
+      );
+    }
   }
   // const secondRow = [];
   // for (let i = 4; i < 8; i++) {
@@ -120,9 +130,7 @@ export default function SingleGunDetails ({modsState, toggleSingleGun, toggleDra
               {
                 modsGridItems
               }
-            <Grid item xs={12}>
-              <DetailWeaponCard gun={gun} toggleDrawer={toggleDrawer} loadoutGunClass={'primary'}/>
-            </Grid>
+
 
           </Grid>
         </div>
@@ -146,7 +154,6 @@ export default function SingleGunDetails ({modsState, toggleSingleGun, toggleDra
         <Modal
           open={open}
           onClose={handleClose}
-
         >
           <Paper>
             <form onSubmit={() => {setMod(modCardSelection, category, modText)}}>
