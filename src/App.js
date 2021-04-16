@@ -10,10 +10,7 @@ import ReactGA from 'react-ga';
 import { Column, Row, Item } from '@mui-treasury/components/flex';
 import Typography from '@material-ui/core/Typography';
 
-import ImageUploader from 'react-images-upload';
 import ImageUploading from 'react-images-uploading';
-
-
 import { useScreenshot, createFileName } from 'use-react-screenshot'
 import {
   Select,

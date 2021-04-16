@@ -1,4 +1,4 @@
-import { form, useState } from 'react';
+import { form, useState, createRef, useRef } from 'react';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import Paper from '@material-ui/core/Paper';
@@ -19,6 +19,7 @@ import OverlayImage from '../../Img/transparent-background.png';
 import ModCard from './ModCard';
 import DetailWeaponCard from './DetailWeaponCard';
 import LayoutTable from '../../LayoutTable';
+import { useScreenshot, createFileName } from 'use-react-screenshot'
 
 const useStyles = makeStyles({
   root: {
@@ -45,13 +46,29 @@ const useStyles = makeStyles({
   },
 });
 
-export default function SingleGunDetails ({modsState, toggleSingleGun, toggleDrawer, gun, setMod, mixpanel, getImage})  {
+export default function SingleGunDetails ({modsState, toggleSingleGun, toggleDrawer, gun, setMod, mixpanel})  {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [category, setCategory] = useState('');
   const [modText, setModText] = useState('');
   const [modCardSelection, setActiveModCard] = useState(1);
   const [numMods, updateNumMods] = useState(1);
+  const capture = createRef(null);
+  const [image, takeScreenshot] = useScreenshot();
+
+  const download = (image, { name = "gunMods", extension = "jpg" } = {}) => {
+    const a = document.createElement("a");
+    a.href = image;
+    a.download = createFileName(extension, name);
+    a.click();
+  };
+  const getImage = () => {
+    mixpanel.track(
+      'Download',
+      {"download": "downloadLoadout"}
+    );
+    takeScreenshot(capture.current).then(download);
+  }
   const handleCategorySelect = (event) => {
     setCategory(event.target.value);
   };
@@ -125,13 +142,11 @@ export default function SingleGunDetails ({modsState, toggleSingleGun, toggleDra
     <div >
     {
       <div className={classes.root} >
-        <div className={classes.overlay} style={{ backgroundImage: `url(${OverlayImage})`}}>
+        <div ref={capture} className={classes.overlay} style={{ backgroundImage: `url(${OverlayImage})`}}>
           <Grid container className={classes.grid} spacing={3}>
               {
                 modsGridItems
               }
-
-
           </Grid>
         </div>
         <div>
