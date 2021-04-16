@@ -131,13 +131,16 @@ const useStyles = makeStyles(() => ({
     fontSize: 14,
   },
   modImgItem: {
-    padding: '0% 20% 0% 20%',
+    marginLeft: 'auto',
+    marginRight: 'auto',
     maxHeight: '100%',
-    // display: 'flex',
     height: 100,
+    maxWidth: 135,
+    alignItems: 'center',
   },
   modImg: {
-    height: '120%',
+    height: 'auto',
+    width: '100%',
   },
 }));
 
@@ -146,22 +149,14 @@ const ModCard = ({ partName, modName, openModal, closeModal, id }) => {
   return (
       <Card className={classes.card} onClick={() => {openModal(id)}}>
         <CardActionArea className={classes.cardActionArea}>
-
-
               <Item className={classes.modImgItem}>
-                <CardMedia className={classes.modImg} component="img" image={gunImageTable[partName]} />
+                <img className={classes.modImg} component="img" src={gunImageTable[partName]} />
               </Item>
-
-
               <Typography className={classes.title} variant={'h3'}>
                 {partName}
               </Typography>
-
           <Item>
-
             <div className={classes.content}>
-
-
               <Typography className={classes.subtitle}>{modName}</Typography>
             </div>
           </Item>
