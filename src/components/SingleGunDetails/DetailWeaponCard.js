@@ -30,6 +30,7 @@ import {
   beretta,
   desertEagle,
   aap01,
+  hicapa,
 } from '../../Img';
 import { useWideCardMediaStyles } from '@mui-treasury/styles/cardMedia/wide';
 
@@ -50,6 +51,7 @@ const gunImageTable = {
   Beretta: beretta,
   'Desert Eagle': desertEagle,
   'AAP-01': aap01,
+  'Hi-Capa': hicapa,
 }
 
 const useStyles = makeStyles(() => ({
