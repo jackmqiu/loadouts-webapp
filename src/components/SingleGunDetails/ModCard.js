@@ -89,9 +89,8 @@ const useStyles = makeStyles(() => ({
     width: '100%',
     height: 210,
     borderRadius: 8,
-    margin: '5 0 5 0',
     boxShadow: 'none',
-    position: 'relative',
+    // position: 'relative',
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
     '&:hover': {
       boxShadow: `0 6px 12px 0 ${Color(color)
@@ -122,6 +121,8 @@ const useStyles = makeStyles(() => ({
     textAlign: 'left',
     margin: 2,
     color: '#e1d862',
+    position: 'absolute',
+    bottom: 40,
   },
   subtitle: {
     color: '#fff',
@@ -131,12 +132,12 @@ const useStyles = makeStyles(() => ({
     fontSize: 14,
   },
   modImgItem: {
+    marginTop: -45,
     marginLeft: 'auto',
     marginRight: 'auto',
     maxHeight: '100%',
     height: 100,
     maxWidth: 135,
-    alignItems: 'center',
   },
   modImg: {
     height: 'auto',
