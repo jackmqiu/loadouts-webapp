@@ -104,7 +104,7 @@ export default function SingleGunDetails ({modsState, toggleSingleGun, toggleDra
       modsGridItems.push(
         <Grid item xs={LayoutTable[numMods][i].gridItemWidth}>
           <ModCard
-            id={i+1}
+            id={j+1}
             partName={modsState[j+1].category}
             modName={modsState[j+1].model}
             openModal={handleOpen}
@@ -121,20 +121,6 @@ export default function SingleGunDetails ({modsState, toggleSingleGun, toggleDra
       );
     }
   }
-  // const secondRow = [];
-  // for (let i = 4; i < 8; i++) {
-  //   secondRow.push(
-  //
-  //       <ModCard
-  //         partName={modsState[i+1].category}
-  //         modName={modsState[i+1].model}
-  //         openModal={handleOpen}
-  //         closeModal={handleClose}
-  //         id={i+1}
-  //       />
-  //
-  //   )
-  // }
   const modsSelections = [];
   for (let category of ModsList) {
     modsSelections.push(
@@ -145,12 +131,14 @@ export default function SingleGunDetails ({modsState, toggleSingleGun, toggleDra
     <div >
     {
       <div className={classes.root} >
-        <div ref={capture} className={classes.overlay} style={{ backgroundImage: `url(${OverlayImage})`}}>
-          <Grid container className={classes.grid} spacing={3}>
+        <div ref={capture}>
+          <div className={classes.overlay} style={{ backgroundImage: `url(${OverlayImage})`}}>
+            <Grid container className={classes.grid} spacing={3}>
               {
                 modsGridItems
               }
-          </Grid>
+            </Grid>
+          </div>
         </div>
         <div>
           {
