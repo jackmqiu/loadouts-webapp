@@ -13,6 +13,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
+import ModGrid from './ModGrid';
 import ModsList from '../../ModsList.js';
 import Image from '../../Img/LoadoutTest.jpg';
 import OverlayImage from '../../Img/transparent-background.png';
@@ -23,20 +24,11 @@ import { useScreenshot, createFileName } from 'use-react-screenshot'
 
 const useStyles = makeStyles({
   root: {
-    // width: '100%',
-    // height: '100%',
-    // backgroundImage: `url(${Image})`,
-    // backgroundSize: '900px 600px',
-    // backgroundRepeat: 'no-repeat',
-
   },
   grid: {
     margin: 1,
-  },
-  overlay: {
-    width: '100%',
-
-    backgroundSize: '900px 800px',
+    backgroundImage: `url(${OverlayImage})`,
+    backgroundSize: '100% 100%',
     backgroundRepeat: 'no-repeat',
     display: 'flex',
   },
@@ -130,16 +122,20 @@ export default function SingleGunDetails ({modsState, toggleSingleGun, toggleDra
   return (
     <div >
     {
-      <div className={classes.root} >
-        <div ref={capture}>
-          <div className={classes.overlay} style={{ backgroundImage: `url(${OverlayImage})`}}>
-            <Grid container className={classes.grid} spacing={3}>
-              {
-                modsGridItems
-              }
-            </Grid>
-          </div>
-        </div>
+      <div className={classes.root}>
+        <ModGrid
+          modsState={modsState}
+          handleOpen={handleOpen}
+          handleClose={handleClose}
+          gun={gun}
+          toggleDrawer={toggleDrawer}
+          toggleSingleGun={toggleSingleGun}
+          mixpanel={mixpanel}
+          getImage={getImage}
+        />
+        {/*<Grid container ref={capture} className={classes.grid} spacing={3}>
+          { modsGridItems }
+        </Grid>*/}
         <div>
           {
             numMods < 8 &&
@@ -173,9 +169,7 @@ export default function SingleGunDetails ({modsState, toggleSingleGun, toggleDra
                 value={category}
                 onChange={handleCategorySelect}
               >
-                {
-                  modsSelections
-                }
+                { modsSelections }
               </Select>
             </FormControl>
             <FormControl>
