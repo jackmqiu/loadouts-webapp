@@ -22,8 +22,8 @@ const GunTable = {
         },
       }
     },
-    assault: {
-      name: 'Assault',
+    rifle: {
+      name: 'Rifle',
       list: ['AK-47', 'FN-SCAR', 'M4', 'AR-15', 'M16'],
       guns: {
         ak47: {

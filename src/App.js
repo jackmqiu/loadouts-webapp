@@ -55,7 +55,7 @@ const App = () => {
   const [loadoutState, setLoadoutState] = useState({
     primary: {
       gunName: 'AR-15',
-      class: 'Assault',
+      class: 'Rifle',
       manufacturer: 'G&G',
       gunCustomField: 'Vfc hk416',
     },

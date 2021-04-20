@@ -1,6 +1,6 @@
 const KeyTable = {
   smg: 'SMG',
-  assault: 'Assault',
+  rifle: 'Rifle',
   pistol: 'Pistol',
   mac10: 'MAC-10',
   mp5: 'MP5',
@@ -21,7 +21,7 @@ const KeyTable = {
   'Hi-Capa': 'hicapa',
   hicapa: 'Hi-Capa',
   'SMG': 'smg',
-  'Assault': 'assault',
+  'Rifle': 'rifle',
   'Pistol': 'pistol',
   'MAC-10': 'mac10',
   'MP5': 'mp5',

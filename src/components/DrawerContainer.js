@@ -49,7 +49,7 @@ const DrawerContainer = ({
   mixpanel,
 }) => {
   const [selectionState, updateSelectionState] = useState({
-    class: 'assault',
+    class: 'rifle',
     weaponSelection: '',
   });
   const [gunText, setGunText] = useState('');
@@ -132,7 +132,7 @@ const DrawerContainer = ({
           }}
         >
 
-          <option value={'assault'}>Assault Rifle</option>
+          <option value={'rifle'}>Rifle</option>
           <option value={'smg'}>SMG</option>
           <option value={'pistol'}>Pistol</option>
         </Select>
@@ -153,6 +153,7 @@ const DrawerContainer = ({
                 id: 'outlined-class-native-simple',
               }}
             >
+              <option value=""></option>
               {gunTable.classes[keyTable[loadoutState[drawerState.weaponSelection].class]].list.map((gun) =>
                   <option value={gun}>{gun}</option>
               )}
