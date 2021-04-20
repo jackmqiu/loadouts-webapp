@@ -32,23 +32,6 @@ const ModGrid = ({
   numMods,
 }) => {
   const classes = useStyles();
-  const capture = createRef(null);
-  const [image, takeScreenshot] = useScreenshot();
-
-  const download = (image, { name = "gunMods", extension = "jpg" } = {}) => {
-    const a = document.createElement("a");
-    a.href = image;
-    a.download = createFileName(extension, name);
-    a.click();
-  };
-  const getImage = () => {
-    mixpanel.track(
-      'Download',
-      {"download": "downloadLoadout"}
-    );
-    console.log('capture.current', capture.current);
-    takeScreenshot(capture.current).then(download);
-  }
 
     // tell React that we want to associate the <input> ref
     // with the `grid` that we created in the constructor
@@ -78,7 +61,7 @@ const ModGrid = ({
   };
   return (
     <div>
-        <Grid ref={capture} container className={classes.grid} spacing={3}>
+        <Grid container className={classes.grid} spacing={3}>
           { modsGridItems }
         </Grid>
       <div>
