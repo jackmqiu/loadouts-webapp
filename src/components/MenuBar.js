@@ -15,9 +15,7 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
-import ReactGA from 'react-ga';
-const TRACKING_ID = "G-F4LSKD8M8H";
-ReactGA.initialize(TRACKING_ID);
+import FavoriteIcon from '@material-ui/icons/Favorite';
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -97,6 +95,9 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: '#FF2167',
     marginLeft: 5,
   },
+  heart: {
+    marginRight: 5,
+  }
 }));
 
 export default function PrimarySearchAppBar({
@@ -128,10 +129,6 @@ export default function PrimarySearchAppBar({
   };
 
   const handleMobileMenuOpen = (event) => {
-    ReactGA.event({
-      category: 'Action',
-      action: 'mobileMenuOpen'
-    });
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
@@ -147,7 +144,11 @@ export default function PrimarySearchAppBar({
       onClose={handleMenuClose}
     >
       <MenuItem onClick={handleMenuClose}>
-        <Button variant='contained' color='Secondary' onClick={toggleDetails}>{detailsState.display ? 'Loadout' : 'Gun Detail'}</Button>
+        <Button className={classes.removeModButton} variant="contained" color="Secondary" href="https://www.surveymonkey.com/r/9NNQXNH">
+          <FavoriteIcon fontSize='small' className={classes.heart} />
+          Give Feedback
+        </Button>
+        <Button className={classes.removeModButton} variant='contained' color='Secondary' onClick={toggleDetails}>{detailsState.display ? 'Loadout' : 'Gun Detail'}</Button>
       </MenuItem>
     </Menu>
   );
@@ -175,7 +176,11 @@ export default function PrimarySearchAppBar({
           </IconButton>
           <p>Profile - To be added</p>
         */}
-        <Button variant='contained' color='Secondary' onClick={toggleDetails}>{detailsState.display ? 'Loadout' : 'Gun Detail'}</Button>
+        <Button className={classes.removeModButton} variant="contained" color="Secondary" href="https://www.surveymonkey.com/r/9NNQXNH">
+          <FavoriteIcon fontSize='small' className={classes.heart} />
+          Give Feedback
+        </Button>
+        <Button className={classes.removeModButton} variant='contained' color='Secondary' onClick={toggleDetails}>{detailsState.display ? 'Loadout' : 'Gun Detail'}</Button>
       </MenuItem>
     </Menu>
   );
@@ -223,11 +228,8 @@ export default function PrimarySearchAppBar({
             </Button>
           }
           <div className={classes.grow} />
-          {/*
-            <Button variant="contained" color="Secondary" href="https://www.surveymonkey.com/r/9NNQXNH">
-            Give Feedback
-            </Button>
-          */}
+
+
 
           <div className={classes.sectionDesktop}>
             {/*
@@ -244,7 +246,11 @@ export default function PrimarySearchAppBar({
 
             </IconButton>
             */}
-            <Button variant='contained' color='Secondary' onClick={toggleDetails}>{detailsState.display ? 'Loadout' : 'Gun Detail'}</Button>
+            <Button className={classes.removeModButton} variant="contained" color="Secondary" href="https://www.surveymonkey.com/r/9NNQXNH">
+              <FavoriteIcon fontSize='small' className={classes.heart} />
+              Give Feedback
+            </Button>
+            <Button className={classes.removeModButton} variant='contained' color='Secondary' onClick={toggleDetails}>{detailsState.display ? 'Loadout' : 'Gun Detail'}</Button>
 
           </div>
           <div className={classes.sectionMobile}>
