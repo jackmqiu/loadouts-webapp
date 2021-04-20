@@ -57,13 +57,13 @@ const App = () => {
       gunName: 'AR-15',
       class: 'Assault',
       manufacturer: 'G&G',
-      gunImage: 'Img/AK-47.png',
+      gunCustomField: 'Vfc hk416',
     },
     secondary: {
       gunName: '1911',
       class: 'Pistol',
       manufacturer: 'Action Army',
-      gunImage: 'Img/1911.png',
+      gunCustomField: '',
     },
   });
   const [modsState, setModsState] = useState({
@@ -262,6 +262,7 @@ const App = () => {
      setLoadoutState={setLoadoutState}
      drawerState={drawerState}
      toggleDrawer={toggleDrawer}
+     mixpanel={mixpanel}
     />
     </div>
 
