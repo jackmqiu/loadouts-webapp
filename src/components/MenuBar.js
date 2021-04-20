@@ -189,7 +189,7 @@ export default function PrimarySearchAppBar({
             Loadouts
           </Typography>
           {
-            numMods < 8 &&
+            numMods < 8 && detailsState.display &&
             <Button
               className={classes.addModButton}
               variant="contained"
@@ -203,7 +203,7 @@ export default function PrimarySearchAppBar({
               }}>Add Mod</Button>
           }
           {
-            numMods > 0 &&
+            numMods > 0 && detailsState.display &&
             <Button
               className={classes.removeModButton}
               variant="contained"
@@ -216,9 +216,12 @@ export default function PrimarySearchAppBar({
                 );
               }}>Remove Mod</Button>
           }
-          <Button className={classes.downloadButton} variant="contained" color="Secondary" onClick={getImage}>
-            Download
-          </Button>
+          {
+            detailsState.display &&
+            <Button className={classes.downloadButton} variant="contained" color="Secondary" onClick={getImage}>
+              Download
+            </Button>
+          }
           <div className={classes.grow} />
           {/*
             <Button variant="contained" color="Secondary" href="https://www.surveymonkey.com/r/9NNQXNH">
