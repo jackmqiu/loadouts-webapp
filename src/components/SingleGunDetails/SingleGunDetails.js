@@ -4,7 +4,7 @@ import Card from '@material-ui/core/Card';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
-import Modal from '@material-ui/core/Modal';
+import Drawer from '@material-ui/core/Drawer';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
@@ -23,7 +23,7 @@ import LayoutTable from '../../LayoutTable';
 import { useScreenshot, createFileName } from 'use-react-screenshot'
 
 const useStyles = makeStyles({
-  root: {
+  drawer: {
   },
   formControl: {
     margin: '1rem',
@@ -31,6 +31,16 @@ const useStyles = makeStyles({
   },
   button: {
     margin: 5,
+  },
+  formTitle: {
+    margin: 2,
+  },
+  select: {
+    margin: '0px 5px 0px 5px',
+  },
+  textField: {
+    marginBottom: 10,
+    marginLeft: 5,
   }
 });
 
@@ -69,6 +79,10 @@ export default function SingleGunDetails ({
       event.preventDefault();
     }
   }
+  const handleSubmit = () => {
+    setMod(modCardSelection, category, modText)
+    handleClose();
+  }
   const handleTextChange = (event) => {
     setModText(event.target.value);
   }
@@ -104,29 +118,38 @@ export default function SingleGunDetails ({
           mixpanel={mixpanel}
           numMods={numMods}
         />
-        <Modal
+      <Drawer
+          anchor='top'
           open={open}
           onClose={handleClose}
+          className={classes.drawer}
         >
-          <Paper>
-            <form onSubmit={() => {setMod(modCardSelection, category, modText)}}>
-            <FormControl className={classes.formControl}>
-              <InputLabel id="demo-simple-select-label">Category</InputLabel>
-              <Select
-                labelId="select"
-                id="select-category"
-                value={category}
-                onChange={handleCategorySelect}
-              >
-                { modsSelections }
-              </Select>
-            </FormControl>
-            <FormControl>
-              <TextField id="standard-basic" label="Model" onChange={handleTextChange} onKeyPress={handleModelSubmit}/>
-            </FormControl>
-          </form>
-          </Paper>
-        </Modal>
+          <FormControl className={classes.formControl} variant="outlined">
+            <InputLabel id="demo-simple-select-label">Category</InputLabel>
+            <Select
+              className={classes.select}
+              value={category}
+              onChange={handleCategorySelect}
+              label='Category'
+              inputProps={{
+                name: 'class',
+                id: 'outlined-class-native-simple',
+              }}
+            >
+              { modsSelections }
+            </Select>
+          </FormControl>
+          <FormControl className={classes.formControl} variant="outlined">
+            <TextField className={classes.textField} variant="outlined" id="standard-basic" label="Model" onChange={handleTextChange} onKeyPress={handleModelSubmit}/>
+          </FormControl>
+          <div className={classes.formControl}>
+            {
+              category &&
+              <Button className={classes.textField} variant='contained' color='primary' onClick={handleSubmit}>Submit</Button>
+            }
+          </div>
+
+        </Drawer>
       </div>
 
     }
