@@ -105,6 +105,7 @@ export default function PrimarySearchAppBar({
   getImage,
   numMods,
   updateNumMods,
+  mixpanel,
  }) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -114,10 +115,6 @@ export default function PrimarySearchAppBar({
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
   const handleProfileMenuOpen = (event) => {
-    ReactGA.event({
-      category: 'Action',
-      action: 'profileMenuOpen'
-    });
     setAnchorEl(event.currentTarget);
   };
 
@@ -149,7 +146,9 @@ export default function PrimarySearchAppBar({
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile - To Be Added</MenuItem>
+      <MenuItem onClick={handleMenuClose}>
+        <Button variant='contained' color='Secondary' onClick={toggleDetails}>{detailsState.display ? 'Loadout' : 'Gun Detail'}</Button>
+      </MenuItem>
     </Menu>
   );
 
@@ -165,15 +164,18 @@ export default function PrimarySearchAppBar({
       onClose={handleMobileMenuClose}
     >
       <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <AccountCircle />
-        </IconButton>
-        <p>Profile - To be added</p>
+        {/*
+          <IconButton
+            aria-label="account of current user"
+            aria-controls="primary-search-account-menu"
+            aria-haspopup="true"
+            color="inherit"
+            >
+            <AccountCircle />
+          </IconButton>
+          <p>Profile - To be added</p>
+        */}
+        <Button variant='contained' color='Secondary' onClick={toggleDetails}>{detailsState.display ? 'Loadout' : 'Gun Detail'}</Button>
       </MenuItem>
     </Menu>
   );

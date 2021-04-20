@@ -168,7 +168,7 @@ const App = () => {
     );
     takeScreenshot(capture.current).then(download);
   }
-  
+
   const download = (image, { name = "my_loadout1", extension = "jpg" } = {}) => {
     const a = document.createElement("a");
     a.href = image;
@@ -187,6 +187,7 @@ const App = () => {
         toggleDetails={toggleDetails}
         detailsState={detailsState}
         getImage={getImage}
+        mixpanel={mixpanel}
       />
     { detailsState.display ?
       <div ref={capture} className={classes.singleGunDetailsContainer}>
