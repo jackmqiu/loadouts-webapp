@@ -168,13 +168,7 @@ const App = () => {
     );
     takeScreenshot(capture.current).then(download);
   }
-  const onDrop = (picture) => {
-    mixpanel.track(
-      'Action',
-      {"upload": "uploadPic"}
-    );
-    uploadBackImage(picture);
-  }
+  
   const download = (image, { name = "my_loadout1", extension = "jpg" } = {}) => {
     const a = document.createElement("a");
     a.href = image;
@@ -182,8 +176,6 @@ const App = () => {
     a.click();
   };
   const onChange = (imageList, addUpdateIndex) => {
-    // data for submit
-    console.log(imageList, addUpdateIndex);
     setImages(imageList);
   };
 
@@ -239,7 +231,7 @@ const App = () => {
                   onClick={onImageUpload}
                   {...dragProps}
                 >
-                  Click to Add or Drop Your Image Here
+                  Add Your Image
                 </Button>
                 &nbsp;
                 <Button className={classes.button} color='Secondary' variant='contained' onClick={onImageRemoveAll}>Remove Image</Button>
