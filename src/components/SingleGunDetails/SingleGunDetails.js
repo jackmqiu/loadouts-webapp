@@ -25,13 +25,6 @@ import { useScreenshot, createFileName } from 'use-react-screenshot'
 const useStyles = makeStyles({
   root: {
   },
-  grid: {
-    margin: 1,
-    backgroundImage: `url(${OverlayImage})`,
-    backgroundSize: '100% 100%',
-    backgroundRepeat: 'no-repeat',
-    display: 'flex',
-  },
   formControl: {
     margin: '1rem',
     minWidth: 120,
@@ -41,29 +34,23 @@ const useStyles = makeStyles({
   }
 });
 
-export default function SingleGunDetails ({modsState, toggleSingleGun, toggleDrawer, gun, setMod, mixpanel})  {
+export default function SingleGunDetails ({
+  modsState,
+  toggleSingleGun,
+  toggleDrawer,
+  gun,
+  setMod,
+  mixpanel,
+  getImage,
+  numMods,
+})  {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [category, setCategory] = useState('');
   const [modText, setModText] = useState('');
   const [modCardSelection, setActiveModCard] = useState(1);
-  const [numMods, updateNumMods] = useState(1);
   const capture = createRef(null);
-  const [image, takeScreenshot] = useScreenshot();
 
-  const download = (image, { name = "gunMods", extension = "jpg" } = {}) => {
-    const a = document.createElement("a");
-    a.href = image;
-    a.download = createFileName(extension, name);
-    a.click();
-  };
-  const getImage = () => {
-    mixpanel.track(
-      'Download',
-      {"download": "downloadLoadout"}
-    );
-    takeScreenshot(capture.current).then(download);
-  }
   const handleCategorySelect = (event) => {
     setCategory(event.target.value);
   };
@@ -89,30 +76,6 @@ export default function SingleGunDetails ({modsState, toggleSingleGun, toggleDra
     setOpen(false);
   };
 
-  const modsGridItems = [];
-  let j = 0;
-  for (let i = 0; i < numMods+1; i++) {
-    if (LayoutTable[numMods][i].type === 'mod') {
-      modsGridItems.push(
-        <Grid item xs={LayoutTable[numMods][i].gridItemWidth}>
-          <ModCard
-            id={j+1}
-            partName={modsState[j+1].category}
-            modName={modsState[j+1].model}
-            openModal={handleOpen}
-            closeModal={handleClose}
-            />
-        </Grid>
-      )
-      j++;
-    } else {
-      modsGridItems.push(
-        <Grid item xs={LayoutTable[numMods][i].gridItemWidth}>
-          <DetailWeaponCard gun={gun} toggleDrawer={toggleDrawer} loadoutGunClass={'primary'}/>
-        </Grid>
-      );
-    }
-  }
   const modsSelections = [];
   for (let category of ModsList) {
     modsSelections.push(
@@ -131,30 +94,8 @@ export default function SingleGunDetails ({modsState, toggleSingleGun, toggleDra
           toggleDrawer={toggleDrawer}
           toggleSingleGun={toggleSingleGun}
           mixpanel={mixpanel}
-          getImage={getImage}
+          numMods={numMods}
         />
-        {/*<Grid container ref={capture} className={classes.grid} spacing={3}>
-          { modsGridItems }
-        </Grid>*/}
-        <div>
-          {
-            numMods < 8 &&
-            <Button
-              className={classes.button}
-              variant="contained"
-              color="Primary"
-              onClick={() => {updateNumMods(numMods+1)}}>Add Mod</Button>
-          }
-          {
-            numMods > 0 &&
-            <Button
-              className={classes.button}
-              variant="contained"
-              color="Secondary"
-              onClick={() => {updateNumMods(numMods-1)}}>Remove Mod</Button>
-          }
-          <Button className={classes.button} variant="contained" onClick={getImage}>Export</Button>
-        </div>
         <Modal
           open={open}
           onClose={handleClose}

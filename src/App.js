@@ -35,13 +35,13 @@ const useStyles = makeStyles({
     overflow: 'auto',
   },
   singleGunDetailsContainer: {
-    width: '920px',
-    height: '800px',
-    overflow: 'auto',
   },
   button: {
     margin: 5,
-  }
+  },
+  exportButton: {
+
+  },
 });
 
 const App = () => {
@@ -50,6 +50,8 @@ const App = () => {
   const [image, takeScreenshot] = useScreenshot();
   const [backImage, uploadBackImage] = useState(null);
   const [images, setImages] = useState([]);
+  const [numMods, updateNumMods] = useState(1);
+
   const [loadoutState, setLoadoutState] = useState({
     primary: {
       gunName: 'AR-15',
@@ -112,7 +114,6 @@ const App = () => {
     },
   });
   const setMod = (modField, modCategory, modModel) => {
-    console.log('setMod', modField, modModel, modCategory)
     if (modCategory && modModel.length > 0) {
       setModsState({
         ...modsState,
@@ -154,15 +155,12 @@ const App = () => {
       open: !drawerState.open,
       weaponSelection: weaponSelection, //primary or secondary
     });
-    console.log('toggleDrawer ', weaponSelection, drawerState.weaponSelection);
-
   };
   const toggleDetails = () => {
     mixpanel.track(
       'Action',
       {"toggle": `toggleDetails`}
     );
-    console.log('toggle details')
     toggleDetailsState({
       display: !detailsState.display
     })
@@ -179,10 +177,6 @@ const App = () => {
     takeScreenshot(capture.current).then(download);
   }
   const onDrop = (picture) => {
-    ReactGA.event({
-      category: 'Action',
-      action: 'uploadPic'
-    });
     mixpanel.track(
       'Action',
       {"upload": "uploadPic"}
@@ -203,10 +197,6 @@ const App = () => {
 
 
   const setGun = (weaponSelection, gun) => {
-    ReactGA.event({
-      category: 'Action',
-      action: 'setGun'
-    });
     mixpanel.track(
       'Action',
       {"set": "setGun"}
@@ -220,10 +210,6 @@ const App = () => {
     });
   };
   const setClass = (event) => {
-    ReactGA.event({
-      category: 'Action',
-      action: 'setClass'
-    });
     mixpanel.track(
       'Action',
       {"set": "setClass"}
@@ -240,14 +226,12 @@ const App = () => {
 
   return (
     <div className="App" >
-      <MenuBar toggleDetails={toggleDetails} detailsState={detailsState} getImage={getImage}/>
-       <DrawerContainer
-        setClass={setClass}
-        setGun={setGun}
-        loadoutState={loadoutState}
-        setLoadoutState={setLoadoutState}
-        drawerState={drawerState}
-        toggleDrawer={toggleDrawer}
+      <MenuBar
+        numMods={numMods}
+        updateNumMods={updateNumMods}
+        toggleDetails={toggleDetails}
+        detailsState={detailsState}
+        getImage={getImage}
       />
     { detailsState.display ?
       <div ref={capture} className={classes.singleGunDetailsContainer}>
@@ -258,6 +242,7 @@ const App = () => {
           setMod={setMod}
           mixpanel={mixpanel}
           getImage={getImage}
+          numMods={numMods}
         />
       </div> :
         <div>
@@ -295,9 +280,9 @@ const App = () => {
                 </Button>
                 &nbsp;
                 <Button className={classes.button} color='Secondary' variant='contained' onClick={onImageRemoveAll}>Remove Image</Button>
-                  <Button className={classes.button} variant='contained' onClick={getImage}>
-                    Export
-                  </Button>
+                <Button className={classes.exportButton} variant='contained' onClick={getImage}>
+                  Export
+                </Button>
               </div>
               </div>
             )}
@@ -316,7 +301,14 @@ const App = () => {
         </Typography>
       </div>
     }
-
+    <DrawerContainer
+     setClass={setClass}
+     setGun={setGun}
+     loadoutState={loadoutState}
+     setLoadoutState={setLoadoutState}
+     drawerState={drawerState}
+     toggleDrawer={toggleDrawer}
+    />
     </div>
 
   );

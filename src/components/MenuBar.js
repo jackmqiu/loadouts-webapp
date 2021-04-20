@@ -85,9 +85,27 @@ const useStyles = makeStyles((theme) => ({
       display: 'none',
     },
   },
+  downloadButton: {
+    backgroundColor: '#2EFF21',
+    marginLeft: 5,
+  },
+  addModButton: {
+    backgroundColor: '#52EDFF',
+    marginLeft: 5,
+  },
+  removeModButton: {
+    backgroundColor: '#FF2167',
+    marginLeft: 5,
+  },
 }));
 
-export default function PrimarySearchAppBar({ toggleDetails, detailsState, getImage }) {
+export default function PrimarySearchAppBar({
+  toggleDetails,
+  detailsState,
+  getImage,
+  numMods,
+  updateNumMods,
+ }) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -104,18 +122,10 @@ export default function PrimarySearchAppBar({ toggleDetails, detailsState, getIm
   };
 
   const handleMobileMenuClose = () => {
-    ReactGA.event({
-      category: 'Action',
-      action: 'mobileMenuClose'
-    });
     setMobileMoreAnchorEl(null);
   };
 
   const handleMenuClose = () => {
-    ReactGA.event({
-      category: 'Action',
-      action: 'profileMenuClose'
-    });
     setAnchorEl(null);
     handleMobileMenuClose();
   };
@@ -169,20 +179,41 @@ export default function PrimarySearchAppBar({ toggleDetails, detailsState, getIm
   );
 
   return (
-    <div className={classes.grow}>
+    <div >
       <AppBar position="static">
         <Toolbar>
 
           <Typography className={classes.title} variant="h6" noWrap>
             Loadouts
           </Typography>
-          <Button variant='contained' color='Secondary'onClick={toggleDetails}>{detailsState.display ? 'Loadout' : 'Gun Detail'}</Button>
-          <div className={classes.grow} />
-          <Button variant="contained" color="Secondary" href="https://www.surveymonkey.com/r/9NNQXNH">
-            Give Feedback
+          {
+            numMods < 8 &&
+            <Button
+              className={classes.addModButton}
+              variant="contained"
+              color="Primary"
+              onClick={() => {updateNumMods(numMods+1)}}>Add Mod</Button>
+          }
+          {
+            numMods > 0 &&
+            <Button
+              className={classes.removeModButton}
+              variant="contained"
+              color="Secondary"
+              onClick={() => {updateNumMods(numMods-1)}}>Remove Mod</Button>
+          }
+          <Button className={classes.downloadButton} variant="contained" color="Secondary" onClick={getImage}>
+            Download
           </Button>
-          <div className={classes.sectionDesktop}>
+          <div className={classes.grow} />
+          {/*
+            <Button variant="contained" color="Secondary" href="https://www.surveymonkey.com/r/9NNQXNH">
+            Give Feedback
+            </Button>
+          */}
 
+          <div className={classes.sectionDesktop}>
+            {/*
             <IconButton
               edge="end"
               aria-label="account of current user"
@@ -191,8 +222,13 @@ export default function PrimarySearchAppBar({ toggleDetails, detailsState, getIm
               onClick={handleProfileMenuOpen}
               color="inherit"
             >
-              <AccountCircle />
+
+                <AccountCircle />
+
             </IconButton>
+            */}
+            <Button variant='contained' color='Secondary' onClick={toggleDetails}>{detailsState.display ? 'Loadout' : 'Gun Detail'}</Button>
+
           </div>
           <div className={classes.sectionMobile}>
             <IconButton
