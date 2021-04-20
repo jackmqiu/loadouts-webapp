@@ -48,7 +48,6 @@ const DrawerContainer = ({
   return (
     <Drawer anchor={'bottom'} open={drawerState.open} onClose={() => {toggleDrawer('primary')}}>
       <FormControl variant="outlined">
-        <InputLabel htmlFor="outlined-age-native-simple">Class</InputLabel>
         <Select
           native
           value={selectionState.class}
@@ -76,7 +75,6 @@ const DrawerContainer = ({
               id: 'outlined-class-native-simple',
             }}
           >
-            <option aria-label="None" value="" />
             {gunTable.classes[selectionState.class].list.map((gun) =>
                 <option value={gun}>{gun}</option>
             )}
