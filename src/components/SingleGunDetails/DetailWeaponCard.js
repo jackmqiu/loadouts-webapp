@@ -79,10 +79,19 @@ const useStyles = makeStyles(() => ({
   },
   weaponClass: {
     fontSize: '1rem',
-    color: '#4F8A99',
+    color: '#fff',
     height: 20,
     bottom: 0,
     left: 0,
+    position: 'absolute',
+    margin: 5,
+  },
+  tearMark: {
+    fontSize: '1rem',
+    color: '#4F8A99',
+    height: 20,
+    right: 0,
+    bottom: 0,
     position: 'absolute',
     margin: 5,
   },
@@ -131,7 +140,8 @@ export default function WeaponCard({gun, toggleDrawer}) {
         <div className={classes.mediaContainer}>
           <img src={gunImageTable[gun.gunName]} height='100%'/>
         </div>
-        <Typography variant={'h2'} className={classes.weaponClass}>Loadouts.me</Typography>
+        <Typography variant={'h2'} className={classes.weaponClass}>{gun.gunCustomField}</Typography>
+        <Typography variant={'h2'} className={classes.tearMark}>Loadouts.me</Typography>
       </CardActionArea>
     </Card>
   );
