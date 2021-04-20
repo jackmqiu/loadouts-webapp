@@ -100,6 +100,20 @@ const DrawerContainer = ({
       event.preventDefault();
     }
   }
+  const handleSubmit = () => {
+    mixpanel.track(
+      'Action',
+      {"submitGun": `${selectionState.class} ${selectionState.weaponSelection} ${gunText}`}
+    );
+    setLoadoutState({
+      ...loadoutState,
+      [drawerState.weaponSelection]: {
+        ...loadoutState[drawerState.weaponSelection],
+        gunCustomField: gunText,
+      }
+    });
+    toggleDrawer('primary');
+  }
   const classes = useStyles();
   return (
     <Drawer className={classes.root} anchor={'bottom'} open={drawerState.open} onClose={() => {toggleDrawer('primary')}}>
@@ -153,7 +167,7 @@ const DrawerContainer = ({
       <div className={classes.formControl}>
         {
           loadoutState[drawerState.weaponSelection].class !== '' && loadoutState[drawerState.weaponSelection].gunName &&
-          <Button className={classes.textField} variant='contained' color='primary' onClick={() => {toggleDrawer('primary')}}>Submit</Button>
+          <Button className={classes.textField} variant='contained' color='primary' onClick={handleSubmit}>Submit</Button>
         }
       </div>
     </Drawer>
