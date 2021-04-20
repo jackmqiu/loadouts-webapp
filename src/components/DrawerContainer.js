@@ -35,10 +35,6 @@ const DrawerContainer = ({
     })
   }
   const submitSelectionState = (event) => {
-    ReactGA.event({
-      category: 'Action',
-      action: 'inDrawerSubmitSelectionState',
-    });
     setLoadoutState({
       ...loadoutState,
       [drawerState.weaponSelection]: {

@@ -52,10 +52,18 @@ export default function SingleGunDetails ({
   const capture = createRef(null);
 
   const handleCategorySelect = (event) => {
+    mixpanel.track(
+      'Action',
+      {"selectModCategory": event.target.value}
+    );
     setCategory(event.target.value);
   };
   const handleModelSubmit = (event) => {
     if (event.key === 'Enter') {
+      mixpanel.track(
+        'Action',
+        {"submitMod": `${modCardSelection} ${category} ${event.target.value}`}
+      );
       setMod(modCardSelection, category, event.target.value);
       handleClose();
       event.preventDefault();

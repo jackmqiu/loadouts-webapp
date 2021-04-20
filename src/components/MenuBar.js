@@ -194,7 +194,13 @@ export default function PrimarySearchAppBar({
               className={classes.addModButton}
               variant="contained"
               color="Primary"
-              onClick={() => {updateNumMods(numMods+1)}}>Add Mod</Button>
+              onClick={() => {
+                updateNumMods(numMods+1);
+                mixpanel.track(
+                  'Action',
+                  {"add": numMods+1}
+                );
+              }}>Add Mod</Button>
           }
           {
             numMods > 0 &&
@@ -202,7 +208,13 @@ export default function PrimarySearchAppBar({
               className={classes.removeModButton}
               variant="contained"
               color="Secondary"
-              onClick={() => {updateNumMods(numMods-1)}}>Remove Mod</Button>
+              onClick={() => {
+                updateNumMods(numMods-1);
+                mixpanel.track(
+                  'Action',
+                  {"remove": numMods-1}
+                );
+              }}>Remove Mod</Button>
           }
           <Button className={classes.downloadButton} variant="contained" color="Secondary" onClick={getImage}>
             Download
