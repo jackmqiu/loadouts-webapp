@@ -143,10 +143,6 @@ const App = () => {
   })
 
   const toggleDrawer = (weaponSelection) => {
-    ReactGA.event({
-      category: 'Action',
-      action: 'toggleDrawer'
-    });
     mixpanel.track(
       'Action',
       {"toggle": "toggleDrawer"}
@@ -166,10 +162,6 @@ const App = () => {
     })
   }
   const getImage = () => {
-    ReactGA.event({
-      category: 'Action',
-      action: 'downloadLoadout'
-    });
     mixpanel.track(
       'Download',
       {"download": "downloadLoadout"}
@@ -193,35 +185,6 @@ const App = () => {
     // data for submit
     console.log(imageList, addUpdateIndex);
     setImages(imageList);
-  };
-
-
-  const setGun = (weaponSelection, gun) => {
-    mixpanel.track(
-      'Action',
-      {"set": "setGun"}
-    );
-    setLoadoutState({
-      ...loadoutState,
-      [weaponSelection]: {
-        ...loadoutState[weaponSelection],
-        name: gun,
-      },
-    });
-  };
-  const setClass = (event) => {
-    mixpanel.track(
-      'Action',
-      {"set": "setClass"}
-    );
-    console.log('setClass', event.target.value)
-    setLoadoutState({
-      ...loadoutState,
-      [drawerState.weaponSelection]: {
-        ...loadoutState[drawerState.weaponSelection],
-        class: event.target.value,
-      }
-    })
   };
 
   return (
@@ -302,8 +265,6 @@ const App = () => {
       </div>
     }
     <DrawerContainer
-     setClass={setClass}
-     setGun={setGun}
      loadoutState={loadoutState}
      setLoadoutState={setLoadoutState}
      drawerState={drawerState}

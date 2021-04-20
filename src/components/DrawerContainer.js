@@ -18,7 +18,6 @@ ReactGA.initialize(TRACKING_ID);
 const DrawerContainer = ({
   currentClass,
   currentGun,
-  setClass,
   setGun,
   drawerState,
   toggleDrawer,
@@ -30,10 +29,6 @@ const DrawerContainer = ({
     weaponSelection: '',
   });
   const selectClass = (event) => {
-    ReactGA.event({
-      category: 'Action',
-      action: 'inDrawerSelectClass'
-    });
     updateSelectionState({
       ...selectionState,
       class: event.target.value
