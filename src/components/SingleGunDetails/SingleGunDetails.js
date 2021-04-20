@@ -80,6 +80,10 @@ export default function SingleGunDetails ({
     }
   }
   const handleSubmit = () => {
+    mixpanel.track(
+      'Action',
+      {"submitMod": `${modCardSelection} ${category} ${modText}`}
+    );
     setMod(modCardSelection, category, modText)
     handleClose();
   }
