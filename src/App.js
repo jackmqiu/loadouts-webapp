@@ -8,8 +8,6 @@ import React, { useState, useEffect, createRef, useRef } from "react";
 import { makeStyles } from '@material-ui/core/styles';
 import ReactGA from 'react-ga';
 import { Column, Row, Item } from '@mui-treasury/components/flex';
-import Typography from '@material-ui/core/Typography';
-
 import ImageUploading from 'react-images-uploading';
 import { useScreenshot, createFileName } from 'use-react-screenshot'
 import {
@@ -20,7 +18,10 @@ import {
   FormHelperText,
   InputLabel,
   Drawer,
+  Typography,
 } from '@material-ui/core';
+
+import useWindowDimensions from './useWindowDimensions';
 
 const TRACKING_ID = "UA-193462319-2";
 ReactGA.initialize(TRACKING_ID);
@@ -51,6 +52,7 @@ const App = () => {
   const [backImage, uploadBackImage] = useState(null);
   const [images, setImages] = useState([]);
   const [numMods, updateNumMods] = useState(1);
+  const { height, width } = useWindowDimensions();
 
   const [loadoutState, setLoadoutState] = useState({
     primary: {
@@ -190,6 +192,7 @@ const App = () => {
         mixpanel={mixpanel}
       />
     { detailsState.display ?
+      width > 550 ?
       <div ref={capture} className={classes.singleGunDetailsContainer}>
         <SingleGunDetails
           modsState={modsState}
@@ -200,7 +203,8 @@ const App = () => {
           getImage={getImage}
           numMods={numMods}
         />
-      </div> :
+    </div> : <Typography variant='h2'>App works in landscape</Typography>
+      :
         <div>
            <ImageUploading
             multiple
