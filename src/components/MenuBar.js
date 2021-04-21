@@ -224,7 +224,7 @@ export default function PrimarySearchAppBar({
           {
             detailsState.display &&
             <Button className={classes.downloadButton} variant="contained" color="Secondary" onClick={getImage}>
-              Download
+              Save
             </Button>
           }
           <div className={classes.grow} />
