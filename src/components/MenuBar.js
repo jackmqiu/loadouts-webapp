@@ -198,7 +198,6 @@ export default function PrimarySearchAppBar({
             <Button
               className={classes.addModButton}
               variant="contained"
-              color="Primary"
               onClick={() => {
                 updateNumMods(numMods+1);
                 mixpanel.track(
