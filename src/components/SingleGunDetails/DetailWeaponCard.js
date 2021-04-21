@@ -108,23 +108,10 @@ const useStyles = makeStyles(() => ({
   },
   mediaContainer: {
     height: 150,
+    padding: '0px 20px 0px 20px',
   },
-  assaultImg: {
-    padding: '0px auto 0px auto',
-    maxWidth: '60%',
-    display: 'flex',
-    maxHeight: 150,
-  },
-  pistolImg: {
-    padding: '0px 60px 0px 60px',
+  gunImg: {
     maxWidth: '100%',
-    display: 'flex',
-    maxHeight: 150,
-  },
-  smgImg: {
-    padding: '0px 60px 0px 60px',
-    maxWidth: '100%',
-    display: 'flex',
     maxHeight: 150,
   },
 }));
@@ -138,7 +125,7 @@ export default function WeaponCard({gun, toggleDrawer}) {
       <CardActionArea className={classes.actionArea}>
         <Typography variant={'h2'} className={classes.weaponName}>{gun.gunName}</Typography>
         <div className={classes.mediaContainer}>
-          <img src={gunImageTable[gun.gunName]} height='100%'/>
+          <img src={gunImageTable[gun.gunName]} className={classes.gunImg}/>
         </div>
         <Typography variant={'h2'} className={classes.weaponClass}>{gun.gunCustomField}</Typography>
         <Typography variant={'h2'} className={classes.tearMark}>Loadouts.me</Typography>
