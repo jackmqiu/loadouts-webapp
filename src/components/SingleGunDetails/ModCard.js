@@ -43,7 +43,7 @@ import {
   hpa,
   crate,
   laser,
-  optics,
+  optic,
 } from '../../Img';
 
 const gunImageTable = {
@@ -79,7 +79,7 @@ const gunImageTable = {
   HPA: hpa,
   Select: crate,
   Laser: laser,
-  Optics: optics,
+  Optic: optic,
   Other: crate,
 }
 

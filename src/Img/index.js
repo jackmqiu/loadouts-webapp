@@ -29,4 +29,4 @@ export { default as sling } from './Sling.png';
 export { default as hpa } from './HPA.png';
 export { default as crate } from './Crate.png';
 export { default as laser } from './Laser.png';
-export { default as optics } from './Optics.png';
+export { default as optic } from './Optics.png';
