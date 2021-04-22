@@ -191,9 +191,7 @@ const App = () => {
         getImage={getImage}
         mixpanel={mixpanel}
       />
-    { detailsState.display ?
-      width > 550 ?
-      <div ref={capture} className={classes.singleGunDetailsContainer}>
+    { detailsState.display ? <div ref={capture} className={classes.singleGunDetailsContainer}>
         <SingleGunDetails
           modsState={modsState}
           toggleDrawer={toggleDrawer}
@@ -203,8 +201,7 @@ const App = () => {
           getImage={getImage}
           numMods={numMods}
         />
-    </div> : <Typography variant='h2'>App works in landscape</Typography>
-      :
+    </div> :
         <div>
            <ImageUploading
             multiple
