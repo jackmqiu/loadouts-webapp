@@ -17,7 +17,7 @@ const useStyles = makeStyles(() => ({
     borderRadius: 8,
     boxShadow: 'none',
     // position: 'relative',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    backgroundColor: color,
     '&:hover': {
       boxShadow: `0 6px 12px 0 ${Color(color)
         .rotate(-12)
@@ -38,8 +38,8 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const LoadoutCard = ({ itemDetails }) => {
-  const classes = useStyles();
+const LoadoutCard = ({ itemDetails, color }) => {
+  const classes = useStyles({color});
   return (
       <Card className={classes.card} onClick={()=> {window.open(itemDetails.link, '_blank')}}>
 

@@ -55,7 +55,11 @@ const App = () => {
   const [images, setImages] = useState([]);
   const [numMods, updateNumMods] = useState(5);
   const { height, width } = useWindowDimensions();
-
+  const [colorScheme, setColorScheme] = useState({
+    0: '#b1a484',
+    1: '#838079',
+    2: '#3b3736',
+  })
   const [loadoutState, setLoadoutState] = useState({
     primary: {
       gunName: 'AR-15',
@@ -119,6 +123,7 @@ const App = () => {
   });
   const [igLoadoutState, setIgLoadoutState] = useState({
     0: {
+      color: '',
       importance: 5,
       name: 'M4',
       link: 'https://www.vipertech.com.tw/products_pf.php?num=346',
@@ -126,6 +131,7 @@ const App = () => {
       image: 'https://i.imgur.com/7teSCs6.png',
     },
     1: {
+      color: '',
       importance: 3,
       name: 'Light',
       link: 'https://www.surefire.com/products/illumination/weapon-lights/m622u-scout-light-weaponlight/',
@@ -133,6 +139,7 @@ const App = () => {
       image: 'https://i.imgur.com/u8zDTlm.png',
     },
     2: {
+      color: '',
       importance: 1,
       name: 'Grip',
       link: 'https://magpul.com/catalog/product/view/id/5443/s/moe-k2-plus-grip-ar15-m4/category/42/?mp_global_color=118',
@@ -140,6 +147,7 @@ const App = () => {
       image: 'https://i.imgur.com/jd3oJbi.png',
     },
     3: {
+      color: '',
       importance: 6,
       name: 'Optic',
       link: 'http://shop.kic.tw/portal_c1_cnt_page.php?owner_num=c1_33589&button_num=c1&folder_id=7631&cnt_id=85926',
@@ -147,6 +155,7 @@ const App = () => {
       image: 'https://i.imgur.com/KGSsudM.png',
     },
     4: {
+      color: '',
       importance: 2,
       name: 'Sling',
       link: 'https://www.vikingtactics.com/product-p/vtac-mk2.htm',
@@ -154,6 +163,7 @@ const App = () => {
       image: 'https://i.imgur.com/q70DxA5.png',
     },
     5: {
+      color: '',
       importance: 3,
       name: 'Sling Mount',
       link: 'https://magpul.com/firearm-accessories/slings/mounts/asap-ambidextrous-sling-attachment-point.html?mp_global_color=118',
@@ -161,6 +171,7 @@ const App = () => {
       image: 'https://i.imgur.com/JB6MJ2M.png',
     },
     6: {
+      color: '',
       importance: 7,
       name: 'Rail',
       link: 'https://danieldefense.com/m4a1-fsp-risii-black.html',
@@ -168,6 +179,7 @@ const App = () => {
       image: 'https://i.imgur.com/pVEfOJj.png',
     },
     7: {
+      color: '',
       importance: 6,
       name: 'Laser',
       link: 'http://www.fma.hk/la5-c-c-7_57.html',
@@ -175,6 +187,7 @@ const App = () => {
       image: 'https://i.imgur.com/0vUHUvr.png',
     },
     8: {
+      color: '',
       importance: 1,
       name: 'Fore Grip',
       link: 'https://tangodown.com/tangodown-vertical-fore-grip-stubby/',
@@ -274,6 +287,7 @@ const App = () => {
       igLoadoutState={igLoadoutState}
       setIgLoadoutState={setIgLoadoutState}
       numCards={numMods}
+      colorScheme={colorScheme}
     />
 }
         {/* <div>

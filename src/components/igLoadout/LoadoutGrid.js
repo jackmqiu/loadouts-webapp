@@ -25,6 +25,7 @@ const LoadoutGrid = ({
   handleClose,
   setIgLoadoutState,
   numCards,
+  colorScheme,
 }) => {
   const classes = useStyles();
 
@@ -40,6 +41,7 @@ const LoadoutGrid = ({
           itemDetails={igLoadoutState[i]}
           openModal={handleOpen}
           closeModal={handleClose}
+          color={colorScheme[i%2]}
         />
       </Grid>
     )
