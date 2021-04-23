@@ -4,12 +4,14 @@ import MainContainer from './components/MainContainer.js';
 import MenuBar from './components/MenuBar.js';
 import DrawerContainer from './components/DrawerContainer.js';
 import SingleGunDetails from './components/SingleGunDetails';
+import IgLoadout from './components/igLoadout';
 import React, { useState, useEffect, createRef, useRef } from "react";
 import { makeStyles } from '@material-ui/core/styles';
 import ReactGA from 'react-ga';
 import { Column, Row, Item } from '@mui-treasury/components/flex';
 import ImageUploading from 'react-images-uploading';
-import { useScreenshot, createFileName } from 'use-react-screenshot'
+import { useScreenshot, createFileName } from 'use-react-screenshot';
+
 import {
   Select,
   Button,
@@ -51,7 +53,7 @@ const App = () => {
   const [image, takeScreenshot] = useScreenshot();
   const [backImage, uploadBackImage] = useState(null);
   const [images, setImages] = useState([]);
-  const [numMods, updateNumMods] = useState(1);
+  const [numMods, updateNumMods] = useState(5);
   const { height, width } = useWindowDimensions();
 
   const [loadoutState, setLoadoutState] = useState({
@@ -113,6 +115,71 @@ const App = () => {
       category: 'Select',
       active: false,
       model: '',
+    },
+  });
+  const [igLoadoutState, setIgLoadoutState] = useState({
+    0: {
+      importance: 5,
+      name: 'M4',
+      link: 'https://www.vipertech.com.tw/products_pf.php?num=346',
+      model: 'Viper Tech RAS GBB M4A1',
+      image: 'https://i.imgur.com/7teSCs6.png',
+    },
+    1: {
+      importance: 3,
+      name: 'Light',
+      link: 'https://www.surefire.com/products/illumination/weapon-lights/m622u-scout-light-weaponlight/',
+      model: 'M622U Scout Light',
+      image: 'https://i.imgur.com/u8zDTlm.png',
+    },
+    2: {
+      importance: 1,
+      name: 'Grip',
+      link: 'https://magpul.com/catalog/product/view/id/5443/s/moe-k2-plus-grip-ar15-m4/category/42/?mp_global_color=118',
+      model: 'MOE K2',
+      image: 'https://i.imgur.com/jd3oJbi.png',
+    },
+    3: {
+      importance: 6,
+      name: 'Optic',
+      link: 'http://shop.kic.tw/portal_c1_cnt_page.php?owner_num=c1_33589&button_num=c1&folder_id=7631&cnt_id=85926',
+      model: 'Hurricane XPS3 Holosight',
+      image: 'https://i.imgur.com/KGSsudM.png',
+    },
+    4: {
+      importance: 2,
+      name: 'Sling',
+      link: 'https://www.vikingtactics.com/product-p/vtac-mk2.htm',
+      model: 'VTAC MK2',
+      image: 'https://i.imgur.com/q70DxA5.png',
+    },
+    5: {
+      importance: 3,
+      name: 'Sling Mount',
+      link: 'https://magpul.com/firearm-accessories/slings/mounts/asap-ambidextrous-sling-attachment-point.html?mp_global_color=118',
+      model: ' Magpul ASAP Sling Mount',
+      image: 'https://i.imgur.com/JB6MJ2M.png',
+    },
+    6: {
+      importance: 7,
+      name: 'Rail',
+      link: 'https://danieldefense.com/m4a1-fsp-risii-black.html',
+      model: 'Daniel Defense FSP RIS II rail',
+      image: 'https://i.imgur.com/pVEfOJj.png',
+    },
+    7: {
+      importance: 6,
+      name: 'Laser',
+      link: 'http://www.fma.hk/la5-c-c-7_57.html',
+      model: 'PEQ FMA LA5-C',
+      image: 'https://i.imgur.com/0vUHUvr.png',
+    },
+    8: {
+      importance: 1,
+      name: 'Fore Grip',
+      link: 'https://tangodown.com/tangodown-vertical-fore-grip-stubby/',
+      model: 'TangoDown Vertical Fore Grip Stubby',
+      image: 'https://i.imgur.com/EPuMD3i.png',
     },
   });
   const setMod = (modField, modCategory, modModel) => {
@@ -191,7 +258,8 @@ const App = () => {
         getImage={getImage}
         mixpanel={mixpanel}
       />
-    { detailsState.display ? <div ref={capture} className={classes.singleGunDetailsContainer}>
+    { detailsState.display ?
+      <div ref={capture} className={classes.singleGunDetailsContainer}>
         <SingleGunDetails
           modsState={modsState}
           toggleDrawer={toggleDrawer}
@@ -202,7 +270,13 @@ const App = () => {
           numMods={numMods}
         />
     </div> :
-        <div>
+    <IgLoadout
+      igLoadoutState={igLoadoutState}
+      setIgLoadoutState={setIgLoadoutState}
+      numCards={numMods}
+    />
+}
+        {/* <div>
            <ImageUploading
             multiple
             value={images}
@@ -257,7 +331,7 @@ const App = () => {
           3. Export and enjoy!
         </Typography>
       </div>
-    }
+    }*/}
     <DrawerContainer
      loadoutState={loadoutState}
      setLoadoutState={setLoadoutState}

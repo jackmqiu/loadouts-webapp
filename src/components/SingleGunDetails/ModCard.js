@@ -146,7 +146,7 @@ const ModCard = ({ partName, modName, openModal, closeModal, id }) => {
   return (
       <Card className={classes.card} onClick={() => {openModal(id)}}>
         <CardActionArea className={classes.cardActionArea}>
-          <img className={classes.modImg} component="img" src={gunImageTable[partName]} />
+          <img className={classes.modImg} src={gunImageTable[partName]} />
           <Typography className={classes.title} variant={'h3'}>
             {partName}
           </Typography>
