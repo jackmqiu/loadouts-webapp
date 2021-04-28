@@ -194,7 +194,7 @@ export default function PrimarySearchAppBar({
             Loadouts
           </Typography>
           {
-            numMods < 8 && detailsState.display &&
+            numMods < 8 && !detailsState.display &&
             <Button
               className={classes.addModButton}
               variant="contained"
@@ -207,7 +207,7 @@ export default function PrimarySearchAppBar({
               }}>Add Mod</Button>
           }
           {
-            numMods > 0 && detailsState.display &&
+            numMods > 0 && !detailsState.display &&
             <Button
               className={classes.removeModButton}
               variant="contained"
@@ -221,7 +221,7 @@ export default function PrimarySearchAppBar({
               }}>Remove Mod</Button>
           }
           {
-            detailsState.display &&
+            !detailsState.display &&
             <Button className={classes.downloadButton} variant="contained" color="Secondary" onClick={getImage}>
               Save
             </Button>
@@ -249,7 +249,7 @@ export default function PrimarySearchAppBar({
               <FavoriteIcon fontSize='small' className={classes.heart} />
               Give Feedback
             </Button>
-            <Button className={classes.removeModButton} variant='contained' color='Secondary' onClick={toggleDetails}>{detailsState.display ? 'Loadout' : 'Gun Detail'}</Button>
+            <Button className={classes.removeModButton} variant='contained' color='Secondary' onClick={toggleDetails}>{detailsState.display ? 'Gun Detail' : 'Loadout'}</Button>
 
           </div>
           <div className={classes.sectionMobile}>

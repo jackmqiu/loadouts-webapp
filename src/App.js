@@ -11,6 +11,8 @@ import ReactGA from 'react-ga';
 import { Column, Row, Item } from '@mui-treasury/components/flex';
 import ImageUploading from 'react-images-uploading';
 import { useScreenshot, createFileName } from 'use-react-screenshot';
+import { useLocation } from "react-router-dom";
+import axios from 'axios';
 
 import {
   Select,
@@ -24,6 +26,10 @@ import {
 } from '@material-ui/core';
 
 import useWindowDimensions from './useWindowDimensions';
+
+const axiosInstance = axios.create({
+  baseURL: 'https://loadouts-api.herokuapp.com',
+});
 
 const TRACKING_ID = "UA-193462319-2";
 ReactGA.initialize(TRACKING_ID);
@@ -48,6 +54,7 @@ const useStyles = makeStyles({
 });
 
 const App = () => {
+  const loadoutsId = useLocation().pathname.substring(1);
   const classes = useStyles();
   const capture = createRef(null);
   const [image, takeScreenshot] = useScreenshot();
@@ -124,11 +131,11 @@ const App = () => {
   const [igLoadoutState, setIgLoadoutState] = useState({
     0: {
       color: '',
-      importance: 5,
-      name: 'M4',
-      link: 'https://www.vipertech.com.tw/products_pf.php?num=346',
-      model: 'Viper Tech RAS GBB M4A1',
-      image: 'https://i.imgur.com/7teSCs6.png',
+      importance: 6,
+      name: 'Optic',
+      link: 'http://shop.kic.tw/portal_c1_cnt_page.php?owner_num=c1_33589&button_num=c1&folder_id=7631&cnt_id=85926',
+      model: 'Hurricane XPS3 Holosight',
+      image: 'https://i.imgur.com/KGSsudM.png',
     },
     1: {
       color: '',
@@ -148,13 +155,13 @@ const App = () => {
     },
     3: {
       color: '',
-      importance: 6,
-      name: 'Optic',
-      link: 'http://shop.kic.tw/portal_c1_cnt_page.php?owner_num=c1_33589&button_num=c1&folder_id=7631&cnt_id=85926',
-      model: 'Hurricane XPS3 Holosight',
-      image: 'https://i.imgur.com/KGSsudM.png',
+      importance: 5,
+      name: 'M4',
+      link: 'https://www.vipertech.com.tw/products_pf.php?num=346',
+      model: 'Viper Tech RAS GBB M4A1',
+      image: 'https://i.imgur.com/7teSCs6.png',
     },
-    4: {
+    8: {
       color: '',
       importance: 2,
       name: 'Sling',
@@ -186,7 +193,7 @@ const App = () => {
       model: 'PEQ FMA LA5-C',
       image: 'https://i.imgur.com/0vUHUvr.png',
     },
-    8: {
+    4: {
       color: '',
       importance: 1,
       name: 'Fore Grip',
@@ -261,6 +268,15 @@ const App = () => {
     setImages(imageList);
   };
 
+  if (loadoutsId.length > 0) {
+    axiosInstance.get(`/${loadoutsId}`)
+    .then(response => {
+      if (response.data.items) {
+        setIgLoadoutState(response.data.items);
+      }
+    })
+  }
+
   return (
     <div className="App" >
       <MenuBar
@@ -272,23 +288,24 @@ const App = () => {
         mixpanel={mixpanel}
       />
     { detailsState.display ?
-      <div ref={capture} className={classes.singleGunDetailsContainer}>
-        <SingleGunDetails
-          modsState={modsState}
-          toggleDrawer={toggleDrawer}
-          gun={loadoutState.primary}
-          setMod={setMod}
-          mixpanel={mixpanel}
-          getImage={getImage}
-          numMods={numMods}
+      <div ref={capture}>
+        <IgLoadout
+          igLoadoutState={igLoadoutState}
+          setIgLoadoutState={setIgLoadoutState}
+          numCards={numMods}
+          colorScheme={colorScheme}
         />
-    </div> :
-    <IgLoadout
-      igLoadoutState={igLoadoutState}
-      setIgLoadoutState={setIgLoadoutState}
-      numCards={numMods}
-      colorScheme={colorScheme}
-    />
+      </div> : <div ref={capture} className={classes.singleGunDetailsContainer}>
+         <SingleGunDetails
+           modsState={modsState}
+           toggleDrawer={toggleDrawer}
+           gun={loadoutState.primary}
+           setMod={setMod}
+           mixpanel={mixpanel}
+           getImage={getImage}
+           numMods={numMods}
+         />
+     </div>
 }
         {/* <div>
            <ImageUploading

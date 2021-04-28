@@ -32,9 +32,10 @@ const useStyles = makeStyles(() => ({
   modImg: {
     marginLeft: 'auto',
     marginRight: 'auto',
-    maxWidth: 135,
-    height: 'auto',
-    width: '100%',
+    // maxWidth: 135,
+    objectFit: 'contain',
+    height: '100%',
+    maxWidth: '100%',
   },
 }));
 

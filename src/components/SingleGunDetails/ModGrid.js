@@ -47,7 +47,7 @@ const ModGrid = ({
             modName={modsState[j+1].model}
             openModal={handleOpen}
             closeModal={handleClose}
-            />
+          />
         </Grid>
       )
       j++;
