@@ -101,8 +101,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function PrimarySearchAppBar({
-  toggleDetails,
-  detailsState,
+  setDisplay,
+  displayState,
   getImage,
   numMods,
   updateNumMods,
@@ -148,7 +148,7 @@ export default function PrimarySearchAppBar({
           <FavoriteIcon fontSize='small' className={classes.heart} />
           Give Feedback
         </Button>
-        <Button className={classes.removeModButton} variant='contained' color='Secondary' onClick={toggleDetails}>{detailsState.display ? 'Loadout' : 'Gun Detail'}</Button>
+        <Button className={classes.removeModButton} variant='contained' color='Secondary' onClick={setDisplay}>Gun Detail</Button>
       </MenuItem>
     </Menu>
   );
@@ -180,7 +180,7 @@ export default function PrimarySearchAppBar({
           <FavoriteIcon fontSize='small' className={classes.heart} />
           Give Feedback
         </Button>
-        <Button className={classes.removeModButton} variant='contained' color='Secondary' onClick={toggleDetails}>{detailsState.display ? 'Loadout' : 'Gun Detail'}</Button>
+        <Button className={classes.removeModButton} variant='contained' color='Secondary' onClick={setDisplay}>Gun Detail</Button>
       </MenuItem>
     </Menu>
   );
@@ -191,10 +191,10 @@ export default function PrimarySearchAppBar({
         <Toolbar>
 
           <Typography className={classes.title} variant="h6" noWrap>
-            Loadouts
+            Loadouts by Planet Slayer
           </Typography>
           {
-            numMods < 8 && !detailsState.display &&
+            numMods < 8 && displayState === 'gunDetails' &&
             <Button
               className={classes.addModButton}
               variant="contained"
@@ -207,7 +207,7 @@ export default function PrimarySearchAppBar({
               }}>Add Mod</Button>
           }
           {
-            numMods > 0 && !detailsState.display &&
+            numMods > 0 && displayState === 'gunDetails' &&
             <Button
               className={classes.removeModButton}
               variant="contained"
@@ -221,7 +221,7 @@ export default function PrimarySearchAppBar({
               }}>Remove Mod</Button>
           }
           {
-            !detailsState.display &&
+            displayState === 'gunDetails' &&
             <Button className={classes.downloadButton} variant="contained" color="Secondary" onClick={getImage}>
               Save
             </Button>
@@ -249,7 +249,7 @@ export default function PrimarySearchAppBar({
               <FavoriteIcon fontSize='small' className={classes.heart} />
               Give Feedback
             </Button>
-            <Button className={classes.removeModButton} variant='contained' color='Secondary' onClick={toggleDetails}>{detailsState.display ? 'Gun Detail' : 'Loadout'}</Button>
+            <Button className={classes.removeModButton} variant='contained' color='Secondary' onClick={() => setDisplay('gunDetails')}>Gun Detail</Button>
 
           </div>
           <div className={classes.sectionMobile}>

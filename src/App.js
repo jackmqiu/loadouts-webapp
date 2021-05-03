@@ -60,6 +60,7 @@ const App = () => {
   const [image, takeScreenshot] = useScreenshot();
   const [backImage, uploadBackImage] = useState(null);
   const [images, setImages] = useState([]);
+  const [igLoadoutIdState, setIgLoadoutIdState] = useState('');
   const [numMods, updateNumMods] = useState(5);
   const { height, width } = useWindowDimensions();
   const [colorScheme, setColorScheme] = useState({
@@ -202,6 +203,13 @@ const App = () => {
       image: 'https://i.imgur.com/EPuMD3i.png',
     },
   });
+  const [displayState, setDisplayState] = useState(
+    //gunDetails
+    //codLoadout
+    //igLoadout
+    //makeIgLoadout
+    'makeIgLoadout'
+  )
   const setMod = (modField, modCategory, modModel) => {
     if (modCategory && modModel.length > 0) {
       setModsState({
@@ -227,9 +235,6 @@ const App = () => {
     open: false,
     weaponSelection: 'primary',
   });
-  const [detailsState, toggleDetailsState] = useState({ //details vs loadouts
-    display: true,
-  })
 
   const toggleDrawer = (weaponSelection) => {
     mixpanel.track(
@@ -241,14 +246,12 @@ const App = () => {
       weaponSelection: weaponSelection, //primary or secondary
     });
   };
-  const toggleDetails = () => {
+  const setDisplay = (view) => {
     mixpanel.track(
       'Action',
-      {"toggle": `toggleDetails`}
+      {"toggle": `setDisplay`}
     );
-    toggleDetailsState({
-      display: !detailsState.display
-    })
+    setDisplayState(view)
   }
   const getImage = () => {
     mixpanel.track(
@@ -268,10 +271,12 @@ const App = () => {
     setImages(imageList);
   };
 
-  if (loadoutsId.length > 0) {
+  if (loadoutsId.length > 0 && igLoadoutIdState !== loadoutsId) {
     axiosInstance.get(`/${loadoutsId}`)
     .then(response => {
       if (response.data.items) {
+        setIgLoadoutIdState(loadoutsId);
+        setDisplayState('igLoadout');
         setIgLoadoutState(response.data.items);
       }
     })
@@ -282,12 +287,12 @@ const App = () => {
       <MenuBar
         numMods={numMods}
         updateNumMods={updateNumMods}
-        toggleDetails={toggleDetails}
-        detailsState={detailsState}
+        setDisplay={setDisplay}
+        displayState={displayState}
         getImage={getImage}
         mixpanel={mixpanel}
       />
-    { detailsState.display ?
+    { displayState === 'igLoadout' &&
       <div ref={capture}>
         <IgLoadout
           igLoadoutState={igLoadoutState}
@@ -295,74 +300,80 @@ const App = () => {
           numCards={numMods}
           colorScheme={colorScheme}
         />
-      </div> : <div ref={capture} className={classes.singleGunDetailsContainer}>
-         <SingleGunDetails
-           modsState={modsState}
-           toggleDrawer={toggleDrawer}
-           gun={loadoutState.primary}
-           setMod={setMod}
-           mixpanel={mixpanel}
-           getImage={getImage}
-           numMods={numMods}
-         />
-     </div>
-}
-        {/* <div>
-           <ImageUploading
-            multiple
-            value={images}
-            onChange={onChange}
-            maxNumber={1}
-            dataURLKey="data_url"
-           >
-            {({
-              imageList,
-              onImageUpload,
-              onImageRemoveAll,
-              onImageUpdate,
-              onImageRemove,
-              isDragging,
-              dragProps,
-            }) => (
-              // write your building UI
-              <div>
-              <div className={classes.mainContainer} ref={capture}>
-                <MainContainer loadoutState={loadoutState} toggleDrawer={toggleDrawer} backImage={imageList[0]} />
-              </div>
-              <div className="upload__image-wrapper">
-                <Button
-                  className={classes.button}
-                  variant='contained'
-                  color='Primary'
-                  style={isDragging ? { color: 'red' } : undefined}
-                  onClick={onImageUpload}
-                  {...dragProps}
-                >
-                  Add Your Image
-                </Button>
-                &nbsp;
-                <Button className={classes.button} color='Secondary' variant='contained' onClick={onImageRemoveAll}>Remove Image</Button>
-                <Button className={classes.exportButton} variant='contained' onClick={getImage}>
-                  Export
-                </Button>
-              </div>
-              </div>
-            )}
-          </ImageUploading>
-
-          <Typography>
-          1. Upload your own picture by clicking Click to Add
-
-
-          </Typography>
-        <Typography>
-          2. Click the loadout graphics to edit the backgroundSize
-        </Typography>
-        <Typography>
-          3. Export and enjoy!
-        </Typography>
+    </div> }
+    { displayState === 'makeIgLoadout' &&
+      <div>add Item</div>
+    }
+    { displayState === 'gunDetails' &&
+      <div ref={capture} className={classes.singleGunDetailsContainer}>
+        <SingleGunDetails
+         modsState={modsState}
+         toggleDrawer={toggleDrawer}
+         gun={loadoutState.primary}
+         setMod={setMod}
+         mixpanel={mixpanel}
+         getImage={getImage}
+         numMods={numMods}
+       />
       </div>
-    }*/}
+    }
+    { displayState === 'codLoadout' &&
+      <div>
+       <ImageUploading
+        multiple
+        value={images}
+        onChange={onChange}
+        maxNumber={1}
+        dataURLKey="data_url"
+       >
+        {({
+          imageList,
+          onImageUpload,
+          onImageRemoveAll,
+          onImageUpdate,
+          onImageRemove,
+          isDragging,
+          dragProps,
+        }) => (
+          // write your building UI
+          <div>
+          <div className={classes.mainContainer} ref={capture}>
+            <MainContainer loadoutState={loadoutState} toggleDrawer={toggleDrawer} backImage={imageList[0]} />
+          </div>
+          <div className="upload__image-wrapper">
+            <Button
+              className={classes.button}
+              variant='contained'
+              color='Primary'
+              style={isDragging ? { color: 'red' } : undefined}
+              onClick={onImageUpload}
+              {...dragProps}
+            >
+              Add Your Image
+            </Button>
+            &nbsp;
+            <Button className={classes.button} color='Secondary' variant='contained' onClick={onImageRemoveAll}>Remove Image</Button>
+            <Button className={classes.exportButton} variant='contained' onClick={getImage}>
+              Export
+            </Button>
+          </div>
+          </div>
+        )}
+      </ImageUploading>
+
+      <Typography>
+      1. Upload your own picture by clicking Click to Add
+
+
+      </Typography>
+      <Typography>
+        2. Click the loadout graphics to edit the backgroundSize
+      </Typography>
+      <Typography>
+        3. Export and enjoy!
+      </Typography>
+    </div>
+    }
     <DrawerContainer
      loadoutState={loadoutState}
      setLoadoutState={setLoadoutState}
