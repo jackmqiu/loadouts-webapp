@@ -204,11 +204,11 @@ const App = () => {
     },
   });
   const [displayState, setDisplayState] = useState(
-    //gunDetails
-    //codLoadout
+    //Gun Details
+    //Overlay Loadout
     //igLoadout
-    //makeIgLoadout
-    'makeIgLoadout'
+    //Make Loadout
+    'Make Loadout'
   )
   const setMod = (modField, modCategory, modModel) => {
     if (modCategory && modModel.length > 0) {
@@ -246,12 +246,13 @@ const App = () => {
       weaponSelection: weaponSelection, //primary or secondary
     });
   };
-  const setDisplay = (view) => {
+  const setDisplay = (mode) => {
+    console.log('setDisplay', mode);
     mixpanel.track(
       'Action',
       {"toggle": `setDisplay`}
     );
-    setDisplayState(view)
+    setDisplayState(mode)
   }
   const getImage = () => {
     mixpanel.track(
@@ -301,10 +302,10 @@ const App = () => {
           colorScheme={colorScheme}
         />
     </div> }
-    { displayState === 'makeIgLoadout' &&
+    { displayState === 'Make Loadout' &&
       <div>add Item</div>
     }
-    { displayState === 'gunDetails' &&
+    { displayState === 'Gun Detail' &&
       <div ref={capture} className={classes.singleGunDetailsContainer}>
         <SingleGunDetails
          modsState={modsState}
@@ -317,7 +318,7 @@ const App = () => {
        />
       </div>
     }
-    { displayState === 'codLoadout' &&
+    { displayState === 'Overlay Loadout' &&
       <div>
        <ImageUploading
         multiple

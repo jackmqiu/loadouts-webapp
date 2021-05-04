@@ -112,12 +112,8 @@ export default function PrimarySearchAppBar({
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
-  const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-  const handleProfileMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
 
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
@@ -133,25 +129,6 @@ export default function PrimarySearchAppBar({
   };
 
   const menuId = 'primary-search-account-menu';
-  const renderMenu = (
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-      id={menuId}
-      keepMounted
-      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
-      <MenuItem onClick={handleMenuClose}>
-        <Button className={classes.removeModButton} variant="contained" color="Secondary" href="https://www.surveymonkey.com/r/9NNQXNH">
-          <FavoriteIcon fontSize='small' className={classes.heart} />
-          Give Feedback
-        </Button>
-        <Button className={classes.removeModButton} variant='contained' color='Secondary' onClick={setDisplay}>Gun Detail</Button>
-      </MenuItem>
-    </Menu>
-  );
 
   const mobileMenuId = 'primary-search-account-menu-mobile';
   const renderMobileMenu = (
@@ -164,24 +141,27 @@ export default function PrimarySearchAppBar({
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem onClick={handleProfileMenuOpen}>
-        {/*
-          <IconButton
-            aria-label="account of current user"
-            aria-controls="primary-search-account-menu"
-            aria-haspopup="true"
-            color="inherit"
-            >
-            <AccountCircle />
-          </IconButton>
-          <p>Profile - To be added</p>
-        */}
-        <Button className={classes.removeModButton} variant="contained" color="Secondary" href="https://www.surveymonkey.com/r/9NNQXNH">
+      <MenuItem
+        href="https://www.surveymonkey.com/r/9NNQXNH"
+        onClick={() => handleMobileMenuClose()}
+      >
           <FavoriteIcon fontSize='small' className={classes.heart} />
           Give Feedback
-        </Button>
-        <Button className={classes.removeModButton} variant='contained' color='Secondary' onClick={setDisplay}>Gun Detail</Button>
+
+
       </MenuItem>
+      <MenuItem onClick={() => {
+          setDisplay('Gun Detail');
+          handleMobileMenuClose();
+        }}>Gun Detail </MenuItem>
+      <MenuItem onClick={() => {
+          setDisplay('Make Loadout');
+          handleMobileMenuClose();
+        }}>Make Loadout </MenuItem>
+      <MenuItem onClick={() => {
+          setDisplay('Overlay Loadout');
+          handleMobileMenuClose();
+        }}>Overlay Loadout </MenuItem>
     </Menu>
   );
 
@@ -204,10 +184,10 @@ export default function PrimarySearchAppBar({
                   'Action',
                   {"add": numMods+1}
                 );
-              }}>Add Mod</Button>
+              }}>Add</Button>
           }
           {
-            numMods > 0 && displayState === 'gunDetails' &&
+            numMods > 0 && displayState === 'Gun Details' &&
             <Button
               className={classes.removeModButton}
               variant="contained"
@@ -218,7 +198,7 @@ export default function PrimarySearchAppBar({
                   'Action',
                   {"remove": numMods-1}
                 );
-              }}>Remove Mod</Button>
+              }}>Remove</Button>
           }
           {
             displayState === 'gunDetails' &&
@@ -227,32 +207,6 @@ export default function PrimarySearchAppBar({
             </Button>
           }
           <div className={classes.grow} />
-
-
-
-          <div className={classes.sectionDesktop}>
-            {/*
-            <IconButton
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-
-                <AccountCircle />
-
-            </IconButton>
-            */}
-            <Button className={classes.removeModButton} variant="contained" color="Secondary" href="https://www.surveymonkey.com/r/9NNQXNH">
-              <FavoriteIcon fontSize='small' className={classes.heart} />
-              Give Feedback
-            </Button>
-            <Button className={classes.removeModButton} variant='contained' color='Secondary' onClick={() => setDisplay('gunDetails')}>Gun Detail</Button>
-
-          </div>
-          <div className={classes.sectionMobile}>
             <IconButton
               aria-label="show more"
               aria-controls={mobileMenuId}
@@ -260,13 +214,11 @@ export default function PrimarySearchAppBar({
               onClick={handleMobileMenuOpen}
               color="inherit"
             >
-              <MoreIcon />
+              <MenuIcon />
             </IconButton>
-          </div>
         </Toolbar>
       </AppBar>
       {renderMobileMenu}
-      {renderMenu}
     </div>
   );
 }

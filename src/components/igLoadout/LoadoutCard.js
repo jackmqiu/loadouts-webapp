@@ -43,11 +43,9 @@ const LoadoutCard = ({ itemDetails, color }) => {
   const classes = useStyles({color});
   return (
       <Card className={classes.card} onClick={()=> {window.open(itemDetails.link, '_blank')}}>
-
-          <CardActionArea className={classes.cardActionArea}>
-            <img className={classes.modImg} src={itemDetails.image} />
-          </CardActionArea>
-
+        <CardActionArea className={classes.cardActionArea}>
+          <img className={classes.modImg} src={itemDetails.image} />
+        </CardActionArea>
       </Card>
   );
 };
