@@ -26,6 +26,7 @@ import {
 } from '@material-ui/core';
 
 import useWindowDimensions from './useWindowDimensions';
+import IgLoadoutForm from './components/igLoadoutForm'
 
 const axiosInstance = axios.create({
   baseURL: 'https://loadouts-api.herokuapp.com',
@@ -61,7 +62,8 @@ const App = () => {
   const [backImage, uploadBackImage] = useState(null);
   const [images, setImages] = useState([]);
   const [igLoadoutIdState, setIgLoadoutIdState] = useState('');
-  const [numMods, updateNumMods] = useState(5);
+  const [igLoadoutFormOpen, setIgLoadoutFormState] = useState(false);
+  const [numMods, updateNumMods] = useState(3);
   const { height, width } = useWindowDimensions();
   const [colorScheme, setColorScheme] = useState({
     0: '#b1a484',
@@ -130,78 +132,78 @@ const App = () => {
     },
   });
   const [igLoadoutState, setIgLoadoutState] = useState({
-    0: {
-      color: '',
-      importance: 6,
-      name: 'Optic',
-      link: 'http://shop.kic.tw/portal_c1_cnt_page.php?owner_num=c1_33589&button_num=c1&folder_id=7631&cnt_id=85926',
-      model: 'Hurricane XPS3 Holosight',
-      image: 'https://i.imgur.com/KGSsudM.png',
-    },
-    1: {
-      color: '',
-      importance: 3,
-      name: 'Light',
-      link: 'https://www.surefire.com/products/illumination/weapon-lights/m622u-scout-light-weaponlight/',
-      model: 'M622U Scout Light',
-      image: 'https://i.imgur.com/u8zDTlm.png',
-    },
-    2: {
-      color: '',
-      importance: 1,
-      name: 'Grip',
-      link: 'https://magpul.com/catalog/product/view/id/5443/s/moe-k2-plus-grip-ar15-m4/category/42/?mp_global_color=118',
-      model: 'MOE K2',
-      image: 'https://i.imgur.com/jd3oJbi.png',
-    },
-    3: {
-      color: '',
-      importance: 5,
-      name: 'M4',
-      link: 'https://www.vipertech.com.tw/products_pf.php?num=346',
-      model: 'Viper Tech RAS GBB M4A1',
-      image: 'https://i.imgur.com/7teSCs6.png',
-    },
-    8: {
-      color: '',
-      importance: 2,
-      name: 'Sling',
-      link: 'https://www.vikingtactics.com/product-p/vtac-mk2.htm',
-      model: 'VTAC MK2',
-      image: 'https://i.imgur.com/q70DxA5.png',
-    },
-    5: {
-      color: '',
-      importance: 3,
-      name: 'Sling Mount',
-      link: 'https://magpul.com/firearm-accessories/slings/mounts/asap-ambidextrous-sling-attachment-point.html?mp_global_color=118',
-      model: ' Magpul ASAP Sling Mount',
-      image: 'https://i.imgur.com/JB6MJ2M.png',
-    },
-    6: {
-      color: '',
-      importance: 7,
-      name: 'Rail',
-      link: 'https://danieldefense.com/m4a1-fsp-risii-black.html',
-      model: 'Daniel Defense FSP RIS II rail',
-      image: 'https://i.imgur.com/pVEfOJj.png',
-    },
-    7: {
-      color: '',
-      importance: 6,
-      name: 'Laser',
-      link: 'http://www.fma.hk/la5-c-c-7_57.html',
-      model: 'PEQ FMA LA5-C',
-      image: 'https://i.imgur.com/0vUHUvr.png',
-    },
-    4: {
-      color: '',
-      importance: 1,
-      name: 'Fore Grip',
-      link: 'https://tangodown.com/tangodown-vertical-fore-grip-stubby/',
-      model: 'TangoDown Vertical Fore Grip Stubby',
-      image: 'https://i.imgur.com/EPuMD3i.png',
-    },
+    // 0: {
+    //   color: '',
+    //   importance: 6,
+    //   name: 'Optic',
+    //   link: 'http://shop.kic.tw/portal_c1_cnt_page.php?owner_num=c1_33589&button_num=c1&folder_id=7631&cnt_id=85926',
+    //   model: 'Hurricane XPS3 Holosight',
+    //   image: 'https://i.imgur.com/KGSsudM.png',
+    // },
+    // 1: {
+    //   color: '',
+    //   importance: 3,
+    //   name: 'Light',
+    //   link: 'https://www.surefire.com/products/illumination/weapon-lights/m622u-scout-light-weaponlight/',
+    //   model: 'M622U Scout Light',
+    //   image: 'https://i.imgur.com/u8zDTlm.png',
+    // },
+    // 2: {
+    //   color: '',
+    //   importance: 1,
+    //   name: 'Grip',
+    //   link: 'https://magpul.com/catalog/product/view/id/5443/s/moe-k2-plus-grip-ar15-m4/category/42/?mp_global_color=118',
+    //   model: 'MOE K2',
+    //   image: 'https://i.imgur.com/jd3oJbi.png',
+    // },
+    // 3: {
+    //   color: '',
+    //   importance: 5,
+    //   name: 'M4',
+    //   link: 'https://www.vipertech.com.tw/products_pf.php?num=346',
+    //   model: 'Viper Tech RAS GBB M4A1',
+    //   image: 'https://i.imgur.com/7teSCs6.png',
+    // },
+    // 8: {
+    //   color: '',
+    //   importance: 2,
+    //   name: 'Sling',
+    //   link: 'https://www.vikingtactics.com/product-p/vtac-mk2.htm',
+    //   model: 'VTAC MK2',
+    //   image: 'https://i.imgur.com/q70DxA5.png',
+    // },
+    // 5: {
+    //   color: '',
+    //   importance: 3,
+    //   name: 'Sling Mount',
+    //   link: 'https://magpul.com/firearm-accessories/slings/mounts/asap-ambidextrous-sling-attachment-point.html?mp_global_color=118',
+    //   model: ' Magpul ASAP Sling Mount',
+    //   image: 'https://i.imgur.com/JB6MJ2M.png',
+    // },
+    // 6: {
+    //   color: '',
+    //   importance: 7,
+    //   name: 'Rail',
+    //   link: 'https://danieldefense.com/m4a1-fsp-risii-black.html',
+    //   model: 'Daniel Defense FSP RIS II rail',
+    //   image: 'https://i.imgur.com/pVEfOJj.png',
+    // },
+    // 7: {
+    //   color: '',
+    //   importance: 6,
+    //   name: 'Laser',
+    //   link: 'http://www.fma.hk/la5-c-c-7_57.html',
+    //   model: 'PEQ FMA LA5-C',
+    //   image: 'https://i.imgur.com/0vUHUvr.png',
+    // },
+    // 4: {
+    //   color: '',
+    //   importance: 1,
+    //   name: 'Fore Grip',
+    //   link: 'https://tangodown.com/tangodown-vertical-fore-grip-stubby/',
+    //   model: 'TangoDown Vertical Fore Grip Stubby',
+    //   image: 'https://i.imgur.com/EPuMD3i.png',
+    // },
   });
   const [displayState, setDisplayState] = useState(
     //Gun Details
@@ -209,7 +211,10 @@ const App = () => {
     //igLoadout
     //Make Loadout
     'Make Loadout'
-  )
+  );
+  const toggleIgLoadoutForm = () => {
+    setIgLoadoutFormState(!igLoadoutFormOpen);
+  };
   const setMod = (modField, modCategory, modModel) => {
     if (modCategory && modModel.length > 0) {
       setModsState({
@@ -303,7 +308,19 @@ const App = () => {
         />
     </div> }
     { displayState === 'Make Loadout' &&
-      <div>add Item</div>
+      <div ref={capture}>
+        <IgLoadout
+          igLoadoutState={igLoadoutState}
+          setIgLoadoutState={setIgLoadoutState}
+          numCards={numMods}
+          colorScheme={colorScheme}
+          toggleIgLoadoutForm={toggleIgLoadoutForm}
+        />
+        <IgLoadoutForm
+          igLoadoutFormOpen={igLoadoutFormOpen}
+          toggleIgLoadoutForm={toggleIgLoadoutForm}
+        />
+      </div>
     }
     { displayState === 'Gun Detail' &&
       <div ref={capture} className={classes.singleGunDetailsContainer}>
