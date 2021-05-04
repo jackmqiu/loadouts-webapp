@@ -319,6 +319,7 @@ const App = () => {
         <IgLoadoutForm
           igLoadoutFormOpen={igLoadoutFormOpen}
           toggleIgLoadoutForm={toggleIgLoadoutForm}
+          mixpanel={mixpanel}
         />
       </div>
     }

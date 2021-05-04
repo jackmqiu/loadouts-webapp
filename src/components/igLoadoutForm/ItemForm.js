@@ -1,5 +1,10 @@
-import Modal from '@material-ui/core/Modal';
-import React from 'react';
+import {
+  Modal,
+  TextField,
+  Paper,
+  Button,
+} from '@material-ui/core';
+import { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
@@ -13,18 +18,43 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ItemForm = ({igLoadoutFormOpen, toggleIgLoadoutForm}) => {
+const ItemForm = ({igLoadoutFormOpen, toggleIgLoadoutForm, mixpanel}) => {
   const classes = useStyles();
-
+  const [formType, setFormType] = useState(true); // true is Search
+  const [itemText, setItemText] = useState('');
+  const handleTextChange = (event) => {
+    setItemText(event.target.value);
+  };
+  const handleItemSubmit = (event) => {
+    if (event.key === 'Enter') {
+      mixpanel.track(
+        'Action',
+        {"submitItem": `${event.target.value}`}
+      );
+      // setLoadoutState({
+      //   ...loadoutState,
+      //   [drawerState.weaponSelection]: {
+      //     ...loadoutState[drawerState.weaponSelection],
+      //     gunCustomField: event.target.value,
+      //   }
+      // });
+      toggleIgLoadoutForm();
+      event.preventDefault();
+    }
+  }
   return (
 
       <Modal
         open={igLoadoutFormOpen}
         onClose={toggleIgLoadoutForm}
       >
-      <h1>
-        modal
-        </h1>
+        <Paper>
+          <Button variant='contained' color='primary' onClick={() => setFormType(!formType)}>{formType ? 'Link' : 'Search'}</Button>
+            <TextField label="Product" variant="outlined" onChange={handleTextChange} onKeyPress={handleItemSubmit}/>
+          <div>
+
+          </div>
+        </Paper>
       </Modal>
 
   );
