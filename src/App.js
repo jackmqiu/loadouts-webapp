@@ -221,7 +221,7 @@ const App = () => {
     'Make Loadout'
   );
   const queryGoogle = (text) => {
-    axiosInstanceGoogle.get(`v1?&q=${text}&num=6`)
+    axiosInstanceGoogle.get(`v1?&q=${text}&num=10`)
     .then(response => {
       if (response.data.items) {
         setGoogleResults(response.data.items);
