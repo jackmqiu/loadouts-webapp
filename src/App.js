@@ -29,8 +29,15 @@ import useWindowDimensions from './useWindowDimensions';
 import IgLoadoutForm from './components/igLoadoutForm'
 
 const axiosInstance = axios.create({
-  baseURL: 'https://loadouts-api.herokuapp.com',
+  baseURL: `${process.env.REACT_APP_API_URL}`,
 });
+const axiosInstanceGoogle = axios.create({
+  baseURL: 'https://www.googleapis.com/customsearch',
+  params: {
+    key: `${process.env.REACT_APP_GOOGLE_KEY}`,
+    cx: `${process.env.REACT_APP_GOOGLE_CX}`,
+  }
+})
 
 const TRACKING_ID = "UA-193462319-2";
 ReactGA.initialize(TRACKING_ID);
@@ -205,6 +212,7 @@ const App = () => {
     //   image: 'https://i.imgur.com/EPuMD3i.png',
     // },
   });
+  const [googleResults, setGoogleResults] = useState(null);
   const [displayState, setDisplayState] = useState(
     //Gun Details
     //Overlay Loadout
@@ -212,6 +220,14 @@ const App = () => {
     //Make Loadout
     'Make Loadout'
   );
+  const queryGoogle = (text) => {
+    axiosInstanceGoogle.get(`v1?&q=${text}&num=6`)
+    .then(response => {
+      if (response.data.items) {
+        setGoogleResults(response.data.items);
+      }
+    })
+  }
   const toggleIgLoadoutForm = () => {
     setIgLoadoutFormState(!igLoadoutFormOpen);
   };
@@ -320,6 +336,8 @@ const App = () => {
           igLoadoutFormOpen={igLoadoutFormOpen}
           toggleIgLoadoutForm={toggleIgLoadoutForm}
           mixpanel={mixpanel}
+          queryGoogle={queryGoogle}
+          googleResults={googleResults}
         />
       </div>
     }

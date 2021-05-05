@@ -18,7 +18,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ItemForm = ({igLoadoutFormOpen, toggleIgLoadoutForm, mixpanel}) => {
+const ItemForm = ({
+  igLoadoutFormOpen,
+  toggleIgLoadoutForm,
+  mixpanel,
+  googleResults,
+  queryGoogle,
+}) => {
   const classes = useStyles();
   const [formType, setFormType] = useState(true); // true is Search
   const [itemText, setItemText] = useState('');
@@ -31,17 +37,12 @@ const ItemForm = ({igLoadoutFormOpen, toggleIgLoadoutForm, mixpanel}) => {
         'Action',
         {"submitItem": `${event.target.value}`}
       );
-      // setLoadoutState({
-      //   ...loadoutState,
-      //   [drawerState.weaponSelection]: {
-      //     ...loadoutState[drawerState.weaponSelection],
-      //     gunCustomField: event.target.value,
-      //   }
-      // });
+      queryGoogle(event.target.value);
       toggleIgLoadoutForm();
       event.preventDefault();
     }
   }
+  console.log('googleResults', googleResults)
   return (
 
       <Modal
