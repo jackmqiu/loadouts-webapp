@@ -22,8 +22,8 @@ const GunTable = {
         },
       }
     },
-    assault: {
-      name: 'Assault',
+    rifle: {
+      name: 'Rifle',
       list: ['AK-47', 'FN-SCAR', 'M4', 'AR-15', 'M16'],
       guns: {
         ak47: {
@@ -50,7 +50,7 @@ const GunTable = {
     },
     pistol: {
       name: 'Pistol',
-      list: ['1911', 'Glock', 'Sig', 'Beretta', 'Desert Eagle', 'AAP-01'],
+      list: ['1911', 'Glock', 'Sig', 'Beretta', 'Desert Eagle', 'AAP-01', 'Hi-Capa'],
       guns: {
         1911: {
           name: '1911',
@@ -74,7 +74,10 @@ const GunTable = {
         },
         aap01: {
           name: 'AAP-01',
-        }
+        },
+        hicapa: {
+          name: 'Hi-Capa',
+        },
       }
     },
   }

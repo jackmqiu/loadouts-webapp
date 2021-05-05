@@ -15,9 +15,7 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
-import ReactGA from 'react-ga';
-const TRACKING_ID = "G-F4LSKD8M8H";
-ReactGA.initialize(TRACKING_ID);
+import FavoriteIcon from '@material-ui/icons/Favorite';
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -85,63 +83,52 @@ const useStyles = makeStyles((theme) => ({
       display: 'none',
     },
   },
+  downloadButton: {
+    backgroundColor: '#2EFF21',
+    marginLeft: 5,
+  },
+  addModButton: {
+    backgroundColor: '#52EDFF',
+    marginLeft: 5,
+  },
+  removeModButton: {
+    backgroundColor: '#FF2167',
+    marginLeft: 5,
+  },
+  heart: {
+    marginRight: 5,
+  }
 }));
 
-export default function PrimarySearchAppBar({ toggleDetails, detailsState, getImage }) {
+export default function PrimarySearchAppBar({
+  setDisplay,
+  displayState,
+  getImage,
+  numMods,
+  updateNumMods,
+  mixpanel,
+ }) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
-  const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-  const handleProfileMenuOpen = (event) => {
-    ReactGA.event({
-      category: 'Action',
-      action: 'profileMenuOpen'
-    });
-    setAnchorEl(event.currentTarget);
-  };
 
   const handleMobileMenuClose = () => {
-    ReactGA.event({
-      category: 'Action',
-      action: 'mobileMenuClose'
-    });
     setMobileMoreAnchorEl(null);
   };
 
   const handleMenuClose = () => {
-    ReactGA.event({
-      category: 'Action',
-      action: 'profileMenuClose'
-    });
     setAnchorEl(null);
     handleMobileMenuClose();
   };
 
   const handleMobileMenuOpen = (event) => {
-    ReactGA.event({
-      category: 'Action',
-      action: 'mobileMenuOpen'
-    });
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
   const menuId = 'primary-search-account-menu';
-  const renderMenu = (
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-      id={menuId}
-      keepMounted
-      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
-      <MenuItem onClick={handleMenuClose}>Profile - To Be Added</MenuItem>
-    </Menu>
-  );
 
   const mobileMenuId = 'primary-search-account-menu-mobile';
   const renderMobileMenu = (
@@ -154,47 +141,72 @@ export default function PrimarySearchAppBar({ toggleDetails, detailsState, getIm
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <AccountCircle />
-        </IconButton>
-        <p>Profile - To be added</p>
+      <MenuItem
+        href="https://www.surveymonkey.com/r/9NNQXNH"
+        onClick={() => handleMobileMenuClose()}
+      >
+          <FavoriteIcon fontSize='small' className={classes.heart} />
+          Give Feedback
+
+
       </MenuItem>
+      <MenuItem onClick={() => {
+          setDisplay('Gun Detail');
+          handleMobileMenuClose();
+        }}>Gun Detail </MenuItem>
+      <MenuItem onClick={() => {
+          setDisplay('Make Loadout');
+          handleMobileMenuClose();
+        }}>Make Loadout </MenuItem>
+      <MenuItem onClick={() => {
+          setDisplay('Overlay Loadout');
+          handleMobileMenuClose();
+        }}>Overlay Loadout </MenuItem>
     </Menu>
   );
 
   return (
-    <div className={classes.grow}>
+    <div >
       <AppBar position="static">
         <Toolbar>
 
           <Typography className={classes.title} variant="h6" noWrap>
-            Loadouts
+            Loadouts by Planet Slayer
           </Typography>
-          <Button variant='contained' color='Secondary'onClick={toggleDetails}>{detailsState.display ? 'Loadout' : 'Gun Detail'}</Button>
+          {
+            numMods < 8 && displayState === 'Gun Details' || displayState === 'Make Loadout' &&
+            <Button
+              className={classes.addModButton}
+              variant="contained"
+              onClick={() => {
+                updateNumMods(numMods+1);
+                mixpanel.track(
+                  'Action',
+                  {"add": numMods+1}
+                );
+              }}>Add</Button>
+          }
+          {
+            numMods > 0 && displayState === 'Gun Details' || displayState === 'Make Loadout' &&
+            <Button
+              className={classes.removeModButton}
+              variant="contained"
+              color="Secondary"
+              onClick={() => {
+                updateNumMods(numMods-1);
+                mixpanel.track(
+                  'Action',
+                  {"remove": numMods-1}
+                );
+              }}>Remove</Button>
+          }
+          {
+            displayState === 'Gun Details' || displayState === 'Make Loadout' &&
+            <Button className={classes.downloadButton} variant="contained" color="Secondary" onClick={getImage}>
+              Save
+            </Button>
+          }
           <div className={classes.grow} />
-          <Button variant="contained" color="Secondary" href="https://www.surveymonkey.com/r/9NNQXNH">
-            Give Feedback
-          </Button>
-          <div className={classes.sectionDesktop}>
-
-            <IconButton
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
-          </div>
-          <div className={classes.sectionMobile}>
             <IconButton
               aria-label="show more"
               aria-controls={mobileMenuId}
@@ -202,13 +214,11 @@ export default function PrimarySearchAppBar({ toggleDetails, detailsState, getIm
               onClick={handleMobileMenuOpen}
               color="inherit"
             >
-              <MoreIcon />
+              <MenuIcon />
             </IconButton>
-          </div>
         </Toolbar>
       </AppBar>
       {renderMobileMenu}
-      {renderMenu}
     </div>
   );
 }

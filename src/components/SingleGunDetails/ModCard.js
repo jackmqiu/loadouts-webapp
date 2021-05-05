@@ -43,7 +43,7 @@ import {
   hpa,
   crate,
   laser,
-  optics,
+  optic,
 } from '../../Img';
 
 const gunImageTable = {
@@ -79,7 +79,7 @@ const gunImageTable = {
   HPA: hpa,
   Select: crate,
   Laser: laser,
-  Optics: optics,
+  Optic: optic,
   Other: crate,
 }
 
@@ -102,7 +102,6 @@ const useStyles = makeStyles(() => ({
   cardActionArea: {
     width: '100%',
     height: '100%',
-    position: 'relative',
   },
   content: () => {
     return {
@@ -112,6 +111,7 @@ const useStyles = makeStyles(() => ({
       width: '100%',
       position: 'absolute',
       bottom: 0,
+      textAlign: 'left',
     };
   },
   title: {
@@ -122,23 +122,20 @@ const useStyles = makeStyles(() => ({
     color: '#e1d862',
     position: 'absolute',
     bottom: 40,
+    left: 10,
   },
   subtitle: {
     color: '#fff',
     opacity: 0.87,
     marginTop: '0.5rem',
+    marginLeft: 10,
     fontWeight: 500,
     fontSize: 14,
   },
-  modImgItem: {
-    marginTop: -45,
+  modImg: {
     marginLeft: 'auto',
     marginRight: 'auto',
-    maxHeight: '100%',
-    height: 100,
     maxWidth: 135,
-  },
-  modImg: {
     height: 'auto',
     width: '100%',
   },
@@ -149,17 +146,13 @@ const ModCard = ({ partName, modName, openModal, closeModal, id }) => {
   return (
       <Card className={classes.card} onClick={() => {openModal(id)}}>
         <CardActionArea className={classes.cardActionArea}>
-              <Item className={classes.modImgItem}>
-                <img className={classes.modImg} component="img" src={gunImageTable[partName]} />
-              </Item>
-              <Typography className={classes.title} variant={'h3'}>
-                {partName}
-              </Typography>
-
-            <div className={classes.content}>
-              <Typography className={classes.subtitle}>{modName}</Typography>
-            </div>
-
+          <img className={classes.modImg} src={gunImageTable[partName]} />
+          <Typography className={classes.title} variant={'h3'}>
+            {partName}
+          </Typography>
+          <div className={classes.content}>
+            <Typography className={classes.subtitle}>{modName}</Typography>
+          </div>
         </CardActionArea>
       </Card>
   );
