@@ -52,6 +52,7 @@ const ItemForm = ({
   mixpanel,
   googleResults,
   queryGoogle,
+  addIgLoadout,
 }) => {
   const classes = useStyles();
   const [formType, setFormType] = useState(true); // true is Search
@@ -69,6 +70,10 @@ const ItemForm = ({
       // toggleIgLoadoutForm();
       event.preventDefault();
     }
+  }
+  const handleSelect = (item, id) => {
+    addIgLoadout(item, id)
+    toggleIgLoadoutForm();
   }
   console.log('googleResults', googleResults)
   return (
@@ -89,8 +94,8 @@ const ItemForm = ({
               })}
           <GridList className={classes.grid}>
             {
-              googleResults && googleResults.map((item) =>
-                <GridListTile >
+              googleResults && googleResults.map((item, i) =>
+                <GridListTile id={i} onClick={() => {handleSelect(item, i)}}>
                   <img src={item.pagemap.cse_thumbnail[0].src}/>
                   <GridListTileBar
                    title={item.title}

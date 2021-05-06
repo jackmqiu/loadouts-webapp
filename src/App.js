@@ -212,6 +212,7 @@ const App = () => {
     //   image: 'https://i.imgur.com/EPuMD3i.png',
     // },
   });
+  const [activeIgLoadoutCard, setActiveIgLoadoutCard] = useState(0);
   const [googleResults, setGoogleResults] = useState(null);
   const [displayState, setDisplayState] = useState(
     //Gun Details
@@ -220,6 +221,12 @@ const App = () => {
     //Make Loadout
     'Make Loadout'
   );
+  const addIgLoadout = (item) => {
+    setIgLoadoutState({
+      ...igLoadoutState,
+      [activeIgLoadoutCard]: item,
+    });
+  }
   const queryGoogle = (text) => {
     axiosInstanceGoogle.get(`v1?&q=${text}&num=10`)
     .then(response => {
@@ -228,7 +235,8 @@ const App = () => {
       }
     })
   }
-  const toggleIgLoadoutForm = () => {
+  const toggleIgLoadoutForm = (id) => {
+    setActiveIgLoadoutCard(id);
     setIgLoadoutFormState(!igLoadoutFormOpen);
   };
   const setMod = (modField, modCategory, modModel) => {
@@ -338,6 +346,7 @@ const App = () => {
           mixpanel={mixpanel}
           queryGoogle={queryGoogle}
           googleResults={googleResults}
+          addIgLoadout={addIgLoadout}
         />
       </div>
     }
