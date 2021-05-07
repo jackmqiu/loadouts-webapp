@@ -107,6 +107,8 @@ export default function PrimarySearchAppBar({
   numMods,
   updateNumMods,
   mixpanel,
+  setIdFormOpen,
+  toggleIgLoadoutForm,
  }) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -201,7 +203,13 @@ export default function PrimarySearchAppBar({
               }}>Remove</Button>
           }
           {
-            (displayState === 'Gun Detail' || displayState === 'Make Loadout') &&
+            displayState === 'Make Loadout' &&
+            <Button className={classes.downloadButton} variant="contained" color="Secondary" onClick={() => {setIdFormOpen(true); toggleIgLoadoutForm();}}>
+              Save
+            </Button>
+          }
+          {
+            displayState === 'Gun Detail' &&
             <Button className={classes.downloadButton} variant="contained" color="Secondary" onClick={getImage}>
               Save
             </Button>

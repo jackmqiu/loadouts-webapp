@@ -9,6 +9,7 @@ import {
 } from '@material-ui/core';
 import { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import NameLoadoutForm from './NameLoadoutForm';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -53,6 +54,9 @@ const ItemForm = ({
   googleResults,
   queryGoogle,
   addIgLoadout,
+  idFormOpen,
+  setIdFormOpen,
+  submitLoadout,
 }) => {
   const classes = useStyles();
   const [formType, setFormType] = useState(true); // true is Search
@@ -75,7 +79,6 @@ const ItemForm = ({
     addIgLoadout(item, id)
     toggleIgLoadoutForm();
   }
-  console.log('googleResults', googleResults)
   return (
 
       <Modal
@@ -84,24 +87,33 @@ const ItemForm = ({
         className={classes.modal}
       >
         <Paper>
-          <Button variant='contained' color='primary' onClick={() => setFormType(!formType)}>{formType ? 'Link' : 'Search'}</Button>
+        { idFormOpen ?
+          <NameLoadoutForm
+            classes={classes}
+            mixpanel={mixpanel}
+            submitLoadout={submitLoadout}
+          /> :
+          <div>
+            <Button variant='contained' color='primary' onClick={() => setFormType(!formType)}>{formType ? 'Link' : 'Search'}</Button>
             <TextField className={classes.textField} label="Product" variant="outlined" onChange={handleTextChange} onKeyPress={handleItemSubmit}/>
-          <GridList className={classes.grid}>
-            {
-              googleResults && googleResults.map((item, i) =>
-                <GridListTile id={i} onClick={() => {handleSelect(item, i)}}>
-                  { item.pagemap.cse_thumbnail &&
-                    <img src={item.pagemap.cse_thumbnail[0].src}/>
-                  }
-                  <GridListTileBar
-                   title={item.title}
-                   titlePosition="top"
-                   className={classes.titleBar}
-                  />
-                </GridListTile>
-              )
-            }
-          </GridList>
+            <GridList className={classes.grid}>
+              {
+                googleResults && googleResults.map((item, i) =>
+                  <GridListTile id={i} onClick={() => {handleSelect(item, i)}}>
+                    { item.pagemap.cse_thumbnail &&
+                      <img src={item.pagemap.cse_thumbnail[0].src}/>
+                    }
+                    <GridListTileBar
+                     title={item.title}
+                     titlePosition="top"
+                     className={classes.titleBar}
+                    />
+                  </GridListTile>
+                )
+              }
+            </GridList>
+          </div>
+        }
         </Paper>
       </Modal>
 

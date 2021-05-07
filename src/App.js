@@ -264,7 +264,6 @@ const App = () => {
     open: false,
     weaponSelection: 'primary',
   });
-
   const toggleDrawer = (weaponSelection) => {
     mixpanel.track(
       'Action',
@@ -300,14 +299,40 @@ const App = () => {
   const onChange = (imageList, addUpdateIndex) => {
     setImages(imageList);
   };
-
-  if (loadoutsId.length > 0 && igLoadoutIdState !== loadoutsId) {
+  const getLoadout = () => {
+    console.log('getLoadout')
     axiosInstance.get(`/${loadoutsId}`)
     .then(response => {
       if (response.data.items) {
         setIgLoadoutIdState(loadoutsId);
         setDisplayState('igLoadout');
         setIgLoadoutState(response.data.items);
+      }
+    })
+  }
+  if (loadoutsId.length > 0 && igLoadoutIdState !== loadoutsId) {
+    getLoadout();
+  }
+  const [takenId, setTakenId] = useState('');
+  const [idFormOpen, setIdFormOpen] = useState(false);
+  const submitLoadout = (id) => {
+    console.log('submitLoadout', id);
+    axiosInstance.get(`/${id}`)
+    .then(response => {
+      if (response._id === id) {
+        setTakenId(id);
+      } else {
+        console.log('submitLoadout post', id, igLoadoutState);
+        axiosInstance.post(`/make`, {
+          _id: id,
+          items: igLoadoutState,
+        })
+        .then(response => {
+          console.log('submitLoadout post response', id)
+          setIgLoadoutIdState(id);
+          // toggleIgLoadoutForm();
+          window.location.assign(`http://loadouts.me/${id}`);
+        })
       }
     })
   }
@@ -320,6 +345,9 @@ const App = () => {
         setDisplay={setDisplay}
         displayState={displayState}
         getImage={getImage}
+        submitLoadout={submitLoadout}
+        setIdFormOpen={setIdFormOpen}
+        toggleIgLoadoutForm={toggleIgLoadoutForm}
         mixpanel={mixpanel}
       />
     { displayState === 'igLoadout' &&
@@ -347,6 +375,9 @@ const App = () => {
           queryGoogle={queryGoogle}
           googleResults={googleResults}
           addIgLoadout={addIgLoadout}
+          idFormOpen={idFormOpen}
+          setIdFormOpen={setIdFormOpen}
+          submitLoadout={submitLoadout}
         />
       </div>
     }
