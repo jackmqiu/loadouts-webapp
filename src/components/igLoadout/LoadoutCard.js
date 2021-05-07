@@ -39,20 +39,21 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const LoadoutCard = ({ itemDetails, color, toggleIgLoadoutForm }) => {
+const LoadoutCard = ({ itemDetails, color, toggleIgLoadoutForm, id }) => {
   const classes = useStyles({color});
+  console.log('itemDetails', itemDetails)
   return (
     <div>
       { itemDetails &&
         <Card className={classes.card} onClick={()=> {window.open(itemDetails.link, '_blank')}}>
           <CardActionArea className={classes.cardActionArea}>
-            <img className={classes.modImg} src={itemDetails.image} />
+            <img className={classes.modImg} src={itemDetails.pagemap.cse_image[0].src} />
           </CardActionArea>
         </Card>
       }
       {
         !itemDetails &&
-        <Card className={classes.card} onClick={() => toggleIgLoadoutForm()}>
+        <Card className={classes.card} onClick={() => toggleIgLoadoutForm(id)}>
         </Card>
       }
     </div>

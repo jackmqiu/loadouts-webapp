@@ -3,6 +3,9 @@ import {
   TextField,
   Paper,
   Button,
+  GridList,
+  GridListTile,
+  GridListTileBar,
 } from '@material-ui/core';
 import { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
@@ -16,6 +19,31 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
   },
+  grid: {
+    margin: 1,
+    backgroundColor: 'gray',
+    width: '100%',
+  },
+  modal: {
+    minWidth: 120,
+    maxHeight: 800,
+    padding: 20,
+  },
+  titleBar: {
+    background:
+      'linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, ' +
+      'rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
+  },
+  formTitle: {
+    margin: 2,
+  },
+  select: {
+    margin: '0px 5px 0px 5px',
+  },
+  textField: {
+    marginBottom: 10,
+    marginLeft: 5,
+  },
 }));
 
 const ItemForm = ({
@@ -24,6 +52,7 @@ const ItemForm = ({
   mixpanel,
   googleResults,
   queryGoogle,
+  addIgLoadout,
 }) => {
   const classes = useStyles();
   const [formType, setFormType] = useState(true); // true is Search
@@ -38,9 +67,13 @@ const ItemForm = ({
         {"submitItem": `${event.target.value}`}
       );
       queryGoogle(event.target.value);
-      toggleIgLoadoutForm();
+      // toggleIgLoadoutForm();
       event.preventDefault();
     }
+  }
+  const handleSelect = (item, id) => {
+    addIgLoadout(item, id)
+    toggleIgLoadoutForm();
   }
   console.log('googleResults', googleResults)
   return (
@@ -48,13 +81,27 @@ const ItemForm = ({
       <Modal
         open={igLoadoutFormOpen}
         onClose={toggleIgLoadoutForm}
+        className={classes.modal}
       >
         <Paper>
           <Button variant='contained' color='primary' onClick={() => setFormType(!formType)}>{formType ? 'Link' : 'Search'}</Button>
-            <TextField label="Product" variant="outlined" onChange={handleTextChange} onKeyPress={handleItemSubmit}/>
-          <div>
-
-          </div>
+            <TextField className={classes.textField} label="Product" variant="outlined" onChange={handleTextChange} onKeyPress={handleItemSubmit}/>
+          <GridList className={classes.grid}>
+            {
+              googleResults && googleResults.map((item, i) =>
+                <GridListTile id={i} onClick={() => {handleSelect(item, i)}}>
+                  { item.pagemap.cse_thumbnail &&
+                    <img src={item.pagemap.cse_thumbnail[0].src}/>
+                  }
+                  <GridListTileBar
+                   title={item.title}
+                   titlePosition="top"
+                   className={classes.titleBar}
+                  />
+                </GridListTile>
+              )
+            }
+          </GridList>
         </Paper>
       </Modal>
 

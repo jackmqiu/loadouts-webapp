@@ -5,7 +5,7 @@ import { useScreenshot, createFileName } from 'use-react-screenshot'
 import { makeStyles } from '@material-ui/core/styles';
 
 import LoadoutCard from './LoadoutCard';
-import LayoutTable from '../../LayoutTable';
+import IgLayoutTable from '../../IgLayoutTable';
 
 const useStyles = makeStyles({
   grid: {
@@ -33,9 +33,9 @@ const LoadoutGrid = ({
     // tell React that we want to associate the <input> ref
     // with the `grid` that we created in the constructor
   const loadoutGridItems = [];
-  for (let i = 0; i < numCards; i++) {
+  for (let i = 0; i < numCards + 1; i++) {
     loadoutGridItems.push(
-      <Grid item xs={LayoutTable[numCards][i].gridItemWidth}>
+      <Grid item xs={IgLayoutTable[numCards][i].gridItemWidth}>
         <LoadoutCard
           id={i}
           itemDetails={igLoadoutState[i]}

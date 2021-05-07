@@ -73,9 +73,9 @@ const App = () => {
   const [numMods, updateNumMods] = useState(3);
   const { height, width } = useWindowDimensions();
   const [colorScheme, setColorScheme] = useState({
-    0: '#b1a484',
-    1: '#838079',
-    2: '#3b3736',
+    0: 'white',
+    1: 'white',
+    2: 'white',
   })
   const [loadoutState, setLoadoutState] = useState({
     primary: {
@@ -212,6 +212,7 @@ const App = () => {
     //   image: 'https://i.imgur.com/EPuMD3i.png',
     // },
   });
+  const [activeIgLoadoutCard, setActiveIgLoadoutCard] = useState(0);
   const [googleResults, setGoogleResults] = useState(null);
   const [displayState, setDisplayState] = useState(
     //Gun Details
@@ -220,15 +221,22 @@ const App = () => {
     //Make Loadout
     'Make Loadout'
   );
+  const addIgLoadout = (item) => {
+    setIgLoadoutState({
+      ...igLoadoutState,
+      [activeIgLoadoutCard]: item,
+    });
+  }
   const queryGoogle = (text) => {
-    axiosInstanceGoogle.get(`v1?&q=${text}&num=6`)
+    axiosInstanceGoogle.get(`v1?&q=${text}&num=10`)
     .then(response => {
       if (response.data.items) {
         setGoogleResults(response.data.items);
       }
     })
   }
-  const toggleIgLoadoutForm = () => {
+  const toggleIgLoadoutForm = (id) => {
+    setActiveIgLoadoutCard(id);
     setIgLoadoutFormState(!igLoadoutFormOpen);
   };
   const setMod = (modField, modCategory, modModel) => {
@@ -338,6 +346,7 @@ const App = () => {
           mixpanel={mixpanel}
           queryGoogle={queryGoogle}
           googleResults={googleResults}
+          addIgLoadout={addIgLoadout}
         />
       </div>
     }
