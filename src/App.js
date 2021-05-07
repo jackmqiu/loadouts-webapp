@@ -300,17 +300,18 @@ const App = () => {
     setImages(imageList);
   };
   const getLoadout = () => {
-    console.log('getLoadout')
+    setIgLoadoutIdState(loadoutsId);
     axiosInstance.get(`/${loadoutsId}`)
     .then(response => {
       if (response.data.items) {
-        setIgLoadoutIdState(loadoutsId);
-        setDisplayState('igLoadout');
+        updateNumMods(Object.keys(response.data.items).length - 1)
+        console.log('updateNumMods', numMods)
         setIgLoadoutState(response.data.items);
       }
     })
   }
   if (loadoutsId.length > 0 && igLoadoutIdState !== loadoutsId) {
+    console.log('getLoadout', loadoutsId, igLoadoutState);
     getLoadout();
   }
   const [takenId, setTakenId] = useState('');
@@ -328,10 +329,8 @@ const App = () => {
           items: igLoadoutState,
         })
         .then(response => {
-          console.log('submitLoadout post response', id)
           setIgLoadoutIdState(id);
-          // toggleIgLoadoutForm();
-          window.location.assign(`http://loadouts.me/${id}`);
+          window.location.assign(`${process.env.REACT_APP_URL}/${id}`);
         })
       }
     })
