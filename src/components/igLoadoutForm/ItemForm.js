@@ -86,17 +86,13 @@ const ItemForm = ({
         <Paper>
           <Button variant='contained' color='primary' onClick={() => setFormType(!formType)}>{formType ? 'Link' : 'Search'}</Button>
             <TextField className={classes.textField} label="Product" variant="outlined" onChange={handleTextChange} onKeyPress={handleItemSubmit}/>
-            { googleResults && googleResults.map((item) => {
-              <div>
-              <h1>item</h1>
-                <img href={item.pagemap.cse_thumbnail[0].src}/>
-                </div>
-              })}
           <GridList className={classes.grid}>
             {
               googleResults && googleResults.map((item, i) =>
                 <GridListTile id={i} onClick={() => {handleSelect(item, i)}}>
-                  <img src={item.pagemap.cse_thumbnail[0].src}/>
+                  { item.pagemap.cse_thumbnail &&
+                    <img src={item.pagemap.cse_thumbnail[0].src}/>
+                  }
                   <GridListTileBar
                    title={item.title}
                    titlePosition="top"

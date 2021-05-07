@@ -174,7 +174,7 @@ export default function PrimarySearchAppBar({
             Loadouts by Planet Slayer
           </Typography>
           {
-            numMods < 8 && displayState === 'Gun Details' || displayState === 'Make Loadout' &&
+            numMods < 8 && (displayState === 'Gun Detail' || displayState === 'Make Loadout') &&
             <Button
               className={classes.addModButton}
               variant="contained"
@@ -187,7 +187,7 @@ export default function PrimarySearchAppBar({
               }}>Add</Button>
           }
           {
-            numMods > 0 && displayState === 'Gun Details' || displayState === 'Make Loadout' &&
+            numMods > 0 && (displayState === 'Gun Detail' || displayState === 'Make Loadout') &&
             <Button
               className={classes.removeModButton}
               variant="contained"
@@ -201,7 +201,7 @@ export default function PrimarySearchAppBar({
               }}>Remove</Button>
           }
           {
-            displayState === 'Gun Details' || displayState === 'Make Loadout' &&
+            (displayState === 'Gun Detail' || displayState === 'Make Loadout') &&
             <Button className={classes.downloadButton} variant="contained" color="Secondary" onClick={getImage}>
               Save
             </Button>

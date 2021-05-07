@@ -73,9 +73,9 @@ const App = () => {
   const [numMods, updateNumMods] = useState(3);
   const { height, width } = useWindowDimensions();
   const [colorScheme, setColorScheme] = useState({
-    0: '#b1a484',
-    1: '#838079',
-    2: '#3b3736',
+    0: 'white',
+    1: 'white',
+    2: 'white',
   })
   const [loadoutState, setLoadoutState] = useState({
     primary: {
