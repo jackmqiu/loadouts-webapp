@@ -8,6 +8,7 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
+import SearchIcon from '@material-ui/icons/Search';
 
 const useStyles = makeStyles(() => ({
 
@@ -37,6 +38,9 @@ const useStyles = makeStyles(() => ({
     height: '100%',
     maxWidth: '100%',
   },
+  icon: {
+    marginTop: '50%'
+  }
 }));
 
 const LoadoutCard = ({ itemDetails, color, toggleIgLoadoutForm, id }) => {
@@ -54,6 +58,7 @@ const LoadoutCard = ({ itemDetails, color, toggleIgLoadoutForm, id }) => {
       {
         !itemDetails &&
         <Card className={classes.card} onClick={() => toggleIgLoadoutForm(id)}>
+          <SearchIcon className={classes.icon} fontSize='large'/>
         </Card>
       }
     </div>
