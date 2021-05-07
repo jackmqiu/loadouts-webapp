@@ -311,7 +311,7 @@ const App = () => {
     })
   }
   if (loadoutsId.length > 0 && igLoadoutIdState !== loadoutsId) {
-    console.log('getLoadout', loadoutsId, igLoadoutState);
+    setDisplayState('igLoadout');
     getLoadout();
   }
   const [takenId, setTakenId] = useState('');
