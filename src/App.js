@@ -356,6 +356,7 @@ const App = () => {
           setIgLoadoutState={setIgLoadoutState}
           numCards={numMods}
           colorScheme={colorScheme}
+          displayState={displayState}
         />
     </div> }
     { displayState === 'Make Loadout' &&
@@ -366,6 +367,7 @@ const App = () => {
           numCards={numMods}
           colorScheme={colorScheme}
           toggleIgLoadoutForm={toggleIgLoadoutForm}
+          displayState={displayState}
         />
         <IgLoadoutForm
           igLoadoutFormOpen={igLoadoutFormOpen}

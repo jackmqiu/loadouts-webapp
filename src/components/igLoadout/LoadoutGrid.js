@@ -27,6 +27,7 @@ const LoadoutGrid = ({
   numCards,
   colorScheme,
   toggleIgLoadoutForm,
+  displayState
 }) => {
   const classes = useStyles();
 
@@ -43,6 +44,7 @@ const LoadoutGrid = ({
           closeModal={handleClose}
           color={colorScheme[i%2]}
           toggleIgLoadoutForm={toggleIgLoadoutForm}
+          displayState={displayState}
         />
       </Grid>
     )

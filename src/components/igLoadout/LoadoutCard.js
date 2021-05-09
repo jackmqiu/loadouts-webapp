@@ -43,13 +43,20 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const LoadoutCard = ({ itemDetails, color, toggleIgLoadoutForm, id }) => {
+const LoadoutCard = ({ itemDetails, color, toggleIgLoadoutForm, id, displayState }) => {
   const classes = useStyles({color});
-  console.log('itemDetails', itemDetails)
+  console.log('loadoutCard displayState', displayState)
   return (
     <div>
-      { itemDetails &&
+      { (itemDetails && displayState === 'igLoadout') &&
         <Card className={classes.card} onClick={()=> {window.open(itemDetails.link, '_blank')}}>
+          <CardActionArea className={classes.cardActionArea}>
+            <img className={classes.modImg} src={itemDetails.pagemap.cse_image[0].src} />
+          </CardActionArea>
+        </Card>
+      }
+      { (itemDetails && displayState === 'Make Loadout') &&
+        <Card className={classes.card} onClick={() => toggleIgLoadoutForm(id)}>
           <CardActionArea className={classes.cardActionArea}>
             <img className={classes.modImg} src={itemDetails.pagemap.cse_image[0].src} />
           </CardActionArea>
