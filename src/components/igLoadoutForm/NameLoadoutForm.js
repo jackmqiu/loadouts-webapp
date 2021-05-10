@@ -6,7 +6,7 @@ import TextField from '@material-ui/core/TextField';
 const NameLoadoutForm = ({classes, mixpanel, submitLoadout}) => {
   const [itemText, setItemText] = useState('');
   const handleTextChange = (event) => {
-    setItemText(event.target.value);
+    setItemText(event.target.value.toLowerCase());
   };
   const handleItemSubmit = (event) => {
     if (event.key === 'Enter') {
@@ -21,7 +21,7 @@ const NameLoadoutForm = ({classes, mixpanel, submitLoadout}) => {
   return (
     <div>
     <Typography variant='h5'> Enter Loadout Id</Typography>
-    <TextField label="Product" variant="outlined" onChange={handleTextChange} onKeyPress={handleItemSubmit}/>
+    <TextField value={itemText} label="Product" variant="outlined" onChange={handleTextChange} onKeyPress={handleItemSubmit}/>
     </div>
   )
 }
