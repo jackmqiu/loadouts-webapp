@@ -231,7 +231,7 @@ const App = () => {
       },
     });
   }
-  const editIgLoadout = (productLink, imageLink, productName) => {
+  const editIgLoadout = ({productLink, imageLink, productName}) => {
     setIgLoadoutState({
       ...igLoadoutState,
       [activeIgLoadoutCard]: {

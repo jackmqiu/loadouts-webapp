@@ -95,11 +95,11 @@ const ItemForm = ({
         'Action',
         {"submitEdit": `${event.target.value}`}
       );
-      addIgLoadout({
+      editIgLoadout({
         productName: productNameText,
         productLink: productLink,
         imageLink: imageLink,
-      }, activeIgLoadoutCard);
+      });
       toggleIgLoadoutForm();
       event.preventDefault();
     }
