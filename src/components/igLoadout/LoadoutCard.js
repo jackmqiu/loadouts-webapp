@@ -12,9 +12,9 @@ import SearchIcon from '@material-ui/icons/Search';
 
 const useStyles = makeStyles(() => ({
 
-  card: ({ color }) => ({
+  card: ({ color, height }) => ({
     width: '100%',
-    height: 210,
+    height: 400*height/12,
     borderRadius: 8,
     boxShadow: 'none',
     // position: 'relative',
@@ -43,8 +43,8 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const LoadoutCard = ({ itemDetails, color, toggleIgLoadoutForm, id, displayState }) => {
-  const classes = useStyles({color});
+const LoadoutCard = ({ itemDetails, color, toggleIgLoadoutForm, id, displayState, height }) => {
+  const classes = useStyles({color, height});
   console.log('loadoutCard displayState', displayState)
   return (
     <div>
