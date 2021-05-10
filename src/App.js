@@ -236,9 +236,9 @@ const App = () => {
       ...igLoadoutState,
       [activeIgLoadoutCard]: {
         ...igLoadoutState[activeIgLoadoutCard],
-        productLink: productLink,
-        imageLink: imageLink,
-        productName: productName,
+        productLink: productLink || igLoadoutState[activeIgLoadoutCard].productLink,
+        imageLink: imageLink || igLoadoutState[activeIgLoadoutCard].imageLink,
+        productName: productName || igLoadoutState[activeIgLoadoutCard].productName,
       },
     });
   }

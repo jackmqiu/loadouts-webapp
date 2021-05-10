@@ -64,9 +64,9 @@ const ItemForm = ({
   const classes = useStyles();
   const [formType, setFormType] = useState(true); // true is Search
   const [searchText, setSearchText] = useState('');
-  const [productNameText, setProductNameText] = useState('');
-  const [productLink, setProductLink] = useState('');
-  const [imageLink, setImageLink] = useState('');
+  const [productNameText, setProductNameText] = useState(igLoadoutState[activeIgLoadoutCard] && igLoadoutState[activeIgLoadoutCard].productName);
+  const [imageLink, setImageLink] = useState(igLoadoutState[activeIgLoadoutCard] && igLoadoutState[activeIgLoadoutCard].imageLink);
+  const [productLink, setProductLink] = useState(igLoadoutState[activeIgLoadoutCard] && igLoadoutState[activeIgLoadoutCard].productLink);
   const handleSearchTextChange = (event) => {
     setSearchText(event.target.value);
   };
