@@ -129,7 +129,7 @@ const ItemForm = ({
               {
                 googleResults && googleResults.map((item, i) =>
                   <GridListTile id={i} onClick={() => {handleSelect(item, i)}}>
-                    { item.pagemap.cse_thumbnail &&
+                    { item.pagemap && item.pagemap.cse_thumbnail &&
                       <img src={item.pagemap.cse_thumbnail[0].src}/>
                     }
                     <GridListTileBar
