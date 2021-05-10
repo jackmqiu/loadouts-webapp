@@ -153,17 +153,9 @@ export default function PrimarySearchAppBar({
 
       </MenuItem>
       <MenuItem onClick={() => {
-          setDisplay('Gun Detail');
-          handleMobileMenuClose();
-        }}>Gun Detail </MenuItem>
-      <MenuItem onClick={() => {
           setDisplay('Make Loadout');
           handleMobileMenuClose();
         }}>Make Loadout </MenuItem>
-      <MenuItem onClick={() => {
-          setDisplay('Overlay Loadout');
-          handleMobileMenuClose();
-        }}>Overlay Loadout </MenuItem>
     </Menu>
   );
 
