@@ -32,29 +32,29 @@ const IgLayoutTable = {
   3: {
     0: {
       gridItemWidth: 6,
-      gridItemHeight: 5,
+      gridItemHeight: 6,
     },
     1: {
       gridItemWidth: 6,
-      gridItemHeight: 5,
+      gridItemHeight: 6,
     },
     2: {
       gridItemWidth: 6,
-      gridItemHeight: 5,
+      gridItemHeight: 6,
     },
     3: {
       gridItemWidth: 6,
-      gridItemHeight: 7,
+      gridItemHeight: 6,
     },
   },
   4: {
     0: {
       gridItemWidth: 5,
-      gridItemHeight: 5,
+      gridItemHeight: 7,
     },
     1: {
       gridItemWidth: 7,
-      gridItemHeight: 5,
+      gridItemHeight: 7,
     },
     2: {
       gridItemWidth: 4,
@@ -62,11 +62,11 @@ const IgLayoutTable = {
     },
     3: {
       gridItemWidth: 4,
-      gridItemHeight: 7,
+      gridItemHeight: 5,
     },
     4: {
       gridItemWidth: 4,
-      gridItemHeight: 7,
+      gridItemHeight: 5,
     },
   },
   5: {
@@ -128,19 +128,19 @@ const IgLayoutTable = {
   7: {
     0: {
       gridItemWidth: 4,
-      gridItemHeight: 3,
+      gridItemHeight: 4,
     },
     1: {
       gridItemWidth: 4,
-      gridItemHeight: 3,
+      gridItemHeight: 4,
     },
     2: {
       gridItemWidth: 4,
-      gridItemHeight: 3,
+      gridItemHeight: 4,
     },
     3: {
       gridItemWidth: 6,
-      gridItemHeight: 3,
+      gridItemHeight: 4,
     },
     4: {
       gridItemWidth: 6,
@@ -162,19 +162,19 @@ const IgLayoutTable = {
   8: {
     0: {
       gridItemWidth: 4,
-      gridItemHeight: 3,
+      gridItemHeight: 4,
     },
     1: {
       gridItemWidth: 4,
-      gridItemHeight: 3,
+      gridItemHeight: 4,
     },
     2: {
       gridItemWidth: 4,
-      gridItemHeight: 3,
+      gridItemHeight: 4,
     },
     3: {
       gridItemWidth: 4,
-      gridItemHeight: 3,
+      gridItemHeight: 4,
     },
     4: {
       gridItemWidth: 4,
@@ -182,19 +182,19 @@ const IgLayoutTable = {
     },
     5: {
       gridItemWidth: 4,
-      gridItemHeight: 3,
+      gridItemHeight: 4,
     },
     6: {
       gridItemWidth: 4,
-      gridItemHeight: 3,
+      gridItemHeight: 4,
     },
     7: {
       gridItemWidth: 4,
-      gridItemHeight: 3,
+      gridItemHeight: 4,
     },
     8: {
       gridItemWidth: 4,
-      gridItemHeight: 3,
+      gridItemHeight: 4,
     },
   },
 };

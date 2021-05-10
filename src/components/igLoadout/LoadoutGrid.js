@@ -39,6 +39,7 @@ const LoadoutGrid = ({
       <Grid item xs={IgLayoutTable[numCards][i].gridItemWidth}>
         <LoadoutCard
           id={i}
+          height={IgLayoutTable[numCards][i].gridItemHeight}
           itemDetails={igLoadoutState[i]}
           openModal={handleOpen}
           closeModal={handleClose}
