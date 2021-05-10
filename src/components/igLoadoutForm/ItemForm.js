@@ -99,7 +99,7 @@ const ItemForm = ({
         productName: productNameText,
         productLink: productLink,
         imageLink: imageLink,
-      }, activeIgLoadoutCard);
+      });
       toggleIgLoadoutForm();
       event.preventDefault();
     }
