@@ -224,16 +224,35 @@ const App = () => {
   const addIgLoadout = (item) => {
     setIgLoadoutState({
       ...igLoadoutState,
-      [activeIgLoadoutCard]: item,
+      [activeIgLoadoutCard]: {
+        productLink: item.link,
+        imageLink: item.pagemap.cse_image[0].src || item.pagemap.cse_thumbnail[0].src,
+        productName: item.title,
+      },
+    });
+  }
+  const editIgLoadout = (productLink, imageLink, productName) => {
+    setIgLoadoutState({
+      ...igLoadoutState,
+      [activeIgLoadoutCard]: {
+        ...igLoadoutState[activeIgLoadoutCard],
+        productLink: productLink,
+        imageLink: imageLink,
+        productName: productName,
+      },
     });
   }
   const queryGoogle = (text) => {
-    axiosInstanceGoogle.get(`v1?&q=${text}&num=10`)
-    .then(response => {
-      if (response.data.items) {
-        setGoogleResults(response.data.items);
-      }
-    })
+    if (!text) {
+      setGoogleResults(null);
+    } else {
+      axiosInstanceGoogle.get(`v1?&q=${text}&num=10`)
+      .then(response => {
+        if (response.data.items) {
+          setGoogleResults(response.data.items);
+        }
+      })
+    }
   }
   const toggleIgLoadoutForm = (id) => {
     setActiveIgLoadoutCard(id);
@@ -379,6 +398,9 @@ const App = () => {
           idFormOpen={idFormOpen}
           setIdFormOpen={setIdFormOpen}
           submitLoadout={submitLoadout}
+          igLoadoutState={igLoadoutState}
+          activeIgLoadoutCard={activeIgLoadoutCard}
+          editIgLoadout={editIgLoadout}
         />
       </div>
     }

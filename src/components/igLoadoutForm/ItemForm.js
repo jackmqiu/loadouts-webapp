@@ -57,26 +57,56 @@ const ItemForm = ({
   idFormOpen,
   setIdFormOpen,
   submitLoadout,
+  igLoadoutState,
+  activeIgLoadoutCard,
+  editIgLoadout,
 }) => {
   const classes = useStyles();
   const [formType, setFormType] = useState(true); // true is Search
-  const [itemText, setItemText] = useState('');
-  const handleTextChange = (event) => {
-    setItemText(event.target.value);
+  const [searchText, setSearchText] = useState('');
+  const [productNameText, setProductNameText] = useState('');
+  const [productLink, setProductLink] = useState('');
+  const [imageLink, setImageLink] = useState('');
+  const handleSearchTextChange = (event) => {
+    setSearchText(event.target.value);
   };
-  const handleItemSubmit = (event) => {
+  const handleProductNameTextChange = (event) => {
+    setProductNameText(event.target.value);
+  };
+  const handleImageLinkTextChange = (event) => {
+    setImageLink(event.target.value);
+  }
+  const handleProductLinkTextChange = (event) => {
+    setProductLink(event.target.value);
+  }
+  const handleSearchSubmit = (event) => {
     if (event.key === 'Enter') {
       mixpanel.track(
         'Action',
-        {"submitItem": `${event.target.value}`}
+        {"submitSearch": `${event.target.value}`}
       );
       queryGoogle(event.target.value);
-      // toggleIgLoadoutForm();
+      event.preventDefault();
+    }
+  }
+  const handleTextFieldSubmit = (event) => {
+    if (event.key === 'Enter') {
+      mixpanel.track(
+        'Action',
+        {"submitEdit": `${event.target.value}`}
+      );
+      addIgLoadout({
+        productName: productNameText,
+        productLink: productLink,
+        imageLink: imageLink,
+      }, activeIgLoadoutCard);
+      toggleIgLoadoutForm();
       event.preventDefault();
     }
   }
   const handleSelect = (item, id) => {
     addIgLoadout(item, id)
+    queryGoogle(0);
     toggleIgLoadoutForm();
   }
   return (
@@ -94,8 +124,7 @@ const ItemForm = ({
             submitLoadout={submitLoadout}
           /> :
           <div>
-            <Button variant='contained' color='primary' onClick={() => setFormType(!formType)}>{formType ? 'Link' : 'Search'}</Button>
-            <TextField className={classes.textField} label="Product" variant="outlined" onChange={handleTextChange} onKeyPress={handleItemSubmit}/>
+            <TextField className={classes.textField} label="Search" variant="outlined" onChange={handleSearchTextChange} onKeyPress={handleSearchSubmit}/>
             <GridList className={classes.grid}>
               {
                 googleResults && googleResults.map((item, i) =>
@@ -112,6 +141,9 @@ const ItemForm = ({
                 )
               }
             </GridList>
+            <TextField fullWidth={true} defaultValue={igLoadoutState[activeIgLoadoutCard] && igLoadoutState[activeIgLoadoutCard].productName} className={classes.textField} label="Product" variant="outlined" onChange={handleProductNameTextChange} onKeyPress={handleTextFieldSubmit}/>
+            <TextField fullWidth={true} defaultValue={igLoadoutState[activeIgLoadoutCard] && igLoadoutState[activeIgLoadoutCard].imageLink} className={classes.textField} label="Image URL" variant="outlined" onChange={handleImageLinkTextChange} onKeyPress={handleTextFieldSubmit}/>
+            <TextField fullWidth={true} defaultValue={igLoadoutState[activeIgLoadoutCard] && igLoadoutState[activeIgLoadoutCard].productLink} className={classes.textField} label="Product URL" variant="outlined" onChange={handleProductLinkTextChange} onKeyPress={handleTextFieldSubmit}/>
           </div>
         }
         </Paper>

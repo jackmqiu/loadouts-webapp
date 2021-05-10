@@ -49,16 +49,16 @@ const LoadoutCard = ({ itemDetails, color, toggleIgLoadoutForm, id, displayState
   return (
     <div>
       { (itemDetails && displayState === 'igLoadout') &&
-        <Card className={classes.card} onClick={()=> {window.open(itemDetails.link, '_blank')}}>
+        <Card className={classes.card} onClick={()=> {window.open(itemDetails.productLink, '_blank')}}>
           <CardActionArea className={classes.cardActionArea}>
-            <img className={classes.modImg} src={itemDetails.pagemap.cse_image[0].src} />
+            <img className={classes.modImg} src={itemDetails.imageLink} />
           </CardActionArea>
         </Card>
       }
       { (itemDetails && displayState === 'Make Loadout') &&
         <Card className={classes.card} onClick={() => toggleIgLoadoutForm(id)}>
           <CardActionArea className={classes.cardActionArea}>
-            <img className={classes.modImg} src={itemDetails.pagemap.cse_image[0].src} />
+            <img className={classes.modImg} src={itemDetails.imageLink} />
           </CardActionArea>
         </Card>
       }
