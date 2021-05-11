@@ -67,16 +67,22 @@ const ItemForm = ({
   const [productNameText, setProductNameText] = useState(igLoadoutState[activeIgLoadoutCard] && igLoadoutState[activeIgLoadoutCard].productName);
   const [imageLink, setImageLink] = useState(igLoadoutState[activeIgLoadoutCard] && igLoadoutState[activeIgLoadoutCard].imageLink);
   const [productLink, setProductLink] = useState(igLoadoutState[activeIgLoadoutCard] && igLoadoutState[activeIgLoadoutCard].productLink);
+  const [hasSubmitted, toggleHasSubmitted] = useState(false);
+
   const handleSearchTextChange = (event) => {
+    toggleHasSubmitted(false);
     setSearchText(event.target.value);
   };
   const handleProductNameTextChange = (event) => {
+    toggleHasSubmitted(false);
     setProductNameText(event.target.value);
   };
   const handleImageLinkTextChange = (event) => {
+    toggleHasSubmitted(false);
     setImageLink(event.target.value);
   }
   const handleProductLinkTextChange = (event) => {
+    toggleHasSubmitted(false);
     setProductLink(event.target.value);
   }
   const handleSearchSubmit = (event) => {
@@ -93,15 +99,26 @@ const ItemForm = ({
     if (event.key === 'Enter') {
       mixpanel.track(
         'Action',
-        {"submitEdit": `${event.target.value}`}
+        {"submitLoadout": `${productNameText}, ${productLink}, ${imageLink}`}
       );
+      handleSubmitLoadout();
+      event.preventDefault();
+    }
+  }
+  const handleSubmitLoadout = () => {
+    console.log(
+      'handleSubmitLoadout'
+    )
+    if (productNameText && productLink && imageLink) {
       editIgLoadout({
         productName: productNameText,
         productLink: productLink,
         imageLink: imageLink,
       });
+      toggleHasSubmitted(false);
       toggleIgLoadoutForm();
-      event.preventDefault();
+    } else {
+      toggleHasSubmitted(true);
     }
   }
   const handleSelect = (item, id) => {
@@ -141,9 +158,10 @@ const ItemForm = ({
                 )
               }
             </GridList>
-            <TextField fullWidth={true} defaultValue={igLoadoutState[activeIgLoadoutCard] && igLoadoutState[activeIgLoadoutCard].productName} className={classes.textField} label="Product" variant="outlined" onChange={handleProductNameTextChange} onKeyPress={handleTextFieldSubmit}/>
-            <TextField fullWidth={true} defaultValue={igLoadoutState[activeIgLoadoutCard] && igLoadoutState[activeIgLoadoutCard].imageLink} className={classes.textField} label="Image URL" variant="outlined" onChange={handleImageLinkTextChange} onKeyPress={handleTextFieldSubmit}/>
-            <TextField fullWidth={true} defaultValue={igLoadoutState[activeIgLoadoutCard] && igLoadoutState[activeIgLoadoutCard].productLink} className={classes.textField} label="Product URL" variant="outlined" onChange={handleProductLinkTextChange} onKeyPress={handleTextFieldSubmit}/>
+            <TextField error={hasSubmitted && !productNameText} helperText={hasSubmitted && !productNameText && 'Add Item Name'} fullWidth={true} defaultValue={igLoadoutState[activeIgLoadoutCard] && igLoadoutState[activeIgLoadoutCard].productName} className={classes.textField} label="Product" variant="outlined" onChange={handleProductNameTextChange} onKeyPress={handleTextFieldSubmit}/>
+            <TextField error={hasSubmitted && !imageLink} helperText={hasSubmitted && !imageLink && 'Add Image Link'} fullWidth={true} defaultValue={igLoadoutState[activeIgLoadoutCard] && igLoadoutState[activeIgLoadoutCard].imageLink} className={classes.textField} label="Image URL" variant="outlined" onChange={handleImageLinkTextChange} onKeyPress={handleTextFieldSubmit}/>
+            <TextField error={hasSubmitted && !productLink} helperText={hasSubmitted && !productLink && 'Add Item Link'} fullWidth={true} defaultValue={igLoadoutState[activeIgLoadoutCard] && igLoadoutState[activeIgLoadoutCard].productLink} className={classes.textField} label="Product URL" variant="outlined" onChange={handleProductLinkTextChange} onKeyPress={handleTextFieldSubmit}/>
+            <Button variant='contained' color='primary' onClick={() => {handleSubmitLoadout()}}>Submit</Button>
           </div>
         }
         </Paper>
