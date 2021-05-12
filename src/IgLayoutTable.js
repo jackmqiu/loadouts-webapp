@@ -1,11 +1,13 @@
 const IgLayoutTable = {
   0: {
+    rows: 1,
     0: {
       gridItemWidth: 12,
-      gridItemHeight: 5,
+      gridItemHeight: 12,
     },
   },
   1: {
+    rows: 2,
     0: {
       gridItemWidth: 12,
       gridItemHeight: 5,
@@ -16,6 +18,7 @@ const IgLayoutTable = {
     },
   },
   2: {
+    rows: 2,
     0: {
       gridItemWidth: 5,
       gridItemHeight: 5,
@@ -30,6 +33,7 @@ const IgLayoutTable = {
     },
   },
   3: {
+    rows: 2,
     0: {
       gridItemWidth: 6,
       gridItemHeight: 6,
@@ -48,6 +52,7 @@ const IgLayoutTable = {
     },
   },
   4: {
+    rows: 2,
     0: {
       gridItemWidth: 5,
       gridItemHeight: 7,
@@ -70,6 +75,7 @@ const IgLayoutTable = {
     },
   },
   5: {
+    rows: 3,
     0: {
       gridItemWidth: 5,
       gridItemHeight: 4,
@@ -96,6 +102,7 @@ const IgLayoutTable = {
     },
   },
   6: {
+    rows: 3,
     0: {
       gridItemWidth: 5,
       gridItemHeight: 4,
@@ -126,6 +133,7 @@ const IgLayoutTable = {
     },
   },
   7: {
+    rows: 3,
     0: {
       gridItemWidth: 4,
       gridItemHeight: 4,
@@ -160,6 +168,7 @@ const IgLayoutTable = {
     },
   },
   8: {
+    rows: 3,
     0: {
       gridItemWidth: 4,
       gridItemHeight: 4,

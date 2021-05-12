@@ -7,16 +7,17 @@ import { makeStyles } from '@material-ui/core/styles';
 import LoadoutCard from './LoadoutCard';
 import IgLayoutTable from '../../IgLayoutTable';
 
-const useStyles = makeStyles({
-  grid: {
-    margin: 1,
+const useStyles = makeStyles(() => ({
+  grid: ({screenWidth}) => ({
+    margin: 0,
     backgroundColor: 'gray',
     width: '100%',
-  },
+    height: screenWidth,
+  }),
   button: {
     margin: 5,
   },
-});
+}));
 
 const LoadoutGrid = ({
   mixpanel,
@@ -27,9 +28,10 @@ const LoadoutGrid = ({
   numCards,
   colorScheme,
   toggleIgLoadoutForm,
-  displayState
+  displayState,
+  screenWidth,
 }) => {
-  const classes = useStyles();
+  const classes = useStyles({ screenWidth });
 
     // tell React that we want to associate the <input> ref
     // with the `grid` that we created in the constructor
@@ -46,13 +48,15 @@ const LoadoutGrid = ({
           color={colorScheme[i%2]}
           toggleIgLoadoutForm={toggleIgLoadoutForm}
           displayState={displayState}
+          screenWidth={screenWidth}
+          rows={IgLayoutTable[numCards].rows}
         />
       </Grid>
     )
   };
   return (
     <div>
-        <Grid container className={classes.grid} spacing={3}>
+        <Grid container className={classes.grid} spacing={2}>
           { loadoutGridItems }
         </Grid>
       <div>
