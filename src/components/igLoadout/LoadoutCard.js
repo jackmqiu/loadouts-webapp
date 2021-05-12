@@ -10,21 +10,27 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import SearchIcon from '@material-ui/icons/Search';
 
+const heightGuide = {
+  1: 0.95,
+  2: 0.9,
+  3: 0.85,
+}
+
 const useStyles = makeStyles(() => ({
 
-  card: ({ color, height }) => ({
+  card: ({ color, height, screenWidth, rows }) => ({
     width: '100%',
-    height: 400*height/12,
+    height: screenWidth*height/12*heightGuide[rows],
     borderRadius: 8,
     boxShadow: 'none',
     // position: 'relative',
     backgroundColor: color,
-    '&:hover': {
-      boxShadow: `0 6px 12px 0 ${Color(color)
-        .rotate(-12)
-        .darken(0.2)
-        .fade(0.5)}`,
-    },
+    // '&:hover': {
+    //   boxShadow: `0 6px 12px 0 ${Color('#fff')
+    //     .rotate(-12)
+    //     .darken(0.2)
+    //     .fade(0.5)}`,
+    // },
   }),
   cardActionArea: {
     width: '100%',
@@ -43,9 +49,18 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const LoadoutCard = ({ itemDetails, color, toggleIgLoadoutForm, id, displayState, height }) => {
-  const classes = useStyles({color, height});
-  console.log('loadoutCard displayState', displayState)
+const LoadoutCard = ({
+  itemDetails,
+  color,
+  toggleIgLoadoutForm,
+  id,
+  displayState,
+  height,
+  screenWidth,
+  rows,
+}) => {
+  console.log(rows)
+  const classes = useStyles({color, height, screenWidth, rows});
   return (
     <div>
       { (itemDetails && displayState === 'igLoadout') &&
