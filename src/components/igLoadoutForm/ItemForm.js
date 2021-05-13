@@ -61,6 +61,7 @@ const ItemForm = ({
   igLoadoutState,
   activeIgLoadoutCard,
   editIgLoadout,
+  deleteIgLoadout,
 }) => {
   const classes = useStyles();
   const [formType, setFormType] = useState(true); // true is Search
@@ -107,9 +108,6 @@ const ItemForm = ({
     }
   }
   const handleSubmitLoadout = () => {
-    console.log(
-      'handleSubmitLoadout'
-    )
     if (productNameText && productLink && imageLink) {
       editIgLoadout({
         productName: productNameText,
@@ -126,6 +124,10 @@ const ItemForm = ({
     addIgLoadout(item, id)
     queryGoogle(0);
     toggleIgLoadoutForm();
+  }
+  const handleDeleteCard = (item) => {
+    toggleIgLoadoutForm();
+    deleteIgLoadout();
   }
   return (
 
@@ -165,6 +167,7 @@ const ItemForm = ({
             <TextField error={hasSubmitted && !imageLink} helperText={hasSubmitted && !imageLink && 'Add Image Link'} fullWidth={true} defaultValue={igLoadoutState[activeIgLoadoutCard] && igLoadoutState[activeIgLoadoutCard].imageLink} className={classes.textField} label="Image URL" variant="outlined" onChange={handleImageLinkTextChange} onKeyPress={handleTextFieldSubmit}/>
             <TextField error={hasSubmitted && !productLink} helperText={hasSubmitted && !productLink && 'Add Item Link'} fullWidth={true} defaultValue={igLoadoutState[activeIgLoadoutCard] && igLoadoutState[activeIgLoadoutCard].productLink} className={classes.textField} label="Product URL" variant="outlined" onChange={handleProductLinkTextChange} onKeyPress={handleTextFieldSubmit}/>
             <Button variant='contained' color='primary' onClick={() => {handleSubmitLoadout()}}>Submit</Button>
+            <Button variant='contained' color='secondary' onClick={() => {handleDeleteCard()}}>Delete</Button>
           </div>
         }
         </Paper>
