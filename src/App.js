@@ -2,6 +2,7 @@
 import './App.css';
 import MenuBar from './components/MenuBar.js';
 import IgLoadout from './components/igLoadout';
+import FloatingNav from './components/FloatingNav';
 import React, { useState, useEffect, createRef, useRef } from "react";
 import { makeStyles } from '@material-ui/core/styles';
 import ReactGA from 'react-ga';
@@ -101,12 +102,10 @@ const App = () => {
   const addIgLoadout = (item) => {
     setIgLoadoutState({
       ...igLoadoutState,
-      [activeIgLoadoutCard]: {
-        productLink: item.link,
-        imageLink: item.pagemap.cse_image[0].src || item.pagemap.cse_thumbnail[0].src,
-        productName: item.title,
-      },
+      [Object.keys(igLoadoutState).length]: {},
     });
+    setActiveIgLoadoutCard(Object.keys(igLoadoutState).length);
+    toggleIgLoadoutForm(Object.keys(igLoadoutState).length);
   }
   const editIgLoadout = ({productLink, imageLink, productName}) => {
     setIgLoadoutState({
@@ -147,6 +146,10 @@ const App = () => {
     setActiveIgLoadoutCard(id);
     setIgLoadoutFormState(!igLoadoutFormOpen);
   };
+  const closeIgLoadoutForm = () => {
+    setIgLoadoutFormState(!igLoadoutFormOpen);
+    setIdFormOpen(false);
+  }
   const [drawerState, toggleDrawerState] = useState({
     open: false,
     weaponSelection: 'primary',
@@ -272,9 +275,15 @@ const App = () => {
           activeIgLoadoutCard={activeIgLoadoutCard}
           editIgLoadout={editIgLoadout}
           deleteIgLoadout={deleteIgLoadout}
+          closeIgLoadoutForm={closeIgLoadoutForm}
         />
       </div>
     }
+    <FloatingNav
+      addIgLoadout={addIgLoadout}
+      setIdFormOpen={setIdFormOpen}
+      toggleIgLoadoutForm={toggleIgLoadoutForm}
+      />
     </div>
 
   );

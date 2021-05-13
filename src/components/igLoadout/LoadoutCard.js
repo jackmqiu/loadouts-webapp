@@ -59,7 +59,6 @@ const LoadoutCard = ({
   screenWidth,
   rows,
 }) => {
-  console.log(rows)
   const classes = useStyles({color, height, screenWidth, rows});
   return (
     <div>

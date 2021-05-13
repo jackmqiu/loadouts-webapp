@@ -25,18 +25,17 @@ const LoadoutGrid = ({
   handleOpen,
   handleClose,
   setIgLoadoutState,
-  numCards,
   colorScheme,
   toggleIgLoadoutForm,
   displayState,
   screenWidth,
 }) => {
   const classes = useStyles({ screenWidth });
-
+  const numCards = Object.keys(igLoadoutState).length;
     // tell React that we want to associate the <input> ref
     // with the `grid` that we created in the constructor
   const loadoutGridItems = [];
-  for (let i = 0; i < numCards + 1; i++) {
+  for (let i = 0; i < numCards; i++) {
     loadoutGridItems.push(
       <Grid item xs={IgLayoutTable[numCards][i].gridItemWidth}>
         <LoadoutCard

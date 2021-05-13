@@ -62,6 +62,7 @@ const ItemForm = ({
   activeIgLoadoutCard,
   editIgLoadout,
   deleteIgLoadout,
+  closeIgLoadoutForm,
 }) => {
   const classes = useStyles();
   const [formType, setFormType] = useState(true); // true is Search
@@ -121,7 +122,11 @@ const ItemForm = ({
     }
   }
   const handleSelect = (item, id) => {
-    addIgLoadout(item, id)
+    editIgLoadout({
+      productLink: item.link,
+      imageLink: item.pagemap.cse_image[0].src || item.pagemap.cse_thumbnail[0].src,
+      productName: item.title,
+    })
     queryGoogle(0);
     toggleIgLoadoutForm();
   }
@@ -133,7 +138,7 @@ const ItemForm = ({
 
       <Modal
         open={igLoadoutFormOpen}
-        onClose={toggleIgLoadoutForm}
+        onClose={closeIgLoadoutForm}
         className={classes.modal}
       >
         <Paper>
