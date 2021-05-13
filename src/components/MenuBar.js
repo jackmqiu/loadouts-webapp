@@ -165,7 +165,7 @@ export default function PrimarySearchAppBar({
         <Toolbar>
 
           <Typography className={classes.title} variant="h6" noWrap>
-            Loadouts by Planet Slayer
+            Loadouts by Mixellator
           </Typography>
           {
             numMods < 8 && (displayState === 'Gun Detail' || displayState === 'Make Loadout') &&
