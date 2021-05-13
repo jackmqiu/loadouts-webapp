@@ -167,45 +167,6 @@ export default function PrimarySearchAppBar({
           <Typography className={classes.title} variant="h6" noWrap>
             Loadouts by Mixellator
           </Typography>
-          {
-            numMods < 8 && (displayState === 'Gun Detail' || displayState === 'Make Loadout') &&
-            <Button
-              className={classes.addModButton}
-              variant="contained"
-              onClick={() => {
-                updateNumMods(numMods+1);
-                mixpanel.track(
-                  'Action',
-                  {"add": numMods+1}
-                );
-              }}>Add</Button>
-          }
-          {
-            numMods > 0 && (displayState === 'Gun Detail' || displayState === 'Make Loadout') &&
-            <Button
-              className={classes.removeModButton}
-              variant="contained"
-              color="Secondary"
-              onClick={() => {
-                updateNumMods(numMods-1);
-                mixpanel.track(
-                  'Action',
-                  {"remove": numMods-1}
-                );
-              }}>Remove</Button>
-          }
-          {
-            displayState === 'Make Loadout' &&
-            <Button className={classes.downloadButton} variant="contained" color="Secondary" onClick={() => {setIdFormOpen(true); toggleIgLoadoutForm();}}>
-              Save
-            </Button>
-          }
-          {
-            displayState === 'Gun Detail' &&
-            <Button className={classes.downloadButton} variant="contained" color="Secondary" onClick={getImage}>
-              Save
-            </Button>
-          }
           <div className={classes.grow} />
             <IconButton
               aria-label="show more"
