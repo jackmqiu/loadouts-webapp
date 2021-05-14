@@ -109,14 +109,20 @@ const ItemForm = ({
     }
   }
   const handleSubmitLoadout = () => {
-    if (productNameText && productLink && imageLink) {
+    if ((productNameText || igLoadoutState[activeIgLoadoutCard].productName) &&
+    (productLink || igLoadoutState[activeIgLoadoutCard].productLink) &&
+    (imageLink || igLoadoutState[activeIgLoadoutCard].imageLink)) {
       editIgLoadout({
-        productName: productNameText,
-        productLink: productLink,
-        imageLink: imageLink,
+        productName: productNameText || igLoadoutState[activeIgLoadoutCard].productName,
+        productLink: productLink || igLoadoutState[activeIgLoadoutCard].productLink,
+        imageLink: imageLink || igLoadoutState[activeIgLoadoutCard].imageLink,
       });
       toggleHasSubmitted(false);
       toggleIgLoadoutForm();
+      //clear fields
+      setImageLink('');
+      setProductNameText('');
+      setProductLink('');
     } else {
       toggleHasSubmitted(true);
     }
