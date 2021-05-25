@@ -2,6 +2,10 @@
   "name": "loadouts-app",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "8.9.1",
+    "npm": "5.2.0"
+  },
   "dependencies": {
     "@material-ui/core": "^4.11.3",
     "@material-ui/icons": "^4.11.2",
