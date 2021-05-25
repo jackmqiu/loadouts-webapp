@@ -2,6 +2,11 @@
   "name": "loadouts-app",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "14.15.4",
+    "npm": "7.14.0"
+  },
+  },
   "dependencies": {
     "@material-ui/core": "^4.11.3",
     "@material-ui/icons": "^4.11.2",
@@ -48,5 +53,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-zip": "^5.1.0"
   }
 }
