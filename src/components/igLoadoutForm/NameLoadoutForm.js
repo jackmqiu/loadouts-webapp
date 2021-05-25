@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import Typography from '@material-ui/core/Typography';
-import Modal from '@material-ui/core/Modal';
 import TextField from '@material-ui/core/TextField';
 
 const NameLoadoutForm = ({classes, mixpanel, submitLoadout}) => {

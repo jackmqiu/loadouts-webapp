@@ -1,7 +1,5 @@
-import React, { createRef, useState, useRef } from 'react';
+import React from 'react';
 import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
-import { useScreenshot, createFileName } from 'use-react-screenshot'
 import { makeStyles } from '@material-ui/core/styles';
 
 import LoadoutCard from './LoadoutCard';
@@ -37,7 +35,7 @@ const LoadoutGrid = ({
   const loadoutGridItems = [];
   for (let i = 0; i < numCards; i++) {
     loadoutGridItems.push(
-      <Grid item xs={IgLayoutTable[numCards][i].gridItemWidth}>
+      <Grid key={i} item xs={IgLayoutTable[numCards][i].gridItemWidth}>
         <LoadoutCard
           id={i}
           height={IgLayoutTable[numCards][i].gridItemHeight}

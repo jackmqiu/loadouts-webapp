@@ -3,26 +3,10 @@ import './App.css';
 import MenuBar from './components/MenuBar.js';
 import IgLoadout from './components/igLoadout';
 import FloatingNav from './components/FloatingNav';
-import React, { useState, useEffect, createRef, useRef } from "react";
-import { makeStyles } from '@material-ui/core/styles';
+import React, { useState, createRef } from "react";
 import ReactGA from 'react-ga';
-import { Column, Row, Item } from '@mui-treasury/components/flex';
-import ImageUploading from 'react-images-uploading';
-import { useScreenshot, createFileName } from 'use-react-screenshot';
 import { useLocation } from "react-router-dom";
 import axios from 'axios';
-
-import {
-  Select,
-  Button,
-  NativeSelect,
-  FormControl,
-  FormHelperText,
-  InputLabel,
-  Drawer,
-  Typography,
-} from '@material-ui/core';
-
 import useWindowDimensions from './useWindowDimensions';
 import IgLoadoutForm from './components/igLoadoutForm'
 
@@ -43,29 +27,9 @@ ReactGA.pageview(window.location.pathname + window.location.search);
 const mixpanel = require('mixpanel-browser');
 mixpanel.init("fbbc7fb17f489f12483171381e8da3d2");
 
-const useStyles = makeStyles({
-  mainContainer: {
-    width: '900px',
-    height: '600px',
-    overflow: 'auto',
-  },
-  singleGunDetailsContainer: {
-  },
-  button: {
-    margin: 5,
-  },
-  exportButton: {
-
-  },
-});
-
 const App = () => {
   const loadoutsId = useLocation().pathname.substring(1);
-  const classes = useStyles();
   const capture = createRef(null);
-  const [image, takeScreenshot] = useScreenshot();
-  const [backImage, uploadBackImage] = useState(null);
-  const [images, setImages] = useState([]);
   const [igLoadoutIdState, setIgLoadoutIdState] = useState('');
   const [igLoadoutFormOpen, setIgLoadoutFormState] = useState(false);
   const [numMods, updateNumMods] = useState(3);
@@ -75,20 +39,6 @@ const App = () => {
     1: 'white',
     2: 'white',
   })
-  const [loadoutState, setLoadoutState] = useState({
-    primary: {
-      gunName: 'AR-15',
-      class: 'Rifle',
-      manufacturer: 'G&G',
-      gunCustomField: 'Vfc hk416',
-    },
-    secondary: {
-      gunName: '1911',
-      class: 'Pistol',
-      manufacturer: 'Action Army',
-      gunCustomField: '',
-    },
-  });
   const [igLoadoutState, setIgLoadoutState] = useState({});
   const [activeIgLoadoutCard, setActiveIgLoadoutCard] = useState(0);
   const [googleResults, setGoogleResults] = useState(null);
@@ -150,20 +100,7 @@ const App = () => {
     setIgLoadoutFormState(!igLoadoutFormOpen);
     setIdFormOpen(false);
   }
-  const [drawerState, toggleDrawerState] = useState({
-    open: false,
-    weaponSelection: 'primary',
-  });
-  const toggleDrawer = (weaponSelection) => {
-    mixpanel.track(
-      'Action',
-      {"toggle": "toggleDrawer"}
-    );
-    toggleDrawerState({
-      open: !drawerState.open,
-      weaponSelection: weaponSelection, //primary or secondary
-    });
-  };
+
   const setDisplay = (mode) => {
     console.log('setDisplay', mode);
     mixpanel.track(
@@ -172,23 +109,7 @@ const App = () => {
     );
     setDisplayState(mode)
   }
-  const getImage = () => {
-    mixpanel.track(
-      'Download',
-      {"download": "downloadLoadout"}
-    );
-    takeScreenshot(capture.current).then(download);
-  }
 
-  const download = (image, { name = "my_loadout1", extension = "jpg" } = {}) => {
-    const a = document.createElement("a");
-    a.href = image;
-    a.download = createFileName(extension, name);
-    a.click();
-  };
-  const onChange = (imageList, addUpdateIndex) => {
-    setImages(imageList);
-  };
   const getLoadout = () => {
     setIgLoadoutIdState(loadoutsId);
     axiosInstance.get(`/${loadoutsId}`)
@@ -233,7 +154,6 @@ const App = () => {
         updateNumMods={updateNumMods}
         setDisplay={setDisplay}
         displayState={displayState}
-        getImage={getImage}
         submitLoadout={submitLoadout}
         setIdFormOpen={setIdFormOpen}
         toggleIgLoadoutForm={toggleIgLoadoutForm}
@@ -248,6 +168,7 @@ const App = () => {
           colorScheme={colorScheme}
           displayState={displayState}
           screenWidth={width}
+          height={height}
         />
     </div> }
     { displayState === 'Make Loadout' &&

@@ -65,7 +65,6 @@ const ItemForm = ({
   closeIgLoadoutForm,
 }) => {
   const classes = useStyles();
-  const [formType, setFormType] = useState(true); // true is Search
   const [searchText, setSearchText] = useState('');
   const [productNameText, setProductNameText] = useState(igLoadoutState[activeIgLoadoutCard] && igLoadoutState[activeIgLoadoutCard].productName);
   const [imageLink, setImageLink] = useState(igLoadoutState[activeIgLoadoutCard] && igLoadoutState[activeIgLoadoutCard].imageLink);
@@ -92,7 +91,7 @@ const ItemForm = ({
     if (event.key === 'Enter') {
       mixpanel.track(
         'Action',
-        {"submitSearch": `${event.target.value}`}
+        {"submitSearch": searchText}
       );
       queryGoogle(event.target.value);
       event.preventDefault();
@@ -157,22 +156,24 @@ const ItemForm = ({
           <div>
             <Typography variant='h5'>Search</Typography>
             <TextField className={classes.textField} label="Search" variant="outlined" onChange={handleSearchTextChange} onKeyPress={handleSearchSubmit}/>
-            <GridList className={classes.grid}>
-              {
-                googleResults && googleResults.map((item, i) =>
-                  <GridListTile id={i} onClick={() => {handleSelect(item, i)}}>
-                    { item.pagemap && item.pagemap.cse_thumbnail &&
-                      <img src={item.pagemap.cse_thumbnail[0].src}/>
-                    }
-                    <GridListTileBar
-                     title={item.title}
-                     titlePosition="top"
-                     className={classes.titleBar}
-                    />
-                  </GridListTile>
-                )
-              }
-            </GridList>
+            { googleResults &&
+              <GridList className={classes.grid}>
+                {
+                  googleResults.map((item, i) =>
+                    <GridListTile id={i} onClick={() => {handleSelect(item, i)}}>
+                      { item.pagemap && item.pagemap.cse_thumbnail &&
+                        <img alt='' src={item.pagemap.cse_thumbnail[0].src}/>
+                      }
+                      <GridListTileBar
+                       title={item.title}
+                       titlePosition="top"
+                       className={classes.titleBar}
+                      />
+                    </GridListTile>
+                  )
+                }
+              </GridList>
+            }
             <Typography variant='h5'>Custom</Typography>
             <TextField error={hasSubmitted && !productNameText} helperText={hasSubmitted && !productNameText && 'Add Item Name'} fullWidth={true} defaultValue={igLoadoutState[activeIgLoadoutCard] && igLoadoutState[activeIgLoadoutCard].productName} className={classes.textField} label="Product" variant="outlined" onChange={handleProductNameTextChange} onKeyPress={handleTextFieldSubmit}/>
             <TextField error={hasSubmitted && !imageLink} helperText={hasSubmitted && !imageLink && 'Add Image Link'} fullWidth={true} defaultValue={igLoadoutState[activeIgLoadoutCard] && igLoadoutState[activeIgLoadoutCard].imageLink} className={classes.textField} label="Image URL" variant="outlined" onChange={handleImageLinkTextChange} onKeyPress={handleTextFieldSubmit}/>
