@@ -2,19 +2,11 @@ import React from 'react';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import InputBase from '@material-ui/core/InputBase';
-import Badge from '@material-ui/core/Badge';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import MenuIcon from '@material-ui/icons/Menu';
-import SearchIcon from '@material-ui/icons/Search';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import MailIcon from '@material-ui/icons/Mail';
-import NotificationsIcon from '@material-ui/icons/Notifications';
-import MoreIcon from '@material-ui/icons/MoreVert';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 
 const useStyles = makeStyles((theme) => ({
@@ -111,7 +103,6 @@ export default function PrimarySearchAppBar({
   toggleIgLoadoutForm,
  }) {
   const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -121,16 +112,9 @@ export default function PrimarySearchAppBar({
     setMobileMoreAnchorEl(null);
   };
 
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-    handleMobileMenuClose();
-  };
-
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
-
-  const menuId = 'primary-search-account-menu';
 
   const mobileMenuId = 'primary-search-account-menu-mobile';
   const renderMobileMenu = (
@@ -167,45 +151,6 @@ export default function PrimarySearchAppBar({
           <Typography className={classes.title} variant="h6" noWrap>
             Loadouts by Mixellator
           </Typography>
-          {
-            numMods < 8 && (displayState === 'Gun Detail' || displayState === 'Make Loadout') &&
-            <Button
-              className={classes.addModButton}
-              variant="contained"
-              onClick={() => {
-                updateNumMods(numMods+1);
-                mixpanel.track(
-                  'Action',
-                  {"add": numMods+1}
-                );
-              }}>Add</Button>
-          }
-          {
-            numMods > 0 && (displayState === 'Gun Detail' || displayState === 'Make Loadout') &&
-            <Button
-              className={classes.removeModButton}
-              variant="contained"
-              color="Secondary"
-              onClick={() => {
-                updateNumMods(numMods-1);
-                mixpanel.track(
-                  'Action',
-                  {"remove": numMods-1}
-                );
-              }}>Remove</Button>
-          }
-          {
-            displayState === 'Make Loadout' &&
-            <Button className={classes.downloadButton} variant="contained" color="Secondary" onClick={() => {setIdFormOpen(true); toggleIgLoadoutForm();}}>
-              Save
-            </Button>
-          }
-          {
-            displayState === 'Gun Detail' &&
-            <Button className={classes.downloadButton} variant="contained" color="Secondary" onClick={getImage}>
-              Save
-            </Button>
-          }
           <div className={classes.grow} />
             <IconButton
               aria-label="show more"

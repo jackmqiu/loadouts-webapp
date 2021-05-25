@@ -1,13 +1,8 @@
 
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Color from 'color';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
 import SearchIcon from '@material-ui/icons/Search';
 
 const heightGuide = {
@@ -59,21 +54,20 @@ const LoadoutCard = ({
   screenWidth,
   rows,
 }) => {
-  console.log(rows)
   const classes = useStyles({color, height, screenWidth, rows});
   return (
     <div>
       { (itemDetails && displayState === 'igLoadout') &&
         <Card className={classes.card} onClick={()=> {window.open(itemDetails.productLink, '_blank')}}>
           <CardActionArea className={classes.cardActionArea}>
-            <img className={classes.modImg} src={itemDetails.imageLink} />
+            <img alt='' className={classes.modImg} src={itemDetails.imageLink} />
           </CardActionArea>
         </Card>
       }
       { (itemDetails && displayState === 'Make Loadout') &&
         <Card className={classes.card} onClick={() => toggleIgLoadoutForm(id)}>
           <CardActionArea className={classes.cardActionArea}>
-            <img className={classes.modImg} src={itemDetails.imageLink} />
+            <img alt='' className={classes.modImg} src={itemDetails.imageLink} />
           </CardActionArea>
         </Card>
       }
