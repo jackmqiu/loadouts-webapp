@@ -3,8 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "engines": {
-    "node": "14.15.4",
-    "npm": "7.14.0"
+    "node": "14.15.4"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.3",
@@ -54,7 +53,5 @@
     ]
   },
   "devDependencies": {
-    "gulp": "^4.0.2",
-    "gulp-zip": "^5.1.0"
   }
 }
