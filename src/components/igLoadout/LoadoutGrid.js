@@ -2,7 +2,7 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 
-import LoadoutCard from './LoadoutCard';
+import ItemCard from './ItemCard';
 import IgLayoutTable from '../../IgLayoutTable';
 
 const useStyles = makeStyles(() => ({
@@ -36,7 +36,7 @@ const LoadoutGrid = ({
   for (let i = 0; i < numCards; i++) {
     loadoutGridItems.push(
       <Grid key={i} item xs={IgLayoutTable[numCards][i].gridItemWidth}>
-        <LoadoutCard
+        <ItemCard
           id={i}
           height={IgLayoutTable[numCards][i].gridItemHeight}
           itemDetails={igLoadoutState[i]}
