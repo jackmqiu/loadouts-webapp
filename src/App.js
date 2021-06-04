@@ -77,7 +77,6 @@ const App = () => {
         newLoadout[i-1] = igLoadoutState[i];
       }
     }
-    console.log('deleteIgLoadout newLoadout', newLoadout);
     setIgLoadoutState(newLoadout);
   }
   const queryGoogle = (text) => {
@@ -102,7 +101,6 @@ const App = () => {
   }
 
   const setDisplay = (mode) => {
-    console.log('setDisplay', mode);
     mixpanel.track(
       'Action',
       {"toggle": `setDisplay`}
@@ -116,7 +114,6 @@ const App = () => {
     .then(response => {
       if (response.data.items) {
         updateNumMods(Object.keys(response.data.items).length - 1)
-        console.log('updateNumMods', numMods)
         setIgLoadoutState(response.data.items);
       }
     })
@@ -128,13 +125,11 @@ const App = () => {
   const [takenId, setTakenId] = useState('');
   const [idFormOpen, setIdFormOpen] = useState(false);
   const submitLoadout = (id) => {
-    console.log('submitLoadout', id);
     axiosInstance.get(`/${id}`)
     .then(response => {
       if (response._id === id) {
         setTakenId(id);
       } else {
-        console.log('submitLoadout post', id, igLoadoutState);
         axiosInstance.post(`/make`, {
           _id: id,
           items: igLoadoutState,
