@@ -148,6 +148,7 @@ const App = () => {
       } else {
         axiosInstance.post(`/make`, {
           _id: id,
+          category: loadoutCategory,
           items: igLoadoutState,
         })
         .then(response => {
