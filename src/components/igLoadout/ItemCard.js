@@ -55,9 +55,17 @@ const LoadoutCard = ({
   rows,
 }) => {
   const classes = useStyles({color, height, screenWidth, rows});
+  console.log(itemDetails,
+  color,
+  toggleIgLoadoutForm,
+  id,
+  displayState,
+  height,
+  screenWidth,
+  rows,)
   return (
     <div>
-      { (itemDetails && displayState === 'igLoadout') &&
+      { (itemDetails && (displayState === 'igLoadout' || displayState === 'feed')) &&
         <Card className={classes.card} onClick={()=> {window.open(itemDetails.productLink, '_blank')}}>
           <CardActionArea className={classes.cardActionArea}>
             <img alt='' className={classes.modImg} src={itemDetails.imageLink} />

@@ -3,12 +3,13 @@ import './App.css';
 import MenuBar from './components/MenuBar.js';
 import IgLoadout from './components/igLoadout';
 import FloatingNav from './components/FloatingNav';
-import React, { useState, createRef } from "react";
+import React, { useState, createRef, useEffect } from "react";
 import ReactGA from 'react-ga';
 import { useLocation } from "react-router-dom";
 import axios from 'axios';
 import useWindowDimensions from './useWindowDimensions';
-import IgLoadoutForm from './components/igLoadoutForm'
+import IgLoadoutForm from './components/igLoadoutForm';
+import Feed from './components/Feed';
 
 const axiosInstance = axios.create({
   baseURL: `${process.env.REACT_APP_API_URL}`,
@@ -47,8 +48,11 @@ const App = () => {
     //Overlay Loadout
     //igLoadout
     //Make Loadout
-    'Make Loadout'
+    // 'Make Loadout'
+    'feed'
   );
+  const [loadoutCategory, setLoadoutCategory] = useState(window.location.host.split('.')[0]);
+  const [feedLoadouts, setFeedLoadouts] = useState([]);
   const addIgLoadout = (item) => {
     setIgLoadoutState({
       ...igLoadoutState,
@@ -107,7 +111,19 @@ const App = () => {
     );
     setDisplayState(mode)
   }
-
+  const getFeed = () => {
+    console.log('getFeed')
+    // axiosInstance.get(`/feed/${loadoutCategory}`)
+    axiosInstance.get('/feed/airsoft')
+    .then(response => {
+      if (response.data[0]) {
+        setFeedLoadouts(response.data);
+      }
+    })
+  }
+  useEffect(() => { // getting feed on ComponentDidMount
+    getFeed();
+  }, []);
   const getLoadout = () => {
     setIgLoadoutIdState(loadoutsId);
     axiosInstance.get(`/${loadoutsId}`)
@@ -154,6 +170,16 @@ const App = () => {
         toggleIgLoadoutForm={toggleIgLoadoutForm}
         mixpanel={mixpanel}
       />
+    { displayState === 'feed' &&
+      <Feed
+        feedLoadouts={feedLoadouts}
+        setIgLoadoutState={setIgLoadoutState}
+        colorScheme={colorScheme}
+        displayState={displayState}
+        screenWidth={width}
+        height={height}
+      />
+    }
     { displayState === 'igLoadout' &&
       <div ref={capture}>
         <IgLoadout
