@@ -33,7 +33,6 @@ const App = () => {
   const capture = createRef(null);
   const [igLoadoutIdState, setIgLoadoutIdState] = useState('');
   const [igLoadoutFormOpen, setIgLoadoutFormState] = useState(false);
-  const [numMods, updateNumMods] = useState(3);
   const { height, width } = useWindowDimensions();
   const [colorScheme, setColorScheme] = useState({
     0: 'white',
@@ -129,7 +128,6 @@ const App = () => {
     axiosInstance.get(`/${loadoutsId}`)
     .then(response => {
       if (response.data.items) {
-        updateNumMods(Object.keys(response.data.items).length - 1)
         setIgLoadoutState(response.data.items);
       }
     })
@@ -162,8 +160,6 @@ const App = () => {
   return (
     <div className="App" >
       <MenuBar
-        numMods={numMods}
-        updateNumMods={updateNumMods}
         setDisplay={setDisplay}
         displayState={displayState}
         submitLoadout={submitLoadout}
@@ -186,7 +182,6 @@ const App = () => {
         <IgLoadout
           igLoadoutState={igLoadoutState}
           setIgLoadoutState={setIgLoadoutState}
-          numCards={numMods}
           colorScheme={colorScheme}
           displayState={displayState}
           screenWidth={width}
@@ -198,7 +193,6 @@ const App = () => {
         <IgLoadout
           igLoadoutState={igLoadoutState}
           setIgLoadoutState={setIgLoadoutState}
-          numCards={numMods}
           colorScheme={colorScheme}
           toggleIgLoadoutForm={toggleIgLoadoutForm}
           displayState={displayState}
