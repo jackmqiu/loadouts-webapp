@@ -217,6 +217,8 @@ const App = () => {
       </div>
     }
     <FloatingNav
+      displayState={displayState}
+      igLoadoutState={igLoadoutState}
       addIgLoadout={addIgLoadout}
       setIdFormOpen={setIdFormOpen}
       toggleIgLoadoutForm={toggleIgLoadoutForm}
