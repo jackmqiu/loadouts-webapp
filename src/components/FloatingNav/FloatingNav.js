@@ -4,6 +4,7 @@ import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import EditIcon from '@material-ui/icons/Edit';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import Slide from '@material-ui/core/Slide';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,20 +26,25 @@ export default function FloatingNav({
   toggleIgLoadoutForm,
   displayState,
   igLoadoutState,
+  floatingNavDisplay,
 }) {
   const classes = useStyles();
-
+  const displayPublish = (displayState === 'Make Loadout' && Object.keys(igLoadoutState).length > 0 && floatingNavDisplay)
   return (
     <div className={classes.root}>
+      <Slide direction="up" in={floatingNavDisplay} mountOnEnter unmountOnExit>
+
       <Fab color="primary" aria-label="add" onClick={addIgLoadout}>
         <AddIcon />
       </Fab>
-      {
-        displayState === 'Make Loadout' && Object.keys(igLoadoutState).length > 0 &&
+    </Slide>
+
+    <Slide direction="up" in={displayPublish} mountOnEnter unmountOnExit>
+
         <Fab variant="extended" onClick={() => {setIdFormOpen(true); toggleIgLoadoutForm();}}>
           Publish
         </Fab>
-      }
+      </Slide>
     </div>
   );
 }

@@ -231,16 +231,16 @@ const App = () => {
         />
       </div>
     }
-    {
-      floatingNavDisplay &&
+
       <FloatingNav
         displayState={displayState}
         igLoadoutState={igLoadoutState}
         addIgLoadout={addIgLoadout}
         setIdFormOpen={setIdFormOpen}
         toggleIgLoadoutForm={toggleIgLoadoutForm}
+        floatingNavDisplay={floatingNavDisplay}
       />
-    }
+
     </div>
 
   );
