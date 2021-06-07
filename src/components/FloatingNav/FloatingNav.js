@@ -24,7 +24,7 @@ export default function FloatingNav({
   setIdFormOpen,
   toggleIgLoadoutForm,
   displayState,
-  igLoadoutState
+  igLoadoutState,
 }) {
   const classes = useStyles();
 
@@ -33,20 +33,10 @@ export default function FloatingNav({
       <Fab color="primary" aria-label="add" onClick={addIgLoadout}>
         <AddIcon />
       </Fab>
-      { false &&
-        <Fab color="secondary" aria-label="edit">
-        <EditIcon />
-        </Fab>
-      }
       {
         displayState === 'Make Loadout' && Object.keys(igLoadoutState).length > 0 &&
         <Fab variant="extended" onClick={() => {setIdFormOpen(true); toggleIgLoadoutForm();}}>
           Publish
-        </Fab>
-      }
-      { false &&
-        <Fab disabled aria-label="like">
-        <FavoriteIcon />
         </Fab>
       }
     </div>

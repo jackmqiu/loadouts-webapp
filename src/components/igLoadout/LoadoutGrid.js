@@ -45,7 +45,6 @@ const LoadoutGrid = ({
   }
   const loadoutGridItems = [];
   for (let i = 0; i < numCards; i++) {
-    console.log(igLoadoutState[i])
     loadoutGridItems.push(
       <Grid key={i} item xs={IgLayoutTable[numCards][i].gridItemWidth}>
         <ItemCard

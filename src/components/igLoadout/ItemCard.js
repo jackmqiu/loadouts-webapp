@@ -55,14 +55,6 @@ const LoadoutCard = ({
   rows,
 }) => {
   const classes = useStyles({color, height, screenWidth, rows});
-  console.log(itemDetails,
-  color,
-  toggleIgLoadoutForm,
-  id,
-  displayState,
-  height,
-  screenWidth,
-  rows,)
   return (
     <div>
       { (itemDetails && (displayState === 'igLoadout' || displayState === 'feed')) &&

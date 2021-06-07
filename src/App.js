@@ -52,6 +52,21 @@ const App = () => {
   );
   const [loadoutCategory, setLoadoutCategory] = useState(window.location.host.split('.')[0]);
   const [feedLoadouts, setFeedLoadouts] = useState([]);
+  const [scrollPosition, setScrollPosition] = useState(window.pageYOffset);
+  const [floatingNavDisplay, setFloatingNavDisplay] = useState(true);
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      window.onscroll = () => {
+        if (window.pageYOffset > scrollPosition) {
+          setFloatingNavDisplay(false);
+        }
+        if (window.pageYOffset < scrollPosition) {
+          setFloatingNavDisplay(true);
+        }
+        setScrollPosition(window.pageYOffset);
+      }
+    }
+  });
   const addIgLoadout = (item) => {
     setIgLoadoutState({
       ...igLoadoutState,
@@ -216,13 +231,16 @@ const App = () => {
         />
       </div>
     }
-    <FloatingNav
-      displayState={displayState}
-      igLoadoutState={igLoadoutState}
-      addIgLoadout={addIgLoadout}
-      setIdFormOpen={setIdFormOpen}
-      toggleIgLoadoutForm={toggleIgLoadoutForm}
+    {
+      floatingNavDisplay &&
+      <FloatingNav
+        displayState={displayState}
+        igLoadoutState={igLoadoutState}
+        addIgLoadout={addIgLoadout}
+        setIdFormOpen={setIdFormOpen}
+        toggleIgLoadoutForm={toggleIgLoadoutForm}
       />
+    }
     </div>
 
   );
