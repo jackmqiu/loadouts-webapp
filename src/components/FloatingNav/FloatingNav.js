@@ -6,6 +6,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import HomeIcon from '@material-ui/icons/Home';
 import Slide from '@material-ui/core/Slide';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -50,11 +51,13 @@ export default function FloatingNav({
         </Fab>
         </Slide>
       */}
-      <Slide direction="up" in={floatingNavDisplay} mountOnEnter unmountOnExit>
-        <Fab color="primary" aria-label="add" onClick={handleAddClick}>
-          <AddIcon />
-        </Fab>
-      </Slide>
+      <Link to='/make'>
+        <Slide direction="up" in={floatingNavDisplay} mountOnEnter unmountOnExit>
+          <Fab color="primary" aria-label="add" onClick={handleAddClick}>
+            <AddIcon />
+          </Fab>
+        </Slide>
+      </Link>
 
       <Slide direction="up" in={displayPublish} mountOnEnter unmountOnExit>
         <Fab variant="extended" onClick={() => {setIdFormOpen(true); toggleIgLoadoutForm();}}>

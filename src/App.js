@@ -10,6 +10,11 @@ import axios from 'axios';
 import useWindowDimensions from './useWindowDimensions';
 import IgLoadoutForm from './components/igLoadoutForm';
 import Feed from './components/Feed';
+import {
+  Switch,
+  Route,
+  Link,
+} from "react-router-dom";
 
 const axiosInstance = axios.create({
   baseURL: `${process.env.REACT_APP_API_URL}`,
@@ -166,7 +171,7 @@ const App = () => {
         })
         .then(response => {
           setIgLoadoutIdState(id);
-          window.location.assign(`${process.env.REACT_APP_URL}/${id}`);
+          window.location.assign(`${window.location.href.slice(0, -4)}/${id}`);
         })
       }
     })
@@ -182,29 +187,8 @@ const App = () => {
         toggleIgLoadoutForm={toggleIgLoadoutForm}
         mixpanel={mixpanel}
       />
-    { displayState === 'feed' &&
-      <Feed
-        feedLoadouts={feedLoadouts}
-        setIgLoadoutState={setIgLoadoutState}
-        colorScheme={colorScheme}
-        displayState={displayState}
-        screenWidth={width}
-        height={height}
-      />
-    }
-    { displayState === 'igLoadout' &&
-      <div ref={capture}>
-        <IgLoadout
-          igLoadoutState={igLoadoutState}
-          setIgLoadoutState={setIgLoadoutState}
-          colorScheme={colorScheme}
-          displayState={displayState}
-          screenWidth={width}
-          height={height}
-        />
-    </div> }
-    { displayState === 'Make Loadout' &&
-      <div ref={capture}>
+    <Switch>
+      <Route path='/make'>
         <IgLoadout
           igLoadoutState={igLoadoutState}
           setIgLoadoutState={setIgLoadoutState}
@@ -212,7 +196,7 @@ const App = () => {
           toggleIgLoadoutForm={toggleIgLoadoutForm}
           displayState={displayState}
           screenWidth={width}
-        />
+          />
         <IgLoadoutForm
           igLoadoutFormOpen={igLoadoutFormOpen}
           toggleIgLoadoutForm={toggleIgLoadoutForm}
@@ -228,10 +212,29 @@ const App = () => {
           editIgLoadout={editIgLoadout}
           deleteIgLoadout={deleteIgLoadout}
           closeIgLoadoutForm={closeIgLoadoutForm}
+          />
+      </Route>
+      <Route path='/:id'>
+        <IgLoadout
+          igLoadoutState={igLoadoutState}
+          setIgLoadoutState={setIgLoadoutState}
+          colorScheme={colorScheme}
+          displayState={displayState}
+          screenWidth={width}
+          height={height}
+          />
+      </Route>
+      <Route path='/'>
+        <Feed
+          feedLoadouts={feedLoadouts}
+          setIgLoadoutState={setIgLoadoutState}
+          colorScheme={colorScheme}
+          displayState={displayState}
+          screenWidth={width}
+          height={height}
         />
-      </div>
-    }
-
+      </Route>
+  </Switch>
       <FloatingNav
         displayState={displayState}
         setDisplayState={setDisplayState}
