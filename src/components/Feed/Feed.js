@@ -34,7 +34,7 @@ const Feed = ({
   for (let i = 0; i < feedLoadouts.length; i++) {
     loadouts.push(
         <LoadoutGrid
-          id={i}
+          key={i}
           igLoadoutState={feedLoadouts[i].items}
           setIgLoadoutState={setIgLoadoutState}
           colorScheme={colorScheme}

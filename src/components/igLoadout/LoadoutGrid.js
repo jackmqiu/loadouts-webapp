@@ -67,7 +67,7 @@ const LoadoutGrid = ({
         <Grid container className={classes.grid} spacing={2}>
           { loadoutGridItems }
         </Grid>
-        <div class={classes.loadoutCaption}>
+        <div className={classes.loadoutCaption}>
           <Typography variant="h6">M4 Loadout</Typography>
           <Typography variant="body2" color="textSecondary" component="p">
             {numCards} Parts
