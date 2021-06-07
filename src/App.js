@@ -234,6 +234,7 @@ const App = () => {
 
       <FloatingNav
         displayState={displayState}
+        setDisplayState={setDisplayState}
         igLoadoutState={igLoadoutState}
         addIgLoadout={addIgLoadout}
         setIdFormOpen={setIdFormOpen}
