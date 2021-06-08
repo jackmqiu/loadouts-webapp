@@ -6,7 +6,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import HomeIcon from '@material-ui/icons/Home';
 import Slide from '@material-ui/core/Slide';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -30,18 +30,12 @@ export default function FloatingNav({
   setDisplayState,
   igLoadoutState,
   floatingNavDisplay,
+  toggleNewLoadoutFormOpen,
+  newLoadoutFormOpen,
 }) {
   const classes = useStyles();
-  const handleAddClick = () => {
-    if (displayState === 'feed') {
-      console.log('handleAddClick', displayState)
-      setDisplayState('Make Loadout')
-    }
-    if (displayState === 'Make Loadout') {
-      addIgLoadout();
-    }
-  }
-  const displayPublish = (displayState === 'Make Loadout' && Object.keys(igLoadoutState).length > 0 && floatingNavDisplay)
+  const location = useLocation().pathname;
+  const displayPublish = (location === '/make' && Object.keys(igLoadoutState).length > 0 && floatingNavDisplay)
   return (
     <div className={classes.root}>
       {/*
@@ -51,13 +45,13 @@ export default function FloatingNav({
         </Fab>
         </Slide>
       */}
-      <Link to='/make'>
-        <Slide direction="up" in={floatingNavDisplay} mountOnEnter unmountOnExit>
-          <Fab color="primary" aria-label="add" onClick={handleAddClick}>
+
+        <Slide direction="up" in={floatingNavDisplay && location === '/' && !newLoadoutFormOpen} mountOnEnter unmountOnExit>
+          <Fab color="primary" aria-label="add" onClick={() => {toggleNewLoadoutFormOpen()}}>
             <AddIcon />
           </Fab>
         </Slide>
-      </Link>
+
 
       <Slide direction="up" in={displayPublish} mountOnEnter unmountOnExit>
         <Fab variant="extended" onClick={() => {setIdFormOpen(true); toggleIgLoadoutForm();}}>

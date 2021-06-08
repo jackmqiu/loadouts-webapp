@@ -61,7 +61,7 @@ const ItemForm = ({
   igLoadoutState,
   activeIgLoadoutCard,
   editIgLoadout,
-  deleteIgLoadout,
+  deleteIgLoadoutItem,
   closeIgLoadoutForm,
 }) => {
   const classes = useStyles();
@@ -137,7 +137,7 @@ const ItemForm = ({
   }
   const handleDeleteCard = (item) => {
     toggleIgLoadoutForm();
-    deleteIgLoadout();
+    deleteIgLoadoutItem();
   }
   return (
 

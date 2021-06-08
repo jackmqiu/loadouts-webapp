@@ -49,7 +49,7 @@ const App = () => {
   const [colorScheme, setColorScheme] = useState({
     0: '#FDF0A6',
     1: '#87CEEB',
-    2: 'white',
+    2: '#DCDCDB',
   })
   const [igLoadoutState, setIgLoadoutState] = useState({});
   const [activeIgLoadoutCard, setActiveIgLoadoutCard] = useState(0);
@@ -189,7 +189,7 @@ const App = () => {
         })
         .then(response => {
           setIgLoadoutIdState(id);
-          window.location.assign(`${window.location.href.slice(0, -4)}/${id}`);
+          window.location.assign(`${window.location.href.slice(0, -4)}${id}`);
         })
       }
     })
@@ -197,14 +197,6 @@ const App = () => {
 
   return (
     <div className="App" >
-      <MenuBar
-        setDisplay={setDisplay}
-        displayState={displayState}
-        submitLoadout={submitLoadout}
-        setIdFormOpen={setIdFormOpen}
-        toggleIgLoadoutForm={toggleIgLoadoutForm}
-        mixpanel={mixpanel}
-      />
     <Switch>
       <Route path='/make'>
         <ItemList
@@ -228,7 +220,7 @@ const App = () => {
           editIgLoadout={editIgLoadout}
           deleteIgLoadoutItem={deleteIgLoadoutItem}
           closeIgLoadoutForm={closeIgLoadoutForm}
-          />
+        />
       </Route>
       <Route path='/:id'>
         <IgLoadout
