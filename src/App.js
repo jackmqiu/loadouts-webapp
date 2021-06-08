@@ -10,6 +10,7 @@ import axios from 'axios';
 import useWindowDimensions from './useWindowDimensions';
 import IgLoadoutForm from './components/igLoadoutForm';
 import Feed from './components/Feed';
+import ItemList from './components/ItemList';
 import {
   Switch,
   Route,
@@ -40,8 +41,8 @@ const App = () => {
   const [igLoadoutFormOpen, setIgLoadoutFormState] = useState(false);
   const { height, width } = useWindowDimensions();
   const [colorScheme, setColorScheme] = useState({
-    0: 'white',
-    1: 'white',
+    0: '#FDF0A6',
+    1: '#87CEEB',
     2: 'white',
   })
   const [igLoadoutState, setIgLoadoutState] = useState({});
@@ -72,7 +73,7 @@ const App = () => {
       }
     }
   });
-  const addIgLoadout = (item) => {
+  const addIgLoadoutItem = (item) => {
     setIgLoadoutState({
       ...igLoadoutState,
       [Object.keys(igLoadoutState).length]: {},
@@ -91,7 +92,7 @@ const App = () => {
       },
     });
   }
-  const deleteIgLoadout = () => {
+  const deleteIgLoadoutItem = () => {
     const newLoadout = {};
     for (let i = 0; i < Object.keys(igLoadoutState).length; i++) {
       if (i < activeIgLoadoutCard){
@@ -189,28 +190,26 @@ const App = () => {
       />
     <Switch>
       <Route path='/make'>
-        <IgLoadout
+        <ItemList
           igLoadoutState={igLoadoutState}
-          setIgLoadoutState={setIgLoadoutState}
-          colorScheme={colorScheme}
+          addIgLoadoutItem={addIgLoadoutItem}
           toggleIgLoadoutForm={toggleIgLoadoutForm}
-          displayState={displayState}
-          screenWidth={width}
-          />
+          colorScheme={colorScheme}
+        />
         <IgLoadoutForm
           igLoadoutFormOpen={igLoadoutFormOpen}
           toggleIgLoadoutForm={toggleIgLoadoutForm}
           mixpanel={mixpanel}
           queryGoogle={queryGoogle}
           googleResults={googleResults}
-          addIgLoadout={addIgLoadout}
+          addIgLoadoutItem={addIgLoadoutItem}
           idFormOpen={idFormOpen}
           setIdFormOpen={setIdFormOpen}
           submitLoadout={submitLoadout}
           igLoadoutState={igLoadoutState}
           activeIgLoadoutCard={activeIgLoadoutCard}
           editIgLoadout={editIgLoadout}
-          deleteIgLoadout={deleteIgLoadout}
+          deleteIgLoadoutItem={deleteIgLoadoutItem}
           closeIgLoadoutForm={closeIgLoadoutForm}
           />
       </Route>
@@ -239,7 +238,7 @@ const App = () => {
         displayState={displayState}
         setDisplayState={setDisplayState}
         igLoadoutState={igLoadoutState}
-        addIgLoadout={addIgLoadout}
+        addIgLoadoutItem={addIgLoadoutItem}
         setIdFormOpen={setIdFormOpen}
         toggleIgLoadoutForm={toggleIgLoadoutForm}
         floatingNavDisplay={floatingNavDisplay}
