@@ -12,10 +12,16 @@ import IgLoadoutForm from './components/igLoadoutForm';
 import Feed from './components/Feed';
 import ItemList from './components/ItemList';
 import {
+  hashtagTable,
+} from './constants';
+import {
   Switch,
   Route,
   Link,
 } from "react-router-dom";
+import {
+  NewLoadoutForm
+} from './components/Forms';
 
 const axiosInstance = axios.create({
   baseURL: `${process.env.REACT_APP_API_URL}`,
@@ -60,6 +66,10 @@ const App = () => {
   const [feedLoadouts, setFeedLoadouts] = useState([]);
   const [scrollPosition, setScrollPosition] = useState(window.pageYOffset);
   const [floatingNavDisplay, setFloatingNavDisplay] = useState(true);
+  const [loadoutName, setLoadoutName] = useState('New Loadout');
+  const [loadoutHashtags, setLoadoutHashtags] = useState(hashtagTable);
+  const [newLoadoutFormOpen, setNewLoadoutFormOpen] = useState(false);
+
   useEffect(() => {
     if (typeof window !== "undefined") {
       window.onscroll = () => {
@@ -73,6 +83,13 @@ const App = () => {
       }
     }
   });
+  const toggleNewLoadoutFormOpen = () => {
+    setNewLoadoutFormOpen(!newLoadoutFormOpen);
+  };
+  const setLoadoutMetadata = (name, hashtags) => {
+    setLoadoutName(name);
+    setLoadoutHashtags(hashtags);
+  }
   const addIgLoadoutItem = (item) => {
     setIgLoadoutState({
       ...igLoadoutState,
@@ -232,6 +249,14 @@ const App = () => {
           screenWidth={width}
           height={height}
         />
+        <NewLoadoutForm
+          setLoadoutMetadata={setLoadoutMetadata}
+          mixpanel={mixpanel}
+          toggleNewLoadoutFormOpen={toggleNewLoadoutFormOpen}
+          newLoadoutFormOpen={newLoadoutFormOpen}
+          loadoutHashtags={loadoutHashtags}
+          setLoadoutHashtags={setLoadoutHashtags}
+        />
       </Route>
   </Switch>
       <FloatingNav
@@ -242,6 +267,8 @@ const App = () => {
         setIdFormOpen={setIdFormOpen}
         toggleIgLoadoutForm={toggleIgLoadoutForm}
         floatingNavDisplay={floatingNavDisplay}
+        toggleNewLoadoutFormOpen={toggleNewLoadoutFormOpen}
+        newLoadoutFormOpen={newLoadoutFormOpen}
       />
 
     </div>
