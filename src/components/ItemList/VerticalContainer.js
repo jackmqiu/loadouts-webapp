@@ -13,6 +13,7 @@ const VerticalContainer = ({
     cards.push(
       <ItemCard
       id={containerIndex}
+      key={containerIndex}
       cardInfo={igLoadoutState[containerIndex]}
       shortCard={containerIndex % 2 === 0}
       toggleIgLoadoutForm={toggleIgLoadoutForm}
@@ -40,6 +41,7 @@ const VerticalContainer = ({
     cards.push(
       <ItemCard
         id={Object.keys(igLoadoutState).length}
+        key={Object.keys(igLoadoutState).length}
         cardInfo={null}
         shortCard={false}
         toggleIgLoadoutForm={toggleIgLoadoutForm}
