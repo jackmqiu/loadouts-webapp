@@ -6,9 +6,16 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(() => ({
+  gridContainer: {
+  },
   loadoutTitleContainer: {
-    height: 120,
-  }
+    height: 160,
+  },
+  loadoutTitle: {
+    fontWeight: 'bold',
+    marginTop: 45,
+    marginBottom: 5,
+  },
 }))
 const ItemList = ({
   igLoadoutState,
@@ -25,9 +32,9 @@ const ItemList = ({
     }
   })
   return (
-    <Grid container>
+    <Grid container className={classes.gridContainer}>
       <Grid item xs={12} className={classes.loadoutTitleContainer}>
-        <Typography variant='h3'>{loadoutName}</Typography>
+        <Typography className={classes.loadoutTitle} variant='h4'>{loadoutName}</Typography>
         <Typography variant='p2'>{hashtagsString}</Typography>
       </Grid>
       <Grid item xs={6}>
@@ -37,6 +44,8 @@ const ItemList = ({
         totalContainers={2}
         toggleIgLoadoutForm={toggleIgLoadoutForm}
         colorScheme={colorScheme}
+        className={classes.leftVertical}
+        firstColumn={true}
       />
       </Grid>
       <Grid item xs={6}>
@@ -46,6 +55,8 @@ const ItemList = ({
         totalContainers={2}
         toggleIgLoadoutForm={toggleIgLoadoutForm}
         colorScheme={colorScheme}
+        className={classes.rightVertical}
+        firstColumn={false}
       />
       </Grid>
     </Grid>

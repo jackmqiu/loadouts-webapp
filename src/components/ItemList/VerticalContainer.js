@@ -1,5 +1,13 @@
 import React, { useState } from 'react';
 import ItemCard from './ItemCard';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles(() => ({
+  columnContainer: ({ firstColumn }) => ({
+    paddingLeft: firstColumn ? 10 : 0,
+    paddingRight: 10,
+  }),
+}))
 
 const VerticalContainer = ({
   igLoadoutState,
@@ -7,7 +15,9 @@ const VerticalContainer = ({
   totalContainers,
   toggleIgLoadoutForm,
   colorScheme,
+  firstColumn,
 }) => {
+  const classes = useStyles({ firstColumn });
   const cards = [];
   if (containerIndex < Object.keys(igLoadoutState).length) {
     cards.push(
@@ -50,7 +60,7 @@ const VerticalContainer = ({
     )
   }
   return (
-    <div>
+    <div className={classes.columnContainer}>
       {cards}
     </div>
   )
