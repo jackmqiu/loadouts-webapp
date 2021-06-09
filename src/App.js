@@ -249,6 +249,7 @@ const App = () => {
           newLoadoutFormOpen={newLoadoutFormOpen}
           loadoutHashtags={loadoutHashtags}
           setLoadoutHashtags={setLoadoutHashtags}
+          loadoutCategory={loadoutCategory}
         />
       </Route>
   </Switch>

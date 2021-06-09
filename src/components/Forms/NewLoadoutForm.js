@@ -4,8 +4,10 @@ import TextField from '@material-ui/core/TextField';
 import Modal from '@material-ui/core/Modal';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
+import Chip from '@material-ui/core/Chip';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
+import Divider from '@material-ui/core/Divider';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -41,6 +43,9 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: 10,
     marginLeft: 5,
   },
+  card: {
+    display: 'block',
+  }
 }));
 
 const NewLoadoutForm = ({
@@ -48,6 +53,9 @@ const NewLoadoutForm = ({
   mixpanel,
   toggleNewLoadoutFormOpen,
   newLoadoutFormOpen,
+  loadoutHashtags,
+  setLoadoutHashtags,
+  loadoutCategory,
 }) => {
   const classes = useStyles();
   const [loadoutNameText, setNameText] = useState('');
@@ -66,6 +74,30 @@ const NewLoadoutForm = ({
       event.preventDefault();
     }
   }
+  const chips = [];
+  const loadoutHashtagsObject = loadoutHashtags[loadoutCategory]
+  const categoryHashtags = Object.keys(loadoutHashtagsObject);
+  const toggleLoadoutHashtags = (key) => {
+    setLoadoutHashtags({
+      ...loadoutHashtags,
+      [loadoutCategory]: {
+        ...loadoutHashtagsObject,
+        [key]: !loadoutHashtagsObject[key],
+      }
+    });
+  }
+  categoryHashtags.forEach((key) => {
+    chips.push(
+      <Chip
+        color={loadoutHashtagsObject[key] ? 'secondary' : ''}
+        label={`#${key}`}
+        onClick={() => {toggleLoadoutHashtags(key)}}
+      >
+        #{'key'}
+      </Chip>
+    );
+  })
+
   return (
     <div>
       {
@@ -75,9 +107,14 @@ const NewLoadoutForm = ({
           onClose={toggleNewLoadoutFormOpen}
           className={classes.modal}
         >
-          <Paper>
-            <Typography variant='h5'> Loadout Name </Typography>
+          <Paper className={classes.card}>
+            <Typography variant='h6' className={classes.formTitle}>New Loadout</Typography>
+            <Divider/>
+            <Typography variant='h6' className={classes.fieldTitle}> Loadout Name </Typography>
             <TextField value={loadoutNameText} label="Product" variant="outlined" onChange={handleTextChange} onKeyPress={handleItemSubmit}/>
+            <div>
+              {chips}
+            </div>
             <Link to='/make'>
               <Button variant='contained' color='primary' onClick={() => {toggleNewLoadoutFormOpen()}}>Add Items</Button>
             </Link>
