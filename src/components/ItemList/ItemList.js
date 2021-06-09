@@ -23,6 +23,7 @@ const ItemList = ({
   colorScheme,
   loadoutName,
   loadoutHashtags,
+  toggleNewLoadoutFormOpen,
 }) => {
   const classes = useStyles();
   let hashtagsString = '';
@@ -33,7 +34,7 @@ const ItemList = ({
   })
   return (
     <Grid container className={classes.gridContainer}>
-      <Grid item xs={12} className={classes.loadoutTitleContainer}>
+      <Grid item xs={12} className={classes.loadoutTitleContainer} onClick={() => { toggleNewLoadoutFormOpen() }}>
         <Typography className={classes.loadoutTitle} variant='h4'>{loadoutName}</Typography>
         <Typography variant='p2'>{hashtagsString}</Typography>
       </Grid>

@@ -60,7 +60,7 @@ const NewLoadoutForm = ({
   const classes = useStyles();
   const [loadoutNameText, setNameText] = useState('');
   const handleTextChange = (event) => {
-    setNameText(event.target.value.toLowerCase());
+    setNameText(event.target.value);
   };
   //loadout Name
   //chips
@@ -70,6 +70,7 @@ const NewLoadoutForm = ({
       {"handleMetadataSubmit": `${loadoutNameText}`}
     );
     setLoadoutName(loadoutNameText);
+    toggleNewLoadoutFormOpen();
   }
   const chips = [];
   const loadoutHashtagsObject = loadoutHashtags[loadoutCategory]

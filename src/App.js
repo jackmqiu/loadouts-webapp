@@ -207,6 +207,7 @@ const App = () => {
           colorScheme={colorScheme}
           loadoutName={loadoutName}
           loadoutHashtags={loadoutHashtags[loadoutCategory]}
+          toggleNewLoadoutFormOpen={toggleNewLoadoutFormOpen}
         />
         <IgLoadoutForm
           igLoadoutFormOpen={igLoadoutFormOpen}
@@ -223,6 +224,15 @@ const App = () => {
           editIgLoadout={editIgLoadout}
           deleteIgLoadoutItem={deleteIgLoadoutItem}
           closeIgLoadoutForm={closeIgLoadoutForm}
+        />
+        <NewLoadoutForm
+          setLoadoutName={setLoadoutName}
+          mixpanel={mixpanel}
+          toggleNewLoadoutFormOpen={toggleNewLoadoutFormOpen}
+          newLoadoutFormOpen={newLoadoutFormOpen}
+          loadoutHashtags={loadoutHashtags}
+          setLoadoutHashtags={setLoadoutHashtags}
+          loadoutCategory={loadoutCategory}
         />
       </Route>
       <Route path='/:id'>
