@@ -6,11 +6,12 @@ import AddBoxIcon from '@material-ui/icons/AddBox';
 
 const useStyles = makeStyles(() => ({
 
-  card: ({ color, shortCard }) => ({
+  card: ({ color, shortCard, firstCard }) => ({
     width: '100%',
     height: shortCard ? 150 : 270,
     borderRadius: 8,
     boxShadow: 'none',
+    marginBottom: 10,
     // position: 'relative',
     backgroundColor: color,
     // '&:hover': {
@@ -43,8 +44,9 @@ const ItemCard = ({
   color,
   toggleIgLoadoutForm,
   id,
+  firstCard,
 }) => {
-  const classes = useStyles({color, shortCard});
+  const classes = useStyles({ color, shortCard, firstCard });
   return (
     <div>
     { cardInfo ?
