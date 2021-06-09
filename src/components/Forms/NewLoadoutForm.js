@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const NewLoadoutForm = ({
-  setLoadoutMetadata,
+  setLoadoutName,
   mixpanel,
   toggleNewLoadoutFormOpen,
   newLoadoutFormOpen,
@@ -64,15 +64,12 @@ const NewLoadoutForm = ({
   };
   //loadout Name
   //chips
-  const handleItemSubmit = (event) => {
-    if (event.key === 'Enter') {
-      mixpanel.track(
-        'Action',
-        {"submitLoadoutName": `${event.target.value}`}
-      );
-      setLoadoutMetadata(event.target.value);
-      event.preventDefault();
-    }
+  const handleLoadoutMetadataSubmit = () => {
+    mixpanel.track(
+      'Action',
+      {"handleMetadataSubmit": `${loadoutNameText}`}
+    );
+    setLoadoutName(loadoutNameText);
   }
   const chips = [];
   const loadoutHashtagsObject = loadoutHashtags[loadoutCategory]
@@ -111,12 +108,12 @@ const NewLoadoutForm = ({
             <Typography variant='h6' className={classes.formTitle}>New Loadout</Typography>
             <Divider/>
             <Typography variant='h6' className={classes.fieldTitle}> Loadout Name </Typography>
-            <TextField value={loadoutNameText} label="Product" variant="outlined" onChange={handleTextChange} onKeyPress={handleItemSubmit}/>
+            <TextField value={loadoutNameText} label="Product" variant="outlined" onChange={handleTextChange} />
             <div>
               {chips}
             </div>
             <Link to='/make'>
-              <Button variant='contained' color='primary' onClick={() => {toggleNewLoadoutFormOpen()}}>Add Items</Button>
+              <Button variant='contained' color='primary' onClick={handleLoadoutMetadataSubmit}>Add Items</Button>
             </Link>
           </Paper>
         </Modal>

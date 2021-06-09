@@ -205,6 +205,8 @@ const App = () => {
           addIgLoadoutItem={addIgLoadoutItem}
           toggleIgLoadoutForm={toggleIgLoadoutForm}
           colorScheme={colorScheme}
+          loadoutName={loadoutName}
+          loadoutHashtags={loadoutHashtags[loadoutCategory]}
         />
         <IgLoadoutForm
           igLoadoutFormOpen={igLoadoutFormOpen}
@@ -243,7 +245,7 @@ const App = () => {
           height={height}
         />
         <NewLoadoutForm
-          setLoadoutMetadata={setLoadoutMetadata}
+          setLoadoutName={setLoadoutName}
           mixpanel={mixpanel}
           toggleNewLoadoutFormOpen={toggleNewLoadoutFormOpen}
           newLoadoutFormOpen={newLoadoutFormOpen}
