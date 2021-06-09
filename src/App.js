@@ -62,14 +62,15 @@ const App = () => {
     // 'Make Loadout'
     'feed'
   );
-  const [loadoutCategory, setLoadoutCategory] = useState(window.location.host.split('.')[0]);
+  const [loadoutCategory, setLoadoutCategory] = useState(
+    process.env.REACT_APP_ENV === 'LOCAL' ? 'airsoft' : window.location.host.split('.')[0]
+  );
   const [feedLoadouts, setFeedLoadouts] = useState([]);
   const [scrollPosition, setScrollPosition] = useState(window.pageYOffset);
   const [floatingNavDisplay, setFloatingNavDisplay] = useState(true);
   const [loadoutName, setLoadoutName] = useState('New Loadout');
   const [loadoutHashtags, setLoadoutHashtags] = useState(hashtagTable);
   const [newLoadoutFormOpen, setNewLoadoutFormOpen] = useState(false);
-
   useEffect(() => {
     if (typeof window !== "undefined") {
       window.onscroll = () => {
