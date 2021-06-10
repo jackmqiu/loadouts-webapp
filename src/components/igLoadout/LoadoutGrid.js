@@ -2,7 +2,7 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-
+import { Link } from 'react-router-dom';
 import ItemCard from './ItemCard';
 import IgLayoutTable from '../../IgLayoutTable';
 
@@ -37,6 +37,7 @@ const LoadoutGrid = ({
   toggleIgLoadoutForm,
   displayState,
   screenWidth,
+  scrollToTop,
 }) => {
   const classes = useStyles({ screenWidth });
   let numCards = Object.keys(igLoadoutState.items).length;
@@ -64,15 +65,17 @@ const LoadoutGrid = ({
   };
   return (
     <div>
-        <Grid container className={classes.grid} spacing={2}>
-          { loadoutGridItems }
-        </Grid>
-        <div className={classes.loadoutCaption}>
-          <Typography variant="h6">{igLoadoutState.title || 'untitled'}</Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            {numCards} Parts
-          </Typography>
-        </div>
+    <Link to={`/${igLoadoutState._id}`}>
+      <Grid container className={classes.grid} spacing={2}>
+        { loadoutGridItems }
+      </Grid>
+    </Link>
+      <div className={classes.loadoutCaption}>
+        <Typography variant="h6">{igLoadoutState.title || 'untitled'}</Typography>
+        <Typography variant="body2" color="textSecondary" component="p">
+          {numCards} Parts
+        </Typography>
+      </div>
     </div>
   );
 };

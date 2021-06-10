@@ -18,6 +18,7 @@ import {
   Switch,
   Route,
   Link,
+  withRouter,
 } from "react-router-dom";
 import {
   NewLoadoutForm
@@ -40,7 +41,7 @@ ReactGA.pageview(window.location.pathname + window.location.search);
 const mixpanel = require('mixpanel-browser');
 mixpanel.init("fbbc7fb17f489f12483171381e8da3d2");
 
-const App = () => {
+const App = (props) => {
   const loadoutsId = useLocation().pathname.substring(1);
   const capture = createRef(null);
   const [igLoadoutIdState, setIgLoadoutIdState] = useState('');
@@ -84,6 +85,15 @@ const App = () => {
       }
     }
   });
+  const scrollToTop = () => {
+    window.scrollTo(0, 0);
+  }
+  useEffect((prevProps) => {
+    console.log('apps props', props)
+    if (props.location.pathname !== '/') {
+      window.scrollTo(0, 0);
+    }
+  }, [props.location.pathname])
   const toggleNewLoadoutFormOpen = () => {
     setNewLoadoutFormOpen(!newLoadoutFormOpen);
   };
@@ -256,6 +266,7 @@ const App = () => {
           displayState={displayState}
           screenWidth={width}
           height={height}
+          scrollToTop={scrollToTop}
         />
         <NewLoadoutForm
           setLoadoutName={setLoadoutName}
@@ -285,4 +296,4 @@ const App = () => {
   );
 }
 
-export default App;
+export default withRouter(App);

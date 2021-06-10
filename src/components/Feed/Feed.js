@@ -26,6 +26,7 @@ const Feed = ({
   toggleIgLoadoutForm,
   displayState,
   screenWidth,
+  scrollToTop,
 }) => {
   const classes = useStyles({ screenWidth });
     // tell React that we want to associate the <input> ref
@@ -40,6 +41,7 @@ const Feed = ({
           colorScheme={colorScheme}
           displayState={displayState}
           screenWidth={screenWidth}
+          scrollToTop={scrollToTop}
         />
     )
   };
