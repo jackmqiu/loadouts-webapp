@@ -4,6 +4,9 @@ import ItemCard from './ItemCard';
 import Grid from '@material-ui/core/grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import {
+  hashtagTable,
+} from '../../constants';
 
 const useStyles = makeStyles(() => ({
   gridContainer: {
@@ -21,22 +24,23 @@ const ItemList = ({
   igLoadoutState,
   toggleIgLoadoutForm,
   colorScheme,
-  loadoutName,
-  loadoutHashtags,
   toggleNewLoadoutFormOpen,
   canEdit,
+  loadoutCategory,
 }) => {
   const classes = useStyles();
   let hashtagsString = '';
-  Object.keys(loadoutHashtags).forEach((key) => {
-    if (loadoutHashtags[key]) {
+  let hashtags = igLoadoutState.hashtags || hashtagTable[loadoutCategory];
+  Object.keys(hashtags).forEach((key) => {
+    if (hashtags[key]) {
       hashtagsString = hashtagsString.concat('#', key, ' ');
     }
   })
+  console.log('igLodostate', igLoadoutState)
   return (
     <Grid container className={classes.gridContainer}>
       <Grid item xs={12} className={classes.loadoutTitleContainer} onClick={() => { toggleNewLoadoutFormOpen() }}>
-        <Typography className={classes.loadoutTitle} variant='h4'>{loadoutName}</Typography>
+        <Typography className={classes.loadoutTitle} variant='h4'>{igLoadoutState.title}</Typography>
         <Typography variant='p2'>{hashtagsString}</Typography>
       </Grid>
       <Grid item xs={6}>

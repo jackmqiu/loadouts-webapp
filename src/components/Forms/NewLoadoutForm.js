@@ -49,12 +49,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const NewLoadoutForm = ({
-  setLoadoutName,
   mixpanel,
   toggleNewLoadoutFormOpen,
   newLoadoutFormOpen,
   loadoutHashtags,
   setLoadoutHashtags,
+  updateLoadoutMetadata,
   loadoutCategory,
 }) => {
   const classes = useStyles();
@@ -69,7 +69,9 @@ const NewLoadoutForm = ({
       'Action',
       {"handleMetadataSubmit": `${loadoutNameText}`}
     );
-    setLoadoutName(loadoutNameText);
+    updateLoadoutMetadata({
+      loadoutName: loadoutNameText
+    });
     toggleNewLoadoutFormOpen();
   }
   const chips = [];

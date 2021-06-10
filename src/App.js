@@ -52,7 +52,9 @@ const App = (props) => {
     1: '#87CEEB',
     2: '#DCDCDB',
   })
-  const [igLoadoutState, setIgLoadoutState] = useState({});
+  const [igLoadoutState, setIgLoadoutState] = useState({
+    items: {}
+  });
   const [activeIgLoadoutCard, setActiveIgLoadoutCard] = useState(0);
   const [googleResults, setGoogleResults] = useState(null);
   const [displayState, setDisplayState] = useState(
@@ -69,7 +71,6 @@ const App = (props) => {
   const [feedLoadouts, setFeedLoadouts] = useState([]);
   const [scrollPosition, setScrollPosition] = useState(window.pageYOffset);
   const [floatingNavDisplay, setFloatingNavDisplay] = useState(true);
-  const [loadoutName, setLoadoutName] = useState('New Loadout');
   const [loadoutHashtags, setLoadoutHashtags] = useState(hashtagTable);
   const [newLoadoutFormOpen, setNewLoadoutFormOpen] = useState(false);
   useEffect(() => {
@@ -88,8 +89,13 @@ const App = (props) => {
   const scrollToTop = () => {
     window.scrollTo(0, 0);
   }
-  useEffect((prevProps) => {
-    console.log('apps props', props)
+  useEffect(() => {
+    if (props.location.pathname === '/') {
+      getFeed();
+    } else if (props.location.pathname !== '/make') {
+      setDisplayState('igLoadout');
+      getLoadout();
+    }
     if (props.location.pathname !== '/') {
       window.scrollTo(0, 0);
     }
@@ -97,9 +103,12 @@ const App = (props) => {
   const toggleNewLoadoutFormOpen = () => {
     setNewLoadoutFormOpen(!newLoadoutFormOpen);
   };
-  const setLoadoutMetadata = (name, hashtags) => {
-    setLoadoutName(name);
-    setLoadoutHashtags(hashtags);
+  const updateLoadoutMetadata = ({ loadoutName }) => {
+    setIgLoadoutState({
+      ...igLoadoutState,
+      title: loadoutName,
+      hashtags: loadoutHashtags[loadoutCategory],
+    })
   }
   const addIgLoadoutItem = (item) => {
     setIgLoadoutState({
@@ -169,22 +178,16 @@ const App = (props) => {
       }
     })
   }
-  useEffect(() => { // getting feed on ComponentDidMount
-    getFeed();
-  }, []);
+
   const getLoadout = () => {
-    setIgLoadoutIdState(loadoutsId);
     axiosInstance.get(`/${loadoutsId}`)
     .then(response => {
-      if (response.data.items) {
-        setIgLoadoutState(response.data.items);
+      if (response.data) {
+        setIgLoadoutState(response.data);
       }
     })
   }
-  if (loadoutsId.length > 0 && igLoadoutIdState !== loadoutsId) {
-    setDisplayState('igLoadout');
-    getLoadout();
-  }
+
   const [takenId, setTakenId] = useState('');
   const [idFormOpen, setIdFormOpen] = useState(false);
   const submitLoadout = (id) => {
@@ -215,10 +218,9 @@ const App = (props) => {
           addIgLoadoutItem={addIgLoadoutItem}
           toggleIgLoadoutForm={toggleIgLoadoutForm}
           colorScheme={colorScheme}
-          loadoutName={loadoutName}
-          loadoutHashtags={loadoutHashtags[loadoutCategory]}
           toggleNewLoadoutFormOpen={toggleNewLoadoutFormOpen}
           canEdit={true}
+          loadoutCategory={loadoutCategory}
         />
         <IgLoadoutForm
           igLoadoutFormOpen={igLoadoutFormOpen}
@@ -237,12 +239,12 @@ const App = (props) => {
           closeIgLoadoutForm={closeIgLoadoutForm}
         />
         <NewLoadoutForm
-          setLoadoutName={setLoadoutName}
           mixpanel={mixpanel}
           toggleNewLoadoutFormOpen={toggleNewLoadoutFormOpen}
           newLoadoutFormOpen={newLoadoutFormOpen}
           loadoutHashtags={loadoutHashtags}
           setLoadoutHashtags={setLoadoutHashtags}
+          updateLoadoutMetadata={updateLoadoutMetadata}
           loadoutCategory={loadoutCategory}
         />
       </Route>
@@ -252,10 +254,9 @@ const App = (props) => {
           addIgLoadoutItem={addIgLoadoutItem}
           toggleIgLoadoutForm={toggleIgLoadoutForm}
           colorScheme={colorScheme}
-          loadoutName={loadoutName}
-          loadoutHashtags={loadoutHashtags[loadoutCategory]}
           toggleNewLoadoutFormOpen={toggleNewLoadoutFormOpen}
           canEdit={false}
+          loadoutCategory={loadoutCategory}
         />
       </Route>
       <Route path='/'>
@@ -269,12 +270,12 @@ const App = (props) => {
           scrollToTop={scrollToTop}
         />
         <NewLoadoutForm
-          setLoadoutName={setLoadoutName}
           mixpanel={mixpanel}
           toggleNewLoadoutFormOpen={toggleNewLoadoutFormOpen}
           newLoadoutFormOpen={newLoadoutFormOpen}
           loadoutHashtags={loadoutHashtags}
           setLoadoutHashtags={setLoadoutHashtags}
+          updateLoadoutMetadata={updateLoadoutMetadata}
           loadoutCategory={loadoutCategory}
         />
       </Route>

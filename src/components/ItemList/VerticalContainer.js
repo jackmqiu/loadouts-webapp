@@ -20,13 +20,13 @@ const VerticalContainer = ({
 }) => {
   const classes = useStyles({ firstColumn });
   const cards = [];
-  if (containerIndex < Object.keys(igLoadoutState).length) {
+  if (containerIndex < Object.keys(igLoadoutState.items).length) {
     // first card of column might be short, handled here
     cards.push(
       <ItemCard
         id={containerIndex}
         key={containerIndex}
-        cardInfo={igLoadoutState[containerIndex]}
+        cardInfo={igLoadoutState.items[containerIndex]}
         shortCard={containerIndex % 2 === 0}
         toggleIgLoadoutForm={toggleIgLoadoutForm}
         color={colorScheme[containerIndex % 3]}
@@ -37,14 +37,14 @@ const VerticalContainer = ({
   }
   for (
     let i = containerIndex + totalContainers;
-    i < Object.keys(igLoadoutState).length;
+    i < Object.keys(igLoadoutState.items).length;
     i += totalContainers
   ) {
     cards.push(
       <ItemCard
         id={i}
         key={i}
-        cardInfo={igLoadoutState[i]}
+        cardInfo={igLoadoutState.items[i]}
         shortCard={false}
         toggleIgLoadoutForm={toggleIgLoadoutForm}
         color={colorScheme[i % 3]}
@@ -53,16 +53,16 @@ const VerticalContainer = ({
       />
     )
   }
-  if (containerIndex === Object.keys(igLoadoutState).length % totalContainers) {
+  if (containerIndex === Object.keys(igLoadoutState.items).length % totalContainers) {
     // if all cards are out, add blank 'add' card
     cards.push(
       <ItemCard
-        id={Object.keys(igLoadoutState).length}
-        key={Object.keys(igLoadoutState).length}
+        id={Object.keys(igLoadoutState.items).length}
+        key={Object.keys(igLoadoutState.items).length}
         cardInfo={null}
         shortCard={false}
         toggleIgLoadoutForm={toggleIgLoadoutForm}
-        color={colorScheme[Object.keys(igLoadoutState).length % 3]}
+        color={colorScheme[Object.keys(igLoadoutState.items).length % 3]}
         firstCard={false}
         canEdit={canEdit}
       />
