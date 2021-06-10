@@ -39,7 +39,7 @@ const LoadoutGrid = ({
   screenWidth,
 }) => {
   const classes = useStyles({ screenWidth });
-  let numCards = Object.keys(igLoadoutState).length;
+  let numCards = Object.keys(igLoadoutState.items).length;
   if (numCards > 9) { // keep it to 2 rows
     numCards = 9;
   }
@@ -50,7 +50,7 @@ const LoadoutGrid = ({
         <ItemCard
           id={i}
           height={IgLayoutTable[numCards][i].gridItemHeight}
-          itemDetails={igLoadoutState[i]}
+          itemDetails={igLoadoutState.items[i]}
           openModal={handleOpen}
           closeModal={handleClose}
           color={colorScheme[i%2]}
@@ -68,7 +68,7 @@ const LoadoutGrid = ({
           { loadoutGridItems }
         </Grid>
         <div className={classes.loadoutCaption}>
-          <Typography variant="h6">M4 Loadout</Typography>
+          <Typography variant="h6">{igLoadoutState.title || 'untitled'}</Typography>
           <Typography variant="body2" color="textSecondary" component="p">
             {numCards} Parts
           </Typography>

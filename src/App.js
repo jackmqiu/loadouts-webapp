@@ -208,6 +208,7 @@ const App = () => {
           loadoutName={loadoutName}
           loadoutHashtags={loadoutHashtags[loadoutCategory]}
           toggleNewLoadoutFormOpen={toggleNewLoadoutFormOpen}
+          canEdit={true}
         />
         <IgLoadoutForm
           igLoadoutFormOpen={igLoadoutFormOpen}
@@ -236,14 +237,16 @@ const App = () => {
         />
       </Route>
       <Route path='/:id'>
-        <IgLoadout
+        <ItemList
           igLoadoutState={igLoadoutState}
-          setIgLoadoutState={setIgLoadoutState}
+          addIgLoadoutItem={addIgLoadoutItem}
+          toggleIgLoadoutForm={toggleIgLoadoutForm}
           colorScheme={colorScheme}
-          displayState={displayState}
-          screenWidth={width}
-          height={height}
-          />
+          loadoutName={loadoutName}
+          loadoutHashtags={loadoutHashtags[loadoutCategory]}
+          toggleNewLoadoutFormOpen={toggleNewLoadoutFormOpen}
+          canEdit={false}
+        />
       </Route>
       <Route path='/'>
         <Feed

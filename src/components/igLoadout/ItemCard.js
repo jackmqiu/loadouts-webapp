@@ -58,7 +58,7 @@ const LoadoutCard = ({
   return (
     <div>
       { (itemDetails && (displayState === 'igLoadout' || displayState === 'feed')) &&
-        <Card className={classes.card} onClick={()=> {window.open(itemDetails.productLink, '_blank')}}>
+        <Card className={classes.card} >
           <CardActionArea className={classes.cardActionArea}>
             <img alt='' className={classes.modImg} src={itemDetails.imageLink} />
           </CardActionArea>

@@ -16,6 +16,7 @@ const VerticalContainer = ({
   toggleIgLoadoutForm,
   colorScheme,
   firstColumn,
+  canEdit,
 }) => {
   const classes = useStyles({ firstColumn });
   const cards = [];
@@ -30,6 +31,7 @@ const VerticalContainer = ({
         toggleIgLoadoutForm={toggleIgLoadoutForm}
         color={colorScheme[containerIndex % 3]}
         firstCard={true}
+        canEdit={canEdit}
       />
     )
   }
@@ -47,6 +49,7 @@ const VerticalContainer = ({
         toggleIgLoadoutForm={toggleIgLoadoutForm}
         color={colorScheme[i % 3]}
         firstCard={false}
+        canEdit={canEdit}
       />
     )
   }
@@ -61,6 +64,7 @@ const VerticalContainer = ({
         toggleIgLoadoutForm={toggleIgLoadoutForm}
         color={colorScheme[Object.keys(igLoadoutState).length % 3]}
         firstCard={false}
+        canEdit={canEdit}
       />
     )
   }

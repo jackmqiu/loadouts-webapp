@@ -24,6 +24,7 @@ const ItemList = ({
   loadoutName,
   loadoutHashtags,
   toggleNewLoadoutFormOpen,
+  canEdit,
 }) => {
   const classes = useStyles();
   let hashtagsString = '';
@@ -47,6 +48,7 @@ const ItemList = ({
         colorScheme={colorScheme}
         className={classes.leftVertical}
         firstColumn={true}
+        canEdit={canEdit}
       />
       </Grid>
       <Grid item xs={6}>
@@ -58,6 +60,7 @@ const ItemList = ({
         colorScheme={colorScheme}
         className={classes.rightVertical}
         firstColumn={false}
+        canEdit={canEdit}
       />
       </Grid>
     </Grid>

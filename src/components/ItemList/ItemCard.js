@@ -45,22 +45,31 @@ const ItemCard = ({
   toggleIgLoadoutForm,
   id,
   firstCard,
+  canEdit,
 }) => {
   const classes = useStyles({ color, shortCard, firstCard });
   return (
     <div>
-    { cardInfo ?
-        <Card className={classes.card} onClick={() => toggleIgLoadoutForm(id)}>
-          <CardActionArea className={classes.cardActionArea}>
-            <img alt='' className={classes.modImg} src={cardInfo.imageLink} />
-          </CardActionArea>
-        </Card>
-        :
-        <Card className={classes.card} onClick={() => toggleIgLoadoutForm(id)}>
-          <CardActionArea className={classes.cardActionArea}>
-            <AddBoxIcon/>
-          </CardActionArea>
-        </Card>
+    { cardInfo && canEdit && // making loadout card
+      <Card className={classes.card} onClick={() => toggleIgLoadoutForm(id)}>
+        <CardActionArea className={classes.cardActionArea}>
+          <img alt='' className={classes.modImg} src={cardInfo.imageLink} />
+        </CardActionArea>
+      </Card>
+    }
+    { cardInfo && !canEdit && // to product link
+      <Card className={classes.card} onClick={()=> {window.open(cardInfo.productLink, '_blank')}}>
+        <CardActionArea className={classes.cardActionArea}>
+          <img alt='' className={classes.modImg} src={cardInfo.imageLink} />
+        </CardActionArea>
+      </Card>
+    }
+    { !cardInfo && canEdit && // blank card
+      <Card className={classes.card} onClick={() => toggleIgLoadoutForm(id)}>
+        <CardActionArea className={classes.cardActionArea}>
+          <AddBoxIcon/>
+        </CardActionArea>
+      </Card>
     }
     </div>
   )
