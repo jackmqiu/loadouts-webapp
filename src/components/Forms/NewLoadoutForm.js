@@ -8,6 +8,11 @@ import Chip from '@material-ui/core/Chip';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 import Divider from '@material-ui/core/Divider';
+import Select from '@material-ui/core/Select';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -18,23 +23,14 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
   },
-  grid: {
-    margin: 1,
-    backgroundColor: 'gray',
-    width: '100%',
-  },
   modal: {
     minWidth: 120,
     maxHeight: 800,
     padding: 20,
   },
-  titleBar: {
-    background:
-      'linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, ' +
-      'rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
-  },
   formTitle: {
-    margin: 2,
+    marginLeft: '10%',
+    paddingTop: 30,
   },
   select: {
     margin: '0px 5px 0px 5px',
@@ -45,7 +41,29 @@ const useStyles = makeStyles((theme) => ({
   },
   card: {
     display: 'block',
-  }
+  },
+  select: {
+    width: '80%',
+    marginLeft: '10%',
+    marginRight: '10%',
+  },
+  fieldsContainer: {
+    paddingTop: 30,
+    paddingBottom: 30,
+  },
+  chipsContainer: {
+    width: '80%',
+    marginLeft: '10%',
+    marginRight: '10%',
+    marginBottom: 30,
+  },
+  nextButton: {
+    marginBottom: 30,
+  },
+  chips: {
+    marginRight: 4,
+    marginBottom: 5,
+  },
 }));
 
 const NewLoadoutForm = ({
@@ -56,12 +74,16 @@ const NewLoadoutForm = ({
   setLoadoutHashtags,
   updateLoadoutMetadata,
   loadoutCategory,
+  setLoadoutCategory,
 }) => {
   const classes = useStyles();
   const [loadoutNameText, setNameText] = useState('');
   const handleTextChange = (event) => {
     setNameText(event.target.value);
   };
+  const handleSelect = (event) => {
+    setLoadoutCategory(event.target.value);
+  }
   //loadout Name
   //chips
   const handleLoadoutMetadataSubmit = () => {
@@ -89,15 +111,21 @@ const NewLoadoutForm = ({
   categoryHashtags.forEach((key) => {
     chips.push(
       <Chip
-        color={loadoutHashtagsObject[key] ? 'secondary' : ''}
+        color={loadoutHashtagsObject[key] ? 'primary' : ''}
         label={`#${key}`}
         onClick={() => {toggleLoadoutHashtags(key)}}
+        className={classes.chips}
       >
         #{'key'}
       </Chip>
     );
   })
-
+  const categoryChoices = [];
+  Object.keys(loadoutHashtags).forEach((key) => {
+    categoryChoices.push(
+      <MenuItem value={key}>{ key }</MenuItem>
+    )
+  })
   return (
     <div>
       {
@@ -108,16 +136,28 @@ const NewLoadoutForm = ({
           className={classes.modal}
         >
           <Paper className={classes.card}>
-            <Typography variant='h6' className={classes.formTitle}>New Loadout</Typography>
-            <Divider/>
-            <Typography variant='h6' className={classes.fieldTitle}> Loadout Name </Typography>
-            <TextField value={loadoutNameText} label="Product" variant="outlined" onChange={handleTextChange} />
-            <div>
+            <Typography variant='h5' className={classes.formTitle}>New Loadout</Typography>
+            <div className={classes.fieldsContainer}>
+            <FormControl variant="outlined" margin="dense" className={classes.select}>
+              <InputLabel>Category</InputLabel>
+              <Select
+                value={loadoutCategory}
+                onChange={handleSelect}
+                label="Category"
+              >
+                { categoryChoices }
+              </Select>
+            </FormControl>
+            <TextField className={classes.select} value={loadoutNameText}  margin="dense" label="Loadout Title" variant="outlined" onChange={handleTextChange} />
+            </div>
+            <div className={classes.chipsContainer}>
               {chips}
             </div>
-            <Link to='/make'>
-              <Button variant='contained' color='primary' onClick={handleLoadoutMetadataSubmit}>Add Items</Button>
-            </Link>
+            <div className={classes.chipsContainer}>
+              <Link to='/make' style={{ textDecoration: 'none' }}>
+                <Button className={ classes.nextButton } variant='contained' color='primary' onClick={handleLoadoutMetadataSubmit}>Create</Button>
+              </Link>
+            </div>
           </Paper>
         </Modal>
       }

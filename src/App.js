@@ -246,6 +246,7 @@ const App = (props) => {
           setLoadoutHashtags={setLoadoutHashtags}
           updateLoadoutMetadata={updateLoadoutMetadata}
           loadoutCategory={loadoutCategory}
+          setLoadoutCategory={setLoadoutCategory}
         />
       </Route>
       <Route path='/:id'>
@@ -277,6 +278,7 @@ const App = (props) => {
           setLoadoutHashtags={setLoadoutHashtags}
           updateLoadoutMetadata={updateLoadoutMetadata}
           loadoutCategory={loadoutCategory}
+          setLoadoutCategory={setLoadoutCategory}
         />
       </Route>
   </Switch>
