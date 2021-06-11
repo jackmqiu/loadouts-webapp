@@ -13,6 +13,8 @@ const useStyles = makeStyles(() => ({
   },
   loadoutTitleContainer: {
     height: 160,
+    marginLeft: '10%',
+    marginRight: '10%',
   },
   loadoutTitle: {
     fontWeight: 'bold',
