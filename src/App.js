@@ -13,6 +13,7 @@ import Feed from './components/Feed';
 import ItemList from './components/ItemList';
 import {
   hashtagTable,
+  cseIDs,
 } from './constants';
 import {
   Switch,
@@ -27,13 +28,6 @@ import {
 const axiosInstance = axios.create({
   baseURL: `${process.env.REACT_APP_API_URL}`,
 });
-const axiosInstanceGoogle = axios.create({
-  baseURL: 'https://www.googleapis.com/customsearch',
-  params: {
-    key: `${process.env.REACT_APP_GOOGLE_KEY}`,
-    cx: `${process.env.REACT_APP_GOOGLE_CX}`,
-  }
-})
 
 const TRACKING_ID = "UA-193462319-2";
 ReactGA.initialize(TRACKING_ID);
@@ -100,6 +94,13 @@ const App = (props) => {
       window.scrollTo(0, 0);
     }
   }, [props.location.pathname])
+  const axiosInstanceGoogle = axios.create({
+    baseURL: 'https://www.googleapis.com/customsearch',
+    params: {
+      key: `${process.env.REACT_APP_GOOGLE_KEY}`,
+      cx: `${cseIDs[loadoutCategory]}`,
+    }
+  })
   const toggleNewLoadoutFormOpen = () => {
     setNewLoadoutFormOpen(!newLoadoutFormOpen);
   };
