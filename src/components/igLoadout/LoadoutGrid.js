@@ -10,7 +10,7 @@ const useStyles = makeStyles(() => ({
   grid: ({screenWidth}) => ({
     margin: 0,
     // backgroundColor: 'black',
-    backgroundImage: 'linear-gradient(to bottom, #A7A309, #616A6B)',
+    backgroundImage: 'linear-gradient(to bottom, #FDF0A6, #87CEEB)',
     width: '95%',
     marginLeft: '2.5%',
     marginRight: '2.5%',
@@ -41,16 +41,17 @@ const LoadoutGrid = ({
 }) => {
   const classes = useStyles({ screenWidth });
   let numCards = Object.keys(igLoadoutState.items).length;
+  let numDisplayCards = numCards;
   if (numCards > 9) { // keep it to 2 rows
-    numCards = 9;
+    numDisplayCards = 9;
   }
   const loadoutGridItems = [];
-  for (let i = 0; i < numCards; i++) {
+  for (let i = 0; i < numDisplayCards; i++) {
     loadoutGridItems.push(
-      <Grid key={i} item xs={IgLayoutTable[numCards][i].gridItemWidth}>
+      <Grid key={i} item xs={IgLayoutTable[numDisplayCards][i].gridItemWidth}>
         <ItemCard
           id={i}
-          height={IgLayoutTable[numCards][i].gridItemHeight}
+          height={IgLayoutTable[numDisplayCards][i].gridItemHeight}
           itemDetails={igLoadoutState.items[i]}
           openModal={handleOpen}
           closeModal={handleClose}
@@ -58,7 +59,7 @@ const LoadoutGrid = ({
           toggleIgLoadoutForm={toggleIgLoadoutForm}
           displayState={displayState}
           screenWidth={screenWidth}
-          rows={IgLayoutTable[numCards].rows}
+          rows={IgLayoutTable[numDisplayCards].rows}
         />
       </Grid>
     )
