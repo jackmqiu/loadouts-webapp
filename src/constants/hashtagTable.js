@@ -7,6 +7,10 @@ const hashtagTable = {
   },
   guns: {
     tacticalgear: false,
+    guns: true,
+    rifle: false,
+    glock: false,
+    ar15: false,
   },
   vlogging: {
     vlogging: true,
@@ -18,6 +22,22 @@ const hashtagTable = {
     import: false,
     drifting: false,
   },
+  skin: {
+    skincare: true,
+    skincareroutine: true,
+    skincareproducts: true,
+    skincarecommunity: false,
+    skinhealth: true,
+    skincarelover: false,
+    skintips: false,
+  },
+  crafts: {
+    crafts: true,
+    arduino: false,
+    raspberrypi: false,
+    diy: true,
+    craftsforkids: false,
+  }
 };
 
 export { hashtagTable };
