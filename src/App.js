@@ -247,6 +247,8 @@ const App = (props) => {
           editIgLoadout={editIgLoadout}
           deleteIgLoadoutItem={deleteIgLoadoutItem}
           closeIgLoadoutForm={closeIgLoadoutForm}
+          height={height}
+          width={width}
         />
         <NewLoadoutForm
           mixpanel={mixpanel}

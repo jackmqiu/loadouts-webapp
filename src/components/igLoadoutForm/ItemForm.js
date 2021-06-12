@@ -11,6 +11,9 @@ import {
 import { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import NameLoadoutForm from './NameLoadoutForm';
+import IconButton from "@material-ui/core/IconButton";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import SearchIcon from "@material-ui/icons/Search";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -28,8 +31,8 @@ const useStyles = makeStyles((theme) => ({
   },
   modal: {
     minWidth: 120,
-    maxHeight: 800,
     padding: 20,
+    marginBottom: '10%',
   },
   formTitle: {
     marginLeft: '10%',
@@ -43,6 +46,7 @@ const useStyles = makeStyles((theme) => ({
     width: '80%',
     marginLeft: '10%',
     marginRight: '10%',
+    padding: 0,
   },
   card: {
     display: 'block',
@@ -66,6 +70,15 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: 30,
     marginRight: 10,
   },
+  searchButton: {
+    padding: 0,
+  },
+  resultsWindow: ({ height }) => ({
+    overflow: 'scroll',
+    marginBottom: 10,
+    height: height*.61,
+    marginLeft: 2,
+  }),
 }));
 
 const ItemForm = ({
@@ -83,8 +96,10 @@ const ItemForm = ({
   editIgLoadout,
   deleteIgLoadoutItem,
   closeIgLoadoutForm,
+  height,
+  width,
 }) => {
-  const classes = useStyles();
+  const classes = useStyles({ height });
   const [searchText, setSearchText] = useState('');
   const [productNameText, setProductNameText] = useState(igLoadoutState.items[activeIgLoadoutCard] && igLoadoutState.items[activeIgLoadoutCard].productName);
   const [imageLink, setImageLink] = useState(igLoadoutState.items[activeIgLoadoutCard] && igLoadoutState.items[activeIgLoadoutCard].imageLink);
@@ -179,42 +194,64 @@ const ItemForm = ({
         <Paper>
         { idFormOpen ?
           <NameLoadoutForm
-            classes={classes}
             mixpanel={mixpanel}
             submitLoadout={submitLoadout}
           /> :
           <div>
             <div className={classes.fieldsContainer}>
               <Typography variant='h5' className={classes.formTitle}>Find Item</Typography>
-              <TextField className={classes.textField} margin="dense" label="Search" variant="outlined" onChange={handleSearchTextChange} onKeyPress={handleSearchSubmit}/>
-
+              <TextField
+                className={classes.textField}
+                margin="dense"
+                label="Search"
+                variant="outlined"
+                onChange={handleSearchTextChange}
+                onKeyPress={handleSearchSubmit}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment>
+                      <IconButton className={classes.searchButton} onClick={() => {queryGoogle(searchText)}}>
+                        <SearchIcon />
+                      </IconButton>
+                    </InputAdornment>
+                  )
+                }}
+              />
               { googleResults &&
-                <GridList className={classes.grid}>
-                  {
-                    googleResults.map((item, i) =>
+                <div className={classes.resultsWindow}>
+                  <GridList className={classes.grid}>
+                    {
+                      googleResults.map((item, i) =>
                       <GridListTile id={i} onClick={() => {handleSelect(item, i)}}>
                         { item.pagemap && item.pagemap.cse_thumbnail &&
                           <img alt='' src={item.pagemap.cse_thumbnail[0].src}/>
                         }
                         <GridListTileBar
-                         title={item.title}
-                         titlePosition="top"
-                         className={classes.titleBar}
-                        />
+                          title={item.title}
+                          titlePosition="top"
+                          className={classes.titleBar}
+                          />
                       </GridListTile>
                     )
                   }
                 </GridList>
+                </div>
               }
-              <Typography variant='h5' className={classes.formTitle}>Customize</Typography>
-              <TextField margin="dense" error={hasSubmitted && !productNameText} helperText={hasSubmitted && !productNameText && 'Add Item Name'} defaultValue={igLoadoutState.items[activeIgLoadoutCard] && igLoadoutState.items[activeIgLoadoutCard].productName} className={classes.textField} label="Product" variant="outlined" onChange={handleProductNameTextChange} onKeyPress={handleTextFieldSubmit}/>
-              <TextField margin="dense" error={hasSubmitted && !imageLink} helperText={hasSubmitted && !imageLink && 'Add Image Link'} defaultValue={igLoadoutState.items[activeIgLoadoutCard] && igLoadoutState.items[activeIgLoadoutCard].imageLink} className={classes.textField} label="Image URL" variant="outlined" onChange={handleImageLinkTextChange} onKeyPress={handleTextFieldSubmit}/>
-              <TextField margin="dense" error={hasSubmitted && !productLink} helperText={hasSubmitted && !productLink && 'Add Item Link'} defaultValue={igLoadoutState.items[activeIgLoadoutCard] && igLoadoutState.items[activeIgLoadoutCard].productLink} className={classes.textField} label="Product URL" variant="outlined" onChange={handleProductLinkTextChange} onKeyPress={handleTextFieldSubmit}/>
+              { !googleResults &&
+                <div>
+                  <Typography variant='h5' className={classes.formTitle}>Customize</Typography>
+                  <TextField margin="dense" error={hasSubmitted && !productNameText} helperText={hasSubmitted && !productNameText && 'Add Item Name'} defaultValue={igLoadoutState.items[activeIgLoadoutCard] && igLoadoutState.items[activeIgLoadoutCard].productName} className={classes.textField} label="Product" variant="outlined" onChange={handleProductNameTextChange} onKeyPress={handleTextFieldSubmit}/>
+                  <TextField margin="dense" error={hasSubmitted && !imageLink} helperText={hasSubmitted && !imageLink && 'Add Image Link'} defaultValue={igLoadoutState.items[activeIgLoadoutCard] && igLoadoutState.items[activeIgLoadoutCard].imageLink} className={classes.textField} label="Image URL" variant="outlined" onChange={handleImageLinkTextChange} onKeyPress={handleTextFieldSubmit}/>
+                  <TextField margin="dense" error={hasSubmitted && !productLink} helperText={hasSubmitted && !productLink && 'Add Item Link'} defaultValue={igLoadoutState.items[activeIgLoadoutCard] && igLoadoutState.items[activeIgLoadoutCard].productLink} className={classes.textField} label="Product URL" variant="outlined" onChange={handleProductLinkTextChange} onKeyPress={handleTextFieldSubmit}/>
+                </div>
+              }
             </div>
-            <div className={classes.buttonContainer}>
-              <Button className={classes.nextButton} variant='contained' color='primary' onClick={() => {handleSubmitLoadout()}}>Submit</Button>
-              <Button className={classes.nextButton} variant='contained' color='secondary' onClick={() => {handleDeleteCard()}}>Delete</Button>
-            </div>
+            { !googleResults &&
+              <div className={classes.buttonContainer}>
+                <Button className={classes.nextButton} variant='contained' color='primary' onClick={() => {handleSubmitLoadout()}}>Submit</Button>
+                <Button className={classes.nextButton} variant='contained' color='secondary' onClick={() => {handleDeleteCard()}}>Delete</Button>
+              </div>
+            }
           </div>
         }
         </Paper>
