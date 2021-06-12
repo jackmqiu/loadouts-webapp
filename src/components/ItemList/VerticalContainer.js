@@ -20,6 +20,7 @@ const VerticalContainer = ({
 }) => {
   const classes = useStyles({ firstColumn });
   const cards = [];
+  console.log('vertContaner igloadoutstate', igLoadoutState);
   if (containerIndex < Object.keys(igLoadoutState.items).length) {
     // first card of column might be short, handled here
     cards.push(

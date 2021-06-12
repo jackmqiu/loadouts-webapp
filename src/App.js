@@ -135,14 +135,17 @@ const App = (props) => {
   }
   const deleteIgLoadoutItem = () => {
     const newLoadout = {};
-    for (let i = 0; i < Object.keys(igLoadoutState).length; i++) {
+    for (let i = 0; i < Object.keys(igLoadoutState.items).length; i++) {
       if (i < activeIgLoadoutCard){
-        newLoadout[i] = igLoadoutState[i];
+        newLoadout[i] = igLoadoutState.items[i];
       } else if (i > activeIgLoadoutCard) {
-        newLoadout[i-1] = igLoadoutState[i];
+        newLoadout[i-1] = igLoadoutState.items[i];
       }
     }
-    setIgLoadoutState(newLoadout);
+    setIgLoadoutState({
+      ...igLoadoutState,
+      items: newLoadout,
+    });
   }
   const queryGoogle = (text) => {
     if (!text) {
