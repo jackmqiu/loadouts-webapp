@@ -122,12 +122,15 @@ const App = (props) => {
   const editIgLoadout = ({productLink, imageLink, productName}) => {
     setIgLoadoutState({
       ...igLoadoutState,
-      [activeIgLoadoutCard]: {
-        ...igLoadoutState[activeIgLoadoutCard],
-        productLink: productLink || igLoadoutState[activeIgLoadoutCard].productLink,
-        imageLink: imageLink || igLoadoutState[activeIgLoadoutCard].imageLink,
-        productName: productName || igLoadoutState[activeIgLoadoutCard].productName,
-      },
+      items: {
+        ...igLoadoutState.items,
+        [activeIgLoadoutCard]: {
+          ...igLoadoutState[activeIgLoadoutCard],
+          productLink: productLink || igLoadoutState[activeIgLoadoutCard].productLink,
+          imageLink: imageLink || igLoadoutState[activeIgLoadoutCard].imageLink,
+          productName: productName || igLoadoutState[activeIgLoadoutCard].productName,
+        },
+      }
     });
   }
   const deleteIgLoadoutItem = () => {
