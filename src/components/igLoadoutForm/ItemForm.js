@@ -66,9 +66,9 @@ const ItemForm = ({
 }) => {
   const classes = useStyles();
   const [searchText, setSearchText] = useState('');
-  const [productNameText, setProductNameText] = useState(igLoadoutState[activeIgLoadoutCard] && igLoadoutState[activeIgLoadoutCard].productName);
-  const [imageLink, setImageLink] = useState(igLoadoutState[activeIgLoadoutCard] && igLoadoutState[activeIgLoadoutCard].imageLink);
-  const [productLink, setProductLink] = useState(igLoadoutState[activeIgLoadoutCard] && igLoadoutState[activeIgLoadoutCard].productLink);
+  const [productNameText, setProductNameText] = useState(igLoadoutState.items[activeIgLoadoutCard] && igLoadoutState.items[activeIgLoadoutCard].productName);
+  const [imageLink, setImageLink] = useState(igLoadoutState.items[activeIgLoadoutCard] && igLoadoutState.items[activeIgLoadoutCard].imageLink);
+  const [productLink, setProductLink] = useState(igLoadoutState.items[activeIgLoadoutCard] && igLoadoutState.items[activeIgLoadoutCard].productLink);
   const [hasSubmitted, toggleHasSubmitted] = useState(false);
 
   const handleSearchTextChange = (event) => {
@@ -108,13 +108,15 @@ const ItemForm = ({
     }
   }
   const handleSubmitLoadout = () => {
-    if ((productNameText || igLoadoutState[activeIgLoadoutCard].productName) &&
-    (productLink || igLoadoutState[activeIgLoadoutCard].productLink) &&
-    (imageLink || igLoadoutState[activeIgLoadoutCard].imageLink)) {
+    if (igLoadoutState.items[activeIgLoadoutCard] &&
+    (productNameText || igLoadoutState.items[activeIgLoadoutCard].productName) &&
+    (productLink || igLoadoutState.items[activeIgLoadoutCard].productLink) &&
+    (imageLink || igLoadoutState.items[activeIgLoadoutCard].imageLink)) {
+      console.log('handleSubmit', igLoadoutState.items[activeIgLoadoutCard], productNameText, productLink, imageLink)
       editIgLoadout({
-        productName: productNameText || igLoadoutState[activeIgLoadoutCard].productName,
-        productLink: productLink || igLoadoutState[activeIgLoadoutCard].productLink,
-        imageLink: imageLink || igLoadoutState[activeIgLoadoutCard].imageLink,
+        productName: productNameText || igLoadoutState.items[activeIgLoadoutCard].productName,
+        productLink: productLink || igLoadoutState.items[activeIgLoadoutCard].productLink,
+        imageLink: imageLink || igLoadoutState.items[activeIgLoadoutCard].imageLink,
       });
       toggleHasSubmitted(false);
       toggleIgLoadoutForm();
@@ -122,6 +124,14 @@ const ItemForm = ({
       setImageLink('');
       setProductNameText('');
       setProductLink('');
+    } else if (!igLoadoutState.items[activeIgLoadoutCard] && productNameText && productLink && imageLink) {
+      editIgLoadout({
+        productName: productNameText,
+        productLink: productLink,
+        imageLink: imageLink,
+      });
+      toggleIgLoadoutForm();
+
     } else {
       toggleHasSubmitted(true);
     }
@@ -175,9 +185,9 @@ const ItemForm = ({
               </GridList>
             }
             <Typography variant='h5'>Custom</Typography>
-            <TextField error={hasSubmitted && !productNameText} helperText={hasSubmitted && !productNameText && 'Add Item Name'} fullWidth={true} defaultValue={igLoadoutState[activeIgLoadoutCard] && igLoadoutState[activeIgLoadoutCard].productName} className={classes.textField} label="Product" variant="outlined" onChange={handleProductNameTextChange} onKeyPress={handleTextFieldSubmit}/>
-            <TextField error={hasSubmitted && !imageLink} helperText={hasSubmitted && !imageLink && 'Add Image Link'} fullWidth={true} defaultValue={igLoadoutState[activeIgLoadoutCard] && igLoadoutState[activeIgLoadoutCard].imageLink} className={classes.textField} label="Image URL" variant="outlined" onChange={handleImageLinkTextChange} onKeyPress={handleTextFieldSubmit}/>
-            <TextField error={hasSubmitted && !productLink} helperText={hasSubmitted && !productLink && 'Add Item Link'} fullWidth={true} defaultValue={igLoadoutState[activeIgLoadoutCard] && igLoadoutState[activeIgLoadoutCard].productLink} className={classes.textField} label="Product URL" variant="outlined" onChange={handleProductLinkTextChange} onKeyPress={handleTextFieldSubmit}/>
+            <TextField error={hasSubmitted && !productNameText} helperText={hasSubmitted && !productNameText && 'Add Item Name'} fullWidth={true} defaultValue={igLoadoutState.items[activeIgLoadoutCard] && igLoadoutState.items[activeIgLoadoutCard].productName} className={classes.textField} label="Product" variant="outlined" onChange={handleProductNameTextChange} onKeyPress={handleTextFieldSubmit}/>
+            <TextField error={hasSubmitted && !imageLink} helperText={hasSubmitted && !imageLink && 'Add Image Link'} fullWidth={true} defaultValue={igLoadoutState.items[activeIgLoadoutCard] && igLoadoutState.items[activeIgLoadoutCard].imageLink} className={classes.textField} label="Image URL" variant="outlined" onChange={handleImageLinkTextChange} onKeyPress={handleTextFieldSubmit}/>
+            <TextField error={hasSubmitted && !productLink} helperText={hasSubmitted && !productLink && 'Add Item Link'} fullWidth={true} defaultValue={igLoadoutState.items[activeIgLoadoutCard] && igLoadoutState.items[activeIgLoadoutCard].productLink} className={classes.textField} label="Product URL" variant="outlined" onChange={handleProductLinkTextChange} onKeyPress={handleTextFieldSubmit}/>
             <Button variant='contained' color='primary' onClick={() => {handleSubmitLoadout()}}>Submit</Button>
             <Button variant='contained' color='secondary' onClick={() => {handleDeleteCard()}}>Delete</Button>
           </div>

@@ -114,7 +114,10 @@ const App = (props) => {
   const addIgLoadoutItem = (item) => {
     setIgLoadoutState({
       ...igLoadoutState,
-      [Object.keys(igLoadoutState).length]: {},
+      items: {
+        ...igLoadoutState.items,
+        [Object.keys(igLoadoutState.items).length]: {},
+      }
     });
     setActiveIgLoadoutCard(Object.keys(igLoadoutState).length);
     toggleIgLoadoutForm(Object.keys(igLoadoutState).length);
