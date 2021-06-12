@@ -138,17 +138,17 @@ const NewLoadoutForm = ({
           <Paper className={classes.card}>
             <Typography variant='h5' className={classes.formTitle}>New Loadout</Typography>
             <div className={classes.fieldsContainer}>
-            <FormControl variant="outlined" margin="dense" className={classes.select}>
-              <InputLabel>Category</InputLabel>
-              <Select
-                value={loadoutCategory}
-                onChange={handleSelect}
-                label="Category"
-              >
-                { categoryChoices }
-              </Select>
-            </FormControl>
-            <TextField className={classes.select} value={loadoutNameText}  margin="dense" label="Loadout Title" variant="outlined" onChange={handleTextChange} />
+              <FormControl variant="outlined" margin="dense" className={classes.select}>
+                <InputLabel>Category</InputLabel>
+                <Select
+                  value={loadoutCategory}
+                  onChange={handleSelect}
+                  label="Category"
+                >
+                  { categoryChoices }
+                </Select>
+              </FormControl>
+              <TextField className={classes.select} value={loadoutNameText}  margin="dense" label="Loadout Title" variant="outlined" onChange={handleTextChange} />
             </div>
             <div className={classes.chipsContainer}>
               {chips}

@@ -31,20 +31,40 @@ const useStyles = makeStyles((theme) => ({
     maxHeight: 800,
     padding: 20,
   },
-  titleBar: {
-    background:
-      'linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, ' +
-      'rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
-  },
   formTitle: {
-    margin: 2,
+    marginLeft: '10%',
+    paddingTop: 30,
+    paddingBottom: 10,
   },
   select: {
     margin: '0px 5px 0px 5px',
   },
   textField: {
-    marginBottom: 10,
-    marginLeft: 5,
+    width: '80%',
+    marginLeft: '10%',
+    marginRight: '10%',
+  },
+  card: {
+    display: 'block',
+  },
+  select: {
+    width: '80%',
+    marginLeft: '10%',
+    marginRight: '10%',
+  },
+  fieldsContainer: {
+    paddingTop: 30,
+    paddingBottom: 30,
+  },
+  buttonContainer: {
+    width: '80%',
+    marginLeft: '10%',
+    marginRight: '10%',
+    marginBottom: 30,
+  },
+  nextButton: {
+    marginBottom: 30,
+    marginRight: 10,
   },
 }));
 
@@ -164,32 +184,37 @@ const ItemForm = ({
             submitLoadout={submitLoadout}
           /> :
           <div>
-            <Typography variant='h5'>Search</Typography>
-            <TextField className={classes.textField} label="Search" variant="outlined" onChange={handleSearchTextChange} onKeyPress={handleSearchSubmit}/>
-            { googleResults &&
-              <GridList className={classes.grid}>
-                {
-                  googleResults.map((item, i) =>
-                    <GridListTile id={i} onClick={() => {handleSelect(item, i)}}>
-                      { item.pagemap && item.pagemap.cse_thumbnail &&
-                        <img alt='' src={item.pagemap.cse_thumbnail[0].src}/>
-                      }
-                      <GridListTileBar
-                       title={item.title}
-                       titlePosition="top"
-                       className={classes.titleBar}
-                      />
-                    </GridListTile>
-                  )
-                }
-              </GridList>
-            }
-            <Typography variant='h5'>Custom</Typography>
-            <TextField error={hasSubmitted && !productNameText} helperText={hasSubmitted && !productNameText && 'Add Item Name'} fullWidth={true} defaultValue={igLoadoutState.items[activeIgLoadoutCard] && igLoadoutState.items[activeIgLoadoutCard].productName} className={classes.textField} label="Product" variant="outlined" onChange={handleProductNameTextChange} onKeyPress={handleTextFieldSubmit}/>
-            <TextField error={hasSubmitted && !imageLink} helperText={hasSubmitted && !imageLink && 'Add Image Link'} fullWidth={true} defaultValue={igLoadoutState.items[activeIgLoadoutCard] && igLoadoutState.items[activeIgLoadoutCard].imageLink} className={classes.textField} label="Image URL" variant="outlined" onChange={handleImageLinkTextChange} onKeyPress={handleTextFieldSubmit}/>
-            <TextField error={hasSubmitted && !productLink} helperText={hasSubmitted && !productLink && 'Add Item Link'} fullWidth={true} defaultValue={igLoadoutState.items[activeIgLoadoutCard] && igLoadoutState.items[activeIgLoadoutCard].productLink} className={classes.textField} label="Product URL" variant="outlined" onChange={handleProductLinkTextChange} onKeyPress={handleTextFieldSubmit}/>
-            <Button variant='contained' color='primary' onClick={() => {handleSubmitLoadout()}}>Submit</Button>
-            <Button variant='contained' color='secondary' onClick={() => {handleDeleteCard()}}>Delete</Button>
+            <div className={classes.fieldsContainer}>
+              <Typography variant='h5' className={classes.formTitle}>Find Item</Typography>
+              <TextField className={classes.textField} margin="dense" label="Search" variant="outlined" onChange={handleSearchTextChange} onKeyPress={handleSearchSubmit}/>
+
+              { googleResults &&
+                <GridList className={classes.grid}>
+                  {
+                    googleResults.map((item, i) =>
+                      <GridListTile id={i} onClick={() => {handleSelect(item, i)}}>
+                        { item.pagemap && item.pagemap.cse_thumbnail &&
+                          <img alt='' src={item.pagemap.cse_thumbnail[0].src}/>
+                        }
+                        <GridListTileBar
+                         title={item.title}
+                         titlePosition="top"
+                         className={classes.titleBar}
+                        />
+                      </GridListTile>
+                    )
+                  }
+                </GridList>
+              }
+              <Typography variant='h5' className={classes.formTitle}>Customize</Typography>
+              <TextField margin="dense" error={hasSubmitted && !productNameText} helperText={hasSubmitted && !productNameText && 'Add Item Name'} defaultValue={igLoadoutState.items[activeIgLoadoutCard] && igLoadoutState.items[activeIgLoadoutCard].productName} className={classes.textField} label="Product" variant="outlined" onChange={handleProductNameTextChange} onKeyPress={handleTextFieldSubmit}/>
+              <TextField margin="dense" error={hasSubmitted && !imageLink} helperText={hasSubmitted && !imageLink && 'Add Image Link'} defaultValue={igLoadoutState.items[activeIgLoadoutCard] && igLoadoutState.items[activeIgLoadoutCard].imageLink} className={classes.textField} label="Image URL" variant="outlined" onChange={handleImageLinkTextChange} onKeyPress={handleTextFieldSubmit}/>
+              <TextField margin="dense" error={hasSubmitted && !productLink} helperText={hasSubmitted && !productLink && 'Add Item Link'} defaultValue={igLoadoutState.items[activeIgLoadoutCard] && igLoadoutState.items[activeIgLoadoutCard].productLink} className={classes.textField} label="Product URL" variant="outlined" onChange={handleProductLinkTextChange} onKeyPress={handleTextFieldSubmit}/>
+            </div>
+            <div className={classes.buttonContainer}>
+              <Button className={classes.nextButton} variant='contained' color='primary' onClick={() => {handleSubmitLoadout()}}>Submit</Button>
+              <Button className={classes.nextButton} variant='contained' color='secondary' onClick={() => {handleDeleteCard()}}>Delete</Button>
+            </div>
           </div>
         }
         </Paper>
