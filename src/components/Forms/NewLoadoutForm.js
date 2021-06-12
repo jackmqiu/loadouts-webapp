@@ -96,6 +96,12 @@ const NewLoadoutForm = ({
     });
     toggleNewLoadoutFormOpen();
   }
+  const handleSubmitTitle = (event) => {
+    if (event.key === 'Enter') {
+      handleLoadoutMetadataSubmit();
+      event.preventDefault();
+    }
+  }
   const chips = [];
   const loadoutHashtagsObject = loadoutHashtags[loadoutCategory]
   const categoryHashtags = Object.keys(loadoutHashtagsObject);
@@ -148,7 +154,7 @@ const NewLoadoutForm = ({
                   { categoryChoices }
                 </Select>
               </FormControl>
-              <TextField className={classes.select} value={loadoutNameText}  margin="dense" label="Loadout Title" variant="outlined" onChange={handleTextChange} />
+              <TextField className={classes.select} value={loadoutNameText}  margin="dense" label="Loadout Title" variant="outlined" onChange={handleTextChange} onKeyPress={handleSubmitTitle} />
             </div>
             <div className={classes.chipsContainer}>
               {chips}
