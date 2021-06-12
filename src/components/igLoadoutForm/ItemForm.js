@@ -130,7 +130,16 @@ const ItemForm = ({
       );
       queryGoogle(event.target.value);
       event.preventDefault();
+      setTimeout(() => {
+        document.activeElement.blur();
+      }, 0);
     }
+  }
+  const handleSearchClick = () => {
+    queryGoogle(searchText);
+    setTimeout(() => {
+      document.activeElement.blur();
+    }, 0);
   }
   const handleTextFieldSubmit = (event) => {
     if (event.key === 'Enter') {
@@ -205,12 +214,13 @@ const ItemForm = ({
                 margin="dense"
                 label="Search"
                 variant="outlined"
+                autoFocus={true}
                 onChange={handleSearchTextChange}
                 onKeyPress={handleSearchSubmit}
                 InputProps={{
                   endAdornment: (
                     <InputAdornment>
-                      <IconButton className={classes.searchButton} onClick={() => {queryGoogle(searchText)}}>
+                      <IconButton className={classes.searchButton} onClick={handleSearchClick}>
                         <SearchIcon />
                       </IconButton>
                     </InputAdornment>
