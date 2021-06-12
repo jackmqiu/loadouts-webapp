@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import VerticalContainer from './VerticalContainer';
 import ItemCard from './ItemCard';
 import Grid from '@material-ui/core/grid';
@@ -38,7 +38,11 @@ const ItemList = ({
       hashtagsString = hashtagsString.concat('#', key, ' ');
     }
   })
-  console.log('igLodostate', igLoadoutState)
+  useEffect(() => {
+    if (!igLoadoutState.title) {
+      toggleNewLoadoutFormOpen()
+    }
+  }, [])
   return (
     <Grid container className={classes.gridContainer}>
       <Grid item xs={12} className={classes.loadoutTitleContainer} onClick={() => { toggleNewLoadoutFormOpen() }}>
