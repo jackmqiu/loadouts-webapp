@@ -47,7 +47,7 @@ const Feed = ({
   };
   return (
     <div>
-          { loadouts }
+      { loadouts }
     </div>
   );
 };

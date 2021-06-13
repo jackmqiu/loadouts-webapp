@@ -11,6 +11,7 @@ import useWindowDimensions from './useWindowDimensions';
 import IgLoadoutForm from './components/igLoadoutForm';
 import Feed from './components/Feed';
 import ItemList from './components/ItemList';
+import CategoryBar from './components/CategoryBar';
 import {
   hashtagTable,
   cseIDs,
@@ -179,9 +180,8 @@ const App = (props) => {
     setDisplayState(mode)
   }
   const getFeed = () => {
-    console.log('getFeed')
-    // axiosInstance.get(`/feed/${loadoutCategory}`)
-    axiosInstance.get('/feed/airsoft')
+    axiosInstance.get(`/feed/${loadoutCategory}`)
+    // axiosInstance.get('/feed/airsoft')
     .then(response => {
       if (response.data[0]) {
         setFeedLoadouts(response.data);
@@ -273,6 +273,7 @@ const App = (props) => {
         />
       </Route>
       <Route path='/'>
+        <CategoryBar mixpanel={mixpanel} loadoutCategory={loadoutCategory} />
         <Feed
           feedLoadouts={feedLoadouts}
           setIgLoadoutState={setIgLoadoutState}

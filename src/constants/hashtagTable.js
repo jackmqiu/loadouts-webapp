@@ -37,7 +37,7 @@ const hashtagTable = {
     raspberrypi: false,
     diy: true,
     craftsforkids: false,
-  }
+  },
 };
 
 export { hashtagTable };
