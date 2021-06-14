@@ -12,9 +12,11 @@ import IgLoadoutForm from './components/igLoadoutForm';
 import Feed from './components/Feed';
 import ItemList from './components/ItemList';
 import CategoryBar from './components/CategoryBar';
+import HomePage from './components/HomePage';
 import {
   hashtagTable,
   cseIDs,
+  showHome,
 } from './constants';
 import {
   Switch,
@@ -61,7 +63,7 @@ const App = (props) => {
     'feed'
   );
   const [loadoutCategory, setLoadoutCategory] = useState(
-    process.env.REACT_APP_ENV === 'LOCAL' ? 'airsoft' : window.location.host.split('.')[0]
+    window.location.host.split('.')[0]
   );
   const [feedLoadouts, setFeedLoadouts] = useState([]);
   const [scrollPosition, setScrollPosition] = useState(window.pageYOffset);
@@ -218,7 +220,7 @@ const App = (props) => {
       }
     })
   }
-
+  console.log('loadoutCategory',loadoutCategory )
   return (
     <div className="App" >
     <Switch>
@@ -273,26 +275,44 @@ const App = (props) => {
         />
       </Route>
       <Route path='/'>
-        <CategoryBar mixpanel={mixpanel} loadoutCategory={loadoutCategory} />
-        <Feed
-          feedLoadouts={feedLoadouts}
-          setIgLoadoutState={setIgLoadoutState}
-          colorScheme={colorScheme}
-          displayState={displayState}
-          screenWidth={width}
-          height={height}
-          scrollToTop={scrollToTop}
-        />
-        <NewLoadoutForm
-          mixpanel={mixpanel}
-          toggleNewLoadoutFormOpen={toggleNewLoadoutFormOpen}
-          newLoadoutFormOpen={newLoadoutFormOpen}
-          loadoutHashtags={loadoutHashtags}
-          setLoadoutHashtags={setLoadoutHashtags}
-          updateLoadoutMetadata={updateLoadoutMetadata}
-          loadoutCategory={loadoutCategory}
-          setLoadoutCategory={setLoadoutCategory}
-        />
+        { showHome[loadoutCategory] ?
+          <div>
+          <HomePage/>
+            <NewLoadoutForm
+              mixpanel={mixpanel}
+              toggleNewLoadoutFormOpen={toggleNewLoadoutFormOpen}
+              newLoadoutFormOpen={newLoadoutFormOpen}
+              loadoutHashtags={loadoutHashtags}
+              setLoadoutHashtags={setLoadoutHashtags}
+              updateLoadoutMetadata={updateLoadoutMetadata}
+              loadoutCategory={loadoutCategory}
+              setLoadoutCategory={setLoadoutCategory}
+              />
+          </div>
+          :
+          <div>
+            <CategoryBar mixpanel={mixpanel} loadoutCategory={loadoutCategory} />
+            <Feed
+              feedLoadouts={feedLoadouts}
+              setIgLoadoutState={setIgLoadoutState}
+              colorScheme={colorScheme}
+              displayState={displayState}
+              screenWidth={width}
+              height={height}
+              scrollToTop={scrollToTop}
+              />
+            <NewLoadoutForm
+              mixpanel={mixpanel}
+              toggleNewLoadoutFormOpen={toggleNewLoadoutFormOpen}
+              newLoadoutFormOpen={newLoadoutFormOpen}
+              loadoutHashtags={loadoutHashtags}
+              setLoadoutHashtags={setLoadoutHashtags}
+              updateLoadoutMetadata={updateLoadoutMetadata}
+              loadoutCategory={loadoutCategory}
+              setLoadoutCategory={setLoadoutCategory}
+              />
+          </div>
+        }
       </Route>
   </Switch>
       <FloatingNav

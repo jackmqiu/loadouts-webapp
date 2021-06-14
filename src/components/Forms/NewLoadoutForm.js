@@ -104,7 +104,7 @@ const NewLoadoutForm = ({
   }
   const chips = [];
   const loadoutHashtagsObject = loadoutHashtags[loadoutCategory]
-  const categoryHashtags = Object.keys(loadoutHashtagsObject);
+  const categoryHashtags = loadoutHashtagsObject ? Object.keys(loadoutHashtagsObject): [];
   const toggleLoadoutHashtags = (key) => {
     setLoadoutHashtags({
       ...loadoutHashtags,
