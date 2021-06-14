@@ -19,7 +19,7 @@ const useStyles = makeStyles(() => ({
     borderRadius: 8,
     boxShadow: 'none',
     // position: 'relative',
-    backgroundColor: color,
+    backgroundColor: 'white',
     // '&:hover': {
     //   boxShadow: `0 6px 12px 0 ${Color('#fff')
     //     .rotate(-12)
@@ -57,8 +57,8 @@ const LoadoutCard = ({
   const classes = useStyles({color, height, screenWidth, rows});
   return (
     <div>
-      { (itemDetails && displayState === 'igLoadout') &&
-        <Card className={classes.card} onClick={()=> {window.open(itemDetails.productLink, '_blank')}}>
+      { (itemDetails && (displayState === 'igLoadout' || displayState === 'feed')) &&
+        <Card className={classes.card} >
           <CardActionArea className={classes.cardActionArea}>
             <img alt='' className={classes.modImg} src={itemDetails.imageLink} />
           </CardActionArea>
