@@ -5,23 +5,19 @@ const hashtagTable = {
     speedqb: false,
     milsim: false,
   },
-  // guns: {
-  //   tacticalgear: false,
-  //   guns: true,
-  //   rifle: false,
-  //   glock: false,
-  //   ar15: false,
-  // },
-  vlogging: {
-    vlogging: true,
-    selfie: false,
+  guns: {
+    tacticalgear: false,
+    guns: true,
+    rifle: false,
+    glock: false,
+    ar15: false,
   },
-  // cars: {
-  //   cars: true,
-  //   tuning: true,
-  //   import: false,
-  //   drifting: false,
-  // },
+  cars: {
+    cars: true,
+    tuning: true,
+    import: false,
+    drifting: false,
+  },
   skin: {
     skincare: true,
     skincareroutine: true,
@@ -30,6 +26,10 @@ const hashtagTable = {
     skinhealth: true,
     skincarelover: false,
     skintips: false,
+  },
+  vlogging: {
+    vlogging: true,
+    selfie: false,
   },
   crafts: {
     crafts: true,

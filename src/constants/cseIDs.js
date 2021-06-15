@@ -3,8 +3,10 @@ const cseIDs = {
   www: '286ad10865fb2879c',
   loadouts: '286ad10865fb2879c',
   vlogging: '8e12ffab12a80e3c2',
-  crafts:'0639ef9d42a24325d',
-  skin:'4f5e872aad5b9c62a',
+  crafts: '0639ef9d42a24325d',
+  skin: '4f5e872aad5b9c62a',
+  guns: 'c35f3f1fdcb04e91c',
+  cars: '8c916d032552115a5',
 };
 
 export { cseIDs };
