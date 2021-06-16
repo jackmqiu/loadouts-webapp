@@ -70,6 +70,7 @@ const App = (props) => {
   const [floatingNavDisplay, setFloatingNavDisplay] = useState(true);
   const [loadoutHashtags, setLoadoutHashtags] = useState(hashtagTable);
   const [newLoadoutFormOpen, setNewLoadoutFormOpen] = useState(false);
+  const [discoverUI, setDiscoverUI] = useState({});
   useEffect(() => {
     if (typeof window !== "undefined") {
       window.onscroll = () => {
@@ -96,7 +97,10 @@ const App = (props) => {
     if (props.location.pathname !== '/') {
       window.scrollTo(0, 0);
     }
-  }, [props.location.pathname])
+  }, [props.location.pathname]);
+  useEffect(() => {
+    getUI();
+  }, [])
   const axiosInstanceGoogle = axios.create({
     baseURL: 'https://www.googleapis.com/customsearch',
     params: {
@@ -180,7 +184,13 @@ const App = (props) => {
       {"toggle": `setDisplay`}
     );
     setDisplayState(mode)
-  }
+  };
+  const getUI = () => {
+    axiosInstance.get(`/ui/discover/${loadoutCategory}`)
+    .then(response => {
+      setDiscoverUI(response.data.sections);
+    })
+  };
   const getFeed = () => {
     axiosInstance.get(`/feed/${loadoutCategory}`)
     // axiosInstance.get('/feed/airsoft')
@@ -220,7 +230,6 @@ const App = (props) => {
       }
     })
   }
-  console.log('loadoutCategory',loadoutCategory )
   return (
     <div className="App" >
     <Switch>
@@ -277,7 +286,10 @@ const App = (props) => {
       <Route path='/'>
         { showHome[loadoutCategory] ?
           <div>
-          <HomePage/>
+          <HomePage
+            discoverUI={discoverUI}
+            mixpanel={mixpanel}
+          />
             <NewLoadoutForm
               mixpanel={mixpanel}
               toggleNewLoadoutFormOpen={toggleNewLoadoutFormOpen}
@@ -287,7 +299,7 @@ const App = (props) => {
               updateLoadoutMetadata={updateLoadoutMetadata}
               loadoutCategory={loadoutCategory}
               setLoadoutCategory={setLoadoutCategory}
-              />
+            />
           </div>
           :
           <div>

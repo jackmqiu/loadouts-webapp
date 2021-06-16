@@ -17,12 +17,12 @@ const useStyles = makeStyles({
   },
   categoryCardsContainer: {
     marginTop: 15,
-    marginLeft: 5,
-    marginRight: 5,
+    marginLeft: 10,
+    marginRight: 10,
   },
   categoryCard: {
     margin: 4,
-    borderRadius: 15,
+    borderRadius: 14,
     display: 'relative',
   },
   cardSpace: {
@@ -55,19 +55,20 @@ const useStyles = makeStyles({
   },
 })
 
-const uiObject = mainUI;
+// const uiObject = mainUI;
 
 const HomePage = ({
-
+  discoverUI,
 }) => {
-
   const classes = useStyles();
+  const uiObject = discoverUI;
   const gridItems = [];
+  console.log(discoverUI);
   Object.keys(uiObject).forEach((section) => {
     if (uiObject[section].show) {
       gridItems.push(
         <Grid item xs={12} className={classes.sectionTitleContainer}>
-          <Typography variant='subtitle3' className={classes.sectionTitle}>
+          <Typography className={classes.sectionTitle}>
             {uiObject[section].title}
           </Typography>
         </Grid>
