@@ -76,7 +76,7 @@ const HomePage = ({
         if (uiObject[section].cards[key].show) {
           gridItems.push(
             <Grid item xs={6} >
-              <Card elevation={0} className={classes.categoryCard}>
+              <Card elevation={0} className={classes.categoryCard} onClick={() => {window.location.assign(`https://${uiObject[section].cards[key].link}`)}}>
                 <div className={classes.cardSpace}>
                   <CardMedia image={uiObject[section].cards[key].imageLink} className={classes.categoryCardMedia}/>
                   <Typography variant='subtitle1' className={classes.cardTitle}>
