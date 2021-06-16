@@ -14,6 +14,9 @@ const useStyles = makeStyles({
   root: {
     width: '100%',
     display: 'flex',
+    maxWidth: 800,
+    marginRight: 'auto',
+    marginLeft: 'auto',
   },
   categoryCardsContainer: {
     marginTop: 15,
@@ -51,7 +54,7 @@ const useStyles = makeStyles({
     marginTop: 35,
   },
   sectionTitle: {
-    marginBottom: 10,
+    // marginBottom: 10,
   },
 })
 
