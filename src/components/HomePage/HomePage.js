@@ -66,7 +66,6 @@ const HomePage = ({
   const classes = useStyles();
   const uiObject = discoverUI;
   const gridItems = [];
-  console.log(discoverUI);
   Object.keys(uiObject).forEach((section) => {
     if (uiObject[section].show) {
       gridItems.push(

@@ -242,6 +242,24 @@ const App = (props) => {
   return (
     <div className="App" >
     <Switch>
+      <Route path='/discover'>
+        <div>
+          <HomePage
+            discoverUI={discoverUI}
+            mixpanel={mixpanel}
+          />
+          <NewLoadoutForm
+            mixpanel={mixpanel}
+            toggleNewLoadoutFormOpen={toggleNewLoadoutFormOpen}
+            newLoadoutFormOpen={newLoadoutFormOpen}
+            loadoutHashtags={loadoutHashtags}
+            setLoadoutHashtags={setLoadoutHashtags}
+            updateLoadoutMetadata={updateLoadoutMetadata}
+            loadoutCategory={loadoutCategory}
+            setLoadoutCategory={setLoadoutCategory}
+          />
+        </div>
+      </Route>
       <Route path='/make'>
         <ItemList
           igLoadoutState={igLoadoutState}
@@ -293,48 +311,29 @@ const App = (props) => {
         />
       </Route>
       <Route path='/'>
-        { showHome[loadoutCategory] ?
-          <div>
-          <HomePage
-            discoverUI={discoverUI}
-            mixpanel={mixpanel}
-          />
-            <NewLoadoutForm
-              mixpanel={mixpanel}
-              toggleNewLoadoutFormOpen={toggleNewLoadoutFormOpen}
-              newLoadoutFormOpen={newLoadoutFormOpen}
-              loadoutHashtags={loadoutHashtags}
-              setLoadoutHashtags={setLoadoutHashtags}
-              updateLoadoutMetadata={updateLoadoutMetadata}
-              loadoutCategory={loadoutCategory}
-              setLoadoutCategory={setLoadoutCategory}
+        <div>
+          <CategoryBar mixpanel={mixpanel} loadoutCategory={loadoutCategory} />
+          <Feed
+            feedLoadouts={feedLoadouts}
+            setIgLoadoutState={setIgLoadoutState}
+            colorScheme={colorScheme}
+            displayState={displayState}
+            screenWidth={width}
+            height={height}
+            scrollToTop={scrollToTop}
             />
-          </div>
-          :
-          <div>
-            <CategoryBar mixpanel={mixpanel} loadoutCategory={loadoutCategory} />
-            <Feed
-              feedLoadouts={feedLoadouts}
-              setIgLoadoutState={setIgLoadoutState}
-              colorScheme={colorScheme}
-              displayState={displayState}
-              screenWidth={width}
-              height={height}
-              scrollToTop={scrollToTop}
-              />
-            <NewLoadoutForm
-              mixpanel={mixpanel}
-              toggleNewLoadoutFormOpen={toggleNewLoadoutFormOpen}
-              newLoadoutFormOpen={newLoadoutFormOpen}
-              loadoutHashtags={loadoutHashtags}
-              setLoadoutHashtags={setLoadoutHashtags}
-              updateLoadoutMetadata={updateLoadoutMetadata}
-              loadoutCategory={loadoutCategory}
-              setLoadoutCategory={setLoadoutCategory}
-              />
-          </div>
-        }
-      </Route>
+          <NewLoadoutForm
+            mixpanel={mixpanel}
+            toggleNewLoadoutFormOpen={toggleNewLoadoutFormOpen}
+            newLoadoutFormOpen={newLoadoutFormOpen}
+            loadoutHashtags={loadoutHashtags}
+            setLoadoutHashtags={setLoadoutHashtags}
+            updateLoadoutMetadata={updateLoadoutMetadata}
+            loadoutCategory={loadoutCategory}
+            setLoadoutCategory={setLoadoutCategory}
+            />
+        </div>
+    </Route>
   </Switch>
       <FloatingNav
         displayState={displayState}
