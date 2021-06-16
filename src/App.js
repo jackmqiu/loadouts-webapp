@@ -17,6 +17,7 @@ import {
   hashtagTable,
   cseIDs,
   showHome,
+  nonIDpaths,
 } from './constants';
 import {
   Switch,
@@ -50,7 +51,8 @@ const App = (props) => {
     2: '#DCDCDB',
   })
   const [igLoadoutState, setIgLoadoutState] = useState({
-    items: {}
+    items: {},
+    hashtags: {},
   });
   const [activeIgLoadoutCard, setActiveIgLoadoutCard] = useState(0);
   const [googleResults, setGoogleResults] = useState(null);
@@ -90,7 +92,7 @@ const App = (props) => {
   useEffect(() => {
     if (props.location.pathname === '/') {
       getFeed();
-    } else if (props.location.pathname !== '/make') {
+    } else if (!nonIDpaths[props.location.pathname]) {
       setDisplayState('igLoadout');
       getLoadout();
     }
@@ -204,8 +206,15 @@ const App = (props) => {
   const getLoadout = () => {
     axiosInstance.get(`/${loadoutsId}`)
     .then(response => {
-      if (response.data) {
+      console.log('response', response);
+      if (typeof(response.data) === 'object') {
         setIgLoadoutState(response.data);
+      } else {
+        setIgLoadoutState({
+          title: 'Not Found',
+          items: {},
+          hashtags: {},
+        })
       }
     })
   }
