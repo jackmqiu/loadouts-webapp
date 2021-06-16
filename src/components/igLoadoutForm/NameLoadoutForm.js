@@ -2,7 +2,11 @@ import { useState } from 'react';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 
-const NameLoadoutForm = ({classes, mixpanel, submitLoadout}) => {
+const NameLoadoutForm = ({
+  classes,
+  mixpanel,
+  submitLoadout
+}) => {
   const [itemText, setItemText] = useState('');
   const handleTextChange = (event) => {
     setItemText(event.target.value.toLowerCase());
@@ -19,8 +23,8 @@ const NameLoadoutForm = ({classes, mixpanel, submitLoadout}) => {
   }
   return (
     <div>
-    <Typography variant='h5'> Enter Loadout Id</Typography>
-    <TextField value={itemText} label="Product" variant="outlined" onChange={handleTextChange} onKeyPress={handleItemSubmit}/>
+      <Typography variant='h5'> Enter Loadout Id</Typography>
+      <TextField value={itemText} label="Product" variant="outlined" onChange={handleTextChange} onKeyPress={handleItemSubmit}/>
     </div>
   )
 }

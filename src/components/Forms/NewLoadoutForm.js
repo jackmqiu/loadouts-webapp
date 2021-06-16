@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Modal from '@material-ui/core/Modal';
@@ -6,7 +6,7 @@ import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import Chip from '@material-ui/core/Chip';
 import { makeStyles } from '@material-ui/core/styles';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import Divider from '@material-ui/core/Divider';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -78,6 +78,8 @@ const NewLoadoutForm = ({
 }) => {
   const classes = useStyles();
   const [loadoutNameText, setNameText] = useState('');
+  const history = useHistory();
+  const directToMakeLoadout = useCallback(() => history.push('/make'), [history]);
   const handleTextChange = (event) => {
     setNameText(event.target.value);
   };
@@ -99,6 +101,7 @@ const NewLoadoutForm = ({
   const handleSubmitTitle = (event) => {
     if (event.key === 'Enter') {
       handleLoadoutMetadataSubmit();
+      directToMakeLoadout();
       event.preventDefault();
     }
   }
