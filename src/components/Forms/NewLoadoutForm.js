@@ -13,7 +13,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
-
+import { hashtagTable } from '../../constants';
 const useStyles = makeStyles((theme) => ({
   paper: {
     position: 'absolute',
@@ -85,6 +85,7 @@ const NewLoadoutForm = ({
   };
   const handleSelect = (event) => {
     setLoadoutCategory(event.target.value);
+    setLoadoutHashtags(hashtagTable);
   }
   //loadout Name
   //chips
