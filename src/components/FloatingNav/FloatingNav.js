@@ -8,6 +8,7 @@ import HomeIcon from '@material-ui/icons/Home';
 import Slide from '@material-ui/core/Slide';
 import IconButton from '@material-ui/core/IconButton';
 import ViewCarouselIcon from '@material-ui/icons/ViewCarousel';
+import PublishIcon from '@material-ui/icons/Publish';
 import { Link, useLocation, useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
@@ -73,9 +74,14 @@ export default function FloatingNav({
           <IconButton component="span" className={classes.inside} onClick={() => {handleClick('/')}}>
             <HomeIcon color={(location === '/') ? 'primary' : 'disabled'}/>
           </IconButton>
-          <IconButton className={classes.button} disableFocusRipple={true} onClick={() => { toggleNewLoadoutFormOpen() }}>
-            <AddIcon color={(location === '/make') ? 'primary' : 'disabled'}/>
-          </IconButton>
+          { (location !== '/make') ?
+            <IconButton className={classes.button} disableFocusRipple={true} onClick={() => { toggleNewLoadoutFormOpen() }}>
+              <AddIcon color={(location === '/make') ? 'primary' : 'disabled'}/>
+            </IconButton> :
+            <IconButton className={classes.button} disableFocusRipple={true} onClick={() => {setIdFormOpen(true); toggleIgLoadoutForm();}}>
+              <PublishIcon color={(location === '/make') ? 'secondary' : 'disabled'}/>
+            </IconButton>
+          }
           <IconButton className={classes.button} onClick={() => {handleClick('/discover')}}>
             <ViewCarouselIcon color={(location === '/discover') ? 'primary' : 'disabled'}/>
           </IconButton>
