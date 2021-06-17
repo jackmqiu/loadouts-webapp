@@ -71,13 +71,13 @@ export default function FloatingNav({
       <Slide direction="up" in={floatingNavDisplay} mountOnEnter unmountOnExit>
         <Fab variant='extended' aria-label="add" disableRipple={true} className={classes.fab}>
           <IconButton component="span" className={classes.inside} onClick={() => {handleClick('/')}}>
-            <HomeIcon/>
+            <HomeIcon color={(location === '/') ? 'primary' : 'disabled'}/>
           </IconButton>
           <IconButton className={classes.button} disableFocusRipple={true} onClick={() => { toggleNewLoadoutFormOpen() }}>
-            <AddIcon />
+            <AddIcon color={(location === '/make') ? 'primary' : 'disabled'}/>
           </IconButton>
           <IconButton className={classes.button} onClick={() => {handleClick('/discover')}}>
-            <ViewCarouselIcon />
+            <ViewCarouselIcon color={(location === '/discover') ? 'primary' : 'disabled'}/>
           </IconButton>
         </Fab>
       </Slide>
