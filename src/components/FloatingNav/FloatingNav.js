@@ -6,6 +6,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import HomeIcon from '@material-ui/icons/Home';
 import Slide from '@material-ui/core/Slide';
+import IconButton from '@material-ui/core/IconButton';
 import ViewCarouselIcon from '@material-ui/icons/ViewCarousel';
 import { Link, useLocation, useHistory } from 'react-router-dom';
 
@@ -16,11 +17,22 @@ const useStyles = makeStyles((theme) => ({
     },
     position: 'fixed',
     bottom: 5,
-    left: 5,
+    left: '50%',
+    marginLeft: -90,
+  },
+  fab: {
+    width: 180,
+
   },
   extendedIcon: {
     marginRight: theme.spacing(1),
   },
+  insideIconButton: {
+    width: 10,
+    height: 25,
+    borderRadius: '50%',
+    padding: 5,
+  }
 }));
 
 export default function FloatingNav({
@@ -39,7 +51,7 @@ export default function FloatingNav({
   const displayPublish = (location === '/make' && Object.keys(igLoadoutState).length > 0 && floatingNavDisplay);
   const displayDiscover = (location !== '/discover');
   const history = useHistory();
-  const handleDiscoverClick = useCallback(() => history.push('/discover'), [history]);
+  const handleClick = useCallback((element) => history.push(`${element}`), [history]);
   return (
     <div className={classes.rootNav}>
       {/*
@@ -48,27 +60,41 @@ export default function FloatingNav({
         <HomeIcon />
         </Fab>
         </Slide>
-      */}
 
         <Slide direction="up" in={floatingNavDisplay && location !== '/make' && !newLoadoutFormOpen} mountOnEnter unmountOnExit>
           <Fab color="primary" aria-label="add" onClick={() => {toggleNewLoadoutFormOpen()}}>
             <AddIcon />
           </Fab>
         </Slide>
+      */}
 
-
-      <Slide direction="up" in={displayPublish} mountOnEnter unmountOnExit>
-        <Fab variant="extended" onClick={() => {setIdFormOpen(true); toggleIgLoadoutForm();}}>
-          Publish
+      <Slide direction="up" in={floatingNavDisplay} mountOnEnter unmountOnExit>
+        <Fab variant='extended' aria-label="add" disableRipple={true} className={classes.fab}>
+          <IconButton component="span" className={classes.inside} onClick={() => {handleClick('/')}}>
+            <HomeIcon/>
+          </IconButton>
+          <IconButton className={classes.button} disableFocusRipple={true} onClick={() => { toggleNewLoadoutFormOpen() }}>
+            <AddIcon />
+          </IconButton>
+          <IconButton className={classes.button} onClick={() => {handleClick('/discover')}}>
+            <ViewCarouselIcon />
+          </IconButton>
         </Fab>
       </Slide>
 
-      <Slide direction="up" in={floatingNavDisplay && displayDiscover} mountOnEnter unmountOnExit>
-        <Fab variant="extended" onClick={handleDiscoverClick}>
-          <ViewCarouselIcon />
-        </Fab>
-      </Slide>
+      {/*
+        <Slide direction="up" in={displayPublish} mountOnEnter unmountOnExit>
+          <Fab variant="extended" onClick={() => {setIdFormOpen(true); toggleIgLoadoutForm();}}>
+            Publish
+          </Fab>
+        </Slide>
 
+        <Slide direction="up" in={floatingNavDisplay && displayDiscover} mountOnEnter unmountOnExit>
+          <Fab variant="extended" onClick={handleDiscoverClick}>
+            <ViewCarouselIcon />
+          </Fab>
+        </Slide>
+      */}
     </div>
   );
 }
