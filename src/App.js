@@ -228,9 +228,9 @@ const App = (props) => {
         setTakenId(id);
       } else {
         axiosInstance.post(`/make`, {
+          ...igLoadoutState,
           _id: id,
-          category: loadoutCategory,
-          items: igLoadoutState,
+          hashtags: loadoutHashtags,
         })
         .then(response => {
           setIgLoadoutIdState(id);
