@@ -1,8 +1,5 @@
 
 import './App.css';
-import MenuBar from './components/MenuBar.js';
-import IgLoadout from './components/igLoadout';
-import FloatingNav from './components/FloatingNav';
 import React, { useState, createRef, useEffect } from "react";
 import ReactGA from 'react-ga';
 import { useLocation } from "react-router-dom";
@@ -25,9 +22,10 @@ import {
   Link,
   withRouter,
 } from "react-router-dom";
-import {
-  NewLoadoutForm
-} from './components/Forms';
+import Form from './components/Forms';
+import MenuBar from './components/MenuBar.js';
+import IgLoadout from './components/igLoadout';
+import FloatingNav from './components/FloatingNav';
 
 const axiosInstance = axios.create({
   baseURL: `${process.env.REACT_APP_API_URL}`,
@@ -248,7 +246,7 @@ const App = (props) => {
             discoverUI={discoverUI}
             mixpanel={mixpanel}
           />
-          <NewLoadoutForm
+          <Form
             mixpanel={mixpanel}
             toggleNewLoadoutFormOpen={toggleNewLoadoutFormOpen}
             newLoadoutFormOpen={newLoadoutFormOpen}
@@ -288,7 +286,7 @@ const App = (props) => {
           height={height}
           width={width}
         />
-        <NewLoadoutForm
+        <Form
           mixpanel={mixpanel}
           toggleNewLoadoutFormOpen={toggleNewLoadoutFormOpen}
           newLoadoutFormOpen={newLoadoutFormOpen}
@@ -322,7 +320,7 @@ const App = (props) => {
             height={height}
             scrollToTop={scrollToTop}
             />
-          <NewLoadoutForm
+          <Form
             mixpanel={mixpanel}
             toggleNewLoadoutFormOpen={toggleNewLoadoutFormOpen}
             newLoadoutFormOpen={newLoadoutFormOpen}

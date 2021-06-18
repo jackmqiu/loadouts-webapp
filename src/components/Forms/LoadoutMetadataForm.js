@@ -66,7 +66,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const NewLoadoutForm = ({
+const LoadoutMetadataForm = ({
   mixpanel,
   toggleNewLoadoutFormOpen,
   newLoadoutFormOpen,
@@ -175,4 +175,4 @@ const NewLoadoutForm = ({
   )
 };
 
-export { NewLoadoutForm };
+export default LoadoutMetadataForm;

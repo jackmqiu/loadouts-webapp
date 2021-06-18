@@ -1,1 +1,1 @@
-export { NewLoadoutForm } from './NewLoadoutForm.js';
+export { default } from './Form.js';
