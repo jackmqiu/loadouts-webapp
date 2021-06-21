@@ -13,7 +13,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
-import { hashtagTable } from '../../constants';
+import { hashtagTable, categoriesList } from '../../constants';
 const useStyles = makeStyles((theme) => ({
   paper: {
     position: 'absolute',
@@ -131,10 +131,12 @@ const LoadoutMetadataForm = ({
     );
   })
   const categoryChoices = [];
-  Object.keys(loadoutHashtags).forEach((key) => {
-    categoryChoices.push(
-      <MenuItem value={key}>{ key }</MenuItem>
-    )
+  Object.keys(categoriesList).forEach((key) => {
+    if (categoriesList[key]){
+      categoryChoices.push(
+        <MenuItem value={key}>{ key }</MenuItem>
+      )
+    }
   })
   return (
     <div>

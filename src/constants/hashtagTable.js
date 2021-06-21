@@ -38,6 +38,18 @@ const hashtagTable = {
     diy: true,
     craftsforkids: false,
   },
+  'localhost:3000': {
+    local: true,
+  },
+  loadouts: {
+    loadouts: true,
+  },
+  www: {
+    loadouts: true,
+  },
+  test: {
+    test: true,
+  }
 };
 
 export { hashtagTable };

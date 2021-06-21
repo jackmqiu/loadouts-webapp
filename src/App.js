@@ -15,6 +15,7 @@ import {
   cseIDs,
   showHome,
   nonIDpaths,
+  categoryByDomain,
 } from './constants';
 import {
   Switch,
@@ -63,12 +64,12 @@ const App = (props) => {
     'feed'
   );
   const [loadoutCategory, setLoadoutCategory] = useState(
-    window.location.host.split('.')[0]
+    categoryByDomain[window.location.host.split('.')[0]]
   );
   const [feedLoadouts, setFeedLoadouts] = useState([]);
   const [scrollPosition, setScrollPosition] = useState(window.pageYOffset);
   const [floatingNavDisplay, setFloatingNavDisplay] = useState(true);
-  const [loadoutHashtags, setLoadoutHashtags] = useState(hashtagTable);
+  const [loadoutHashtags, setLoadoutHashtags] = useState(hashtagTable[loadoutCategory]);
   const [newLoadoutFormOpen, setNewLoadoutFormOpen] = useState(false);
   const [discoverUI, setDiscoverUI] = useState({});
   useEffect(() => {
@@ -115,6 +116,7 @@ const App = (props) => {
     setIgLoadoutState({
       ...igLoadoutState,
       title: loadoutName,
+      category: loadoutCategory,
       hashtags: loadoutHashtags[loadoutCategory],
     })
   }
@@ -232,6 +234,7 @@ const App = (props) => {
         })
         .then(response => {
           setIgLoadoutIdState(id);
+          console.log('make loaout response', response);
           window.location.assign(`${window.location.href.slice(0, -4)}${id}`);
         })
       }
