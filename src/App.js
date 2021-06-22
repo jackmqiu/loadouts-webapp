@@ -69,7 +69,7 @@ const App = (props) => {
   const [feedLoadouts, setFeedLoadouts] = useState([]);
   const [scrollPosition, setScrollPosition] = useState(window.pageYOffset);
   const [floatingNavDisplay, setFloatingNavDisplay] = useState(true);
-  const [loadoutHashtags, setLoadoutHashtags] = useState(hashtagTable[loadoutCategory]);
+  const [loadoutHashtags, setLoadoutHashtags] = useState(hashtagTable);
   const [newLoadoutFormOpen, setNewLoadoutFormOpen] = useState(false);
   const [discoverUI, setDiscoverUI] = useState({});
   useEffect(() => {
@@ -230,7 +230,6 @@ const App = (props) => {
         axiosInstance.post(`/make`, {
           ...igLoadoutState,
           _id: id,
-          hashtags: loadoutHashtags,
         })
         .then(response => {
           setIgLoadoutIdState(id);
