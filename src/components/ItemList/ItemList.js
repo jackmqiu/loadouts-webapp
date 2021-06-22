@@ -39,11 +39,7 @@ const ItemList = ({
       hashtagsString = hashtagsString.concat('#', key, ' ');
     }
   })
-  useEffect(() => {
-    if (!igLoadoutState.title) {
-      toggleNewLoadoutFormOpen()
-    }
-  }, [])
+
   return (
     <Grid container className={classes.gridContainer}>
       <Grid item xs={12} className={classes.loadoutTitleContainer} onClick={() => { toggleNewLoadoutFormOpen() }}>
