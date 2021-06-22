@@ -15,6 +15,14 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import { hashtagTable, categoriesList } from '../../constants';
 const useStyles = makeStyles((theme) => ({
+  modal: {
+    marginRight: 'auto',
+    marginLeft: 'auto',
+    maxWidth: 600,
+    minWidth: 120,
+    maxHeight: 800,
+    padding: 20,
+  },
   paper: {
     position: 'absolute',
     width: 400,
@@ -22,11 +30,6 @@ const useStyles = makeStyles((theme) => ({
     border: '2px solid #000',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
-  },
-  modal: {
-    minWidth: 120,
-    maxHeight: 800,
-    padding: 20,
   },
   formTitle: {
     marginLeft: '10%',
@@ -139,7 +142,7 @@ const LoadoutMetadataForm = ({
     }
   })
   return (
-    <div>
+    <div >
       {
         newLoadoutFormOpen &&
         <Modal
