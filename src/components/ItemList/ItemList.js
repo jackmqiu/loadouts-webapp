@@ -9,7 +9,12 @@ import {
 } from '../../constants';
 
 const useStyles = makeStyles(() => ({
-  gridContainer: {
+  root: {
+    width: '100%',
+    display: 'flex',
+    maxWidth: 800,
+    marginRight: 'auto',
+    marginLeft: 'auto',
   },
   loadoutTitleContainer: {
     minHeight: 160,
@@ -41,7 +46,7 @@ const ItemList = ({
   })
 
   return (
-    <Grid container className={classes.gridContainer}>
+    <Grid container className={classes.root}>
       <Grid item xs={12} className={classes.loadoutTitleContainer} onClick={() => { toggleNewLoadoutFormOpen() }}>
         <Typography className={classes.loadoutTitle} variant='h4'>{igLoadoutState.title}</Typography>
         <Typography variant='p2'>{hashtagsString}</Typography>
