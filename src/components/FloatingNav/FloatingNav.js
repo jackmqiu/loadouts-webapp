@@ -71,7 +71,7 @@ export default function FloatingNav({
 
       <Slide direction="up" in={floatingNavDisplay} mountOnEnter unmountOnExit>
         <Fab variant='extended' aria-label="add" disableRipple={true} className={classes.fab}>
-          <IconButton component="span" className={classes.inside} onClick={() => {handleClick('/')}}>
+          <IconButton component="span" disableFocusRipple={true} className={classes.inside} onClick={() => {handleClick('/')}}>
             <HomeIcon color={(location === '/') ? 'primary' : 'disabled'}/>
           </IconButton>
           { (location !== '/make') ?
