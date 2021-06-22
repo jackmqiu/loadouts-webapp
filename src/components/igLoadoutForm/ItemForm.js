@@ -30,6 +30,9 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
   },
   modal: {
+    marginRight: 'auto',
+    marginLeft: 'auto',
+    maxWidth: 600,
     minWidth: 120,
     padding: 20,
     marginBottom: '10%',
