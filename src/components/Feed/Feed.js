@@ -4,11 +4,16 @@ import { makeStyles } from '@material-ui/core/styles';
 import LoadoutGrid from '../igLoadout';
 
 const useStyles = makeStyles(() => ({
-  grid: ({screenWidth}) => ({
+  root: {
+    maxWidth: 600,
+    marginLeft: 'auto',
+    marginRight: 'auto',
+  },
+  grid: ({limitedScreenWidth}) => ({
     margin: 0,
     // backgroundColor: 'gray',
     width: '100%',
-    height: screenWidth,
+    height: limitedScreenWidth,
   }),
   button: {
     margin: 5,
@@ -28,7 +33,11 @@ const Feed = ({
   screenWidth,
   scrollToTop,
 }) => {
-  const classes = useStyles({ screenWidth });
+  let limitedScreenWidth = 600;
+  if (screenWidth < limitedScreenWidth) {
+    limitedScreenWidth = screenWidth;
+  }
+  const classes = useStyles({ limitedScreenWidth });
     // tell React that we want to associate the <input> ref
     // with the `grid` that we created in the constructor
   const loadouts = [];
@@ -40,13 +49,13 @@ const Feed = ({
           setIgLoadoutState={setIgLoadoutState}
           colorScheme={colorScheme}
           displayState={displayState}
-          screenWidth={screenWidth}
+          screenWidth={limitedScreenWidth}
           scrollToTop={scrollToTop}
         />
     )
   };
   return (
-    <div>
+    <div className={classes.root}>
       { loadouts }
     </div>
   );
