@@ -50,8 +50,9 @@ const App = (props) => {
     2: '#DCDCDB',
   })
   const [igLoadoutState, setIgLoadoutState] = useState({
+    title: 'New Loadout',
     items: {},
-    hashtags: {},
+    hashtags: { loadouts: true },
   });
   const [activeIgLoadoutCard, setActiveIgLoadoutCard] = useState(0);
   const [googleResults, setGoogleResults] = useState(null);
