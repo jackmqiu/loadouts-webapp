@@ -54,6 +54,11 @@ const App = (props) => {
     items: {},
     hashtags: { loadouts: true },
   });
+  const [viewLoadoutState, setViewLoadoutState] = useState({
+    title: 'Not Found',
+    items: {},
+    hashtags: { loadouts: true },
+  })
   const [activeIgLoadoutCard, setActiveIgLoadoutCard] = useState(0);
   const [googleResults, setGoogleResults] = useState(null);
   const [displayState, setDisplayState] = useState(
@@ -209,9 +214,9 @@ const App = (props) => {
     .then(response => {
       console.log('response', response);
       if (typeof(response.data) === 'object') {
-        setIgLoadoutState(response.data);
+        setViewLoadoutState(response.data);
       } else {
-        setIgLoadoutState({
+        setViewLoadoutState({
           title: 'Not Found',
           items: {},
           hashtags: {},
@@ -302,7 +307,7 @@ const App = (props) => {
       </Route>
       <Route path='/:id'>
         <ItemList
-          igLoadoutState={igLoadoutState}
+          igLoadoutState={viewLoadoutState}
           addIgLoadoutItem={addIgLoadoutItem}
           toggleIgLoadoutForm={toggleIgLoadoutForm}
           colorScheme={colorScheme}
