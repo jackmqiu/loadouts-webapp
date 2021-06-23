@@ -344,6 +344,7 @@ const App = (props) => {
     </Route>
   </Switch>
       <FloatingNav
+        mixpanel={mixpanel}
         displayState={displayState}
         setDisplayState={setDisplayState}
         igLoadoutState={igLoadoutState}

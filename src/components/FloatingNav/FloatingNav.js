@@ -37,6 +37,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function FloatingNav({
+  mixpanel,
   addIgLoadout,
   setIdFormOpen,
   toggleIgLoadoutForm,
@@ -52,7 +53,19 @@ export default function FloatingNav({
   const displayPublish = (location === '/make' && Object.keys(igLoadoutState).length > 0 && floatingNavDisplay);
   const displayDiscover = (location !== '/discover');
   const history = useHistory();
-  const handleClick = useCallback((element) => history.push(`${element}`), [history]);
+  const handleClick = useCallback((element) => {
+    mixpanel.track(
+      'Action',
+      {"FloatingNav": `${element}`}
+    );
+    history.push(`${element}`)
+  }, [history]);
+  const track = (action) => {
+    mixpanel.track(
+      'Action',
+      {"FloatingNav": `${action}`}
+    );
+  }
   return (
     <div className={classes.rootNav}>
       {/*
@@ -75,10 +88,10 @@ export default function FloatingNav({
             <HomeIcon color={(location === '/') ? 'primary' : 'disabled'}/>
           </IconButton>
           { (location !== '/make') ?
-            <IconButton className={classes.button} disableFocusRipple={true} onClick={() => { toggleNewLoadoutFormOpen() }}>
+            <IconButton className={classes.button} disableFocusRipple={true} onClick={() => { toggleNewLoadoutFormOpen(); track('add loadout') }}>
               <AddIcon color={(location === '/make') ? 'primary' : 'disabled'}/>
             </IconButton> :
-            <IconButton className={classes.button} disableFocusRipple={true} onClick={() => {setIdFormOpen(true); toggleIgLoadoutForm();}}>
+            <IconButton className={classes.button} disableFocusRipple={true} onClick={() => {setIdFormOpen(true); toggleIgLoadoutForm(); track('publish loadout')}}>
               <PublishIcon color={(location === '/make') ? 'secondary' : 'disabled'}/>
             </IconButton>
           }
