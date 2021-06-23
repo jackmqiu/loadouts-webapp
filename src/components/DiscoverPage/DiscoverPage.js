@@ -61,10 +61,14 @@ const useStyles = makeStyles({
 // const uiObject = mainUI;
 
 const HomePage = ({
+  mixpanel,
   discoverUI,
 }) => {
   const classes = useStyles();
   const uiObject = discoverUI;
+  const handleClick = () => {
+
+  }
   const gridItems = [];
   Object.keys(uiObject).forEach((section) => {
     if (uiObject[section].show) {

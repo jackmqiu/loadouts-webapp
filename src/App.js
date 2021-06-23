@@ -9,7 +9,7 @@ import IgLoadoutForm from './components/igLoadoutForm';
 import Feed from './components/Feed';
 import ItemList from './components/ItemList';
 import CategoryBar from './components/CategoryBar';
-import HomePage from './components/HomePage';
+import DiscoverPage from './components/DiscoverPage';
 import {
   hashtagTable,
   cseIDs,
@@ -250,7 +250,7 @@ const App = (props) => {
     <Switch>
       <Route path='/discover'>
         <div>
-          <HomePage
+          <DiscoverPage
             discoverUI={discoverUI}
             mixpanel={mixpanel}
           />
