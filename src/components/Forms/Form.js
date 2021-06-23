@@ -4,6 +4,7 @@ import LoadoutMetadataForm from './LoadoutMetadataForm';
 
 const Form = ({
   mixpanel,
+  igLoadoutState,
   toggleNewLoadoutFormOpen,
   newLoadoutFormOpen,
   loadoutHashtags,
@@ -17,6 +18,7 @@ const Form = ({
     { newLoadoutFormOpen &&
       <LoadoutMetadataForm
         mixpanel={mixpanel}
+        igLoadoutState={igLoadoutState}
         toggleNewLoadoutFormOpen={toggleNewLoadoutFormOpen}
         newLoadoutFormOpen={newLoadoutFormOpen}
         loadoutHashtags={loadoutHashtags}

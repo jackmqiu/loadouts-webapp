@@ -71,6 +71,7 @@ const useStyles = makeStyles((theme) => ({
 
 const LoadoutMetadataForm = ({
   mixpanel,
+  igLoadoutState,
   toggleNewLoadoutFormOpen,
   newLoadoutFormOpen,
   loadoutHashtags,
@@ -80,7 +81,7 @@ const LoadoutMetadataForm = ({
   setLoadoutCategory,
 }) => {
   const classes = useStyles();
-  const [loadoutNameText, setNameText] = useState('');
+  const [loadoutNameText, setNameText] = useState(igLoadoutState.title);
   const history = useHistory();
   const directToMakeLoadout = useCallback(() => history.push('/make'), [history]);
   const handleTextChange = (event) => {

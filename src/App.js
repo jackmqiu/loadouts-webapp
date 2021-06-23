@@ -256,6 +256,7 @@ const App = (props) => {
           />
           <Form
             mixpanel={mixpanel}
+            igLoadoutState={igLoadoutState}
             toggleNewLoadoutFormOpen={toggleNewLoadoutFormOpen}
             newLoadoutFormOpen={newLoadoutFormOpen}
             loadoutHashtags={loadoutHashtags}
@@ -297,6 +298,7 @@ const App = (props) => {
         />
         <Form
           mixpanel={mixpanel}
+          igLoadoutState={igLoadoutState}
           toggleNewLoadoutFormOpen={toggleNewLoadoutFormOpen}
           newLoadoutFormOpen={newLoadoutFormOpen}
           loadoutHashtags={loadoutHashtags}
@@ -332,6 +334,7 @@ const App = (props) => {
             />
           <Form
             mixpanel={mixpanel}
+            igLoadoutState={igLoadoutState}
             toggleNewLoadoutFormOpen={toggleNewLoadoutFormOpen}
             newLoadoutFormOpen={newLoadoutFormOpen}
             loadoutHashtags={loadoutHashtags}
