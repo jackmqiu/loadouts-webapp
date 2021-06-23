@@ -52,7 +52,7 @@ const CategoryBar = ({
   return (
     <div className={classes.root}>
     <div className={classes.breadcrumbs}>
-      <Breadcrumbs aria-label="breadcrumb" className={classes.scrollable}>
+      <Breadcrumbs itemsBeforeCollapse={8} aria-label="breadcrumb" className={classes.scrollable}>
       {
         buttons.map(({ category, color }) => {
         return <Link color={color} href={`http://${category}.loadouts.me`} onClick={() => { handleClick(category) }}>
