@@ -12,7 +12,7 @@ const useStyles = makeStyles(() => ({
   root: {
     width: '100%',
     display: 'flex',
-    maxWidth: 800,
+    maxWidth: 600,
     marginRight: 'auto',
     marginLeft: 'auto',
   },
