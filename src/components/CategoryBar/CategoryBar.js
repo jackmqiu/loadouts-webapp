@@ -37,8 +37,8 @@ const CategoryBar = ({
 }) => {
   const handleClick = (category) => {
     mixpanel.track(
-      'Action',
-      {"changeCategory": `${category}`}
+      'Navigate',
+      {"CategoryBar": `${category}`}
     );
   };
   const buttons = [];
