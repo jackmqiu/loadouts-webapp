@@ -268,6 +268,7 @@ const App = (props) => {
       </Route>
       <Route path='/make'>
         <ItemList
+          mixpanel={mixpanel}
           igLoadoutState={igLoadoutState}
           addIgLoadoutItem={addIgLoadoutItem}
           toggleIgLoadoutForm={toggleIgLoadoutForm}
@@ -307,6 +308,7 @@ const App = (props) => {
       </Route>
       <Route path='/:id'>
         <ItemList
+          mixpanel={mixpanel}
           igLoadoutState={viewLoadoutState}
           addIgLoadoutItem={addIgLoadoutItem}
           toggleIgLoadoutForm={toggleIgLoadoutForm}

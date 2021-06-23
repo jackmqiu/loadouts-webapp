@@ -29,6 +29,7 @@ const useStyles = makeStyles(() => ({
   },
 }))
 const ItemList = ({
+  mixpanel,
   igLoadoutState,
   toggleIgLoadoutForm,
   colorScheme,
@@ -37,6 +38,13 @@ const ItemList = ({
   loadoutCategory,
 }) => {
   const classes = useStyles();
+  useEffect(() => {
+    console.log('mixpanel loadout')
+    mixpanel.track(
+      'Navigate',
+      {"ItemList": `${igLoadoutState.title}`}
+    );
+  }, [])
   let hashtagsString = '';
   let hashtags = igLoadoutState.hashtags || hashtagTable[loadoutCategory];
   Object.keys(hashtags).forEach((key) => {
