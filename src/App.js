@@ -50,12 +50,12 @@ const App = (props) => {
     2: '#DCDCDB',
   })
   const [igLoadoutState, setIgLoadoutState] = useState({
-    title: 'New Loadout',
+    title: '',
     items: {},
     hashtags: { loadouts: true },
   });
   const [viewLoadoutState, setViewLoadoutState] = useState({
-    title: 'Not Found',
+    title: '',
     items: {},
     hashtags: { loadouts: true },
   })

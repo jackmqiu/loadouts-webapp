@@ -4,6 +4,7 @@ import ItemCard from './ItemCard';
 import Grid from '@material-ui/core/grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import { useLocation } from 'react-router-dom';
 import {
   hashtagTable,
 } from '../../constants';
@@ -38,6 +39,7 @@ const ItemList = ({
   loadoutCategory,
 }) => {
   const classes = useStyles();
+  const location = useLocation().pathname;
   useEffect(() => {
     mixpanel.track(
       'Navigate',
@@ -51,11 +53,19 @@ const ItemList = ({
       hashtagsString = hashtagsString.concat('#', key, ' ');
     }
   })
+  let titleString = igLoadoutState.title;
+  if (titleString.length === 0) {
+    if (location === '/make') {
+      titleString = 'Untitled';
+    } else {
+      titleString = 'Not Found';
+    }
+  }
 
   return (
     <Grid container className={classes.root}>
       <Grid item xs={12} className={classes.loadoutTitleContainer} onClick={() => { toggleNewLoadoutFormOpen() }}>
-        <Typography className={classes.loadoutTitle} variant='h4'>{igLoadoutState.title}</Typography>
+        <Typography className={classes.loadoutTitle} variant='h4'>{titleString}</Typography>
         <Typography variant='p2'>{hashtagsString}</Typography>
       </Grid>
       <Grid item xs={6}>
