@@ -68,8 +68,8 @@ const DiscoverPage = ({
   const uiObject = discoverUI;
   const handleClick = (section, key) => {
     mixpanel.track(
-      'Action',
-      {"selectCategory": `${uiObject[section].cards[key].link}`}
+      'Navigate',
+      {"DiscoverPage": `${uiObject[section].cards[key].link}`}
     );
     window.location.assign(`https://${uiObject[section].cards[key].link}`)
   }
