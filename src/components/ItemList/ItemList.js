@@ -39,7 +39,6 @@ const ItemList = ({
 }) => {
   const classes = useStyles();
   useEffect(() => {
-    console.log('mixpanel loadout')
     mixpanel.track(
       'Navigate',
       {"ItemList": `${igLoadoutState.title}`}
