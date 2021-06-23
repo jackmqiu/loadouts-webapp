@@ -43,7 +43,6 @@ const CategoryBar = ({
   };
   const buttons = [];
   Object.keys(hashtagTable).forEach((category) => {
-    console.log('category, loadoutCategory', category, loadoutCategory);
     if (!nonCategories[category]) {
       buttons.push({
         category: category,
