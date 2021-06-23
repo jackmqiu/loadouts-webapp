@@ -59,16 +59,12 @@ const LoadoutCard = ({
     <div>
       { (itemDetails && (displayState === 'igLoadout' || displayState === 'feed')) &&
         <Card className={classes.card} >
-          <CardActionArea className={classes.cardActionArea}>
             <img alt='' className={classes.modImg} src={itemDetails.imageLink} />
-          </CardActionArea>
         </Card>
       }
       { (itemDetails && displayState === 'Make Loadout') &&
         <Card className={classes.card} onClick={() => toggleIgLoadoutForm(id)}>
-          <CardActionArea className={classes.cardActionArea}>
             <img alt='' className={classes.modImg} src={itemDetails.imageLink} />
-          </CardActionArea>
         </Card>
       }
       {
