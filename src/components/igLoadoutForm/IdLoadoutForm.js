@@ -67,7 +67,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const NameLoadoutForm = ({
+const IdLoadoutForm = ({
   mixpanel,
   submitLoadout
 }) => {
@@ -102,4 +102,4 @@ const NameLoadoutForm = ({
   )
 }
 
-export default NameLoadoutForm;
+export default IdLoadoutForm;
