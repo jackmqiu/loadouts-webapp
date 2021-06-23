@@ -2,7 +2,8 @@ import React from 'react';
 import Chip from '@material-ui/core/chip';
 import { makeStyles } from '@material-ui/core/styles';
 import {
-  hashtagTable
+  hashtagTable,
+  nonCategories,
 } from '../../constants';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import Link from '@material-ui/core/Link';
@@ -43,10 +44,12 @@ const CategoryBar = ({
   const buttons = [];
   Object.keys(hashtagTable).forEach((category) => {
     console.log('category, loadoutCategory', category, loadoutCategory);
-    buttons.push({
-      category: category,
-      color: (category === loadoutCategory) ? 'textPrimary' : 'inherit',
-    });
+    if (!nonCategories[category]) {
+      buttons.push({
+        category: category,
+        color: (category === loadoutCategory) ? 'textPrimary' : 'inherit',
+      });
+    }
   })
   const classes = useStyles();
   return (
