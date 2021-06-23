@@ -60,14 +60,18 @@ const useStyles = makeStyles({
 
 // const uiObject = mainUI;
 
-const HomePage = ({
+const DiscoverPage = ({
   mixpanel,
   discoverUI,
 }) => {
   const classes = useStyles();
   const uiObject = discoverUI;
-  const handleClick = () => {
-
+  const handleClick = (section, key) => {
+    mixpanel.track(
+      'Action',
+      {"selectCategory": `${uiObject[section].cards[key].link}`}
+    );
+    window.location.assign(`https://${uiObject[section].cards[key].link}`)
   }
   const gridItems = [];
   Object.keys(uiObject).forEach((section) => {
@@ -83,7 +87,7 @@ const HomePage = ({
         if (uiObject[section].cards[key].show) {
           gridItems.push(
             <Grid item xs={6} >
-              <Card elevation={0} className={classes.categoryCard} onClick={() => {window.location.assign(`https://${uiObject[section].cards[key].link}`)}}>
+              <Card elevation={0} className={classes.categoryCard} onClick={() => {handleClick(section, key)}}>
                 <div className={classes.cardSpace}>
                   <CardMedia image={uiObject[section].cards[key].imageLink} className={classes.categoryCardMedia}/>
                   <Typography variant='subtitle1' className={classes.cardTitle}>
@@ -111,4 +115,4 @@ const HomePage = ({
   )
 }
 
-export default HomePage;
+export default DiscoverPage;
