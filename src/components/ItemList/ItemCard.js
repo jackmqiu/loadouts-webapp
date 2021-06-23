@@ -39,6 +39,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 const ItemCard = ({
+  mixpanel,
   cardInfo,
   shortCard,
   color,
@@ -48,17 +49,23 @@ const ItemCard = ({
   canEdit,
 }) => {
   const classes = useStyles({ color, shortCard, firstCard });
+  const track = (action) => {
+    mixpanel.track(
+      'Action',
+      {"ItemList-ItemCard": `${action}`}
+    );
+  }
   return (
     <div>
     { cardInfo && canEdit && // making loadout card
-      <Card className={classes.card} onClick={() => toggleIgLoadoutForm(id)}>
+      <Card className={classes.card} onClick={() => {toggleIgLoadoutForm(id); track('edit')}}>
         <CardActionArea className={classes.cardActionArea}>
           <img alt='' className={classes.modImg} src={cardInfo.imageLink} />
         </CardActionArea>
       </Card>
     }
     { cardInfo && !canEdit && // to product link
-      <Card className={classes.card} onClick={()=> {window.open(cardInfo.productLink, '_blank')}}>
+      <Card className={classes.card} onClick={()=> {window.open(cardInfo.productLink, '_blank'); track(cardInfo.productLink)}}>
         <CardActionArea className={classes.cardActionArea}>
           <img alt='' className={classes.modImg} src={cardInfo.imageLink} />
         </CardActionArea>

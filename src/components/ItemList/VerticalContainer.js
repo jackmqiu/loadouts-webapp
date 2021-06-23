@@ -10,6 +10,7 @@ const useStyles = makeStyles(() => ({
 }))
 
 const VerticalContainer = ({
+  mixpanel,
   igLoadoutState,
   containerIndex,
   totalContainers,
@@ -24,6 +25,7 @@ const VerticalContainer = ({
     // first card of column might be short, handled here
     cards.push(
       <ItemCard
+        mixpanel={mixpanel}
         id={containerIndex}
         key={containerIndex}
         cardInfo={igLoadoutState.items[containerIndex]}
@@ -42,6 +44,7 @@ const VerticalContainer = ({
   ) {
     cards.push(
       <ItemCard
+        mixpanel={mixpanel}
         id={i}
         key={i}
         cardInfo={igLoadoutState.items[i]}
@@ -57,6 +60,7 @@ const VerticalContainer = ({
     // if all cards are out, add blank 'add' card
     cards.push(
       <ItemCard
+        mixpanel={mixpanel}
         id={Object.keys(igLoadoutState.items).length}
         key={Object.keys(igLoadoutState.items).length}
         cardInfo={null}

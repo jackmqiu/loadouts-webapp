@@ -60,6 +60,7 @@ const ItemList = ({
       </Grid>
       <Grid item xs={6}>
       <VerticalContainer
+        mixpanel={mixpanel}
         igLoadoutState={igLoadoutState}
         containerIndex={0}
         totalContainers={2}
@@ -72,6 +73,7 @@ const ItemList = ({
       </Grid>
       <Grid item xs={6}>
       <VerticalContainer
+        mixpanel={mixpanel}
         igLoadoutState={igLoadoutState}
         containerIndex={1}
         totalContainers={2}
