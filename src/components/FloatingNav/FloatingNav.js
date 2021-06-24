@@ -88,7 +88,7 @@ export default function FloatingNav({
             <HomeIcon color={(location === '/') ? 'primary' : 'disabled'}/>
           </IconButton>
           { (location !== '/make') ?
-            <IconButton className={classes.button} disableFocusRipple={true} onClick={() => { toggleNewLoadoutFormOpen(); track('add loadout') }}>
+            <IconButton className={classes.button} disableFocusRipple={true} onClick={() => { toggleNewLoadoutFormOpen(); track('add loadout'); handleClick('/make') }}>
               <AddIcon color={(location === '/make') ? 'primary' : 'disabled'}/>
             </IconButton> :
             <IconButton className={classes.button} disableFocusRipple={true} onClick={() => {setIdFormOpen(true); toggleIgLoadoutForm(); track('publish loadout')}}>
