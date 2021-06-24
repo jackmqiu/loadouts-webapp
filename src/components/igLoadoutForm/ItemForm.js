@@ -255,7 +255,7 @@ const ItemForm = ({
                 </GridList>
                 </div>
               }
-              { !googleResults &&
+              { !googleResults && igLoadoutState.items[activeIgLoadoutCard] &&
                 <div>
                   <Typography variant='h5' className={classes.formTitle}>Customize</Typography>
                   <TextField margin="dense" error={hasSubmitted && !productNameText} helperText={hasSubmitted && !productNameText && 'Add Item Name'} defaultValue={igLoadoutState.items[activeIgLoadoutCard] && igLoadoutState.items[activeIgLoadoutCard].productName} className={classes.textField} label="Product" variant="outlined" onChange={handleProductNameTextChange} onKeyPress={handleTextFieldSubmit}/>
@@ -264,7 +264,7 @@ const ItemForm = ({
                 </div>
               }
             </div>
-            { !googleResults &&
+            { !googleResults && igLoadoutState.items[activeIgLoadoutCard] &&
               <div className={classes.buttonContainer}>
                 <Button className={classes.nextButton} variant='contained' color='primary' onClick={() => {handleSubmitLoadout()}}>Submit</Button>
                 <Button className={classes.nextButton} variant='contained' color='secondary' onClick={() => {handleDeleteCard()}}>Delete</Button>
