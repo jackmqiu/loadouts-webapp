@@ -52,6 +52,11 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: 30,
     paddingBottom: 30,
   },
+  guideText: {
+    marginLeft: '10%',
+    marginRight: '10%',
+    marginTop: 5,
+  },
   buttonContainer: {
     width: '80%',
     marginLeft: '10%',
@@ -94,6 +99,7 @@ const IdLoadoutForm = ({
       <div className={classes.fieldsContainer}>
         <Typography variant='h5' className={classes.formTitle}> Enter Loadout Id</Typography>
         <TextField className={classes.textField} value={itemText} label="Product" variant="outlined" onChange={handleTextChange} onKeyPress={handleItemSubmit}/>
+        <Typography className={classes.guideText} variant='subtitle2'>{`Your loadout will be available at loadouts.me/${itemText}`}</Typography>
       </div>
       <div className={classes.buttonContainer}>
         <Button variant='contained' color='primary' className={classes.nextButton} onClick={handleClick}> Submit </Button>
