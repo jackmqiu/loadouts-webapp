@@ -183,6 +183,10 @@ const ItemForm = ({
       toggleHasSubmitted(true);
     }
   }
+  let placeholder = 'sling, specna m4, magpul, etc.';
+  // if (Object.keys(igLoadoutState.items).length < 1) {
+  //   placeholder = 'vfc hk416';
+  // }
   const handleSelect = (item, id) => {
     editIgLoadout({
       productLink: item.link,
@@ -218,6 +222,7 @@ const ItemForm = ({
                 label="Search"
                 variant="outlined"
                 autoFocus={true}
+                placeholder={placeholder}
                 onChange={handleSearchTextChange}
                 onKeyPress={handleSearchSubmit}
                 InputProps={{
