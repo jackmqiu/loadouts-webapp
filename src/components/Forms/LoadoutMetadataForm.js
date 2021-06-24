@@ -164,7 +164,7 @@ const LoadoutMetadataForm = ({
                   { categoryChoices }
                 </Select>
               </FormControl>
-              <TextField className={classes.select} value={loadoutNameText}  margin="dense" label="Loadout Title" variant="outlined" onChange={handleTextChange} onKeyPress={handleSubmitTitle} />
+              <TextField autoFocus={true} className={classes.select} value={loadoutNameText}  margin="dense" label="Loadout Title" variant="outlined" onChange={handleTextChange} onKeyPress={handleSubmitTitle} />
             </div>
             <div className={classes.chipsContainer}>
               {chips}
