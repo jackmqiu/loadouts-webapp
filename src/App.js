@@ -169,7 +169,7 @@ const App = (props) => {
     if (!text) {
       setGoogleResults(null);
     } else {
-      axiosInstanceGoogle.get(`v1?&q=${text}&num=10`)
+      axiosInstanceGoogle.get(`v1/siterestrict?&q=${text}&num=10`)
       .then(response => {
         if (response.data.items) {
           setGoogleResults(response.data.items);
