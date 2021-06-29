@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 import ItemCard from './ItemCard';
 import IgLayoutTable from '../../IgLayoutTable';
+import { gridLayoutTable } from '../../constants';
 
 const useStyles = makeStyles(() => ({
   grid: ({screenWidth}) => ({
@@ -42,11 +43,16 @@ const LoadoutGrid = ({
   const classes = useStyles({ screenWidth });
   let numCards = Object.keys(igLoadoutState.items).length;
   let numDisplayCards = numCards;
-  if (numCards > 9) { // keep it to 2 rows
-    numDisplayCards = 9;
+  if (numCards > 6) { // keep it to 2 rows
+    numDisplayCards = 6;
   }
   const loadoutGridItems = [];
+  // Object.keys(gridLayoutTable[numDisplayCards]).forEach((subGridKey) => {
+  //   gridLayoutTable[numDisplayCards][subGridKey]
+  // });
+
   for (let i = 0; i < numDisplayCards; i++) {
+
     loadoutGridItems.push(
       <Grid key={i} item xs={IgLayoutTable[numDisplayCards][i].gridItemWidth}>
         <ItemCard

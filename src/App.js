@@ -10,6 +10,7 @@ import Feed from './components/Feed';
 import ItemList from './components/ItemList';
 import CategoryBar from './components/CategoryBar';
 import DiscoverPage from './components/DiscoverPage';
+import { makeStyles } from '@material-ui/core/styles';
 import {
   hashtagTable,
   cseIDs,
@@ -31,7 +32,11 @@ import FloatingNav from './components/FloatingNav';
 const axiosInstance = axios.create({
   baseURL: `${process.env.REACT_APP_API_URL}`,
 });
-
+const useStyles = makeStyles(() => ({
+  root: {
+    backgroundColor: '#2C2B15',
+  },
+}))
 const TRACKING_ID = "UA-193462319-2";
 ReactGA.initialize(TRACKING_ID);
 ReactGA.pageview(window.location.pathname + window.location.search);
@@ -39,6 +44,7 @@ const mixpanel = require('mixpanel-browser');
 mixpanel.init("fbbc7fb17f489f12483171381e8da3d2");
 
 const App = (props) => {
+  const classes = useStyles();
   const loadoutsId = useLocation().pathname.substring(1);
   const capture = createRef(null);
   const [igLoadoutIdState, setIgLoadoutIdState] = useState('');
@@ -247,6 +253,7 @@ const App = (props) => {
   }
   return (
     <div className="App" >
+      <div className={classes.root}>
     <Switch>
       <Route path='/discover'>
         <div>
@@ -358,7 +365,7 @@ const App = (props) => {
         toggleNewLoadoutFormOpen={toggleNewLoadoutFormOpen}
         newLoadoutFormOpen={newLoadoutFormOpen}
       />
-
+      </div>
     </div>
 
   );
