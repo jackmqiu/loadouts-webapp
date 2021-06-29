@@ -49,12 +49,12 @@ const gridLayoutTable = {
   },
   5: {
     0: {
-      xs: 5,
-      gridItemHeight: 7,
+      xs: 7,
+      gridItemHeight: 8,
     },
     1: {
-      xs: 7,
-      gridItemHeight: 7,
+      xs: 5,
+      gridItemHeight: 8,
     },
     2: {
       xs: 4,
