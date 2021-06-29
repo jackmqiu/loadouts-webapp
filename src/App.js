@@ -34,7 +34,7 @@ const axiosInstance = axios.create({
 });
 const useStyles = makeStyles(() => ({
   root: {
-    backgroundColor: '#2C2B15',
+    backgroundColor: '#ECEFE9',
   },
 }))
 const TRACKING_ID = "UA-193462319-2";
