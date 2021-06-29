@@ -15,8 +15,8 @@ const useStyles = makeStyles(() => ({
 
   card: ({ color, height, screenWidth, rows }) => ({
     width: '100%',
-    height: screenWidth*height/12*heightGuide[rows],
-    borderRadius: 8,
+    // height: screenWidth*height/12*heightGuide[rows],
+    borderRadius: 0,
     boxShadow: 'none',
     // position: 'relative',
     backgroundColor: 'white',
@@ -56,24 +56,9 @@ const LoadoutCard = ({
 }) => {
   const classes = useStyles({color, height, screenWidth, rows});
   return (
-    <div>
-      { (itemDetails && (displayState === 'igLoadout' || displayState === 'feed')) &&
-        <Card className={classes.card} >
-            <img alt='' className={classes.modImg} src={itemDetails.imageLink} />
-        </Card>
-      }
-      { (itemDetails && displayState === 'Make Loadout') &&
-        <Card className={classes.card} onClick={() => toggleIgLoadoutForm(id)}>
-            <img alt='' className={classes.modImg} src={itemDetails.imageLink} />
-        </Card>
-      }
-      {
-        !itemDetails &&
-        <Card className={classes.card} onClick={() => toggleIgLoadoutForm(id)}>
-          <SearchIcon className={classes.icon} fontSize='large'/>
-        </Card>
-      }
-    </div>
+    <Card className={classes.card} >
+        <img alt='' className={classes.modImg} src={itemDetails.imageLink} />
+    </Card>
   );
 };
 

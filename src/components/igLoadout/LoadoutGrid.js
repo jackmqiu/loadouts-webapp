@@ -5,19 +5,22 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 import ItemCard from './ItemCard';
 import IgLayoutTable from '../../IgLayoutTable';
-import { gridLayoutTable } from '../../constants';
+import { gridLayoutTable, heightGuide } from '../../constants';
 
 const useStyles = makeStyles(() => ({
   grid: ({screenWidth}) => ({
     margin: 0,
     // backgroundColor: 'black',
-    backgroundImage: 'linear-gradient(to bottom, #FDF0A6, #87CEEB)',
+    // backgroundImage: 'linear-gradient(to bottom, #FDF0A6, #87CEEB)',
     width: '95%',
     marginLeft: '2.5%',
     marginRight: '2.5%',
     height: screenWidth,
-    borderRadius: 10,
+    borderRadius: 0,
   }),
+  gridItem: {
+    display: 'flex',
+  },
   button: {
     margin: 5,
   },
@@ -49,8 +52,9 @@ const LoadoutGrid = ({
   const populateSubItems = (subGridIndex) => {
     const loadoutGridSubItems = [];
     gridLayoutTable[numDisplayCards][subGridIndex].items.forEach((item, i) => {
+      const gridHeight = screenWidth*item.gridItemHeight/12;
       loadoutGridSubItems.push(
-        <Grid key={subGridIndex+i} item xs={item.xs}>
+        <Grid key={subGridIndex+i} className={classes.gridItem} item xs={item.xs} style={{height: gridHeight}}>
           <ItemCard
             height={item.gridItemHeight}
             itemDetails={igLoadoutState.items[subGridIndex+i]}
@@ -76,17 +80,20 @@ const LoadoutGrid = ({
   for (let i = 0; i < numDisplayCards; i++) {
     if (gridLayoutTable[numDisplayCards][i].items) {
       // const loadoutGridSubItems = populateSubItems(i)
+      const gridHeight = screenWidth*gridLayoutTable[numDisplayCards][i].gridItemHeight/12;
       loadoutGridItems.push(
-        <Grid key={i} item xs={gridLayoutTable[numDisplayCards][i].xs}>
-          <Grid container spacing={1}>
-            {populateSubItems(i)}
+        <Grid key={i} item xs={gridLayoutTable[numDisplayCards][i].xs} style={{height: gridHeight}}>
+          <Grid container spacing={1} style={{height: gridHeight}}>
+            {populateSubItems(i, gridHeight)}
           </Grid>
         </Grid>
       )
       i += (gridLayoutTable[numDisplayCards][i].items.length - 1);
     } else {
+      const gridHeight = screenWidth*gridLayoutTable[numDisplayCards][i].gridItemHeight/12;
+
       loadoutGridItems.push(
-        <Grid key={i} item xs={gridLayoutTable[numDisplayCards][i].xs}>
+        <Grid key={i} item xs={gridLayoutTable[numDisplayCards][i].xs} className={classes.gridItem} style={{height: gridHeight}}>
           <ItemCard
             id={i}
             height={gridLayoutTable[numDisplayCards][i].gridItemHeight}

@@ -58,15 +58,15 @@ const gridLayoutTable = {
     },
     2: {
       xs: 4,
-      gridItemHeight: 5,
+      gridItemHeight: 4,
     },
     3: {
       xs: 4,
-      gridItemHeight: 5,
+      gridItemHeight: 4,
     },
     4: {
       xs: 4,
-      gridItemHeight: 5,
+      gridItemHeight: 4,
     },
   },
   6: {
