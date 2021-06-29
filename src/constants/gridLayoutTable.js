@@ -3,216 +3,102 @@ const gridLayoutTable = {
     0: {
       xs: 12,
       gridItemHeight: 12,
-      items: {
-        0: {
-          xs: 12,
-          gridItemHeight: 12,
-        }
-      }
     },
   },
   2: {
     0: {
       xs: 12,
       gridItemHeight: 5,
-      items: {
-        0: {
-          xs: 12,
-          gridItemHeight: 12,
-        }
-      }
     },
     1: {
       xs: 12,
       gridItemHeight: 7,
-      items: {
-        0: {
-          xs: 12,
-          gridItemHeight: 12,
-        }
-      }
     },
   },
   3: {
     0: {
       xs: 5,
       gridItemHeight: 5,
-      items: {
-        0: {
-          xs: 12,
-          gridItemHeight: 12,
-        }
-      }
     },
     1: {
       xs: 7,
       gridItemHeight: 5,
-      items: {
-        0: {
-          xs: 12,
-          gridItemHeight: 12,
-        }
-      }
     },
     2: {
       xs: 12,
       gridItemHeight: 7,
-      items: {
-        0: {
-          xs: 12,
-          gridItemHeight: 12,
-        }
-      }
     },
   },
   4: {
     0: {
       xs: 6,
       gridItemHeight: 6,
-      items: {
-        0: {
-          xs: 12,
-          gridItemHeight: 12,
-        }
-      }
     },
     1: {
       xs: 6,
       gridItemHeight: 6,
-      items: {
-        0: {
-          xs: 12,
-          gridItemHeight: 12,
-        }
-      }
     },
     2: {
       xs: 6,
       gridItemHeight: 6,
-      items: {
-        0: {
-          xs: 12,
-          gridItemHeight: 12,
-        }
-      }
     },
     3: {
       xs: 6,
       gridItemHeight: 6,
-      items: {
-        0: {
-          xs: 12,
-          gridItemHeight: 12,
-        }
-      }
     },
   },
   5: {
     0: {
       xs: 5,
       gridItemHeight: 7,
-      items: {
-        0: {
-          xs: 12,
-          gridItemHeight: 12,
-        }
-      }
     },
     1: {
       xs: 7,
       gridItemHeight: 7,
-      items: {
-        0: {
-          xs: 12,
-          gridItemHeight: 12,
-        }
-      }
     },
     2: {
       xs: 4,
       gridItemHeight: 5,
-      items: {
-        0: {
-          xs: 12,
-          gridItemHeight: 12,
-        }
-      }
     },
     3: {
       xs: 4,
       gridItemHeight: 5,
-      items: {
-        0: {
-          xs: 12,
-          gridItemHeight: 12,
-        }
-      }
     },
     4: {
       xs: 4,
       gridItemHeight: 5,
-      items: {
-        0: {
-          xs: 12,
-          gridItemHeight: 12,
-        }
-      }
     },
   },
   6: {
     0: {
       xs: 8,
       gridItemHeight: 8,
-      items: {
-        0: {
-          xs: 12,
-          gridItemHeight: 12,
-        }
-      }
     },
     1: {
       xs: 4,
-      gridItemHeight: 4,
-      items: {
-        0: {
+      gridItemHeight: 8,
+      items: [
+        {
           xs: 12,
-          gridItemHeight: 6,
+          gridItemHeight: 4,
         },
-        1: {
+        {
           xs: 12,
-          gridItemHeight: 6,
+          gridItemHeight: 4,
         },
-      }
-    },
-    2: {
-      xs: 4,
-      gridItemHeight: 4,
-      items: {
-        0: {
-          xs: 12,
-          gridItemHeight: 12,
-        }
-      }
+      ]
     },
     3: {
       xs: 4,
       gridItemHeight: 4,
-      items: {
-        0: {
-          xs: 12,
-          gridItemHeight: 12,
-        }
-      }
     },
     4: {
       xs: 4,
       gridItemHeight: 4,
-      items: {
-        0: {
-          xs: 12,
-          gridItemHeight: 12,
-        }
-      }
+    },
+    5: {
+      xs: 4,
+      gridItemHeight: 4,
     },
   },
   7: {

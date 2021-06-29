@@ -46,34 +46,67 @@ const LoadoutGrid = ({
   if (numCards > 6) { // keep it to 2 rows
     numDisplayCards = 6;
   }
+  const populateSubItems = (subGridIndex) => {
+    const loadoutGridSubItems = [];
+    gridLayoutTable[numDisplayCards][subGridIndex].items.forEach((item, i) => {
+      loadoutGridSubItems.push(
+        <Grid key={subGridIndex+i} item xs={item.xs}>
+          <ItemCard
+            height={item.gridItemHeight}
+            itemDetails={igLoadoutState.items[subGridIndex+i]}
+            openModal={handleOpen}
+            closeModal={handleClose}
+            color={colorScheme[i%2]}
+            toggleIgLoadoutForm={toggleIgLoadoutForm}
+            displayState={displayState}
+            screenWidth={screenWidth}
+            rows={IgLayoutTable[numDisplayCards].rows}
+          />
+        </Grid>
+      )
+    });
+    return loadoutGridSubItems;
+  }
   const loadoutGridItems = [];
   // Object.keys(gridLayoutTable[numDisplayCards]).forEach((subGridKey) => {
   //   gridLayoutTable[numDisplayCards][subGridKey]
   // });
 
-  for (let i = 0; i < numDisplayCards; i++) {
 
-    loadoutGridItems.push(
-      <Grid key={i} item xs={IgLayoutTable[numDisplayCards][i].gridItemWidth}>
-        <ItemCard
-          id={i}
-          height={IgLayoutTable[numDisplayCards][i].gridItemHeight}
-          itemDetails={igLoadoutState.items[i]}
-          openModal={handleOpen}
-          closeModal={handleClose}
-          color={colorScheme[i%2]}
-          toggleIgLoadoutForm={toggleIgLoadoutForm}
-          displayState={displayState}
-          screenWidth={screenWidth}
-          rows={IgLayoutTable[numDisplayCards].rows}
-        />
-      </Grid>
-    )
+  for (let i = 0; i < numDisplayCards; i++) {
+    if (gridLayoutTable[numDisplayCards][i].items) {
+      // const loadoutGridSubItems = populateSubItems(i)
+      loadoutGridItems.push(
+        <Grid key={i} item xs={gridLayoutTable[numDisplayCards][i].xs}>
+          <Grid container spacing={1}>
+            {populateSubItems(i)}
+          </Grid>
+        </Grid>
+      )
+      i += (gridLayoutTable[numDisplayCards][i].items.length - 1);
+    } else {
+      loadoutGridItems.push(
+        <Grid key={i} item xs={gridLayoutTable[numDisplayCards][i].xs}>
+          <ItemCard
+            id={i}
+            height={gridLayoutTable[numDisplayCards][i].gridItemHeight}
+            itemDetails={igLoadoutState.items[i]}
+            openModal={handleOpen}
+            closeModal={handleClose}
+            color={colorScheme[i%2]}
+            toggleIgLoadoutForm={toggleIgLoadoutForm}
+            displayState={displayState}
+            screenWidth={screenWidth}
+            rows={IgLayoutTable[numDisplayCards].rows}
+          />
+        </Grid>
+      )
+    }
   };
   return (
     <div>
     <Link to={`/${igLoadoutState._id}`}>
-      <Grid container className={classes.grid} spacing={2}>
+      <Grid container className={classes.grid} spacing={1}>
         { loadoutGridItems }
       </Grid>
     </Link>
