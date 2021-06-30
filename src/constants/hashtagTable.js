@@ -58,6 +58,13 @@ const hashtagTable = {
   //   diy: true,
   //   craftsforkids: false,
   // },
+  kitchen: {
+    kitchenware: true,
+    kitchensetup: true,
+    kitchen: true,
+    kitchenset: true,
+    kitchenitems: false,
+  },
   'localhost:3000': {
     local: true,
   },

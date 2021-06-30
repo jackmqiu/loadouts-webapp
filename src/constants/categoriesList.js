@@ -8,6 +8,7 @@ const categoriesList = {
   skin: true,
   vlogging: true,
   crafts: true,
+  kitchen: true,
 };
 
 export { categoriesList };

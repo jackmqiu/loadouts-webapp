@@ -8,6 +8,7 @@ const categoryByDomain = {
   skin: 'skin',
   vlogging: 'vlogging',
   crafts: 'crafts',
+  kitchen: 'kitchen',
   'localhost:3000': 'airsoft',
   loadouts: 'airsoft',
   www: 'airsoft',
