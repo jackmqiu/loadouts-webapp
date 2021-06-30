@@ -18,6 +18,7 @@ const VerticalContainer = ({
   colorScheme,
   firstColumn,
   canEdit,
+  screenWidth,
 }) => {
   const classes = useStyles({ firstColumn });
   const cards = [];
@@ -34,6 +35,7 @@ const VerticalContainer = ({
         color={colorScheme[containerIndex % 3]}
         firstCard={true}
         canEdit={canEdit}
+        screenWidth={screenWidth}
       />
     )
   }
@@ -53,6 +55,7 @@ const VerticalContainer = ({
         color={colorScheme[i % 3]}
         firstCard={false}
         canEdit={canEdit}
+        screenWidth={screenWidth}
       />
     )
   }
@@ -69,6 +72,7 @@ const VerticalContainer = ({
         color={colorScheme[Object.keys(igLoadoutState.items).length % 3]}
         firstCard={false}
         canEdit={canEdit}
+        screenWidth={screenWidth}
       />
     )
   }

@@ -37,6 +37,7 @@ const ItemList = ({
   toggleNewLoadoutFormOpen,
   canEdit,
   loadoutCategory,
+  screenWidth,
 }) => {
   const classes = useStyles();
   const location = useLocation().pathname;
@@ -79,6 +80,7 @@ const ItemList = ({
         className={classes.leftVertical}
         firstColumn={true}
         canEdit={canEdit}
+        screenWidth={screenWidth}
       />
       </Grid>
       <Grid item xs={6}>
@@ -92,6 +94,7 @@ const ItemList = ({
         className={classes.rightVertical}
         firstColumn={false}
         canEdit={canEdit}
+        screenWidth={screenWidth}
       />
       </Grid>
     </Grid>

@@ -32,9 +32,10 @@ import FloatingNav from './components/FloatingNav';
 const axiosInstance = axios.create({
   baseURL: `${process.env.REACT_APP_API_URL}`,
 });
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles(({ height }) => ({
   root: {
     backgroundColor: '#ECEFE9',
+    minHeight: 700,
   },
 }))
 const TRACKING_ID = "UA-193462319-2";
@@ -44,7 +45,6 @@ const mixpanel = require('mixpanel-browser');
 mixpanel.init("fbbc7fb17f489f12483171381e8da3d2");
 
 const App = (props) => {
-  const classes = useStyles();
   const loadoutsId = useLocation().pathname.substring(1);
   const capture = createRef(null);
   const [igLoadoutIdState, setIgLoadoutIdState] = useState('');
@@ -84,6 +84,8 @@ const App = (props) => {
   const [loadoutHashtags, setLoadoutHashtags] = useState(hashtagTable);
   const [newLoadoutFormOpen, setNewLoadoutFormOpen] = useState(false);
   const [discoverUI, setDiscoverUI] = useState({});
+  const classes = useStyles({ height });
+  console.log('height', height)
   useEffect(() => {
     if (typeof window !== "undefined") {
       window.onscroll = () => {
@@ -252,7 +254,7 @@ const App = (props) => {
     })
   }
   return (
-    <div className="App" >
+    <div className="App">
       <div className={classes.root}>
     <Switch>
       <Route path='/discover'>
@@ -284,6 +286,7 @@ const App = (props) => {
           toggleNewLoadoutFormOpen={toggleNewLoadoutFormOpen}
           canEdit={true}
           loadoutCategory={loadoutCategory}
+          screenWidth={width}
         />
         <IgLoadoutForm
           igLoadoutFormOpen={igLoadoutFormOpen}
@@ -325,6 +328,7 @@ const App = (props) => {
           toggleNewLoadoutFormOpen={toggleNewLoadoutFormOpen}
           canEdit={false}
           loadoutCategory={loadoutCategory}
+          screenWidth={width}
         />
       </Route>
       <Route path='/'>

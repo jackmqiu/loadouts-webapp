@@ -9,7 +9,8 @@ const useStyles = makeStyles(() => ({
 
   card: ({ color, shortCard, firstCard }) => ({
     width: '100%',
-    height: shortCard ? 200 : 250,
+    // height: shortCard ? 265 : 265,
+    minHeight: 200,
     borderRadius: 8,
     boxShadow: 'none',
     marginBottom: 10,
@@ -30,12 +31,19 @@ const useStyles = makeStyles(() => ({
     height: 45,
     overflow: 'hidden',
     textWrap: 'wrap',
-    position: 'absolute',
-    top: 10,
-    left: 0,
+    // position: 'absolute',
+    // top: 10,
+    // left: 0,
     marginRight: 8,
     marginLeft: 8,
+    marginTop: 10,
   },
+  imageArea: ({ screenWidth }) => ({
+    backgroundColor: 'white',
+    height: (screenWidth-30)/2,
+    marginTop: 5,
+    paddingTop: 10,
+  }),
   modImg: {
     marginLeft: 'auto',
     marginRight: 'auto',
@@ -68,8 +76,9 @@ const ItemCard = ({
   id,
   firstCard,
   canEdit,
+  screenWidth,
 }) => {
-  const classes = useStyles({ color, shortCard, firstCard });
+  const classes = useStyles({ color, shortCard, firstCard, screenWidth });
   const track = (action) => {
     mixpanel.track(
       'Action',
@@ -82,7 +91,9 @@ const ItemCard = ({
       <Card className={classes.card} onClick={() => {toggleIgLoadoutForm(id); track('edit')}}>
         <CardActionArea className={classes.cardActionArea}>
           <Typography className={classes.cardTitle} variant='subtitle2'>{cardInfo.productName}</Typography>
-          <img alt='' className={classes.modImg} src={cardInfo.imageLink} />
+            <div className={classes.imageArea}>
+              <img alt='' className={classes.modImg} src={cardInfo.imageLink} />
+            </div>
           <Typography className={classes.cardSubtitle} variant='subtitle2'>{cardInfo.productLink.split('/')[2]}</Typography>
         </CardActionArea>
       </Card>
@@ -91,7 +102,9 @@ const ItemCard = ({
       <Card className={classes.card} onClick={()=> {window.open(cardInfo.productLink, '_blank'); track(cardInfo.productLink)}}>
         <CardActionArea className={classes.cardActionArea}>
           <Typography className={classes.cardTitle} variant='subtitle2'>{cardInfo.productName}</Typography>
-          <img alt='' className={classes.modImg} src={cardInfo.imageLink} />
+          <div className={classes.imageArea}>
+            <img alt='' className={classes.modImg} src={cardInfo.imageLink} />
+          </div>
           <Typography className={classes.cardSubtitle} variant='subtitle2'>{cardInfo.productLink.split('/')[2]}</Typography>
         </CardActionArea>
       </Card>
@@ -99,7 +112,7 @@ const ItemCard = ({
     { !cardInfo && canEdit && // blank card
       <Card className={classes.card} onClick={() => toggleIgLoadoutForm(id)}>
         <CardActionArea className={classes.cardActionArea}>
-          <AddBoxIcon/>
+          <AddBoxIcon className={classes.icon}/>
         </CardActionArea>
       </Card>
     }
