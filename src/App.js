@@ -85,7 +85,6 @@ const App = (props) => {
   const [newLoadoutFormOpen, setNewLoadoutFormOpen] = useState(false);
   const [discoverUI, setDiscoverUI] = useState({});
   const classes = useStyles({ height });
-  console.log('height', height)
   useEffect(() => {
     if (typeof window !== "undefined") {
       window.onscroll = () => {
