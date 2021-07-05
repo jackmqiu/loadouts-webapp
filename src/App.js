@@ -51,9 +51,10 @@ const App = (props) => {
   const [igLoadoutFormOpen, setIgLoadoutFormState] = useState(false);
   const { height, width } = useWindowDimensions();
   const [colorScheme, setColorScheme] = useState({
-    0: '#FDF0A6',
-    1: '#87CEEB',
-    2: '#DCDCDB',
+    0: '#F614A0',
+    1: '#14AEF6',
+    2: '#BDBDBD',
+    3: '#DCDCDB',
   })
   const [igLoadoutState, setIgLoadoutState] = useState({
     title: '',
