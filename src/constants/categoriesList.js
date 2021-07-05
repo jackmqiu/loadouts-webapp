@@ -9,6 +9,7 @@ const categoriesList = {
   vlogging: true,
   crafts: true,
   kitchen: true,
+  golf: true,
 };
 
 export { categoriesList };

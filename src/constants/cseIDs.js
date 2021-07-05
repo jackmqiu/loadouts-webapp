@@ -11,6 +11,7 @@ const cseIDs = {
   vlogging: '8e12ffab12a80e3c2',
   crafts: '0639ef9d42a24325d',
   kitchen: '8ebdfd95d88ccd9bd',
+  golf: '8c85ffd6e55d55c33',
 };
 
 export { cseIDs };

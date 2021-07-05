@@ -65,6 +65,13 @@ const hashtagTable = {
     kitchenset: true,
     kitchenitems: false,
   },
+  golf: {
+    pga: false,
+    golf: true,
+    golfset: true,
+    golfclubs: true,
+    golfcart: false,
+  },
   'localhost:3000': {
     local: true,
   },
