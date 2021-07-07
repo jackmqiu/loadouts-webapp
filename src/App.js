@@ -287,6 +287,12 @@ const App = (props) => {
           canEdit={true}
           loadoutCategory={loadoutCategory}
           screenWidth={width}
+          toggleNewLoadoutFormOpen={toggleNewLoadoutFormOpen}
+          newLoadoutFormOpen={newLoadoutFormOpen}
+          loadoutHashtags={loadoutHashtags}
+          setLoadoutHashtags={setLoadoutHashtags}
+          updateLoadoutMetadata={updateLoadoutMetadata}
+          setLoadoutCategory={setLoadoutCategory}
         />
         <IgLoadoutForm
           igLoadoutFormOpen={igLoadoutFormOpen}
@@ -306,17 +312,7 @@ const App = (props) => {
           height={height}
           width={width}
         />
-        <Form
-          mixpanel={mixpanel}
-          igLoadoutState={igLoadoutState}
-          toggleNewLoadoutFormOpen={toggleNewLoadoutFormOpen}
-          newLoadoutFormOpen={newLoadoutFormOpen}
-          loadoutHashtags={loadoutHashtags}
-          setLoadoutHashtags={setLoadoutHashtags}
-          updateLoadoutMetadata={updateLoadoutMetadata}
-          loadoutCategory={loadoutCategory}
-          setLoadoutCategory={setLoadoutCategory}
-        />
+
       </Route>
       <Route path='/:id'>
         <ItemList
@@ -342,18 +338,7 @@ const App = (props) => {
             screenWidth={width}
             height={height}
             scrollToTop={scrollToTop}
-            />
-          <Form
-            mixpanel={mixpanel}
-            igLoadoutState={igLoadoutState}
-            toggleNewLoadoutFormOpen={toggleNewLoadoutFormOpen}
-            newLoadoutFormOpen={newLoadoutFormOpen}
-            loadoutHashtags={loadoutHashtags}
-            setLoadoutHashtags={setLoadoutHashtags}
-            updateLoadoutMetadata={updateLoadoutMetadata}
-            loadoutCategory={loadoutCategory}
-            setLoadoutCategory={setLoadoutCategory}
-            />
+          />
         </div>
     </Route>
   </Switch>

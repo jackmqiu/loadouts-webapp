@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import VerticalContainer from './VerticalContainer';
 import ItemCard from './ItemCard';
+import MetadataForm from './MetadataForm';
 import Grid from '@material-ui/core/grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
@@ -38,6 +39,11 @@ const ItemList = ({
   canEdit,
   loadoutCategory,
   screenWidth,
+  newLoadoutFormOpen,
+  loadoutHashtags,
+  setLoadoutHashtags,
+  updateLoadoutMetadata,
+  setLoadoutCategory,
 }) => {
   const classes = useStyles();
   const location = useLocation().pathname;
@@ -65,9 +71,25 @@ const ItemList = ({
 
   return (
     <Grid container className={classes.root}>
-      <Grid item xs={12} className={classes.loadoutTitleContainer} onClick={() => { toggleNewLoadoutFormOpen() }}>
-        <Typography className={classes.loadoutTitle} variant='h4'>{titleString}</Typography>
-        <Typography variant='p2'>{hashtagsString}</Typography>
+      <Grid item xs={12} className={classes.loadoutTitleContainer} onClick={() => { !newLoadoutFormOpen && toggleNewLoadoutFormOpen() }}>
+        {newLoadoutFormOpen ?
+          <MetadataForm
+            mixpanel={mixpanel}
+            igLoadoutState={igLoadoutState}
+            toggleNewLoadoutFormOpen={toggleNewLoadoutFormOpen}
+            newLoadoutFormOpen={newLoadoutFormOpen}
+            loadoutHashtags={loadoutHashtags}
+            setLoadoutHashtags={setLoadoutHashtags}
+            updateLoadoutMetadata={updateLoadoutMetadata}
+            loadoutCategory={loadoutCategory}
+            setLoadoutCategory={setLoadoutCategory}
+          />
+          :
+          <div>
+            <Typography className={classes.loadoutTitle} variant='h4'>{titleString}</Typography>
+            <Typography variant='p2'>{hashtagsString}</Typography>
+          </div>
+        }
       </Grid>
       <Grid item xs={6}>
       <VerticalContainer
