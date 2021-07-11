@@ -15,7 +15,7 @@ const useStyles = makeStyles(() => ({
     boxShadow: 'none',
     marginBottom: 10,
     // position: 'relative',
-    backgroundColor: color,
+    backgroundColor: '#1b2a4a',
     // '&:hover': {
     //   boxShadow: `0 6px 12px 0 ${Color('#fff')
     //     .rotate(-12)
@@ -28,12 +28,14 @@ const useStyles = makeStyles(() => ({
     height: '100%',
   },
   cardTitle: {
-    height: 45,
+    height: 50,
     overflow: 'hidden',
     textWrap: 'wrap',
     // position: 'absolute',
     // top: 10,
     // left: 0,
+    color: 'white',
+    fontWeight: 'bold',
     marginRight: 8,
     marginLeft: 8,
     marginTop: 10,
@@ -41,7 +43,7 @@ const useStyles = makeStyles(() => ({
   imageArea: ({ screenWidth }) => ({
     backgroundColor: 'white',
     height: (screenWidth-30)/2,
-    marginTop: 5,
+    // marginTop: 5,
     paddingTop: 10,
   }),
   modImg: {
@@ -57,7 +59,7 @@ const useStyles = makeStyles(() => ({
     overflow: 'hidden',
     textWrap: 'wrap',
     position: 'absolute',
-    bottom: 10,
+    bottom: 65,
     left: 0,
     marginRight: 10,
     marginLeft: 10,
@@ -90,11 +92,11 @@ const ItemCard = ({
     { cardInfo && canEdit && // making loadout card
       <Card className={classes.card} onClick={() => {toggleIgLoadoutForm(id); track('edit')}}>
         <CardActionArea className={classes.cardActionArea}>
-          <Typography className={classes.cardTitle} variant='subtitle2'>{cardInfo.productName}</Typography>
             <div className={classes.imageArea}>
               <img alt='' className={classes.modImg} src={cardInfo.imageLink} />
             </div>
           <Typography className={classes.cardSubtitle} variant='subtitle2'>{cardInfo.productLink.split('/')[2]}</Typography>
+          <Typography className={classes.cardTitle} variant='subtitle2'>{cardInfo.productName}</Typography>
         </CardActionArea>
       </Card>
     }
