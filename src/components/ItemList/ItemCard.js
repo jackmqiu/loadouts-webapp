@@ -41,6 +41,8 @@ const useStyles = makeStyles(() => ({
   addDescriptionText: {
     color: '#1b2a4a',
     fontWeight: 'bold',
+    margin: 10,
+    lineHeight: 1.2,
   },
   addItemText: {
     color: 'white',
@@ -49,7 +51,10 @@ const useStyles = makeStyles(() => ({
   descriptionInput: {
     color: '#1b2a4a',
     fontWeight: 'bold',
-    margin: 10,
+    marginLeft: 10,
+    marginRight: 10,
+    marginTop: 4,
+    marginBottom: 3,
     textWrap: 'wrap',
   },
   cardActionArea: {
@@ -131,6 +136,7 @@ const ItemCard = ({
         {"submitDescription": `${descriptionText}`}
       );
       addDescription(descriptionText, id);
+      toggleDescriptionEdit(!descriptionEdit);
       event.preventDefault();
     }
   }
@@ -166,10 +172,28 @@ const ItemCard = ({
     }
     {
       cardInfo && cardInfo.text &&
-      <div className={classes.addDescriptionCard} >
-        <Typography className={classes.descriptionInput} align='left'>
-          {cardInfo.text}
-        </Typography>
+      <div className={classes.addDescriptionCard}>
+        { descriptionEdit ?
+          <InputBase
+            className={classes.descriptionInput}
+            defaultValue={descriptionText}
+            multiline={true}
+            autoFocus={true}
+            onFocus={(e) =>
+          		e.currentTarget.setSelectionRange(
+          		e.currentTarget.value.length,
+          		e.currentTarget.value.length
+          	)}
+            onChange={handleDescriptionTextChange}
+            onKeyPress={handleTextFieldSubmit}
+          />
+          :
+          <div onClick={() => toggleDescriptionEdit(!descriptionEdit)}>
+            <Typography className={classes.addDescriptionText} align='left'>
+              {cardInfo.text}
+            </Typography>
+          </div>
+        }
       </div>
     }
     { !cardInfo && canEdit && // blank card
