@@ -162,11 +162,11 @@ const ItemCard = ({
     { cardInfo && cardInfo.productLink && !canEdit && // to product link
       <Card className={classes.card} onClick={()=> {window.open(cardInfo.productLink, '_blank'); track(cardInfo.productLink)}}>
         <CardActionArea className={classes.cardActionArea}>
-          <Typography className={classes.cardTitle} variant='subtitle2'>{cardInfo.productName}</Typography>
           <div className={classes.imageArea}>
             <img alt='' className={classes.modImg} src={cardInfo.imageLink} />
           </div>
           <Typography className={classes.cardSubtitle} variant='subtitle2'>{cardInfo.productLink.split('/')[2]}</Typography>
+          <Typography className={classes.cardTitle} variant='subtitle2'>{cardInfo.productName}</Typography>
         </CardActionArea>
       </Card>
     }
