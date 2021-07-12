@@ -19,6 +19,7 @@ const VerticalContainer = ({
   firstColumn,
   canEdit,
   screenWidth,
+  addDescription,
 }) => {
   const classes = useStyles({ firstColumn });
   const cards = [];
@@ -37,6 +38,7 @@ const VerticalContainer = ({
         canEdit={canEdit}
         screenWidth={screenWidth}
         igLoadoutState={igLoadoutState}
+        addDescription={addDescription}
       />
     )
   }
@@ -58,6 +60,7 @@ const VerticalContainer = ({
         canEdit={canEdit}
         screenWidth={screenWidth}
         igLoadoutState={igLoadoutState}
+        addDescription={addDescription}
       />
     )
   }
@@ -76,6 +79,7 @@ const VerticalContainer = ({
         canEdit={canEdit}
         screenWidth={screenWidth}
         igLoadoutState={igLoadoutState}
+        addDescription={addDescription}
       />
     )
   }

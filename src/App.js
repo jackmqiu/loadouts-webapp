@@ -159,12 +159,29 @@ const App = (props) => {
       }
     });
   }
-  const addDescription = (descriptionText) => {
+  const addDescription = (descriptionText, id) => {
+    console.log('id', id);
+    if (Object.keys(igLoadoutState.items).length === id) {
+      setIgLoadoutState({
+        ...igLoadoutState,
+        items: {
+          ...igLoadoutState.items,
+          [Object.keys(igLoadoutState.items).length]: {
+            text: descriptionText,
+          },
+        }
+      });
+      setActiveIgLoadoutCard(Object.keys(igLoadoutState).length);
+    } else {
+      editDescription(descriptionText, id);
+    }
+  }
+  const editDescription = (descriptionText, id) => {
     setIgLoadoutState({
       ...igLoadoutState,
       items: {
         ...igLoadoutState.items,
-        [activeIgLoadoutCard]: {
+        [id]: {
           text: descriptionText,
         },
       }
@@ -304,6 +321,8 @@ const App = (props) => {
           setLoadoutHashtags={setLoadoutHashtags}
           updateLoadoutMetadata={updateLoadoutMetadata}
           setLoadoutCategory={setLoadoutCategory}
+          addDescription={addDescription}
+          editDescription={editDescription}
         />
         <IgLoadoutForm
           igLoadoutFormOpen={igLoadoutFormOpen}

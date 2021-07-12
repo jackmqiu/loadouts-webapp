@@ -116,6 +116,7 @@ const ItemCard = ({
   canEdit,
   screenWidth,
   igLoadoutState,
+  addDescription,
 }) => {
   const classes = useStyles({ color, shortCard, firstCard, screenWidth });
   const [descriptionEdit, toggleDescriptionEdit] = useState(false);
@@ -129,7 +130,7 @@ const ItemCard = ({
         'Action',
         {"submitDescription": `${descriptionText}`}
       );
-      // handleSubmitLoadout();
+      addDescription(descriptionText, id);
       event.preventDefault();
     }
   }
@@ -141,7 +142,7 @@ const ItemCard = ({
   }
   return (
     <div>
-    { cardInfo && canEdit && // making loadout card
+    { cardInfo && cardInfo.productLink && canEdit && // making loadout card
       <Card className={classes.card} onClick={() => {toggleIgLoadoutForm(id); track('edit')}}>
         <CardActionArea className={classes.cardActionArea}>
             <div className={classes.imageArea}>
@@ -152,7 +153,7 @@ const ItemCard = ({
         </CardActionArea>
       </Card>
     }
-    { cardInfo && !canEdit && // to product link
+    { cardInfo && cardInfo.productLink && !canEdit && // to product link
       <Card className={classes.card} onClick={()=> {window.open(cardInfo.productLink, '_blank'); track(cardInfo.productLink)}}>
         <CardActionArea className={classes.cardActionArea}>
           <Typography className={classes.cardTitle} variant='subtitle2'>{cardInfo.productName}</Typography>
@@ -162,6 +163,14 @@ const ItemCard = ({
           <Typography className={classes.cardSubtitle} variant='subtitle2'>{cardInfo.productLink.split('/')[2]}</Typography>
         </CardActionArea>
       </Card>
+    }
+    {
+      cardInfo && cardInfo.text &&
+      <div className={classes.addDescriptionCard} >
+        <Typography className={classes.descriptionInput} align='left'>
+          {cardInfo.text}
+        </Typography>
+      </div>
     }
     { !cardInfo && canEdit && // blank card
       <div>

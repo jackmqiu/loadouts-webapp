@@ -44,6 +44,7 @@ const ItemList = ({
   setLoadoutHashtags,
   updateLoadoutMetadata,
   setLoadoutCategory,
+  addDescription,
 }) => {
   const classes = useStyles();
   const location = useLocation().pathname;
@@ -103,6 +104,7 @@ const ItemList = ({
         firstColumn={true}
         canEdit={canEdit}
         screenWidth={screenWidth}
+        addDescription={addDescription}
       />
       </Grid>
       <Grid item xs={6}>
@@ -117,6 +119,7 @@ const ItemList = ({
         firstColumn={false}
         canEdit={canEdit}
         screenWidth={screenWidth}
+        addDescription={addDescription}
       />
       </Grid>
     </Grid>
