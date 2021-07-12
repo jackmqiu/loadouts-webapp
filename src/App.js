@@ -159,6 +159,17 @@ const App = (props) => {
       }
     });
   }
+  const addDescription = (descriptionText) => {
+    setIgLoadoutState({
+      ...igLoadoutState,
+      items: {
+        ...igLoadoutState.items,
+        [activeIgLoadoutCard]: {
+          text: descriptionText,
+        },
+      }
+    });
+  }
   const deleteIgLoadoutItem = () => {
     const newLoadout = {};
     for (let i = 0; i < Object.keys(igLoadoutState.items).length; i++) {

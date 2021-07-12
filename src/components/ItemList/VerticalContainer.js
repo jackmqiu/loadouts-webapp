@@ -36,6 +36,7 @@ const VerticalContainer = ({
         firstCard={true}
         canEdit={canEdit}
         screenWidth={screenWidth}
+        igLoadoutState={igLoadoutState}
       />
     )
   }
@@ -56,6 +57,7 @@ const VerticalContainer = ({
         firstCard={false}
         canEdit={canEdit}
         screenWidth={screenWidth}
+        igLoadoutState={igLoadoutState}
       />
     )
   }
@@ -73,6 +75,7 @@ const VerticalContainer = ({
         firstCard={false}
         canEdit={canEdit}
         screenWidth={screenWidth}
+        igLoadoutState={igLoadoutState}
       />
     )
   }

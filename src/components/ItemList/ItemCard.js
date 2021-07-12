@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Card from '@material-ui/core/Card';
 import { makeStyles } from '@material-ui/core/styles';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import AddBoxIcon from '@material-ui/icons/AddBox';
 import Typography from '@material-ui/core/Typography';
+import InputBase from '@material-ui/core/InputBase';
 
 const useStyles = makeStyles(() => ({
 
@@ -23,12 +24,40 @@ const useStyles = makeStyles(() => ({
     //     .fade(0.5)}`,
     // },
   }),
+  addDescriptionCard: ({ color }) => ({
+    borderRadius: 8,
+    border: 'solid #1b2a4a',
+    marginBottom: 10,
+    minHeight: 100,
+  }),
+  addItemCard: ({ color }) => ({
+    width: '100%',
+    borderRadius: 8,
+    backgroundColor: '#1b2a4a',
+    boxShadow: 'none',
+    minHeight: 50,
+    textColor: 'white',
+  }),
+  addDescriptionText: {
+    color: '#1b2a4a',
+    fontWeight: 'bold',
+  },
+  addItemText: {
+    color: 'white',
+    fontWeight: 'bold',
+  },
+  descriptionInput: {
+    color: '#1b2a4a',
+    fontWeight: 'bold',
+    margin: 10,
+    textWrap: 'wrap',
+  },
   cardActionArea: {
     width: '100%',
     height: '100%',
   },
   cardTitle: {
-    height: 50,
+    height: 40,
     overflow: 'hidden',
     textWrap: 'wrap',
     // position: 'absolute',
@@ -39,6 +68,7 @@ const useStyles = makeStyles(() => ({
     marginRight: 8,
     marginLeft: 8,
     marginTop: 10,
+    marginBottom: 10,
   },
   imageArea: ({ screenWidth }) => ({
     backgroundColor: 'white',
@@ -64,9 +94,15 @@ const useStyles = makeStyles(() => ({
     marginRight: 10,
     marginLeft: 10,
   },
-  icon: {
-    marginTop: '50%'
-  }
+  addDescriptionIcon: {
+    marginTop: '11%',
+    color: '#1b2a4a',
+  },
+  addItemIcon: {
+    // marginTop: '5%',
+    color: 'white',
+    marginBottom: '10%',
+  },
 }));
 
 const ItemCard = ({
@@ -79,8 +115,24 @@ const ItemCard = ({
   firstCard,
   canEdit,
   screenWidth,
+  igLoadoutState,
 }) => {
   const classes = useStyles({ color, shortCard, firstCard, screenWidth });
+  const [descriptionEdit, toggleDescriptionEdit] = useState(false);
+  const [descriptionText, setDescriptionText] = useState('');
+  const handleDescriptionTextChange = (event) => {
+    setDescriptionText(event.target.value);
+  }
+  const handleTextFieldSubmit = (event) => {
+    if (event.key === 'Enter') {
+      mixpanel.track(
+        'Action',
+        {"submitDescription": `${descriptionText}`}
+      );
+      // handleSubmitLoadout();
+      event.preventDefault();
+    }
+  }
   const track = (action) => {
     mixpanel.track(
       'Action',
@@ -112,11 +164,35 @@ const ItemCard = ({
       </Card>
     }
     { !cardInfo && canEdit && // blank card
-      <Card className={classes.card} onClick={() => toggleIgLoadoutForm(id)}>
-        <CardActionArea className={classes.cardActionArea}>
-          <AddBoxIcon className={classes.icon}/>
-        </CardActionArea>
-      </Card>
+      <div>
+        { Object.keys(igLoadoutState).length > 0 &&
+          <div className={classes.addDescriptionCard} >
+            { descriptionEdit ?
+              <InputBase
+                className={classes.descriptionInput}
+                defaultValue=""
+                multiline={true}
+                autoFocus={true}
+                onChange={handleDescriptionTextChange}
+                onKeyPress={handleTextFieldSubmit}
+              />
+              :
+              <CardActionArea className={classes.cardActionArea} onClick={() => toggleDescriptionEdit(!descriptionEdit)}>
+                <Typography className={classes.addDescriptionText}>
+                  Add Description
+                </Typography>
+                <AddBoxIcon className={classes.addDescriptionIcon}/>
+              </CardActionArea>
+            }
+          </div>
+        }
+        <Card className={classes.addItemCard} onClick={() => toggleIgLoadoutForm(id)}>
+          <CardActionArea className={classes.cardActionArea}>
+            <Typography className={classes.addItemText}> Add Item </Typography>
+            <AddBoxIcon className={classes.addItemIcon}/>
+          </CardActionArea>
+        </Card>
+      </div>
     }
     </div>
   )
