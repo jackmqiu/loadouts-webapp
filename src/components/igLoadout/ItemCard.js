@@ -55,11 +55,20 @@ const LoadoutCard = ({
   rows,
 }) => {
   const classes = useStyles({color, height, screenWidth, rows});
-  return (
-    <Card className={classes.card} >
-        <img alt='' className={classes.modImg} src={itemDetails.imageLink} />
-    </Card>
-  );
+  if (itemDetails) {
+
+    return (
+          <Card className={classes.card} >
+              <img alt='' className={classes.modImg} src={itemDetails.imageLink} />
+          </Card>
+    );
+  } else {
+    return (
+      <Card className={classes.card} >
+        <img alt='' className={classes.modImg} src='https://i.imgur.com/Z7e0jjRm.jpg' />
+      </Card>
+    )
+  }
 };
 
 export default LoadoutCard;

@@ -198,7 +198,7 @@ const ItemCard = ({
     }
     { !cardInfo && canEdit && // blank card
       <div>
-        { Object.keys(igLoadoutState).length > 0 &&
+        { Object.keys(igLoadoutState).length > 0 && //description Add box
           <div className={classes.addDescriptionCard} >
             { descriptionEdit ?
               <InputBase

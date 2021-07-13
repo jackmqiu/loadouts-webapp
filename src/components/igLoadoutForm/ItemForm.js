@@ -240,7 +240,7 @@ const ItemForm = ({
                   <GridList className={classes.grid}>
                     {
                       googleResults.map((item, i) =>
-                      <GridListTile id={i} onClick={() => {handleSelect(item, i)}}>
+                      <GridListTile key={i} id={i} onClick={() => {handleSelect(item, i)}}>
                         { item.pagemap && item.pagemap.cse_thumbnail &&
                           <img alt='' src={item.pagemap.cse_thumbnail[0].src}/>
                         }

@@ -59,6 +59,7 @@ const App = (props) => {
   const [igLoadoutState, setIgLoadoutState] = useState({
     title: '',
     items: {},
+    itemKeyTable: {},
     hashtags: { loadouts: true },
   });
   const [viewLoadoutState, setViewLoadoutState] = useState({
@@ -137,6 +138,10 @@ const App = (props) => {
   const addIgLoadoutItem = (item) => {
     setIgLoadoutState({
       ...igLoadoutState,
+      itemKeyTable: {
+        ...igLoadoutState.itemKeyTable,
+        [Object.keys[igLoadoutState.itemKeyTable].length]: Object.keys(igLoadoutState.items).length,
+      },
       items: {
         ...igLoadoutState.items,
         [Object.keys(igLoadoutState.items).length]: {},
@@ -148,6 +153,10 @@ const App = (props) => {
   const editIgLoadout = ({productLink, imageLink, productName}) => {
     setIgLoadoutState({
       ...igLoadoutState,
+      itemKeyTable: {
+        ...igLoadoutState.itemKeyTable,
+        [Object.keys(igLoadoutState.itemKeyTable).length]: activeIgLoadoutCard,
+      },
       items: {
         ...igLoadoutState.items,
         [activeIgLoadoutCard]: {
@@ -160,7 +169,6 @@ const App = (props) => {
     });
   }
   const addDescription = (descriptionText, id) => {
-    console.log('id', id);
     if (Object.keys(igLoadoutState.items).length === id) {
       setIgLoadoutState({
         ...igLoadoutState,
@@ -171,7 +179,7 @@ const App = (props) => {
           },
         }
       });
-      setActiveIgLoadoutCard(Object.keys(igLoadoutState).length);
+      setActiveIgLoadoutCard(Object.keys(igLoadoutState.items).length);
     } else {
       editDescription(descriptionText, id);
     }
@@ -205,7 +213,7 @@ const App = (props) => {
     if (!text) {
       setGoogleResults(null);
     } else {
-      axiosInstanceGoogle.get(`v1/siterestrict?&q=${text}&num=10`)
+      axiosInstanceGoogle.get(`v1?&q=${text}&num=10`)
       .then(response => {
         if (response.data.items) {
           setGoogleResults(response.data.items);
