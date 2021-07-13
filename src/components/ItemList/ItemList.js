@@ -88,7 +88,7 @@ const ItemList = ({
           :
           <div>
             <Typography className={classes.loadoutTitle} variant='h4'>{titleString}</Typography>
-            <Typography variant='p2'>{hashtagsString}</Typography>
+            <Typography >{hashtagsString}</Typography>
           </div>
         }
       </Grid>
