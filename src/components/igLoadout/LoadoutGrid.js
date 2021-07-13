@@ -45,6 +45,9 @@ const LoadoutGrid = ({
 }) => {
   const classes = useStyles({ screenWidth });
   let numCards = Object.keys(igLoadoutState.items).length;
+  if (igLoadoutState.itemKeyTable) {
+    numCards = Object.keys(igLoadoutState.itemKeyTable).length;
+  }
   let numDisplayCards = numCards;
   if (numCards > 6) { // keep it to 2 rows
     numDisplayCards = 6;
