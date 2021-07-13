@@ -8,6 +8,7 @@ const useStyles = makeStyles(() => ({
     maxWidth: 600,
     marginLeft: 'auto',
     marginRight: 'auto',
+    paddingBottom: 100,
   },
   grid: ({limitedScreenWidth}) => ({
     margin: 0,
