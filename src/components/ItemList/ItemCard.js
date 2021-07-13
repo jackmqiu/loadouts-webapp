@@ -12,6 +12,7 @@ const useStyles = makeStyles(() => ({
     width: '100%',
     // height: shortCard ? 265 : 265,
     minHeight: 200,
+    // maxHeight: 300,
     borderRadius: 8,
     boxShadow: 'none',
     marginBottom: 10,
@@ -78,6 +79,7 @@ const useStyles = makeStyles(() => ({
   imageArea: ({ screenWidth }) => ({
     backgroundColor: 'white',
     height: (screenWidth-30)/2,
+    maxHeight: 320,
     // marginTop: 5,
     paddingTop: 10,
   }),
