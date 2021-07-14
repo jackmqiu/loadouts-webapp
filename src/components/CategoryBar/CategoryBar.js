@@ -30,7 +30,8 @@ const useStyles = makeStyles(theme => ({
     width: 400,
   },
   links: {
-    marginLeft: 18,
+    marginLeft: 9,
+    marginRight: 9,
     fontWeight: 500,
   },
   chip: {
