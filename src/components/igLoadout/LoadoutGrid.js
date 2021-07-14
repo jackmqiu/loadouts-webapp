@@ -28,7 +28,10 @@ const useStyles = makeStyles(() => ({
     textAlign: 'left',
     marginLeft: '5%',
     marginBottom: '5%',
-  }
+  },
+  captionTitle: {
+    fontWeight: 550,
+  },
 }));
 
 const LoadoutGrid = ({
@@ -157,8 +160,8 @@ const LoadoutGrid = ({
       </Grid>
     </Link>
       <div className={classes.loadoutCaption}>
-        <Typography variant="h6">{igLoadoutState.title || 'untitled'}</Typography>
-        <Typography variant="body2" color="textSecondary" component="p">
+        <Typography color='primary' className={classes.captionTitle} variant="subtitle2">{igLoadoutState.title || 'untitled'}</Typography>
+        <Typography variant="caption" color="textSecondary" component="p">
           {numCards} Parts
         </Typography>
       </div>
