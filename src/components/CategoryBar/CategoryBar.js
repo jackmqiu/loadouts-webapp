@@ -11,15 +11,16 @@ import Link from '@material-ui/core/Link';
 const useStyles = makeStyles(theme => ({
   root: {
     overflow: 'hidden',
-    height: 40,
+    height: 50,
   },
   breadcrumbs: {
     marginLeft: 12,
     marginRight: 30,
-    paddingTop: 9,
+    paddingTop: 11,
     overflow: 'scroll',
     whiteSpace: 'nowrap',
     height: 50,
+    paddingBottom: 10,
   },
   scrollable:{
     overflowX: 'auto',
@@ -27,6 +28,14 @@ const useStyles = makeStyles(theme => ({
     webkitOverflowScrolling: 'touch',
     height: 24,
     width: 400,
+  },
+  links: {
+    marginLeft: 18,
+    fontWeight: 500,
+  },
+  chip: {
+    fontSize: 14,
+    fontWeight: 600,
   }
 }));
 
@@ -46,7 +55,8 @@ const CategoryBar = ({
     if (!nonCategories[category]) {
       buttons.push({
         category: category,
-        color: (category === loadoutCategory) ? 'textPrimary' : 'inherit',
+        color: (category === loadoutCategory) ? 'primary' : 'primary',
+        match: category === loadoutCategory,
       });
     }
   })
@@ -54,15 +64,19 @@ const CategoryBar = ({
   return (
     <div className={classes.root}>
     <div className={classes.breadcrumbs}>
-      <Breadcrumbs itemsBeforeCollapse={8} aria-label="breadcrumb" className={classes.scrollable}>
       {
-        buttons.map(({ category, color }) => {
-        return <Link color={color} href={`http://${category}.loadouts.me`} onClick={() => { handleClick(category) }}>
-          {category}
-          </Link>
+        buttons.map(({ category, color, match }) => {
+          if (match) {
+
+            return <Chip sizeSmall={true} className={classes.chip} label={category} color={color} href={`http://${category}.loadouts.me`} onClick={() => { handleClick(category) }}/>
+          } else {
+            return <Link className={classes.links} color={color} href={`http://${category}.loadouts.me`} onClick={() => { handleClick(category) }}>
+              {category}
+              </Link>
+          }
+
         }
       )}
-      </Breadcrumbs>
     </div>
     </div>
   )
