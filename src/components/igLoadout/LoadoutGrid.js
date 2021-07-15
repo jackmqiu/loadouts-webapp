@@ -36,9 +36,13 @@ const useStyles = makeStyles(() => ({
   captionTitle: {
     fontWeight: 550,
   },
+  moreButton: {
+    marginTop: -5,
+    padding: 5,
+  },
   moreIcon: {
     float: 'right',
-  },
+  }
 }));
 
 const LoadoutGrid = ({
@@ -175,7 +179,9 @@ const LoadoutGrid = ({
           </Typography>
         </Grid>
         <Grid item xs={1}>
-            <MoreHorizIcon color='primary' className={classes.moreIcon} onClick={() => {toggleMoreDrawer(igLoadoutState._id)}}/>
+          <IconButton className={classes.moreButton} onClick={() => {toggleMoreDrawer(igLoadoutState._id)}}>
+            <MoreHorizIcon color='primary' className={classes.moreIcon}/>
+          </IconButton>
         </Grid>
       </Grid>
     </div>
