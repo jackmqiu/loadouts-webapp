@@ -33,6 +33,7 @@ const Feed = ({
   displayState,
   screenWidth,
   scrollToTop,
+  toggleMoreDrawer,
 }) => {
   let limitedScreenWidth = 600;
   if (screenWidth < limitedScreenWidth) {
@@ -52,6 +53,7 @@ const Feed = ({
           displayState={displayState}
           screenWidth={limitedScreenWidth}
           scrollToTop={scrollToTop}
+          toggleMoreDrawer={toggleMoreDrawer}
         />
     )
   };

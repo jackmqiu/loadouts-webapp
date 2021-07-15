@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom';
 import ItemCard from './ItemCard';
 import IgLayoutTable from '../../IgLayoutTable';
 import { gridLayoutTable, heightGuide } from '../../constants';
+import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
+import IconButton from '@material-ui/core/IconButton';
 
 const useStyles = makeStyles(() => ({
   grid: ({screenWidth}) => ({
@@ -25,12 +27,17 @@ const useStyles = makeStyles(() => ({
     margin: 5,
   },
   loadoutCaption: {
+    width: '90%',
+    marginRight: '5%',
     textAlign: 'left',
     marginLeft: '5%',
     marginBottom: '5%',
   },
   captionTitle: {
     fontWeight: 550,
+  },
+  moreIcon: {
+    float: 'right',
   },
 }));
 
@@ -45,6 +52,7 @@ const LoadoutGrid = ({
   displayState,
   screenWidth,
   scrollToTop,
+  toggleMoreDrawer,
 }) => {
   const classes = useStyles({ screenWidth });
   let numCards = Object.keys(igLoadoutState.items).length;
@@ -154,17 +162,22 @@ const LoadoutGrid = ({
   };
   return (
     <div>
-    <Link to={`/${igLoadoutState._id}`}>
-      <Grid container className={classes.grid} spacing={1}>
-        { loadoutGridItems }
+      <Link to={`/${igLoadoutState._id}`}>
+        <Grid container className={classes.grid} spacing={1}>
+          { loadoutGridItems }
+        </Grid>
+      </Link>
+      <Grid container className={classes.loadoutCaption}>
+        <Grid item xs={11}>
+          <Typography color='primary' className={classes.captionTitle} variant="subtitle2">{igLoadoutState.title || 'untitled'}</Typography>
+          <Typography variant="caption" color="textSecondary" component="p">
+            {numCards} Parts
+          </Typography>
+        </Grid>
+        <Grid item xs={1}>
+            <MoreHorizIcon color='primary' className={classes.moreIcon} onClick={() => {toggleMoreDrawer(igLoadoutState._id)}}/>
+        </Grid>
       </Grid>
-    </Link>
-      <div className={classes.loadoutCaption}>
-        <Typography color='primary' className={classes.captionTitle} variant="subtitle2">{igLoadoutState.title || 'untitled'}</Typography>
-        <Typography variant="caption" color="textSecondary" component="p">
-          {numCards} Parts
-        </Typography>
-      </div>
     </div>
   );
 };

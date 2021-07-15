@@ -28,6 +28,7 @@ import Form from './components/Forms';
 import MenuBar from './components/MenuBar.js';
 import IgLoadout from './components/igLoadout';
 import FloatingNav from './components/FloatingNav';
+import Drawer from './components/Drawer';
 
 const axiosInstance = axios.create({
   baseURL: `${process.env.REACT_APP_API_URL}`,
@@ -86,6 +87,7 @@ const App = (props) => {
   const [loadoutHashtags, setLoadoutHashtags] = useState(hashtagTable);
   const [newLoadoutFormOpen, setNewLoadoutFormOpen] = useState(false);
   const [discoverUI, setDiscoverUI] = useState({});
+  const [moreDrawer, toggleMoreDrawer] = useState(false);
   const classes = useStyles({ height });
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -124,9 +126,11 @@ const App = (props) => {
       cx: `${cseIDs[loadoutCategory]}`,
     }
   })
+  //TOGGLES
   const toggleNewLoadoutFormOpen = () => {
     setNewLoadoutFormOpen(!newLoadoutFormOpen);
   };
+
   const updateLoadoutMetadata = ({ loadoutName }) => {
     setIgLoadoutState({
       ...igLoadoutState,
@@ -376,6 +380,7 @@ const App = (props) => {
             screenWidth={width}
             height={height}
             scrollToTop={scrollToTop}
+            toggleMoreDrawer={toggleMoreDrawer}
           />
         </div>
     </Route>
@@ -392,6 +397,12 @@ const App = (props) => {
         toggleNewLoadoutFormOpen={toggleNewLoadoutFormOpen}
         newLoadoutFormOpen={newLoadoutFormOpen}
       />
+      <Drawer
+        mixpanel={mixpanel}
+        toggleMoreDrawer={toggleMoreDrawer}
+        moreDrawer={moreDrawer}
+      >
+    </Drawer>
       </div>
     </div>
 
