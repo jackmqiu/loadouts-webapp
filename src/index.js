@@ -7,6 +7,9 @@ import { createMuiTheme, makeStyles, ThemeProvider } from '@material-ui/core/sty
 import { BrowserRouter } from "react-router-dom";
 
 const theme = createMuiTheme({
+  shape: {
+    borderRadius: 10
+  },
   palette: {
     primary: {
       main: '#1b2a4a',

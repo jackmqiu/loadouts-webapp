@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import ReactGA from 'react-ga';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-
+import CloseIcon from '@material-ui/icons/Close';
+import FileCopyIcon from '@material-ui/icons/FileCopy';
+import IconButton from '@material-ui/core/IconButton';
 import {
   Select,
   Button,
@@ -20,20 +22,31 @@ ReactGA.initialize(TRACKING_ID);
 
 const useStyles = makeStyles({
   root: {
-  },
-  formControl: {
-    margin: '1rem',
-    minWidth: 120,
+    height: 200,
   },
   formTitle: {
-    margin: 2,
+    marginTop: 20,
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
-  select: {
-    margin: '0px 5px 0px 5px',
+  drawerBody: {
+    paddingLeft: '8%',
+    paddingRight: '8%',
+    marginTop: 50,
+    marginBottom: 50,
   },
   textField: {
     marginBottom: 10,
     marginLeft: 5,
+  },
+  closeButton: {
+    position: 'absolute',
+    left: 10,
+    top: 10,
+  },
+  copyButton: {
+    marginRight: 0,
+    marginTop: -4,
   }
 });
 
@@ -44,10 +57,31 @@ const DrawerContainer = ({
 }) => {
 
   const classes = useStyles();
+  const [copied, setCopied] = useState(false);
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(`loadouts.me/${moreDrawer}`);
+    setCopied(true);
+  };
   return (
-    <Drawer className={classes.root} anchor={'bottom'} open={moreDrawer} onClose={() => {toggleMoreDrawer(false)}}>
-      <Typography className={classes.formTitle}> Share </Typography>
-
+    <Drawer
+      PaperProps={{ style: {borderTopLeftRadius: 35, borderTopRightRadius: 35 }}}
+      className={classes.root}
+      anchor={'bottom'}
+      open={moreDrawer}
+      onClose={() => {toggleMoreDrawer(false)}}
+    >
+      <IconButton fontSize='large' className={classes.closeButton}>
+        <CloseIcon/>
+      </IconButton>
+      <Typography variant='h6' className={classes.formTitle}> Share </Typography>
+      <div>
+        <Typography variant='h6' className={classes.drawerBody}>
+          <IconButton fontSize='large' className={classes.copyButton} onClick={copyToClipboard}>
+            <FileCopyIcon color={copied ? 'secondary' : 'primary'}/>
+          </IconButton>
+          loadouts.me/{moreDrawer}
+        </Typography>
+      </div>
     </Drawer>
   )}
 
