@@ -19,7 +19,6 @@ const useStyles = makeStyles(() => ({
     marginRight: '2.5%',
     height: screenWidth*.95,
     borderRadius: 0,
-    flexGrow: 1,
   }),
   gridItem: {
     display: 'flex',
@@ -172,7 +171,7 @@ const LoadoutGrid = ({
           { loadoutGridItems }
         </Grid>
       </Link>
-      <Grid container direction='column' className={classes.loadoutCaption}>
+      <Grid container className={classes.loadoutCaption}>
         <Grid item xs={11}>
           <Typography color='primary' className={classes.captionTitle} variant="subtitle2">{igLoadoutState.title || 'untitled'}</Typography>
           <Typography variant="caption" color="textSecondary" component="p">
