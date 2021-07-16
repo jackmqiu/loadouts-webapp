@@ -17,8 +17,9 @@ const useStyles = makeStyles(() => ({
     width: '95%',
     marginLeft: '2.5%',
     marginRight: '2.5%',
-    height: screenWidth,
+    height: screenWidth*.95,
     borderRadius: 0,
+    flexGrow: 1,
   }),
   gridItem: {
     display: 'flex',
@@ -70,7 +71,7 @@ const LoadoutGrid = ({
   const populateSubItems = (subGridIndex) => {
     const loadoutGridSubItems = [];
     gridLayoutTable[numDisplayCards][subGridIndex].items.forEach((item, i) => {
-      const gridHeight = screenWidth*item.gridItemHeight/12;
+      const gridHeight = screenWidth*item.gridItemHeight/12*.95;
       if (igLoadoutState.itemKeyTable) {
         loadoutGridSubItems.push(
           <Grid key={subGridIndex+i} className={classes.gridItem} item xs={item.xs} style={{height: gridHeight}}>
@@ -116,7 +117,7 @@ const LoadoutGrid = ({
   for (let i = 0; i < numDisplayCards; i++) {
     if (gridLayoutTable[numDisplayCards][i].items) {
       // const loadoutGridSubItems = populateSubItems(i)
-      const gridHeight = screenWidth*gridLayoutTable[numDisplayCards][i].gridItemHeight/12;
+      const gridHeight = screenWidth*gridLayoutTable[numDisplayCards][i].gridItemHeight/12*.95;
       loadoutGridItems.push(
         <Grid key={i} item xs={gridLayoutTable[numDisplayCards][i].xs} style={{height: gridHeight}}>
           <Grid container spacing={1} style={{height: gridHeight}}>
@@ -126,7 +127,7 @@ const LoadoutGrid = ({
       )
       i += (gridLayoutTable[numDisplayCards][i].items.length - 1);
     } else {
-      const gridHeight = screenWidth*gridLayoutTable[numDisplayCards][i].gridItemHeight/12;
+      const gridHeight = screenWidth*gridLayoutTable[numDisplayCards][i].gridItemHeight/12*.95;
       if (igLoadoutState.itemKeyTable) {
         loadoutGridItems.push(
           <Grid key={i} item xs={gridLayoutTable[numDisplayCards][i].xs} className={classes.gridItem} style={{height: gridHeight}}>
@@ -171,7 +172,7 @@ const LoadoutGrid = ({
           { loadoutGridItems }
         </Grid>
       </Link>
-      <Grid container className={classes.loadoutCaption}>
+      <Grid container direction='column' className={classes.loadoutCaption}>
         <Grid item xs={11}>
           <Typography color='primary' className={classes.captionTitle} variant="subtitle2">{igLoadoutState.title || 'untitled'}</Typography>
           <Typography variant="caption" color="textSecondary" component="p">
