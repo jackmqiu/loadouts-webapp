@@ -12,6 +12,7 @@ const cseIDs = {
   crafts: '0639ef9d42a24325d',
   kitchen: '0372b01c75aac3bca',
   golf: '8c85ffd6e55d55c33',
+  gardening: 'd5bf94b557523c8da',
 };
 
 export { cseIDs };

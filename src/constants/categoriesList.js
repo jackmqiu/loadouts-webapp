@@ -10,6 +10,7 @@ const categoriesList = {
   crafts: true,
   kitchen: true,
   golf: true,
+  gardening: true,
 };
 
 export { categoriesList };

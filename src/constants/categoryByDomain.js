@@ -10,6 +10,7 @@ const categoryByDomain = {
   crafts: 'crafts',
   kitchen: 'kitchen',
   golf: 'golf',
+  gardening: 'gardening',
   'localhost:3000': 'airsoft',
   loadouts: 'airsoft',
   www: 'airsoft',

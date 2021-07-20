@@ -65,6 +65,15 @@ const hashtagTable = {
     kitchenset: true,
     kitchenitems: false,
   },
+  gardening: {
+    gardening: true,
+    gardeningtips: false,
+    gardeninglife: false,
+    gardeningideas: true,
+    gardeningisfun: false,
+    gardening101: false,
+    gardeningknowhow: false,
+  },
   golf: {
     pga: false,
     golf: true,
