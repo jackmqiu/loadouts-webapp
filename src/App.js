@@ -296,95 +296,95 @@ const App = (props) => {
   return (
     <div className="App">
       <div className={classes.root}>
-    <Switch>
-      <Route path='/discover'>
-        <div>
-          <DiscoverPage
-            discoverUI={discoverUI}
-            mixpanel={mixpanel}
-          />
-          <Form
-            mixpanel={mixpanel}
-            igLoadoutState={igLoadoutState}
-            toggleNewLoadoutFormOpen={toggleNewLoadoutFormOpen}
-            newLoadoutFormOpen={newLoadoutFormOpen}
-            loadoutHashtags={loadoutHashtags}
-            setLoadoutHashtags={setLoadoutHashtags}
-            updateLoadoutMetadata={updateLoadoutMetadata}
-            loadoutCategory={loadoutCategory}
-            setLoadoutCategory={setLoadoutCategory}
-          />
-        </div>
-      </Route>
-      <Route path='/make'>
-        <ItemList
-          mixpanel={mixpanel}
-          igLoadoutState={igLoadoutState}
-          addIgLoadoutItem={addIgLoadoutItem}
-          toggleIgLoadoutForm={toggleIgLoadoutForm}
-          colorScheme={colorScheme}
-          toggleNewLoadoutFormOpen={toggleNewLoadoutFormOpen}
-          canEdit={true}
-          loadoutCategory={loadoutCategory}
-          screenWidth={width}
-          toggleNewLoadoutFormOpen={toggleNewLoadoutFormOpen}
-          newLoadoutFormOpen={newLoadoutFormOpen}
-          loadoutHashtags={loadoutHashtags}
-          setLoadoutHashtags={setLoadoutHashtags}
-          updateLoadoutMetadata={updateLoadoutMetadata}
-          setLoadoutCategory={setLoadoutCategory}
-          addDescription={addDescription}
-          editDescription={editDescription}
-        />
-        <IgLoadoutForm
-          igLoadoutFormOpen={igLoadoutFormOpen}
-          toggleIgLoadoutForm={toggleIgLoadoutForm}
-          mixpanel={mixpanel}
-          queryGoogle={queryGoogle}
-          googleResults={googleResults}
-          addIgLoadoutItem={addIgLoadoutItem}
-          idFormOpen={idFormOpen}
-          setIdFormOpen={setIdFormOpen}
-          submitLoadout={submitLoadout}
-          igLoadoutState={igLoadoutState}
-          activeIgLoadoutCard={activeIgLoadoutCard}
-          editIgLoadout={editIgLoadout}
-          deleteIgLoadoutItem={deleteIgLoadoutItem}
-          closeIgLoadoutForm={closeIgLoadoutForm}
-          height={height}
-          width={width}
-        />
+        <Switch>
+          <Route path='/discover'>
+            <div>
+              <DiscoverPage
+                discoverUI={discoverUI}
+                mixpanel={mixpanel}
+              />
+              <Form
+                mixpanel={mixpanel}
+                igLoadoutState={igLoadoutState}
+                toggleNewLoadoutFormOpen={toggleNewLoadoutFormOpen}
+                newLoadoutFormOpen={newLoadoutFormOpen}
+                loadoutHashtags={loadoutHashtags}
+                setLoadoutHashtags={setLoadoutHashtags}
+                updateLoadoutMetadata={updateLoadoutMetadata}
+                loadoutCategory={loadoutCategory}
+                setLoadoutCategory={setLoadoutCategory}
+              />
+            </div>
+          </Route>
+          <Route path='/make'>
+            <ItemList
+              mixpanel={mixpanel}
+              igLoadoutState={igLoadoutState}
+              addIgLoadoutItem={addIgLoadoutItem}
+              toggleIgLoadoutForm={toggleIgLoadoutForm}
+              colorScheme={colorScheme}
+              toggleNewLoadoutFormOpen={toggleNewLoadoutFormOpen}
+              canEdit={true}
+              loadoutCategory={loadoutCategory}
+              screenWidth={width}
+              toggleNewLoadoutFormOpen={toggleNewLoadoutFormOpen}
+              newLoadoutFormOpen={newLoadoutFormOpen}
+              loadoutHashtags={loadoutHashtags}
+              setLoadoutHashtags={setLoadoutHashtags}
+              updateLoadoutMetadata={updateLoadoutMetadata}
+              setLoadoutCategory={setLoadoutCategory}
+              addDescription={addDescription}
+              editDescription={editDescription}
+            />
+            <IgLoadoutForm
+              igLoadoutFormOpen={igLoadoutFormOpen}
+              toggleIgLoadoutForm={toggleIgLoadoutForm}
+              mixpanel={mixpanel}
+              queryGoogle={queryGoogle}
+              googleResults={googleResults}
+              addIgLoadoutItem={addIgLoadoutItem}
+              idFormOpen={idFormOpen}
+              setIdFormOpen={setIdFormOpen}
+              submitLoadout={submitLoadout}
+              igLoadoutState={igLoadoutState}
+              activeIgLoadoutCard={activeIgLoadoutCard}
+              editIgLoadout={editIgLoadout}
+              deleteIgLoadoutItem={deleteIgLoadoutItem}
+              closeIgLoadoutForm={closeIgLoadoutForm}
+              height={height}
+              width={width}
+            />
 
-      </Route>
-      <Route path='/:id'>
-        <ItemList
-          mixpanel={mixpanel}
-          igLoadoutState={viewLoadoutState}
-          addIgLoadoutItem={addIgLoadoutItem}
-          toggleIgLoadoutForm={toggleIgLoadoutForm}
-          colorScheme={colorScheme}
-          toggleNewLoadoutFormOpen={toggleNewLoadoutFormOpen}
-          canEdit={false}
-          loadoutCategory={loadoutCategory}
-          screenWidth={width}
-        />
-      </Route>
-      <Route path='/'>
-        <div>
-          <CategoryBar mixpanel={mixpanel} loadoutCategory={loadoutCategory} />
-          <Feed
-            feedLoadouts={feedLoadouts}
-            setIgLoadoutState={setIgLoadoutState}
-            colorScheme={colorScheme}
-            displayState={displayState}
-            screenWidth={width}
-            height={height}
-            scrollToTop={scrollToTop}
-            toggleMoreDrawer={toggleMoreDrawer}
-          />
-        </div>
-    </Route>
-  </Switch>
+          </Route>
+          <Route path='/:id'>
+            <ItemList
+              mixpanel={mixpanel}
+              igLoadoutState={viewLoadoutState}
+              addIgLoadoutItem={addIgLoadoutItem}
+              toggleIgLoadoutForm={toggleIgLoadoutForm}
+              colorScheme={colorScheme}
+              toggleNewLoadoutFormOpen={toggleNewLoadoutFormOpen}
+              canEdit={false}
+              loadoutCategory={loadoutCategory}
+              screenWidth={width}
+            />
+          </Route>
+          <Route path='/'>
+            <div>
+              <CategoryBar mixpanel={mixpanel} loadoutCategory={loadoutCategory} />
+              <Feed
+                feedLoadouts={feedLoadouts}
+                setIgLoadoutState={setIgLoadoutState}
+                colorScheme={colorScheme}
+                displayState={displayState}
+                screenWidth={width}
+                height={height}
+                scrollToTop={scrollToTop}
+                toggleMoreDrawer={toggleMoreDrawer}
+              />
+            </div>
+        </Route>
+      </Switch>
       <FloatingNav
         mixpanel={mixpanel}
         displayState={displayState}
@@ -402,8 +402,8 @@ const App = (props) => {
         toggleMoreDrawer={toggleMoreDrawer}
         moreDrawer={moreDrawer}
       >
-    </Drawer>
-      </div>
+      </Drawer>
+    </div>
     </div>
 
   );
