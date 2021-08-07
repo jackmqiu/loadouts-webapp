@@ -73,7 +73,7 @@ const DrawerContainer = ({
       <IconButton fontSize='large' className={classes.closeButton}>
         <CloseIcon/>
       </IconButton>
-      <Typography variant='h6' className={classes.formTitle}> Share </Typography>
+      <Typography variant='h6' className={classes.formTitle}> Options </Typography>
       <div>
         <Typography variant='h6' className={classes.drawerBody}>
           <IconButton fontSize='large' className={classes.copyButton} onClick={copyToClipboard}>
