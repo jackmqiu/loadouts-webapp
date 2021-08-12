@@ -7,6 +7,10 @@ import ItemCard from './ItemCard';
 import IgLayoutTable from '../../IgLayoutTable';
 import { gridLayoutTable, heightGuide } from '../../constants';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
+import ShareIcon from '@material-ui/icons/Share';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
+import ShareOutlinedIcon from '@material-ui/icons/ShareOutlined';
 import IconButton from '@material-ui/core/IconButton';
 
 const useStyles = makeStyles(() => ({
@@ -37,12 +41,16 @@ const useStyles = makeStyles(() => ({
     fontWeight: 550,
   },
   moreButton: {
-    marginTop: -5,
+    // marginTop: -5,
     padding: 5,
   },
   moreIcon: {
     float: 'right',
-  }
+  },
+  buttonGroup: {
+    textAlign: 'right',
+    // paddingTop
+  },
 }));
 
 const LoadoutGrid = ({
@@ -172,15 +180,21 @@ const LoadoutGrid = ({
         </Grid>
       </Link>
       <Grid container className={classes.loadoutCaption}>
-        <Grid item xs={11}>
+        <Grid item xs={8}>
           <Typography color='primary' className={classes.captionTitle} variant="subtitle2">{igLoadoutState.title || 'untitled'}</Typography>
           <Typography variant="caption" color="textSecondary" component="p">
             {numCards} Parts
           </Typography>
         </Grid>
-        <Grid item xs={1}>
+        <Grid item xs={4} className={classes.buttonGroup}>
           <IconButton className={classes.moreButton} onClick={() => {toggleMoreDrawer(igLoadoutState._id)}}>
-            <MoreHorizIcon color='primary' className={classes.moreIcon}/>
+            <FavoriteBorderIcon fontSize='small' color='primary' className={classes.moreIcon}/>
+          </IconButton>
+          <IconButton className={classes.moreButton} onClick={() => {toggleMoreDrawer(igLoadoutState._id)}}>
+            <ChatBubbleOutlineIcon fontSize='small' color='primary' className={classes.moreIcon}/>
+          </IconButton>
+          <IconButton className={classes.moreButton} onClick={() => {toggleMoreDrawer(igLoadoutState._id)}}>
+            <ShareOutlinedIcon fontSize='small' color='primary' className={classes.moreIcon}/>
           </IconButton>
         </Grid>
       </Grid>
