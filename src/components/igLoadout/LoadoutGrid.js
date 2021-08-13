@@ -51,6 +51,13 @@ const useStyles = makeStyles(() => ({
     textAlign: 'right',
     // paddingTop
   },
+  commentRow: {
+    display: 'flex',
+  },
+  commentUser: {
+    fontWeight: 600,
+    marginRight: 5,
+  },
 }));
 
 const LoadoutGrid = ({
@@ -172,6 +179,15 @@ const LoadoutGrid = ({
       }
     }
   };
+  const comments = [];
+  igLoadoutState.comments && igLoadoutState.comments.map((comment) => {
+    comments.push(
+      <div className={classes.commentRow}>
+        <Typography className={classes.commentUser} variant='subtitle2'>{comment.name}</Typography>
+        <Typography variant='body2'>{comment.comment}</Typography>
+      </div>
+    )
+  })
   return (
     <div>
       <Link to={`/${igLoadoutState._id}`}>
@@ -196,6 +212,11 @@ const LoadoutGrid = ({
           <IconButton className={classes.moreButton} onClick={() => {toggleMoreDrawer(igLoadoutState._id)}}>
             <ShareOutlinedIcon fontSize='small' color='primary' className={classes.moreIcon}/>
           </IconButton>
+        </Grid>
+        <Grid item xs={12}>
+          {
+            comments
+          }
         </Grid>
       </Grid>
     </div>
