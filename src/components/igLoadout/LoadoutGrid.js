@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
@@ -12,6 +12,7 @@ import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 import ShareOutlinedIcon from '@material-ui/icons/ShareOutlined';
 import IconButton from '@material-ui/core/IconButton';
+import InputBase from '@material-ui/core/InputBase';
 
 const useStyles = makeStyles(() => ({
   grid: ({screenWidth}) => ({
@@ -72,8 +73,29 @@ const LoadoutGrid = ({
   screenWidth,
   scrollToTop,
   toggleMoreDrawer,
+  addComment,
 }) => {
   const classes = useStyles({ screenWidth });
+  const [commenting, toggleCommenting] = useState(false);
+  const [commentText, setCommentText] = useState('');
+  const handleCommentTextChange = (event) => {
+    setCommentText(event.target.value);
+  }
+  const handleTextFieldSubmit = (event) => {
+    if (event.key === 'Enter') {
+      // mixpanel.track(
+      //   'Action',
+      //   {"submitComment": `${commentText}`}
+      // );
+      addComment(commentText, igLoadoutState._id);
+      toggleCommenting(!commenting);
+      event.preventDefault();
+    }
+  }
+  const handleSubmitComment = () => {
+    addComment(commentText, igLoadoutState._id);
+    toggleCommenting(!commenting);
+  }
   let numCards = Object.keys(igLoadoutState.items).length;
   if (igLoadoutState.itemKeyTable) {
     numCards = Object.keys(igLoadoutState.itemKeyTable).length;
@@ -183,8 +205,8 @@ const LoadoutGrid = ({
   igLoadoutState.comments && igLoadoutState.comments.map((comment) => {
     comments.push(
       <div className={classes.commentRow}>
-        <Typography className={classes.commentUser} variant='subtitle2'>{comment.name}</Typography>
-        <Typography variant='body2'>{comment.comment}</Typography>
+        <Typography color='primary' className={classes.commentUser} variant='subtitle2'>{comment.name}</Typography>
+        <Typography color='primary' variant='body2'>{comment.comment}</Typography>
       </div>
     )
   })
@@ -206,7 +228,7 @@ const LoadoutGrid = ({
           <IconButton className={classes.moreButton} onClick={() => {toggleMoreDrawer(igLoadoutState._id)}}>
             <FavoriteBorderIcon fontSize='small' color='primary' className={classes.moreIcon}/>
           </IconButton>
-          <IconButton className={classes.moreButton} onClick={() => {toggleMoreDrawer(igLoadoutState._id)}}>
+          <IconButton className={classes.moreButton} onClick={() => {toggleCommenting(true)}}>
             <ChatBubbleOutlineIcon fontSize='small' color='primary' className={classes.moreIcon}/>
           </IconButton>
           <IconButton className={classes.moreButton} onClick={() => {toggleMoreDrawer(igLoadoutState._id)}}>
@@ -216,6 +238,20 @@ const LoadoutGrid = ({
         <Grid item xs={12}>
           {
             comments
+          }
+        </Grid>
+        <Grid item xs={12}>
+          {
+            commenting && <div className={classes.commentRow} >
+                <InputBase
+                  className={classes.commentInput}
+                  defaultValue=""
+                  multiline={true}
+                  autoFocus={true}
+                  onChange={handleCommentTextChange}
+                  onKeyPress={handleTextFieldSubmit}
+                />
+            </div>
           }
         </Grid>
       </Grid>

@@ -199,6 +199,15 @@ const App = (props) => {
       }
     });
   }
+  const addComment = (comment, id) => {
+    axiosInstance.put(`/comments/${id}`, {
+      name: 'anonymous',
+      comment: comment,
+      avatar: null,
+    })
+    .then(response => {
+    })
+  }
   const deleteIgLoadoutItem = () => {
     const newLoadout = {};
     for (let i = 0; i < Object.keys(igLoadoutState.items).length; i++) {
@@ -381,6 +390,7 @@ const App = (props) => {
                 height={height}
                 scrollToTop={scrollToTop}
                 toggleMoreDrawer={toggleMoreDrawer}
+                addComment={addComment}
               />
             </div>
         </Route>

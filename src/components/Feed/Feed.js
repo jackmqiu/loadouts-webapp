@@ -34,6 +34,7 @@ const Feed = ({
   screenWidth,
   scrollToTop,
   toggleMoreDrawer,
+  addComment,
 }) => {
   let limitedScreenWidth = 600;
   if (screenWidth < limitedScreenWidth) {
@@ -54,6 +55,8 @@ const Feed = ({
           screenWidth={limitedScreenWidth}
           scrollToTop={scrollToTop}
           toggleMoreDrawer={toggleMoreDrawer}
+          addComment={addComment}
+          mixpanel={mixpanel}
         />
     )
   };
