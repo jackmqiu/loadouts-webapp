@@ -218,14 +218,19 @@ const LoadoutGrid = ({
         </Grid>
       </Link>
       <Grid container className={classes.loadoutCaption}>
-        <Grid item xs={8}>
+        <Grid item xs={7}>
           <Typography color='primary' className={classes.captionTitle} variant="subtitle2">{igLoadoutState.title || 'untitled'}</Typography>
           <Typography variant="caption" color="textSecondary" component="p">
             {numCards} Parts
           </Typography>
         </Grid>
-        <Grid item xs={4} className={classes.buttonGroup}>
-          <IconButton className={classes.moreButton} onClick={() => {toggleMoreDrawer(igLoadoutState._id)}}>
+        <Grid item xs={5} className={classes.buttonGroup}>
+          { igLoadoutState.likes &&
+            <IconButton className={classes.moreButton}>
+              <Typography>{igLoadoutState.likes}</Typography>
+            </IconButton>
+          }
+          <IconButton className={classes.moreButton} onClick={() => {}}>
             <FavoriteBorderIcon fontSize='small' color='primary' className={classes.moreIcon}/>
           </IconButton>
           <IconButton className={classes.moreButton} onClick={() => {toggleCommenting(true)}}>
