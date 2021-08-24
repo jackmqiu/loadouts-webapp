@@ -243,14 +243,20 @@ const LoadoutGrid = ({
         <Grid item xs={12}>
           {
             commenting && <div className={classes.commentRow} >
-                <InputBase
-                  className={classes.commentInput}
-                  defaultValue=""
-                  multiline={true}
-                  autoFocus={true}
-                  onChange={handleCommentTextChange}
-                  onKeyPress={handleTextFieldSubmit}
-                />
+              <InputBase
+                className={classes.commentInput}
+                defaultValue=""
+                multiline={true}
+                autoFocus={true}
+                onChange={handleCommentTextChange}
+                onKeyPress={handleTextFieldSubmit}
+              />
+            </div>
+          }
+          {
+            !commenting && commentText && <div className={classes.commentRow}>
+              <Typography color='primary' className={classes.commentUser} variant='subtitle2'>{'anonymous'}</Typography>
+              <Typography color='primary' variant='body2'>{commentText}</Typography>
             </div>
           }
         </Grid>
