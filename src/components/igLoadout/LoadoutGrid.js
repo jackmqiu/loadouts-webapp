@@ -9,6 +9,7 @@ import { gridLayoutTable, heightGuide } from '../../constants';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import ShareIcon from '@material-ui/icons/Share';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import FavoriteOutlinedIcon from '@material-ui/icons/FavoriteOutlined';
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 import ShareOutlinedIcon from '@material-ui/icons/ShareOutlined';
 import IconButton from '@material-ui/core/IconButton';
@@ -74,13 +75,15 @@ const LoadoutGrid = ({
   scrollToTop,
   toggleMoreDrawer,
   addComment,
+  sendLike,
 }) => {
   const classes = useStyles({ screenWidth });
   const [commenting, toggleCommenting] = useState(false);
   const [commentText, setCommentText] = useState('');
+  const [liked, setLiked] = useState(0);
   const handleCommentTextChange = (event) => {
     setCommentText(event.target.value);
-  }
+  };
   const handleTextFieldSubmit = (event) => {
     if (event.key === 'Enter') {
       // mixpanel.track(
@@ -148,6 +151,10 @@ const LoadoutGrid = ({
   // Object.keys(gridLayoutTable[numDisplayCards]).forEach((subGridKey) => {
   //   gridLayoutTable[numDisplayCards][subGridKey]
   // });
+  const handleLikeClick = () => {
+    setLiked(1);
+    sendLike(igLoadoutState._id);
+  }
 
 
   for (let i = 0; i < numDisplayCards; i++) {
@@ -227,12 +234,17 @@ const LoadoutGrid = ({
         <Grid item xs={5} className={classes.buttonGroup}>
           { igLoadoutState.likes &&
             <IconButton className={classes.moreButton}>
-              <Typography>{igLoadoutState.likes}</Typography>
+              <Typography>{igLoadoutState.likes + liked}</Typography>
             </IconButton>
           }
-          <IconButton className={classes.moreButton} onClick={() => {}}>
-            <FavoriteBorderIcon fontSize='small' color='primary' className={classes.moreIcon}/>
-          </IconButton>
+          { liked ?
+            <IconButton className={classes.moreButton} >
+              <FavoriteOutlinedIcon fontSize='small' color='primary' className={classes.moreIcon}/>
+            </IconButton>
+            : <IconButton className={classes.moreButton} onClick={handleLikeClick}>
+              <FavoriteBorderIcon fontSize='small' color='primary' className={classes.moreIcon}/>
+            </IconButton>
+          }
           <IconButton className={classes.moreButton} onClick={() => {toggleCommenting(true)}}>
             <ChatBubbleOutlineIcon fontSize='small' color='primary' className={classes.moreIcon}/>
           </IconButton>

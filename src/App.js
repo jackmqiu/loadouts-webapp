@@ -208,6 +208,12 @@ const App = (props) => {
     .then(response => {
     })
   }
+  const sendLike = (id) => {
+    axiosInstance.post(`/likes/${id}`)
+    .then(response => {
+
+    })
+  }
   const deleteIgLoadoutItem = () => {
     const newLoadout = {};
     for (let i = 0; i < Object.keys(igLoadoutState.items).length; i++) {
@@ -391,6 +397,7 @@ const App = (props) => {
                 scrollToTop={scrollToTop}
                 toggleMoreDrawer={toggleMoreDrawer}
                 addComment={addComment}
+                sendLike={sendLike}
               />
             </div>
         </Route>
