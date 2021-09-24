@@ -44,11 +44,17 @@ const useStyles = makeStyles(() => ({
     textAlign: 'left',
     marginLeft: '5%',
     marginBottom: 5,
+    display: 'flex',
   },
   avatar: {
     width: 30,
     height: 30,
     fontSize: 15,
+    marginRight: 10,
+  },
+  userName: {
+    marginTop: 4,
+    fontWeight: 550,
   },
   loadoutCaption: {
     width: '90%',
@@ -241,6 +247,7 @@ const LoadoutGrid = ({
         <Avatar className={classes.avatar}>
           <PersonIcon/>
         </Avatar>
+        <Typography color='primary' variant="subtitle2" className={classes.userName}> anonymous </Typography>
       </div>
       <Link to={`/${igLoadoutState._id}`}>
         <Grid container className={classes.grid} spacing={1}>
