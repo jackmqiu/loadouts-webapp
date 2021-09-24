@@ -14,6 +14,8 @@ import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 import ShareOutlinedIcon from '@material-ui/icons/ShareOutlined';
 import IconButton from '@material-ui/core/IconButton';
 import InputBase from '@material-ui/core/InputBase';
+import Avatar from '@material-ui/core/Avatar';
+import PersonIcon from '@material-ui/icons/Person';
 
 const useStyles = makeStyles(() => ({
   grid: ({screenWidth}) => ({
@@ -26,11 +28,27 @@ const useStyles = makeStyles(() => ({
     height: screenWidth*.95,
     borderRadius: 0,
   }),
+  loadoutGroup: {
+    marginTop: '2%',
+    marginBottom: '10%',
+  },
   gridItem: {
     display: 'flex',
   },
   button: {
     margin: 5,
+  },
+  loadoutHeader: {
+    width: '90%',
+    marginRight: '5%',
+    textAlign: 'left',
+    marginLeft: '5%',
+    marginBottom: 5,
+  },
+  avatar: {
+    width: 30,
+    height: 30,
+    fontSize: 15,
   },
   loadoutCaption: {
     width: '90%',
@@ -218,7 +236,12 @@ const LoadoutGrid = ({
     )
   })
   return (
-    <div>
+    <div className={classes.loadoutGroup}>
+      <div className={classes.loadoutHeader}>
+        <Avatar className={classes.avatar}>
+          <PersonIcon/>
+        </Avatar>
+      </div>
       <Link to={`/${igLoadoutState._id}`}>
         <Grid container className={classes.grid} spacing={1}>
           { loadoutGridItems }
