@@ -10,6 +10,7 @@ import Feed from './components/Feed';
 import ItemList from './components/ItemList';
 import CategoryBar from './components/CategoryBar';
 import DiscoverPage from './components/DiscoverPage';
+import ProfilePage from './components/Profile';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   hashtagTable,
@@ -312,6 +313,11 @@ const App = (props) => {
     <div className="App">
       <div className={classes.root}>
         <Switch>
+          <Route path='/profile'>
+            <ProfilePage
+              mixpanel={mixpanel}
+            />
+          </Route>
           <Route path='/discover'>
             <div>
               <DiscoverPage

@@ -9,6 +9,7 @@ import Slide from '@material-ui/core/Slide';
 import IconButton from '@material-ui/core/IconButton';
 import ViewCarouselIcon from '@material-ui/icons/ViewCarousel';
 import PublishIcon from '@material-ui/icons/Publish';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { Link, useLocation, useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
@@ -22,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: -90,
   },
   fab: {
-    width: 180,
+    width: 200,
 
   },
   extendedIcon: {
@@ -97,6 +98,9 @@ export default function FloatingNav({
           }
           <IconButton className={classes.button} onClick={() => {handleClick('/discover')}}>
             <ViewCarouselIcon color={(location === '/discover') ? 'primary' : 'disabled'}/>
+          </IconButton>
+          <IconButton className={classes.button} onClick={() => {handleClick('/profile')}}>
+            <AccountCircleIcon color={(location === '/discover') ? 'primary' : 'disabled'}/>
           </IconButton>
         </Fab>
       </Slide>
