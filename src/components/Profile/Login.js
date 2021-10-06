@@ -13,8 +13,8 @@ const useStyles = makeStyles(() => ({
   },
   LoginContainer: {
     minHeight: 160,
-    marginLeft: '10%',
-    marginRight: '10%',
+    marginLeft: '5%',
+    marginRight: '5%',
     paddingBottom: 30,
   },
   LoginTitle: {
@@ -22,6 +22,9 @@ const useStyles = makeStyles(() => ({
     marginTop: 45,
     marginBottom: 5,
   },
+  TextField: {
+    width: '100%',
+  }
 }))
 
 const Login = ({
@@ -48,8 +51,8 @@ const Login = ({
     <div>
       <div className={classes.LoginTitle}> Login </div>
       <div className={classes.LoginContainer}>
-        <TextField autoFocus={true} className={classes.select} value={usernameText}  margin="dense" label="Username" variant="outlined" onChange={handleUsernameTextChange} onKeyPress={handleSubmitLogin} />
-        <TextField autoFocus={true} className={classes.select} value={passwordText}  margin="dense" label="Password" type='password' variant="outlined" onChange={handlePasswordTextChange} onKeyPress={handleSubmitLogin} />
+        <TextField autoFocus={true} className={classes.TextField} value={usernameText}  margin="dense" label="Username" variant="outlined" onChange={handleUsernameTextChange} onKeyPress={handleSubmitLogin} />
+        <TextField autoFocus={true} className={classes.TextField} value={passwordText}  margin="dense" label="Password" type='password' variant="outlined" onChange={handlePasswordTextChange} onKeyPress={handleSubmitLogin} />
       </div>
     </div>
   )
