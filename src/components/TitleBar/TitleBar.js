@@ -1,35 +1,48 @@
 
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import Chip from '@material-ui/core/Chip';
 
 const useStyles = makeStyles(() => ({
   root: {
     width: '100%',
     display: 'flex',
-    maxWidth: 600,
+    // maxWidth: 600,
     marginRight: 'auto',
     marginLeft: 'auto',
+    // height: 30,
   },
-  loadoutTitleContainer: {
-    minHeight: 160,
-    marginLeft: '10%',
-    marginRight: '10%',
-    paddingBottom: 30,
+  // TopBar: {
+  //
+  //   // minHeight: 160,
+  //   // marginLeft: '10%',
+  //   // marginRight: '10%',
+  //   // paddingBottom: 30,
+  // },
+  Logo: {
+    width: 170,
+    marginRight: 50,
   },
-  loadoutTitle: {
-    fontWeight: 'bold',
-    marginTop: 45,
-    marginBottom: 5,
+  AppLinkChip: {
+    height: 40,
+    borderRadius: 40,
+    fontSize: 16,
+    fontWeight: 700,
+    marginTop: 8,
+    marginBottom: 8,
+    marginLeft: 'auto',
+    marginRight: 8,
   },
 }))
 
 const TitleBar = ({
 
 }) => {
+  const classes = useStyles();
   return (
-    <div>
-      <div className={classes.TopBar}>
-      </div>
+    <div className={classes.root}>
+      <img className={classes.Logo} src='https://i.imgur.com/vObyeho.png'/>
+      <Chip className={classes.AppLinkChip} color='primary' label='App Coming'/>
     </div>
   )
 }
