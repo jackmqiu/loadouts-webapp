@@ -4,6 +4,8 @@ import React, { useState, createRef, useEffect } from "react";
 import ReactGA from 'react-ga';
 import { useLocation } from "react-router-dom";
 import axios from 'axios';
+import { useAuth0 } from "@auth0/auth0-react";
+
 import useWindowDimensions from './useWindowDimensions';
 import IgLoadoutForm from './components/igLoadoutForm';
 import Feed from './components/Feed';
@@ -89,6 +91,8 @@ const App = (props) => {
   const [newLoadoutFormOpen, setNewLoadoutFormOpen] = useState(false);
   const [discoverUI, setDiscoverUI] = useState({});
   const [moreDrawer, toggleMoreDrawer] = useState(false);
+
+
   const classes = useStyles({ height });
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -288,6 +292,64 @@ const App = (props) => {
       }
     })
   }
+  // User data
+  const { user, isAuthenticated, isLoading, getAccessTokenSilently } = useAuth0();
+  const [email, setEmail] = useState('');
+  const [userData, setUserData] = useState(null); // DB data
+  const [userMetadata, setUserMetadata] = useState(null); // Auth0 data
+
+  useEffect(() => {
+    const getUserMetadata = async () => {
+      const domain = "loadoutsdotme.us.auth0.com";
+
+      try {
+        const accessToken = await getAccessTokenSilently({
+          audience: `https://${domain}/api/v2/`,
+          scope: "read:current_user",
+        });
+
+        const userDetailsByIdUrl = `https://${domain}/api/v2/users/${user.sub}`;
+
+        const metadataResponse = await fetch(userDetailsByIdUrl, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
+
+        const { user_metadata } = await metadataResponse.json();
+
+        setUserMetadata(user_metadata);
+      } catch (e) {
+        console.log(e.message);
+      }
+    };
+
+    getUserMetadata();
+  }, [getAccessTokenSilently, user?.sub]);
+
+  const getUser = () => {
+    axiosInstance.get(`/users/${email}`)
+    .then(response => {
+      if (typeof(response.data) === 'object') {
+          setUserData(response.data)
+      } else {
+        console.log('user not found')
+      }
+    })
+  }
+
+  const createUser = () => {
+    axiosInstance.post(`/users/new`, {
+      email: email,
+    })
+    .then(response => {
+      if (typeof(response.data) === 'object') {
+        setUserData(response.data)
+      } else {
+        console.log('user not made')
+      }
+    })
+  }
 
   const [takenId, setTakenId] = useState('');
   const [idFormOpen, setIdFormOpen] = useState(false);
@@ -316,6 +378,10 @@ const App = (props) => {
           <Route path='/profile'>
             <ProfilePage
               mixpanel={mixpanel}
+              userData={userData}
+              userMetadata={userMetadata}
+              isAuthenticated={isAuthenticated}
+              isLoading={isLoading}
             />
           </Route>
           <Route path='/discover'>
