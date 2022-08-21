@@ -9,6 +9,7 @@ import { useCoverCardMediaStyles } from '@mui-treasury/styles/cardMedia/cover';
 import CardMedia from '@material-ui/core/CardMedia';
 import { gunTagsFixture } from "../../constants/tags";
 import tagsFixture from '../../constants/tags';
+import tagClassColors from '../../constants/tags/tagColors';
 
 const heightGuide = {
   1: 0.95,
@@ -73,8 +74,13 @@ const LoadoutCard = ({
     itemDetails?.tags?.forEach((tag) => {
       const processedTag = tag && tag.toLowerCase().replaceAll('-', '');
       if (tagsFixture[processedTag]){
+        console.log(tagClassColors[tagsFixture[processedTag]?.class]);
         tags.push(
-          <Chip label={tagsFixture[processedTag]?.text} className={classes.tagChip}></Chip>
+          <Chip 
+            label={tagsFixture[processedTag]?.text} 
+            sx={{backgroundColor:`#${tagClassColors[tagsFixture[processedTag]?.class]}` || "#E82020"}} 
+            className={classes.tagChip}>
+          </Chip>
         )
       }
     })
