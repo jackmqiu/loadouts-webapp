@@ -7,6 +7,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import Chip from "@material-ui/core/Chip";
 import { useCoverCardMediaStyles } from '@mui-treasury/styles/cardMedia/cover';
 import CardMedia from '@material-ui/core/CardMedia';
+import { gunTagsFixture } from "../../constants/tags";
 
 const heightGuide = {
   1: 0.95,
@@ -66,11 +67,20 @@ const LoadoutCard = ({
 }) => {
   const mediaStyles = useCoverCardMediaStyles({ bgPosition: 'top' });
   const classes = useStyles({color, height, screenWidth, rows});
+  const tags = [];
+  console.log('itemDeats', itemDetails);
+  if (itemDetails?.tags) {
+    itemDetails?.tags?.forEach((tag) => {
+      tags.push(
+        <Chip label={tag} className={classes.tagChip}></Chip>
+      )
+    })
+  }
     return (
           <Card className={classes.card} >
               <img alt='' className={classes.modImg} src={itemDetails?.imageLink || "https://i.imgur.com/Z7e0jjRm.jpg"} />
               <div className={classes.chipContainer}>
-                <Chip label={'ak'} className={classes.tagChip}></Chip>
+                {tags}
               </div>
           </Card>
     );
