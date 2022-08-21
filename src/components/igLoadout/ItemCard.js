@@ -7,7 +7,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import Chip from "@material-ui/core/Chip";
 import { useCoverCardMediaStyles } from '@mui-treasury/styles/cardMedia/cover';
 import CardMedia from '@material-ui/core/CardMedia';
-import 
+
 const heightGuide = {
   1: 0.95,
   2: 0.9,
