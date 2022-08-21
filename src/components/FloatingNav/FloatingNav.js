@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import { makeStyles } from '@mui/styles';
 import Fab from '@mui/material/Fab';
 import AddIcon from '@material-ui/icons/Add';
@@ -45,12 +45,13 @@ export default function FloatingNav({
   displayState,
   setDisplayState,
   igLoadoutState,
-  floatingNavDisplay,
   toggleNewLoadoutFormOpen,
   newLoadoutFormOpen,
 }) {
   const classes = useStyles();
   const location = useLocation().pathname;
+  const [floatingNavDisplay, setFloatingNavDisplay] = useState(true);
+  const [scrollPosition, setScrollPosition] = useState(window.pageYOffset);
   const displayPublish = (location === '/make' && Object.keys(igLoadoutState).length > 0 && floatingNavDisplay);
   const displayDiscover = (location !== '/discover');
   const history = useHistory();
@@ -67,6 +68,19 @@ export default function FloatingNav({
       {"FloatingNav": `${action}`}
     );
   }
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      window.onscroll = () => {
+        if (window.pageYOffset > scrollPosition) {
+          setFloatingNavDisplay(false);
+        }
+        if (window.pageYOffset < scrollPosition) {
+          setFloatingNavDisplay(true);
+        }
+        setScrollPosition(window.pageYOffset);
+      }
+    }
+  });
   return (
     <div className={classes.rootNav}>
       {/*

@@ -74,7 +74,6 @@ const LoadoutCard = ({
     itemDetails?.tags?.forEach((tag) => {
       const processedTag = tag && tag.toLowerCase().replaceAll('-', '');
       if (tagsFixture[processedTag]){
-        console.log(tagClassColors[tagsFixture[processedTag]?.class]);
         tags.push(
           <Chip 
             label={tagsFixture[processedTag]?.text} 

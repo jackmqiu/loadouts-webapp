@@ -85,8 +85,6 @@ const App = (props) => {
     categoryByDomain[window.location.host.split('.')[0]]
   );
   const [feedLoadouts, setFeedLoadouts] = useState([]);
-  const [scrollPosition, setScrollPosition] = useState(window.pageYOffset);
-  const [floatingNavDisplay, setFloatingNavDisplay] = useState(true);
   const [loadoutHashtags, setLoadoutHashtags] = useState(hashtagTable);
   const [newLoadoutFormOpen, setNewLoadoutFormOpen] = useState(false);
   const [discoverUI, setDiscoverUI] = useState({});
@@ -94,19 +92,6 @@ const App = (props) => {
 
 
   const classes = useStyles({ height });
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      window.onscroll = () => {
-        if (window.pageYOffset > scrollPosition) {
-          setFloatingNavDisplay(false);
-        }
-        if (window.pageYOffset < scrollPosition) {
-          setFloatingNavDisplay(true);
-        }
-        setScrollPosition(window.pageYOffset);
-      }
-    }
-  });
   const scrollToTop = () => {
     window.scrollTo(0, 0);
   }
@@ -482,7 +467,6 @@ const App = (props) => {
         addIgLoadoutItem={addIgLoadoutItem}
         setIdFormOpen={setIdFormOpen}
         toggleIgLoadoutForm={toggleIgLoadoutForm}
-        floatingNavDisplay={floatingNavDisplay}
         toggleNewLoadoutFormOpen={toggleNewLoadoutFormOpen}
         newLoadoutFormOpen={newLoadoutFormOpen}
       />
