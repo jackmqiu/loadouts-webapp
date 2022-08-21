@@ -40,6 +40,28 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
+if (module.hot) {
+  module.hot.accept('./App', () => {
+    ReactDOM.render(
+      <React.StrictMode>
+        <BrowserRouter>
+          <Auth0Provider
+            domain="loadoutsdotme.us.auth0.com"
+            clientId="qxuaL5WqxG56RH4ZuqhGawu1CITUbrl7"
+            redirectUri={window.location.origin}
+            audience="https://loadoutsdotme.us.auth0.com/api/v2/"
+            scope="read:current_user update:current_user_metadata"
+          >
+            <ThemeProvider theme={theme}>
+              <App />
+            </ThemeProvider>
+          </Auth0Provider>
+        </BrowserRouter>
+      </React.StrictMode>,
+      document.getElementById('root'))
+  })
+}
+
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
