@@ -4,7 +4,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import Card from '@material-ui/core/Card';
 import SearchIcon from '@material-ui/icons/Search';
-
+import Chip from "@material-ui/core/Chip";
+import { useCoverCardMediaStyles } from '@mui-treasury/styles/cardMedia/cover';
+import CardMedia from '@material-ui/core/CardMedia';
+import 
 const heightGuide = {
   1: 0.95,
   2: 0.9,
@@ -26,6 +29,7 @@ const useStyles = makeStyles(() => ({
     //     .darken(0.2)
     //     .fade(0.5)}`,
     // },
+    textAlign: 'left',
   }),
   cardActionArea: {
     width: '100%',
@@ -41,6 +45,12 @@ const useStyles = makeStyles(() => ({
   },
   icon: {
     marginTop: '50%'
+  },
+  chipContainer: {
+    // position: "absolute",
+    marginTop: -50,
+    bottom: 1,
+    marginLeft: 10,
   }
 }));
 
@@ -54,21 +64,16 @@ const LoadoutCard = ({
   screenWidth,
   rows,
 }) => {
+  const mediaStyles = useCoverCardMediaStyles({ bgPosition: 'top' });
   const classes = useStyles({color, height, screenWidth, rows});
-  if (itemDetails) {
-
     return (
           <Card className={classes.card} >
-              <img alt='' className={classes.modImg} src={itemDetails.imageLink} />
+              <img alt='' className={classes.modImg} src={itemDetails?.imageLink || "https://i.imgur.com/Z7e0jjRm.jpg"} />
+              <div className={classes.chipContainer}>
+                <Chip label={'ak'} className={classes.tagChip}></Chip>
+              </div>
           </Card>
     );
-  } else {
-    return (
-      <Card className={classes.card} >
-        <img alt='' className={classes.modImg} src='https://i.imgur.com/Z7e0jjRm.jpg' />
-      </Card>
-    )
-  }
 };
 
 export default LoadoutCard;
