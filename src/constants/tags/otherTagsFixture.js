@@ -1,4 +1,4 @@
-export default const descriptionTagsFixture = {
+const descriptionTagsFixture = {
   category: "airsoft",
   class: "descriptions",
   gbb: {
@@ -20,3 +20,5 @@ export default const descriptionTagsFixture = {
     placement_priority: 2,
   }
 }
+
+export default descriptionTagsFixture;

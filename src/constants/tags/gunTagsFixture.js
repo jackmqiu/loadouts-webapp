@@ -1,4 +1,4 @@
-export default const gunTagsFixture = {
+const gunTagsFixture = {
     category: "airsoft",
     class: "gun",
     ak47: {
@@ -342,3 +342,5 @@ export default const gunTagsFixture = {
       placement_priority: 1,
     },
 }
+
+export default gunTagsFixture;

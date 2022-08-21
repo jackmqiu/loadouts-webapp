@@ -1,4 +1,4 @@
-export default const accessoryTagsFixture = {
+const accessoryTagsFixture = {
   category: "airsoft",
   class: "accessories",
   gbb: {
@@ -82,3 +82,5 @@ export default const accessoryTagsFixture = {
 // TECH VIDEOS
 // SALE/CLEARANCE
 }
+
+export default accessoryTagsFixture;
