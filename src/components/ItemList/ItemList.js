@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import VerticalContainer from './VerticalContainer';
 import ItemCard from './ItemCard';
 import MetadataForm from './MetadataForm';
-import Grid from '@material-ui/core/grid';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
+import { makeStyles } from '@mui/styles';
 import { useLocation } from 'react-router-dom';
 import {
   hashtagTable,

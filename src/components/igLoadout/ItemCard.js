@@ -1,12 +1,12 @@
 
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import Card from '@material-ui/core/Card';
+import { makeStyles } from '@mui/styles';
+import CardActionArea from '@mui/material/CardActionArea';
+import Card from '@mui/material/Card';
 import SearchIcon from '@material-ui/icons/Search';
-import Chip from "@material-ui/core/Chip";
+import Chip from "@mui/material/Chip";
 import { useCoverCardMediaStyles } from '@mui-treasury/styles/cardMedia/cover';
-import CardMedia from '@material-ui/core/CardMedia';
+import CardMedia from '@mui/material/CardMedia';
 import { gunTagsFixture } from "../../constants/tags";
 import tagsFixture from '../../constants/tags';
 import tagClassColors from '../../constants/tags/tagColors';
@@ -30,7 +30,7 @@ const useStyles = makeStyles(() => ({
     //   boxShadow: `0 6px 12px 0 ${Color('#fff')
     //     .rotate(-12)
     //     .darken(0.2)
-    //     .fade(0.5)}`,
+    //     .alpha(0.5)}`,
     // },
     textAlign: 'left',
   }),

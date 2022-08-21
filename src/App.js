@@ -5,6 +5,7 @@ import ReactGA from 'react-ga';
 import { useLocation } from "react-router-dom";
 import axios from 'axios';
 import { useAuth0 } from "@auth0/auth0-react";
+import { makeStyles } from '@mui/styles';
 
 import useWindowDimensions from './useWindowDimensions';
 import IgLoadoutForm from './components/igLoadoutForm';
@@ -13,7 +14,6 @@ import ItemList from './components/ItemList';
 import CategoryBar from './components/CategoryBar';
 import DiscoverPage from './components/DiscoverPage';
 import ProfilePage from './components/Profile';
-import { makeStyles } from '@material-ui/core/styles';
 import {
   hashtagTable,
   cseIDs,

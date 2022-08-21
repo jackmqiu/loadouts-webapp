@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
+import { makeStyles } from '@mui/styles';
 import { Link } from 'react-router-dom';
 import ItemCard from './ItemCard';
 import IgLayoutTable from '../../IgLayoutTable';
@@ -12,9 +12,9 @@ import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteOutlinedIcon from '@material-ui/icons/FavoriteOutlined';
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 import ShareOutlinedIcon from '@material-ui/icons/ShareOutlined';
-import IconButton from '@material-ui/core/IconButton';
-import InputBase from '@material-ui/core/InputBase';
-import Avatar from '@material-ui/core/Avatar';
+import IconButton from '@mui/material/IconButton';
+import InputBase from '@mui/material/InputBase';
+import Avatar from '@mui/material/Avatar';
 import PersonIcon from '@material-ui/icons/Person';
 
 const useStyles = makeStyles(() => ({

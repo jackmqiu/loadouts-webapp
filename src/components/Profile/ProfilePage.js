@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Profile from './Profile';
 import Login from './Login';
 import TitleBar from '../TitleBar';
-import Divider from '@material-ui/core/Divider';
+import Divider from '@mui/material/Divider';
 
 const ProfilePage = ({
   mixpanel, userData, userMetadata, isAuthenticated, isLoading

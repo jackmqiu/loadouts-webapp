@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import ReactGA from 'react-ga';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles } from '@mui/styles';
 import CloseIcon from '@material-ui/icons/Close';
 import FileCopyIcon from '@material-ui/icons/FileCopy';
-import IconButton from '@material-ui/core/IconButton';
+import IconButton from '@mui/material/IconButton';
 import {
   Select,
   Button,
@@ -14,7 +14,7 @@ import {
   Drawer,
   Typography,
   TextField,
-} from '@material-ui/core';
+} from '@mui/material';
 
 
 const TRACKING_ID = "UA-193462319-2";

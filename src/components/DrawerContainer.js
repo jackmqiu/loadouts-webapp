@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import ReactGA from 'react-ga';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles } from '@mui/styles';
 
 import {
   Select,
@@ -12,7 +12,7 @@ import {
   Drawer,
   Typography,
   TextField,
-} from '@material-ui/core';
+} from '@mui/material';
 import gunTable from '../GunTable.js';
 import keyTable from '../KeyTable.js';
 

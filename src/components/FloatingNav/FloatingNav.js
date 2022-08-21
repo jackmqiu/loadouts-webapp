@@ -1,12 +1,12 @@
 import React, { useCallback } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Fab from '@material-ui/core/Fab';
+import { makeStyles } from '@mui/styles';
+import Fab from '@mui/material/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import EditIcon from '@material-ui/icons/Edit';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import HomeIcon from '@material-ui/icons/Home';
-import Slide from '@material-ui/core/Slide';
-import IconButton from '@material-ui/core/IconButton';
+import Slide from '@mui/material/Slide';
+import IconButton from '@mui/material/IconButton';
 import ViewCarouselIcon from '@material-ui/icons/ViewCarousel';
 import PublishIcon from '@material-ui/icons/Publish';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';

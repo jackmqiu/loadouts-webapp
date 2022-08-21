@@ -1,12 +1,12 @@
 import React from 'react';
-import Chip from '@material-ui/core/chip';
-import { makeStyles } from '@material-ui/core/styles';
+import Chip from '@mui/material/Chip';
+import { makeStyles } from '@mui/styles';
 import {
   hashtagTable,
   nonCategories,
 } from '../../constants';
-import Breadcrumbs from '@material-ui/core/Breadcrumbs';
-import Link from '@material-ui/core/Link';
+import Breadcrumbs from '@mui/material/Breadcrumbs';
+import Link from '@mui/material/Link';
 
 const useStyles = makeStyles(theme => ({
   root: {

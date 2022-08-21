@@ -1,18 +1,18 @@
 import React, { useState, useCallback } from 'react';
-import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
-import Modal from '@material-ui/core/Modal';
-import Paper from '@material-ui/core/Paper';
-import Button from '@material-ui/core/Button';
-import Chip from '@material-ui/core/Chip';
-import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@mui/material/Typography';
+import TextField from '@mui/material/TextField';
+import Modal from '@mui/material/Modal';
+import Paper from '@mui/material/Paper';
+import Button from '@mui/material/Button';
+import Chip from '@mui/material/Chip';
+import { makeStyles } from '@mui/styles';
 import { Link, useHistory } from 'react-router-dom';
-import Divider from '@material-ui/core/Divider';
-import Select from '@material-ui/core/Select';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControl from '@material-ui/core/FormControl';
+import Divider from '@mui/material/Divider';
+import Select from '@mui/material/Select';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormHelperText from '@mui/material/FormHelperText';
+import FormControl from '@mui/material/FormControl';
 import { hashtagTable, categoriesList } from '../../constants';
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -125,7 +125,7 @@ const MetadataForm = ({
   categoryHashtags.forEach((key) => {
     chips.push(
       <Chip
-        color={loadoutHashtagsObject[key] ? 'primary' : ''}
+        // color={loadoutHashtagsObject[key] ? 'primary' : ''}
         label={`#${key}`}
         onClick={() => {toggleLoadoutHashtags(key)}}
         className={classes.chips}

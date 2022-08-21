@@ -3,17 +3,21 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { createMuiTheme, makeStyles, ThemeProvider } from '@material-ui/core/styles';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { makeStyles } from '@mui/styles';
 import { BrowserRouter } from "react-router-dom";
 import { Auth0Provider } from "@auth0/auth0-react";
 
-const theme = createMuiTheme({
+const theme = createTheme({
   shape: {
     borderRadius: 10
   },
   palette: {
     primary: {
       main: '#1b2a4a',
+    },
+    secondary: {
+      main: '#C5C1C1',
     },
     tertiary: {
       main: '#ECEFE9',
