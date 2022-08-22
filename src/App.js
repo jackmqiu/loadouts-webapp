@@ -144,7 +144,7 @@ const App = (props) => {
     setActiveIgLoadoutCard(Object.keys(igLoadoutState).length);
     toggleIgLoadoutForm(Object.keys(igLoadoutState).length);
   }
-  const editIgLoadout = ({productLink, imageLink, productName}) => {
+  const editIgLoadout = ({productLink, imageLink, productName, tags}) => {
     setIgLoadoutState({
       ...igLoadoutState,
       itemKeyTable: {
@@ -158,6 +158,7 @@ const App = (props) => {
           productLink: productLink || igLoadoutState[activeIgLoadoutCard].productLink,
           imageLink: imageLink || igLoadoutState[activeIgLoadoutCard].imageLink,
           productName: productName || igLoadoutState[activeIgLoadoutCard].productName,
+          tags: tags,
         },
       }
     });

@@ -29,27 +29,8 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: 'gray',
     width: '100%',
   },
-  modal: {
-    marginRight: 'auto',
-    marginLeft: 'auto',
-    maxWidth: 600,
-    minWidth: 120,
-    padding: 20,
-    marginBottom: '10%',
-  },
-  formTitle: {
-    marginLeft: '10%',
-    paddingTop: 30,
-    paddingBottom: 10,
-  },
   select: {
     margin: '0px 5px 0px 5px',
-  },
-  textField: {
-    width: '80%',
-    marginLeft: '10%',
-    marginRight: '10%',
-    padding: 0,
   },
   card: {
     display: 'block',
@@ -69,13 +50,6 @@ const useStyles = makeStyles((theme) => ({
     marginRight: '10%',
     marginBottom: 30,
   },
-  nextButton: {
-    marginBottom: 30,
-    marginRight: 10,
-  },
-  searchButton: {
-    padding: 0,
-  },
   resultsWindow: ({ height }) => ({
     overflow: 'scroll',
     marginBottom: 10,
@@ -83,6 +57,35 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: 2,
   }),
 }));
+
+const styles = {
+  modal: {
+    marginRight: 'auto',
+    marginLeft: 'auto',
+    maxWidth: 600,
+    minWidth: 120,
+    padding: 4,
+    marginBottom: '10%',
+  },
+  formTitle: {
+    marginLeft: '10%',
+    paddingTop: 5,
+    paddingBottom: 5,
+  },
+  searchButton: {
+    padding: 0,
+  },
+  textField: {
+    width: '80%',
+    marginLeft: '10%',
+    marginRight: '10%',
+    padding: 0,
+  },
+  nextButton: {
+    marginBottom: 5,
+    marginRight: 5,
+  },
+}
 
 const ItemForm = ({
   igLoadoutFormOpen,
@@ -107,6 +110,7 @@ const ItemForm = ({
   const [productNameText, setProductNameText] = useState(igLoadoutState.items[activeIgLoadoutCard] && igLoadoutState.items[activeIgLoadoutCard].productName);
   const [imageLink, setImageLink] = useState(igLoadoutState.items[activeIgLoadoutCard] && igLoadoutState.items[activeIgLoadoutCard].imageLink);
   const [productLink, setProductLink] = useState(igLoadoutState.items[activeIgLoadoutCard] && igLoadoutState.items[activeIgLoadoutCard].productLink);
+  const [tags, setTags] = useState(igLoadoutState.items[activeIgLoadoutCard]?.tags);
   const [hasSubmitted, toggleHasSubmitted] = useState(false);
 
   const handleSearchTextChange = (event) => {
@@ -159,11 +163,12 @@ const ItemForm = ({
     (productNameText || igLoadoutState.items[activeIgLoadoutCard].productName) &&
     (productLink || igLoadoutState.items[activeIgLoadoutCard].productLink) &&
     (imageLink || igLoadoutState.items[activeIgLoadoutCard].imageLink)) {
-      console.log('handleSubmit', igLoadoutState.items[activeIgLoadoutCard], productNameText, productLink, imageLink)
+      console.log('handleSubmit', igLoadoutState.items[activeIgLoadoutCard], productNameText, productLink, imageLink, tags)
       editIgLoadout({
         productName: productNameText || igLoadoutState.items[activeIgLoadoutCard].productName,
         productLink: productLink || igLoadoutState.items[activeIgLoadoutCard].productLink,
         imageLink: imageLink || igLoadoutState.items[activeIgLoadoutCard].imageLink,
+        tags: tags || igLoadoutState.items[activeIgLoadoutCard].tags
       });
       toggleHasSubmitted(false);
       toggleIgLoadoutForm();
@@ -188,10 +193,16 @@ const ItemForm = ({
   //   placeholder = 'vfc hk416';
   // }
   const handleSelect = (item, id) => {
+    const tags = item.title.split(' ');
+    tags.forEach((tag, index) => {
+      tags[index] = tag.replaceAll('-').toLowerCase();
+    })
+    setTags(tags);
     editIgLoadout({
       productLink: item.link,
       imageLink: item.pagemap.cse_image[0].src || item.pagemap.cse_thumbnail[0].src,
       productName: item.title,
+      tags: tags,
     })
     queryGoogle(0);
     toggleIgLoadoutForm();
@@ -205,7 +216,7 @@ const ItemForm = ({
       <Modal
         open={igLoadoutFormOpen}
         onClose={closeIgLoadoutForm}
-        className={classes.modal}
+        sx={styles.modal}
       >
         <Paper>
         { idFormOpen ?
@@ -215,7 +226,7 @@ const ItemForm = ({
           /> :
           <div>
             <div className={classes.fieldsContainer}>
-              <Typography variant='h5' className={classes.formTitle}>Find Item</Typography>
+              <Typography variant='h5' sx={styles.formTitle}>Find Item</Typography>
               <TextField
                 className={classes.textField}
                 margin="dense"
@@ -228,7 +239,7 @@ const ItemForm = ({
                 InputProps={{
                   endAdornment: (
                     <InputAdornment>
-                      <IconButton className={classes.searchButton} onClick={handleSearchClick}>
+                      <IconButton sx={styles.searchButton} onClick={handleSearchClick}>
                         <SearchIcon />
                       </IconButton>
                     </InputAdornment>
@@ -247,7 +258,7 @@ const ItemForm = ({
                         <ImageListItemBar
                           title={item.title}
                           titlePosition="top"
-                          className={classes.titleBar}
+                          sx={styles.titleBar}
                           />
                       </ImageListItem>
                     )
@@ -257,17 +268,17 @@ const ItemForm = ({
               }
               { !googleResults && igLoadoutState.items[activeIgLoadoutCard] &&
                 <div>
-                  <Typography variant='h5' className={classes.formTitle}>Customize</Typography>
-                  <TextField margin="dense" error={hasSubmitted && !productNameText} helperText={hasSubmitted && !productNameText && 'Add Item Name'} defaultValue={igLoadoutState.items[activeIgLoadoutCard] && igLoadoutState.items[activeIgLoadoutCard].productName} className={classes.textField} label="Product" variant="outlined" onChange={handleProductNameTextChange} onKeyPress={handleTextFieldSubmit}/>
-                  <TextField margin="dense" error={hasSubmitted && !imageLink} helperText={hasSubmitted && !imageLink && 'Add Image Link'} defaultValue={igLoadoutState.items[activeIgLoadoutCard] && igLoadoutState.items[activeIgLoadoutCard].imageLink} className={classes.textField} label="Image URL" variant="outlined" onChange={handleImageLinkTextChange} onKeyPress={handleTextFieldSubmit}/>
-                  <TextField margin="dense" error={hasSubmitted && !productLink} helperText={hasSubmitted && !productLink && 'Add Item Link'} defaultValue={igLoadoutState.items[activeIgLoadoutCard] && igLoadoutState.items[activeIgLoadoutCard].productLink} className={classes.textField} label="Product URL" variant="outlined" onChange={handleProductLinkTextChange} onKeyPress={handleTextFieldSubmit}/>
+                  <Typography variant='h5' sx={styles.formTitle}>Customize</Typography>
+                  <TextField margin="dense" error={hasSubmitted && !productNameText} helperText={hasSubmitted && !productNameText && 'Add Item Name'} defaultValue={igLoadoutState.items[activeIgLoadoutCard] && igLoadoutState.items[activeIgLoadoutCard].productName} sx={styles.textField} label="Product" variant="outlined" onChange={handleProductNameTextChange} onKeyPress={handleTextFieldSubmit}/>
+                  <TextField margin="dense" error={hasSubmitted && !imageLink} helperText={hasSubmitted && !imageLink && 'Add Image Link'} defaultValue={igLoadoutState.items[activeIgLoadoutCard] && igLoadoutState.items[activeIgLoadoutCard].imageLink} sx={styles.textField} label="Image URL" variant="outlined" onChange={handleImageLinkTextChange} onKeyPress={handleTextFieldSubmit}/>
+                  <TextField margin="dense" error={hasSubmitted && !productLink} helperText={hasSubmitted && !productLink && 'Add Item Link'} defaultValue={igLoadoutState.items[activeIgLoadoutCard] && igLoadoutState.items[activeIgLoadoutCard].productLink} sx={styles.textField} label="Product URL" variant="outlined" onChange={handleProductLinkTextChange} onKeyPress={handleTextFieldSubmit}/>
                 </div>
               }
             </div>
             { !googleResults && igLoadoutState.items[activeIgLoadoutCard] &&
               <div className={classes.buttonContainer}>
-                <Button className={classes.nextButton} variant='contained' color='primary' onClick={() => {handleSubmitLoadout()}}>Submit</Button>
-                <Button className={classes.nextButton} variant='contained' color='secondary' onClick={() => {handleDeleteCard()}}>Delete</Button>
+                <Button sx={styles.nextButton} variant='contained' color='primary' onClick={() => {handleSubmitLoadout()}}>Submit</Button>
+                <Button sx={styles.nextButton} variant='contained' color='secondary' onClick={() => {handleDeleteCard()}}>Delete</Button>
               </div>
             }
           </div>
