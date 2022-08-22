@@ -35,9 +35,6 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: '10%',
     paddingTop: 30,
   },
-  select: {
-    margin: '0px 5px 0px 5px',
-  },
   textField: {
     marginBottom: 10,
     marginLeft: 5,
@@ -60,14 +57,20 @@ const useStyles = makeStyles((theme) => ({
     marginRight: '10%',
     marginBottom: 30,
   },
-  nextButton: {
-    marginBottom: 30,
-  },
+}));
+
+const styles = {
   chips: {
     marginRight: 4,
     marginBottom: 5,
   },
-}));
+  select: {
+    margin: '0px 5px 0px 5px',
+  },
+  nextButton: {
+    marginBottom: 30,
+  },
+}
 
 const MetadataForm = ({
   mixpanel,
@@ -128,7 +131,7 @@ const MetadataForm = ({
         // color={loadoutHashtagsObject[key] ? 'primary' : ''}
         label={`#${key}`}
         onClick={() => {toggleLoadoutHashtags(key)}}
-        className={classes.chips}
+        sx={styles.chips}
       >
         #{'key'}
       </Chip>
@@ -145,7 +148,7 @@ const MetadataForm = ({
   return (
     <div>
       <div className={classes.fieldsContainer}>
-        <FormControl variant="outlined" margin="dense" className={classes.select}>
+        <FormControl variant="outlined" margin="dense" sx={styles.select}>
           <InputLabel>Category</InputLabel>
           <Select
             value={loadoutCategory}
@@ -155,14 +158,14 @@ const MetadataForm = ({
             { categoryChoices }
           </Select>
         </FormControl>
-        <TextField autoFocus={true} className={classes.select} value={loadoutNameText}  margin="dense" label="Loadout Title" variant="outlined" onChange={handleTextChange} onKeyPress={handleSubmitTitle} />
+        <TextField autoFocus={true} sx={styles.select} value={loadoutNameText}  margin="dense" label="Loadout Title" variant="outlined" onChange={handleTextChange} onKeyPress={handleSubmitTitle} />
       </div>
       <div className={classes.chipsContainer}>
         {chips}
       </div>
       <div className={classes.chipsContainer}>
         <Link to='/make' style={{ textDecoration: 'none' }}>
-          <Button className={ classes.nextButton } variant='contained' color='primary' onClick={handleLoadoutMetadataSubmit}>Set</Button>
+          <Button sx={ styles.nextButton } variant='contained' color='primary' onClick={handleLoadoutMetadataSubmit}>Set</Button>
         </Link>
       </div>
     </div>

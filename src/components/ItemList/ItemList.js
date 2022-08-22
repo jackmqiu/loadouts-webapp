@@ -10,7 +10,7 @@ import {
   hashtagTable,
 } from '../../constants';
 
-const useStyles = makeStyles(() => ({
+const styles = {
   root: {
     width: '100%',
     display: 'flex',
@@ -22,14 +22,15 @@ const useStyles = makeStyles(() => ({
     minHeight: 160,
     marginLeft: '10%',
     marginRight: '10%',
-    paddingBottom: 30,
+    paddingBottom: 5,
   },
   loadoutTitle: {
     fontWeight: 'bold',
-    marginTop: 45,
+    marginTop: 5,
     marginBottom: 5,
   },
-}))
+}
+
 const ItemList = ({
   mixpanel,
   igLoadoutState,
@@ -46,7 +47,6 @@ const ItemList = ({
   setLoadoutCategory,
   addDescription,
 }) => {
-  const classes = useStyles();
   const location = useLocation().pathname;
   useEffect(() => {
     mixpanel.track(
@@ -71,8 +71,8 @@ const ItemList = ({
   }
 
   return (
-    <Grid container className={classes.root}>
-      <Grid item xs={12} className={classes.loadoutTitleContainer} onClick={() => { !newLoadoutFormOpen && toggleNewLoadoutFormOpen() }}>
+    <Grid container sx={styles.root}>
+      <Grid item xs={12} sx={styles.loadoutTitleContainer} onClick={() => { !newLoadoutFormOpen && toggleNewLoadoutFormOpen() }}>
         {newLoadoutFormOpen ?
           <MetadataForm
             mixpanel={mixpanel}
@@ -87,7 +87,7 @@ const ItemList = ({
           />
           :
           <div>
-            <Typography className={classes.loadoutTitle} variant='h4'>{titleString}</Typography>
+            <Typography sx={styles.loadoutTitle} variant='h4'>{titleString}</Typography>
             <Typography >{hashtagsString}</Typography>
           </div>
         }
@@ -100,7 +100,6 @@ const ItemList = ({
         totalContainers={2}
         toggleIgLoadoutForm={toggleIgLoadoutForm}
         colorScheme={colorScheme}
-        className={classes.leftVertical}
         firstColumn={true}
         canEdit={canEdit}
         screenWidth={screenWidth}
@@ -115,7 +114,6 @@ const ItemList = ({
         totalContainers={2}
         toggleIgLoadoutForm={toggleIgLoadoutForm}
         colorScheme={colorScheme}
-        className={classes.rightVertical}
         firstColumn={false}
         canEdit={canEdit}
         screenWidth={screenWidth}
