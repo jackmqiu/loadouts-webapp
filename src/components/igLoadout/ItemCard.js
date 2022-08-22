@@ -18,22 +18,6 @@ const heightGuide = {
 }
 
 const useStyles = makeStyles(() => ({
-
-  card: ({ color, height, screenWidth, rows }) => ({
-    width: '100%',
-    // height: screenWidth*height/12*heightGuide[rows],
-    borderRadius: 0,
-    boxShadow: 'none',
-    // position: 'relative',
-    backgroundColor: 'white',
-    // '&:hover': {
-    //   boxShadow: `0 6px 12px 0 ${Color('#fff')
-    //     .rotate(-12)
-    //     .darken(0.2)
-    //     .alpha(0.5)}`,
-    // },
-    textAlign: 'left',
-  }),
   cardActionArea: {
     width: '100%',
     height: '100%',
@@ -56,6 +40,24 @@ const useStyles = makeStyles(() => ({
     marginLeft: 10,
   }
 }));
+
+const styles = {
+  card: ({ color, height, screenWidth, rows }) => ({
+    width: '100%',
+    // height: screenWidth*height/12*heightGuide[rows],
+    borderRadius: 0,
+    boxShadow: 'none',
+    // position: 'relative',
+    backgroundColor: 'white',
+    // '&:hover': {
+    //   boxShadow: `0 6px 12px 0 ${Color('#fff')
+    //     .rotate(-12)
+    //     .darken(0.2)
+    //     .alpha(0.5)}`,
+    // },
+    textAlign: 'left',
+  }),
+}
 
 const LoadoutCard = ({
   itemDetails,
@@ -86,7 +88,7 @@ const LoadoutCard = ({
   }
   if (tags.length > 0) {console.log('tags', tags)}
     return (
-          <Card className={classes.card} >
+          <Card sx={styles.card} >
               <img alt='' className={classes.modImg} src={itemDetails?.imageLink || "https://i.imgur.com/Z7e0jjRm.jpg"} />
               <div className={classes.chipContainer}>
                 {tags}

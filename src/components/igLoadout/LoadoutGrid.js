@@ -18,22 +18,9 @@ import Avatar from '@mui/material/Avatar';
 import PersonIcon from '@material-ui/icons/Person';
 
 const useStyles = makeStyles(() => ({
-  grid: ({screenWidth}) => ({
-    margin: 0,
-    // backgroundColor: 'black',
-    // backgroundImage: 'linear-gradient(to bottom, #FDF0A6, #87CEEB)',
-    width: '95%',
-    marginLeft: '2.5%',
-    marginRight: '2.5%',
-    height: screenWidth*.95,
-    borderRadius: 0,
-  }),
   loadoutGroup: {
     marginTop: '2%',
     marginBottom: '10%',
-  },
-  gridItem: {
-    display: 'flex',
   },
   button: {
     margin: 5,
@@ -46,6 +33,18 @@ const useStyles = makeStyles(() => ({
     marginBottom: 5,
     display: 'flex',
   },
+  moreIcon: {
+    float: 'right',
+  },
+  commentRow: {
+    display: 'flex',
+  },
+}));
+
+const styles = {
+  gridItem: {
+    display: 'flex',
+  },
   avatar: {
     width: 30,
     height: 30,
@@ -56,6 +55,16 @@ const useStyles = makeStyles(() => ({
     marginTop: 4,
     fontWeight: 550,
   },
+  grid: ({screenWidth}) => ({
+    margin: 0,
+    // backgroundColor: 'black',
+    // backgroundImage: 'linear-gradient(to bottom, #FDF0A6, #87CEEB)',
+    width: '95%',
+    marginLeft: '2.5%',
+    marginRight: '2.5%',
+    height: screenWidth*.95,
+    borderRadius: 0,
+  }),
   loadoutCaption: {
     width: '90%',
     marginRight: '5%',
@@ -66,25 +75,19 @@ const useStyles = makeStyles(() => ({
   captionTitle: {
     fontWeight: 550,
   },
-  moreButton: {
-    // marginTop: -5,
-    padding: 5,
-  },
-  moreIcon: {
-    float: 'right',
-  },
   buttonGroup: {
     textAlign: 'right',
     // paddingTop
   },
-  commentRow: {
-    display: 'flex',
+  moreButton: {
+    // marginTop: -5,
+    padding: 5,
   },
   commentUser: {
     fontWeight: 600,
     marginRight: 5,
   },
-}));
+}
 
 const LoadoutGrid = ({
   mixpanel,
@@ -137,7 +140,7 @@ const LoadoutGrid = ({
       const gridHeight = screenWidth*item.gridItemHeight/12*.95;
       if (igLoadoutState.itemKeyTable) {
         loadoutGridSubItems.push(
-          <Grid key={subGridIndex+i} className={classes.gridItem} item xs={item.xs} style={{height: gridHeight}}>
+          <Grid key={subGridIndex+i} sx={styles.gridItem} item xs={item.xs} style={{height: gridHeight}}>
             <ItemCard
               height={item.gridItemHeight}
               itemDetails={igLoadoutState.items[igLoadoutState.itemKeyTable[subGridIndex+i]]}
@@ -153,7 +156,7 @@ const LoadoutGrid = ({
         )
       } else {
         loadoutGridSubItems.push(
-          <Grid key={subGridIndex+i} className={classes.gridItem} item xs={item.xs} style={{height: gridHeight}}>
+          <Grid key={subGridIndex+i} sx={styles.gridItem} item xs={item.xs} style={{height: gridHeight}}>
             <ItemCard
               height={item.gridItemHeight}
               itemDetails={igLoadoutState.items[subGridIndex+i]}
@@ -197,7 +200,7 @@ const LoadoutGrid = ({
       const gridHeight = screenWidth*gridLayoutTable[numDisplayCards][i].gridItemHeight/12*.95;
       if (igLoadoutState.itemKeyTable) {
         loadoutGridItems.push(
-          <Grid key={i} item xs={gridLayoutTable[numDisplayCards][i].xs} className={classes.gridItem} style={{height: gridHeight}}>
+          <Grid key={i} item xs={gridLayoutTable[numDisplayCards][i].xs} sx={styles.gridItem} style={{height: gridHeight}}>
             <ItemCard
               id={i}
               height={gridLayoutTable[numDisplayCards][i].gridItemHeight}
@@ -214,7 +217,7 @@ const LoadoutGrid = ({
         )
       } else {
         loadoutGridItems.push(
-          <Grid key={i} item xs={gridLayoutTable[numDisplayCards][i].xs} className={classes.gridItem} style={{height: gridHeight}}>
+          <Grid key={i} item xs={gridLayoutTable[numDisplayCards][i].xs} sx={styles.gridItem} style={{height: gridHeight}}>
             <ItemCard
               id={i}
               height={gridLayoutTable[numDisplayCards][i].gridItemHeight}
@@ -236,7 +239,7 @@ const LoadoutGrid = ({
   igLoadoutState.comments && igLoadoutState.comments.map((comment) => {
     comments.push(
       <div className={classes.commentRow}>
-        <Typography color='primary' className={classes.commentUser} variant='subtitle2'>{comment.name}</Typography>
+        <Typography color='primary' sx={styles.commentUser} variant='subtitle2'>{comment.name}</Typography>
         <Typography color='primary' variant='body2'>{comment.comment}</Typography>
       </div>
     )
@@ -244,41 +247,41 @@ const LoadoutGrid = ({
   return (
     <div className={classes.loadoutGroup}>
       <div className={classes.loadoutHeader}>
-        <Avatar className={classes.avatar}>
+        <Avatar sx={styles.avatar}>
           <PersonIcon/>
         </Avatar>
-        <Typography color='primary' variant="subtitle2" className={classes.userName}> anonymous </Typography>
+        <Typography color='primary' variant="subtitle2" sx={styles.userName}> anonymous </Typography>
       </div>
       <Link to={`/${igLoadoutState._id}`}>
-        <Grid container className={classes.grid} spacing={1}>
+        <Grid container sx={styles.grid} spacing={1}>
           { loadoutGridItems }
         </Grid>
       </Link>
-      <Grid container className={classes.loadoutCaption}>
+      <Grid container sx={styles.loadoutCaption}>
         <Grid item xs={7}>
-          <Typography color='primary' className={classes.captionTitle} variant="subtitle2">{igLoadoutState.title || 'untitled'}</Typography>
+          <Typography color='primary' sx={styles.captionTitle} variant="subtitle2">{igLoadoutState.title || 'untitled'}</Typography>
           <Typography variant="caption" color="textSecondary" component="p">
             {numCards} Parts
           </Typography>
         </Grid>
-        <Grid item xs={5} className={classes.buttonGroup}>
+        <Grid item xs={5} sx={styles.buttonGroup}>
           { igLoadoutState.likes &&
-            <IconButton className={classes.moreButton}>
+            <IconButton sx={styles.moreButton}>
               <Typography>{igLoadoutState.likes + liked}</Typography>
             </IconButton>
           }
           { liked ?
-            <IconButton className={classes.moreButton} >
+            <IconButton sx={styles.moreButton} >
               <FavoriteOutlinedIcon fontSize='small' color='primary' className={classes.moreIcon}/>
             </IconButton>
-            : <IconButton className={classes.moreButton} onClick={handleLikeClick}>
+            : <IconButton sx={styles.moreButton} onClick={handleLikeClick}>
               <FavoriteBorderIcon fontSize='small' color='primary' className={classes.moreIcon}/>
             </IconButton>
           }
-          <IconButton className={classes.moreButton} onClick={() => {toggleCommenting(true)}}>
+          <IconButton sx={styles.moreButton} onClick={() => {toggleCommenting(true)}}>
             <ChatBubbleOutlineIcon fontSize='small' color='primary' className={classes.moreIcon}/>
           </IconButton>
-          <IconButton className={classes.moreButton} onClick={() => {toggleMoreDrawer(igLoadoutState._id)}}>
+          <IconButton sx={styles.moreButton} onClick={() => {toggleMoreDrawer(igLoadoutState._id)}}>
             <ShareOutlinedIcon fontSize='small' color='primary' className={classes.moreIcon}/>
           </IconButton>
         </Grid>
@@ -291,7 +294,6 @@ const LoadoutGrid = ({
           {
             commenting && <div className={classes.commentRow} >
               <InputBase
-                className={classes.commentInput}
                 defaultValue=""
                 multiline={true}
                 autoFocus={true}
@@ -302,7 +304,7 @@ const LoadoutGrid = ({
           }
           {
             !commenting && commentText && <div className={classes.commentRow}>
-              <Typography color='primary' className={classes.commentUser} variant='subtitle2'>{'anonymous'}</Typography>
+              <Typography color='primary' sx={styles.commentUser} variant='subtitle2'>{'anonymous'}</Typography>
               <Typography color='primary' variant='body2'>{commentText}</Typography>
             </div>
           }

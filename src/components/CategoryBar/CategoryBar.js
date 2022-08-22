@@ -29,17 +29,19 @@ const useStyles = makeStyles(theme => ({
     height: 24,
     width: 400,
   },
+}));
+
+const styles = {
   links: {
-    marginLeft: 9,
-    marginRight: 9,
+    marginLeft: 1,
+    marginRight: 2,
     fontWeight: 500,
   },
   chip: {
     fontSize: 14,
     fontWeight: 600,
   }
-}));
-
+}
 
 const CategoryBar = ({
   mixpanel,
@@ -68,14 +70,12 @@ const CategoryBar = ({
       {
         buttons.map(({ category, color, match }) => {
           if (match) {
-
-            return <Chip sizeSmall={true} className={classes.chip} label={category} color={color} href={`http://${category}.loadouts.me`} onClick={() => { handleClick(category) }}/>
+            return <Chip sizeSmall={true} sx={styles.chip} label={category} color={color} href={`/${category}`} onClick={() => { handleClick(category) }}/>
           } else {
-            return <Link className={classes.links} color={color} href={`http://${category}.loadouts.me`} onClick={() => { handleClick(category) }}>
+            return <Link sx={styles.links} color={color} href={`/${category}`} onClick={() => { handleClick(category) }}>
               {category}
               </Link>
           }
-
         }
       )}
     </div>
