@@ -83,11 +83,11 @@ const styles = {
   },
   moreButton: {
     // marginTop: -5,
-    padding: 5,
+    padding: 1,
   },
   commentUser: {
     fontWeight: 600,
-    marginRight: 5,
+    marginRight: 1,
   },
 }
 
