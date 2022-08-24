@@ -1,15 +1,15 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import { makeStyles } from '@mui/styles';
 import Fab from '@mui/material/Fab';
-import AddIcon from '@material-ui/icons/Add';
-import EditIcon from '@material-ui/icons/Edit';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import HomeIcon from '@material-ui/icons/Home';
+import AddIcon from '@mui/icons-material/Add';
+import EditIcon from '@mui/icons-material/Edit';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import HomeIcon from '@mui/icons-material/Home';
 import Slide from '@mui/material/Slide';
 import IconButton from '@mui/material/IconButton';
-import ViewCarouselIcon from '@material-ui/icons/ViewCarousel';
-import PublishIcon from '@material-ui/icons/Publish';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import ViewCarouselIcon from '@mui/icons-material/ViewCarousel';
+import PublishIcon from '@mui/icons-material/Publish';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { Link, useLocation, useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({

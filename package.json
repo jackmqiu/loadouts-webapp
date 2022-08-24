@@ -9,10 +9,7 @@
     "@auth0/auth0-react": "^1.8.0",
     "@emotion/react": "^11.10.0",
     "@emotion/styled": "^11.10.0",
-    "@material-ui/icons": "^4.11.2",
-    "@mui-treasury/components": "^1.10.1",
-    "@mui-treasury/layout": "^4.5.0",
-    "@mui-treasury/styles": "^1.13.1",
+    "@mui/icons-material": "^5.10.2",
     "@mui/material": "^5.10.1",
     "@mui/styles": "^5.9.3",
     "@testing-library/jest-dom": "^5.11.4",
@@ -25,7 +22,7 @@
     "react-ga": "^3.3.0",
     "react-google-font-loader": "^1.1.0",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "4.0.3",
+    "react-scripts": "5.0.1",
     "web-vitals": "^1.0.1"
   },
   "scripts": {

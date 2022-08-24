@@ -13,7 +13,7 @@ import { makeStyles } from '@mui/styles';
 import IdLoadoutForm from './IdLoadoutForm';
 import IconButton from "@mui/material/IconButton";
 import InputAdornment from "@mui/material/InputAdornment";
-import SearchIcon from "@material-ui/icons/Search";
+import SearchIcon from "@mui/icons-material/Search";
 
 const useStyles = makeStyles((theme) => ({
   paper: {

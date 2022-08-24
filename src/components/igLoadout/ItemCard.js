@@ -3,9 +3,8 @@ import React from 'react';
 import { makeStyles } from '@mui/styles';
 import CardActionArea from '@mui/material/CardActionArea';
 import Card from '@mui/material/Card';
-import SearchIcon from '@material-ui/icons/Search';
+import SearchIcon from '@mui/icons-material/Search';
 import Chip from "@mui/material/Chip";
-import { useCoverCardMediaStyles } from '@mui-treasury/styles/cardMedia/cover';
 import CardMedia from '@mui/material/CardMedia';
 import { gunTagsFixture } from "../../constants/tags";
 import tagsFixture from '../../constants/tags';
@@ -69,7 +68,6 @@ const LoadoutCard = ({
   screenWidth,
   rows,
 }) => {
-  const mediaStyles = useCoverCardMediaStyles({ bgPosition: 'top' });
   const classes = useStyles({color, height, screenWidth, rows});
   const tags = [];
   if (itemDetails?.tags) {

@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import ReactGA from 'react-ga';
 import { makeStyles } from '@mui/styles';
-import CloseIcon from '@material-ui/icons/Close';
-import FileCopyIcon from '@material-ui/icons/FileCopy';
+import CloseIcon from '@mui/icons-material/Close';
+import FileCopyIcon from '@mui/icons-material/FileCopy';
 import IconButton from '@mui/material/IconButton';
 import {
   Select,

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Card from '@mui/material/Card';
 import { makeStyles } from '@mui/styles';
 import CardActionArea from '@mui/material/CardActionArea';
-import AddBoxIcon from '@material-ui/icons/AddBox';
+import AddBoxIcon from '@mui/icons-material/AddBox';
 import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
 import Button from '@mui/material/Button';

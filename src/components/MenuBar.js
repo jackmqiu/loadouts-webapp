@@ -7,8 +7,8 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
-import MenuIcon from '@material-ui/icons/Menu';
-import FavoriteIcon from '@material-ui/icons/Favorite';
+import MenuIcon from '@mui/icons-material/Menu';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
 const useStyles = makeStyles((theme) => ({
   grow: {

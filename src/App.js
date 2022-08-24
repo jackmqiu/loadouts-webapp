@@ -40,6 +40,7 @@ const useStyles = makeStyles(({ height }) => ({
   root: {
     backgroundColor: '#ECEFE9',
     minHeight: 700,
+    display: "block",
   },
 }))
 const TRACKING_ID = "UA-193462319-2";
@@ -443,7 +444,7 @@ const App = (props) => {
             />
           </Route>
           <Route path='/'>
-            <div>
+            {/* <div> */}
               <CategoryBar mixpanel={mixpanel} loadoutCategory={loadoutCategory} />
               <Feed
                 feedLoadouts={feedLoadouts}
@@ -457,7 +458,7 @@ const App = (props) => {
                 addComment={addComment}
                 sendLike={sendLike}
               />
-            </div>
+            {/* </div> */}
         </Route>
       </Switch>
       <FloatingNav

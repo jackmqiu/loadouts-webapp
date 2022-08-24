@@ -6,18 +6,23 @@ import { Link } from 'react-router-dom';
 import ItemCard from './ItemCard';
 import IgLayoutTable from '../../IgLayoutTable';
 import { gridLayoutTable, heightGuide } from '../../constants';
-import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
-import ShareIcon from '@material-ui/icons/Share';
-import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
-import FavoriteOutlinedIcon from '@material-ui/icons/FavoriteOutlined';
-import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
-import ShareOutlinedIcon from '@material-ui/icons/ShareOutlined';
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import ShareIcon from '@mui/icons-material/Share';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FavoriteOutlinedIcon from '@mui/icons-material/FavoriteOutlined';
+import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
+import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
 import IconButton from '@mui/material/IconButton';
 import InputBase from '@mui/material/InputBase';
 import Avatar from '@mui/material/Avatar';
-import PersonIcon from '@material-ui/icons/Person';
+import PersonIcon from '@mui/icons-material/Person';
+import Box from '@mui/material/Box';
 
 const useStyles = makeStyles(() => ({
+  
+}));
+
+const styles = {
   loadoutGroup: {
     marginTop: '2%',
     marginBottom: '10%',
@@ -30,7 +35,7 @@ const useStyles = makeStyles(() => ({
     marginRight: '5%',
     textAlign: 'left',
     marginLeft: '5%',
-    marginBottom: 5,
+    marginBottom: 1,
     display: 'flex',
   },
   moreIcon: {
@@ -39,9 +44,6 @@ const useStyles = makeStyles(() => ({
   commentRow: {
     display: 'flex',
   },
-}));
-
-const styles = {
   gridItem: {
     display: 'flex',
   },
@@ -49,10 +51,10 @@ const styles = {
     width: 30,
     height: 30,
     fontSize: 15,
-    marginRight: 10,
+    marginRight: 2,
   },
   userName: {
-    marginTop: 4,
+    marginTop: "4px",
     fontWeight: 550,
   },
   grid: ({screenWidth}) => ({
@@ -238,20 +240,20 @@ const LoadoutGrid = ({
   const comments = [];
   igLoadoutState.comments && igLoadoutState.comments.map((comment) => {
     comments.push(
-      <div className={classes.commentRow}>
+      <Box sx={styles.commentRow}>
         <Typography color='primary' sx={styles.commentUser} variant='subtitle2'>{comment.name}</Typography>
         <Typography color='primary' variant='body2'>{comment.comment}</Typography>
-      </div>
+      </Box>
     )
   })
   return (
-    <div className={classes.loadoutGroup}>
-      <div className={classes.loadoutHeader}>
+    <Box sx={styles.loadoutGroup}>
+      <Box sx={styles.loadoutHeader}>
         <Avatar sx={styles.avatar}>
           <PersonIcon/>
         </Avatar>
         <Typography color='primary' variant="subtitle2" sx={styles.userName}> anonymous </Typography>
-      </div>
+      </Box>
       <Link to={`/${igLoadoutState._id}`}>
         <Grid container sx={styles.grid} spacing={1}>
           { loadoutGridItems }
@@ -272,17 +274,17 @@ const LoadoutGrid = ({
           }
           { liked ?
             <IconButton sx={styles.moreButton} >
-              <FavoriteOutlinedIcon fontSize='small' color='primary' className={classes.moreIcon}/>
+              <FavoriteOutlinedIcon fontSize='small' color='primary' sx={styles.moreIcon}/>
             </IconButton>
             : <IconButton sx={styles.moreButton} onClick={handleLikeClick}>
-              <FavoriteBorderIcon fontSize='small' color='primary' className={classes.moreIcon}/>
+              <FavoriteBorderIcon fontSize='small' color='primary' sx={styles.moreIcon}/>
             </IconButton>
           }
           <IconButton sx={styles.moreButton} onClick={() => {toggleCommenting(true)}}>
-            <ChatBubbleOutlineIcon fontSize='small' color='primary' className={classes.moreIcon}/>
+            <ChatBubbleOutlineIcon fontSize='small' color='primary' sx={styles.moreIcon}/>
           </IconButton>
           <IconButton sx={styles.moreButton} onClick={() => {toggleMoreDrawer(igLoadoutState._id)}}>
-            <ShareOutlinedIcon fontSize='small' color='primary' className={classes.moreIcon}/>
+            <ShareOutlinedIcon fontSize='small' color='primary' sx={styles.moreIcon}/>
           </IconButton>
         </Grid>
         <Grid item xs={12}>
@@ -292,7 +294,7 @@ const LoadoutGrid = ({
         </Grid>
         <Grid item xs={12}>
           {
-            commenting && <div className={classes.commentRow} >
+            commenting && <Box sx={styles.commentRow} >
               <InputBase
                 defaultValue=""
                 multiline={true}
@@ -300,17 +302,17 @@ const LoadoutGrid = ({
                 onChange={handleCommentTextChange}
                 onKeyPress={handleTextFieldSubmit}
               />
-            </div>
+            </Box>
           }
           {
-            !commenting && commentText && <div className={classes.commentRow}>
+            !commenting && commentText && <Box sx={styles.commentRow}>
               <Typography color='primary' sx={styles.commentUser} variant='subtitle2'>{'anonymous'}</Typography>
               <Typography color='primary' variant='body2'>{commentText}</Typography>
-            </div>
+            </Box>
           }
         </Grid>
       </Grid>
-    </div>
+    </Box>
   );
 };
 
