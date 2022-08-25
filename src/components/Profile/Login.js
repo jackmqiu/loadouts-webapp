@@ -4,9 +4,10 @@ import { makeStyles } from '@mui/styles';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
 import { useAuth0 } from "@auth0/auth0-react";
 
-const useStyles = makeStyles(() => ({
+const styles = {
   root: {
     width: '100%',
     display: 'flex',
@@ -18,29 +19,28 @@ const useStyles = makeStyles(() => ({
     minHeight: 160,
     marginLeft: '5%',
     marginRight: '5%',
-    paddingBottom: 30,
-    marginTop: 40,
+    paddingBottom: 4,
+    marginTop: 7,
   },
   LoginTitle: {
     fontWeight: 'bold',
-    marginTop: 45,
-    marginBottom: 5,
+    marginTop: 7,
+    marginBottom: 1,
   },
   TextField: {
     width: '100%',
   },
   Login: {
     width: '100%',
-    marginTop: 50,
+    marginTop: 6,
   }
-}))
+}
 
 const Login = ({
 
 }) => {
   const [usernameText, setUsernameText] = useState('');
   const [passwordText, setPasswordText] = useState('');
-  const classes = useStyles();
   const { user, isAuthenticated, isLoading, getAccessTokenSilently } = useAuth0();
   const { loginWithRedirect } = useAuth0();
   const { logout } = useAuth0();
@@ -62,13 +62,13 @@ const Login = ({
   }
   return (
     <div>
-      <Typography color='primary' variant='h5' className={classes.LoginTitle}> Welcome! </Typography>
-      <div className={classes.LoginContainer}>
-        <TextField autoFocus={true} className={classes.TextField} value={usernameText}  margin="dense" label="Username" variant="outlined" onChange={handleUsernameTextChange} onKeyPress={handleSubmitLogin} />
-        <TextField autoFocus={true} className={classes.TextField} value={passwordText}  margin="dense" label="Password" type='password' variant="outlined" onChange={handlePasswordTextChange} onKeyPress={handleSubmitLogin} />
-        <Button onClick={() => loginWithRedirect()} className={classes.Login} variant='contained' color='primary'> Log In </Button>
-        <Button onClick={() => loginWithRedirect({ screen_hint: "signup" })} className={classes.Login} variant='contained' color='primary'> Sign Up </Button>
-      </div>
+      <Typography color='primary' variant='h5' sx={styles.LoginTitle}> Welcome! </Typography>
+      <Box sx={styles.LoginContainer}>
+        <TextField autoFocus={true} sx={styles.TextField} value={usernameText}  margin="dense" label="Username" variant="outlined" onChange={handleUsernameTextChange} onKeyPress={handleSubmitLogin} />
+        <TextField autoFocus={true} sx={styles.TextField} value={passwordText}  margin="dense" label="Password" type='password' variant="outlined" onChange={handlePasswordTextChange} onKeyPress={handleSubmitLogin} />
+        <Button onClick={() => loginWithRedirect()} sx={styles.Login} variant='contained' color='primary'> Log In </Button>
+        <Button onClick={() => loginWithRedirect({ screen_hint: "signup" })} sx={styles.Login} variant='contained' color='primary'> Sign Up </Button>
+      </Box>
     </div>
   )
 }
