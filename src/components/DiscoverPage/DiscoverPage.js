@@ -6,11 +6,11 @@ import {
   Typography,
   AppBar,
   Grid,
+  Box,
 } from '@mui/material'
-import { makeStyles } from '@mui/styles';
 import { mainUI } from '../../constants';
 
-const useStyles = makeStyles({
+const styles = {
   root: {
     width: '100%',
     display: 'flex',
@@ -19,13 +19,13 @@ const useStyles = makeStyles({
     marginLeft: 'auto',
   },
   categoryCardsContainer: {
-    marginTop: 15,
-    marginLeft: 10,
-    marginRight: 10,
+    marginTop: 2,
+    marginLeft: 1,
+    marginRight: 1,
   },
   categoryCard: {
-    margin: 4,
-    borderRadius: 14,
+    margin: 0.5,
+    borderRadius: 1.5,
     display: 'relative',
   },
   cardSpace: {
@@ -50,13 +50,13 @@ const useStyles = makeStyles({
     fontWeight: 'bold',
   },
   sectionTitleContainer: {
-    marginBottom: 10,
-    marginTop: 35,
+    marginBottom: 1,
+    marginTop: 4,
   },
   sectionTitle: {
     // marginBottom: 10,
   },
-})
+}
 
 // const uiObject = mainUI;
 
@@ -64,7 +64,6 @@ const DiscoverPage = ({
   mixpanel,
   discoverUI,
 }) => {
-  const classes = useStyles();
   const uiObject = discoverUI;
   const handleClick = (section, key) => {
     mixpanel.track(
@@ -77,8 +76,8 @@ const DiscoverPage = ({
   Object.keys(uiObject).forEach((section) => {
     if (uiObject[section].show) {
       gridItems.push(
-        <Grid item xs={12} className={classes.sectionTitleContainer}>
-          <Typography className={classes.sectionTitle}>
+        <Grid item xs={12} sx={styles.sectionTitleContainer}>
+          <Typography sx={styles.sectionTitle}>
             {uiObject[section].title}
           </Typography>
         </Grid>
@@ -87,13 +86,13 @@ const DiscoverPage = ({
         if (uiObject[section].cards[key].show) {
           gridItems.push(
             <Grid item xs={6} >
-              <Card elevation={0} className={classes.categoryCard} onClick={() => {handleClick(section, key)}}>
-                <div className={classes.cardSpace}>
-                  <CardMedia image={uiObject[section].cards[key].imageLink} className={classes.categoryCardMedia}/>
-                  <Typography variant='subtitle1' className={classes.cardTitle}>
+              <Card elevation={0} sx={styles.categoryCard} onClick={() => {handleClick(section, key)}}>
+                <Box sx={styles.cardSpace}>
+                  <CardMedia image={uiObject[section].cards[key].imageLink} sx={styles.categoryCardMedia}/>
+                  <Typography variant='subtitle1' sx={styles.cardTitle}>
                     {uiObject[section].cards[key].title}
                   </Typography>
-                </div>
+                </Box>
               </Card>
             </Grid>
           )
@@ -102,16 +101,16 @@ const DiscoverPage = ({
     }
   })
   return (
-    <div className={classes.root}>
+    <Box sx={styles.root}>
       <AppBar >
         <Typography variant="h6" color="inherit">
           Loadouts.me by Mixellator
         </Typography>
       </AppBar>
-      <Grid container className={classes.categoryCardsContainer}>
+      <Grid container sx={styles.categoryCardsContainer}>
         {gridItems}
       </Grid>
-    </div>
+    </Box>
   )
 }
 
