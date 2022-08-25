@@ -61,14 +61,14 @@ const useStyles = makeStyles((theme) => ({
 
 const styles = {
   chips: {
-    marginRight: 4,
-    marginBottom: 5,
+    marginRight: 1,
+    marginBottom: 1,
   },
   select: {
     margin: '0px 5px 0px 5px',
   },
   nextButton: {
-    marginBottom: 30,
+    marginBottom: 1,
   },
 }
 
@@ -128,7 +128,7 @@ const MetadataForm = ({
   categoryHashtags.forEach((key) => {
     chips.push(
       <Chip
-        // color={loadoutHashtagsObject[key] ? 'primary' : ''}
+        color={loadoutHashtagsObject[key] ? 'primary' : 'secondary'}
         label={`#${key}`}
         onClick={() => {toggleLoadoutHashtags(key)}}
         sx={styles.chips}
