@@ -56,6 +56,10 @@ const styles = {
     // },
     textAlign: 'left',
   }),
+  tagChips: (processedTag) => ({
+    backgroundColor:`#${tagClassColors[tagsFixture[processedTag]?.class]}` || "#E82020",
+    marginRight: 1,
+  })
 }
 
 const LoadoutCard = ({
@@ -77,8 +81,9 @@ const LoadoutCard = ({
         tags.push(
           <Chip 
             label={tagsFixture[processedTag]?.text} 
-            sx={{backgroundColor:`#${tagClassColors[tagsFixture[processedTag]?.class]}` || "#E82020"}} 
-            className={classes.tagChip}>
+            sx={styles.tagChips(processedTag)}
+            size="small"
+          >
           </Chip>
         )
       }
