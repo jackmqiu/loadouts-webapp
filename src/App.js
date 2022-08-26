@@ -32,10 +32,8 @@ import MenuBar from './components/MenuBar.js';
 import IgLoadout from './components/igLoadout';
 import FloatingNav from './components/FloatingNav';
 import Drawer from './components/Drawer';
+import axiosInstance from './API/axiosBase';
 
-const axiosInstance = axios.create({
-  baseURL: `${process.env.REACT_APP_API_URL}`,
-});
 const useStyles = makeStyles(({ height }) => ({
   root: {
     backgroundColor: '#ECEFE9',

@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useRef, useState, useCallback } from 'react';
 import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
 import { makeStyles } from '@mui/styles';
 import LoadoutGrid from '../igLoadout';
+import axiosInstance from '../../API/axiosBase';
+import useAxiosFetch from '../../API/useAxiosFetch';
 
-const useStyles = makeStyles(() => ({
+const styles = {
   root: {
     maxWidth: 600,
     marginLeft: 'auto',
@@ -19,11 +22,11 @@ const useStyles = makeStyles(() => ({
   button: {
     margin: 5,
   },
-}));
+};
 
 const Feed = ({
   mixpanel,
-  feedLoadouts,
+  // feedLoadouts,
   igLoadoutState,
   handleOpen,
   handleClose,
@@ -41,31 +44,70 @@ const Feed = ({
   if (screenWidth < limitedScreenWidth) {
     limitedScreenWidth = screenWidth;
   }
-  const classes = useStyles({ limitedScreenWidth });
+  const [page, setPage] = useState(0);
+  const { loading, error, feedLoadouts, hasMore } = useAxiosFetch('airsoft', page);
+
+  const observer = useRef(); // (*)
+  const lastLoadoutElementRef = useCallback(  // (*)
+    (node) => {
+      console.log('node', node)
+      if (loading) return;
+      if (observer.current) observer.current.disconnect();
+      observer.current = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting && hasMore) {
+          setPage((prev) => prev + 1);
+        }
+      });
+      if (node) observer.current.observe(node);
+    },
+    [loading, hasMore]
+  );
     // tell React that we want to associate the <input> ref
     // with the `grid` that we created in the constructor
   const loadouts = [];
   for (let i = 0; i < feedLoadouts.length; i++) {
-    loadouts.push(
-        <LoadoutGrid
-          key={i}
-          igLoadoutState={feedLoadouts[i]}
-          setIgLoadoutState={setIgLoadoutState}
-          colorScheme={colorScheme}
-          displayState={displayState}
-          screenWidth={limitedScreenWidth}
-          scrollToTop={scrollToTop}
-          toggleMoreDrawer={toggleMoreDrawer}
-          addComment={addComment}
-          sendLike={sendLike}
-          mixpanel={mixpanel}
-        />
+    if (i === feedLoadouts.length - 1) {
+      loadouts.push(
+        <Box key={i} ref={lastLoadoutElementRef}>
+          <LoadoutGrid
+            igLoadoutState={feedLoadouts[i]}
+            setIgLoadoutState={setIgLoadoutState}
+            colorScheme={colorScheme}
+            displayState={displayState}
+            screenWidth={limitedScreenWidth}
+            scrollToTop={scrollToTop}
+            toggleMoreDrawer={toggleMoreDrawer}
+            addComment={addComment}
+            sendLike={sendLike}
+            mixpanel={mixpanel}
+          />
+        </Box>
+      )
+    } else {
+      loadouts.push(
+        <Box key={i}>
+          <LoadoutGrid
+            igLoadoutState={feedLoadouts[i]}
+            setIgLoadoutState={setIgLoadoutState}
+            colorScheme={colorScheme}
+            displayState={displayState}
+            screenWidth={limitedScreenWidth}
+            scrollToTop={scrollToTop}
+            toggleMoreDrawer={toggleMoreDrawer}
+            addComment={addComment}
+            sendLike={sendLike}
+            mixpanel={mixpanel}
+          />
+        </Box>
     )
+    }
   };
   return (
-    <div className={classes.root}>
+    <Box sx={styles.root}>
       { loadouts }
-    </div>
+      <Box>{loading && 'Loading...'}</Box>
+      <Box>{error && 'Error'}</Box>
+    </Box>
   );
 };
 

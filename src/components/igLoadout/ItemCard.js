@@ -89,15 +89,14 @@ const LoadoutCard = ({
       }
     })
   }
-  if (tags.length > 0) {console.log('tags', tags)}
-    return (
-          <Card sx={styles.card} >
-              <img alt='' className={classes.modImg} src={itemDetails?.imageLink || "https://i.imgur.com/Z7e0jjRm.jpg"} />
-              <div className={classes.chipContainer}>
-                {tags}
-              </div>
-          </Card>
-    );
+  return (
+        <Card sx={styles.card} >
+            <img alt='' className={classes.modImg} src={itemDetails?.imageLink || "https://i.imgur.com/Z7e0jjRm.jpg"} />
+            <div className={classes.chipContainer}>
+              {tags}
+            </div>
+        </Card>
+  );
 };
 
 export default LoadoutCard;
