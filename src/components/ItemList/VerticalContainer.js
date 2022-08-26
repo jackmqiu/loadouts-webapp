@@ -1,13 +1,8 @@
 import React, { useState } from 'react';
 import ItemCard from './ItemCard';
 import { makeStyles } from '@mui/styles';
+import Box from '@mui/material/Box';
 
-const useStyles = makeStyles(() => ({
-  columnContainer: ({ firstColumn }) => ({
-    paddingLeft: firstColumn ? 10 : 0,
-    paddingRight: 10,
-  }),
-}))
 
 const VerticalContainer = ({
   mixpanel,
@@ -21,7 +16,7 @@ const VerticalContainer = ({
   screenWidth,
   addDescription,
 }) => {
-  const classes = useStyles({ firstColumn });
+  
   const cards = [];
   if (containerIndex < Object.keys(igLoadoutState.items).length) {
     // first card of column might be short, handled here
@@ -84,9 +79,12 @@ const VerticalContainer = ({
     )
   }
   return (
-    <div className={classes.columnContainer}>
+    <Box sx={{
+      paddingLeft: firstColumn ? 1.5 : 0,
+      paddingRight: 1.5,
+    }}>
       {cards}
-    </div>
+    </Box>
   )
 }
 

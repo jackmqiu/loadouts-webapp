@@ -14,7 +14,7 @@ const styles = {
     // height: shortCard ? 265 : 265,
     minHeight: 200,
     // maxHeight: 300,
-    borderRadius: 8,
+    borderRadius: 1,
     boxShadow: 'none',
     marginBottom: 1,
     // position: 'relative',
