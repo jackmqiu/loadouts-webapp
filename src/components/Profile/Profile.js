@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { makeStyles } from '@mui/styles';
-import { useAuth0 } from "@auth0/auth0-react";
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import axiosInstance from '../../API/axiosBase';
 
-const useStyles = makeStyles(() => ({
+const styles = {
   root: {
     width: '100%',
     display: 'flex',
@@ -31,19 +30,26 @@ const useStyles = makeStyles(() => ({
     width: '100%',
     marginTop: 50,
   }
-}))
+}
 
 const Profile = ({
-  mixpanel
+  mixpanel,
+  loggedInUser,
+  setLoggedInUser
 }) => {
-  const { logout } = useAuth0();
-  const classes = useStyles();
+  const handleLogout = () => {
+    console.log('handleLogout')
+    axiosInstance.post('/logout')
+    .then((res) => {
+      if (res.data.success) {
+        setLoggedInUser({});
+      }
+    }) 
+  }
   return (
     <div>
       Profile
-
-      <Button onClick={() => logout()} className={classes.Login} variant='contained' color='primary'> Log Out </Button>
-
+      <Button onClick={() => {handleLogout()}} sx={styles.Login} variant='contained' color='primary'> Log Out </Button>
     </div>
   )
 }

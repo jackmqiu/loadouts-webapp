@@ -265,7 +265,6 @@ const App = (props) => {
   const getLoadout = () => {
     axiosInstance.get(`/${loadoutsId}`)
     .then(response => {
-      console.log('response', response);
       if (typeof(response.data) === 'object') {
         setViewLoadoutState(response.data);
       } else {

@@ -12,7 +12,7 @@ const ProfilePage = ({
       <TitleBar mixpanel={mixpanel}/>
       <Divider/>
       {
-        loggedInUser ?
+        loggedInUser?.email ?
         <Profile
           mixpanel={mixpanel}
           userData={userData}

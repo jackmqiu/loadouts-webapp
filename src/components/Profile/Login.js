@@ -48,20 +48,40 @@ const Login = ({
   const handlePasswordTextChange = (event) => {
     setPasswordText(event.target.value);
   };
+  
+  const submitLogin = () => {
+    if (usernameText && passwordText) {
+      axiosInstance.post('/login/password', {
+        username: usernameText,
+        password: passwordText,
+      })
+      .then((res) => {
+        if (res.data.success) {
+          setLoggedInUser(res.data.success);
+        }
+      })
+    }
+  }
+
   const handleSubmitLogin = (event) => {
     if (event.key === 'Enter') {
-      if (usernameText && passwordText) {
-        axiosInstance.post('/login/password', {
-          username: usernameText,
-          password: passwordText,
-        })
-        .then((res) => {
-          if (res.data.success) {
-            setLoggedInUser(res.data.success);
-          }
-        })
-      }
+      submitLogin();
       event.preventDefault();
+    }
+  }
+
+  const handleSubmitSignUp = () => {
+    if (usernameText && passwordText) {
+      axiosInstance.post('/users/new', {
+        username: usernameText,
+        password: passwordText,
+        email: usernameText
+      })
+      .then((res) => {
+        if (res.data.acknowledged) {
+          submitLogin();
+        }
+      })
     }
   }
 
@@ -71,7 +91,8 @@ const Login = ({
       <Box sx={styles.LoginContainer}>
         <TextField autoFocus={true} sx={styles.TextField} value={usernameText}  margin="dense" label="Username" variant="outlined" onChange={handleUsernameTextChange} onKeyPress={handleSubmitLogin} />
         <TextField autoFocus={true} sx={styles.TextField} value={passwordText}  margin="dense" label="Password" type='password' variant="outlined" onChange={handlePasswordTextChange} onKeyPress={handleSubmitLogin} />
-        <Button onClick={handleSubmitLogin} sx={styles.Login} variant='contained' color='primary'> Log In / Sign Up </Button>
+        <Button onClick={() => { submitLogin() }} sx={styles.Login} variant='contained' color='primary'> Log In </Button>
+        <Button onClick={() => { handleSubmitSignUp() }} sx={styles.Login} variant='contained' color='primary'> Sign Up </Button>
       </Box>
     </div>
   )
