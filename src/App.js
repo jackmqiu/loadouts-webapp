@@ -278,39 +278,9 @@ const App = (props) => {
     })
   }
   // User data
-  const { user, isAuthenticated, isLoading, getAccessTokenSilently } = useAuth0();
   const [email, setEmail] = useState('');
   const [userData, setUserData] = useState(null); // DB data
-  const [userMetadata, setUserMetadata] = useState(null); // Auth0 data
-
-  useEffect(() => {
-    const getUserMetadata = async () => {
-      const domain = "loadoutsdotme.us.auth0.com";
-
-      try {
-        const accessToken = await getAccessTokenSilently({
-          audience: `https://${domain}/api/v2/`,
-          scope: "read:current_user",
-        });
-
-        const userDetailsByIdUrl = `https://${domain}/api/v2/users/${user.sub}`;
-
-        const metadataResponse = await fetch(userDetailsByIdUrl, {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        });
-
-        const { user_metadata } = await metadataResponse.json();
-
-        setUserMetadata(user_metadata);
-      } catch (e) {
-        console.log(e.message);
-      }
-    };
-
-    getUserMetadata();
-  }, [getAccessTokenSilently, user?.sub]);
+  const [loggedInUser, setLoggedInUser] = useState({});
 
   const getUser = () => {
     axiosInstance.get(`/users/${email}`)
@@ -364,9 +334,8 @@ const App = (props) => {
             <ProfilePage
               mixpanel={mixpanel}
               userData={userData}
-              userMetadata={userMetadata}
-              isAuthenticated={isAuthenticated}
-              isLoading={isLoading}
+              loggedInUser={loggedInUser}
+              setLoggedInUser={setLoggedInUser}
             />
           </Route>
           <Route path='/discover'>

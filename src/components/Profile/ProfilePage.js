@@ -5,27 +5,24 @@ import TitleBar from '../TitleBar';
 import Divider from '@mui/material/Divider';
 
 const ProfilePage = ({
-  mixpanel, userData, userMetadata, isAuthenticated, isLoading
+  mixpanel, userData, loggedInUser, setLoggedInUser
 }) => {
   return (
     <div>
       <TitleBar mixpanel={mixpanel}/>
       <Divider/>
       {
-        isAuthenticated ?
+        loggedInUser ?
         <Profile
           mixpanel={mixpanel}
           userData={userData}
-          userMetadata={userMetadata}
-          isAuthenticated={isAuthenticated}
-          isLoading={isLoading}
+          loggedInUser={loggedInUser}
+          setLoggedInUser={setLoggedInUser}
         /> :
         <Login
           mixpanel={mixpanel}
           userData={userData}
-          userMetadata={userMetadata}
-          isAuthenticated={isAuthenticated}
-          isLoading={isLoading}
+          setLoggedInUser={setLoggedInUser}
         />
       }
     </div>
