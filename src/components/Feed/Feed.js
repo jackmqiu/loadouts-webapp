@@ -39,6 +39,7 @@ const Feed = ({
   toggleMoreDrawer,
   addComment,
   sendLike,
+  loggedInUser,
 }) => {
   let limitedScreenWidth = 600;
   if (screenWidth < limitedScreenWidth) {
@@ -80,6 +81,7 @@ const Feed = ({
             addComment={addComment}
             sendLike={sendLike}
             mixpanel={mixpanel}
+            loggedInUser={loggedInUser}
           />
         </Box>
       )

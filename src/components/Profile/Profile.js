@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import axiosInstance from '../../API/axiosBase';
 
@@ -48,6 +49,8 @@ const Profile = ({
   return (
     <div>
       Profile
+      <Box>{loggedInUser.username}</Box>
+      <Box>{loggedInUser.email}</Box>
       <Button onClick={() => {handleLogout()}} sx={styles.Login} variant='contained' color='primary'> Log Out </Button>
     </div>
   )

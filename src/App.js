@@ -315,6 +315,7 @@ const App = (props) => {
       } else {
         axiosInstance.post(`/make`, {
           ...igLoadoutState,
+          username: loggedInUser?.username,
           _id: id,
         })
         .then(response => {
@@ -367,7 +368,6 @@ const App = (props) => {
               canEdit={true}
               loadoutCategory={loadoutCategory}
               screenWidth={width}
-              toggleNewLoadoutFormOpen={toggleNewLoadoutFormOpen}
               newLoadoutFormOpen={newLoadoutFormOpen}
               loadoutHashtags={loadoutHashtags}
               setLoadoutHashtags={setLoadoutHashtags}
@@ -375,6 +375,7 @@ const App = (props) => {
               setLoadoutCategory={setLoadoutCategory}
               addDescription={addDescription}
               editDescription={editDescription}
+              loggedInUser={loggedInUser}
             />
             <IgLoadoutForm
               igLoadoutFormOpen={igLoadoutFormOpen}
@@ -423,6 +424,7 @@ const App = (props) => {
                 toggleMoreDrawer={toggleMoreDrawer}
                 addComment={addComment}
                 sendLike={sendLike}
+                loggedInUser={loggedInUser}
               />
             {/* </div> */}
         </Route>

@@ -46,6 +46,7 @@ const ItemList = ({
   updateLoadoutMetadata,
   setLoadoutCategory,
   addDescription,
+  loggedInUser,
 }) => {
   const location = useLocation().pathname;
   useEffect(() => {
@@ -84,6 +85,7 @@ const ItemList = ({
             updateLoadoutMetadata={updateLoadoutMetadata}
             loadoutCategory={loadoutCategory}
             setLoadoutCategory={setLoadoutCategory}
+            loggedInUser={loggedInUser}
           />
           :
           <div>

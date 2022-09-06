@@ -5,6 +5,7 @@ import Modal from '@mui/material/Modal';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import Chip from '@mui/material/Chip';
+import Box from '@mui/material/Box';
 import { makeStyles } from '@mui/styles';
 import { Link, useHistory } from 'react-router-dom';
 import Divider from '@mui/material/Divider';
@@ -14,30 +15,23 @@ import MenuItem from '@mui/material/MenuItem';
 import FormHelperText from '@mui/material/FormHelperText';
 import FormControl from '@mui/material/FormControl';
 import { hashtagTable, categoriesList } from '../../constants';
-const useStyles = makeStyles((theme) => ({
+
+const styles = {
   modal: {
     marginRight: 'auto',
     marginLeft: 'auto',
     maxWidth: 600,
     minWidth: 120,
     maxHeight: 800,
-    padding: 20,
-  },
-  paper: {
-    position: 'absolute',
-    width: 400,
-    backgroundColor: theme.palette.background.paper,
-    border: '2px solid #000',
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
+    padding: 3,
   },
   formTitle: {
     marginLeft: '10%',
-    paddingTop: 30,
+    paddingTop: 4,
   },
   textField: {
-    marginBottom: 10,
-    marginLeft: 5,
+    marginBottom: 1,
+    marginLeft: 0.5,
   },
   card: {
     display: 'block',
@@ -48,29 +42,26 @@ const useStyles = makeStyles((theme) => ({
     marginRight: '10%',
   },
   fieldsContainer: {
-    paddingTop: 30,
-    paddingBottom: 30,
+    paddingTop: 4,
+    paddingBottom: 4,
   },
   chipsContainer: {
     width: '80%',
     marginLeft: '10%',
     marginRight: '10%',
-    marginBottom: 30,
+    marginBottom: 4,
   },
-}));
-
-const styles = {
   chips: {
     marginRight: 1,
     marginBottom: 1,
   },
   select: {
-    margin: '0px 5px 0px 5px',
+    margin: '5px 5px 5px 5px',
   },
   nextButton: {
     marginBottom: 1,
   },
-}
+};
 
 const MetadataForm = ({
   mixpanel,
@@ -82,8 +73,8 @@ const MetadataForm = ({
   updateLoadoutMetadata,
   loadoutCategory,
   setLoadoutCategory,
+  loggedInUser,
 }) => {
-  const classes = useStyles();
   const [loadoutNameText, setNameText] = useState(igLoadoutState.title);
   const history = useHistory();
   const directToMakeLoadout = useCallback(() => history.push('/make'), [history]);
@@ -147,7 +138,7 @@ const MetadataForm = ({
   })
   return (
     <div>
-      <div className={classes.fieldsContainer}>
+      <Box sx={styles.fieldsContainer}>
         <FormControl variant="outlined" margin="dense" sx={styles.select}>
           <InputLabel>Category</InputLabel>
           <Select
@@ -159,15 +150,18 @@ const MetadataForm = ({
           </Select>
         </FormControl>
         <TextField autoFocus={true} sx={styles.select} value={loadoutNameText}  margin="dense" label="Loadout Title" variant="outlined" onChange={handleTextChange} onKeyPress={handleSubmitTitle} />
-      </div>
-      <div className={classes.chipsContainer}>
+        { loggedInUser?.username && 
+          <TextField sx={styles.select} value={loggedInUser?.username}  margin="dense" label="Username" disabled />
+        }
+      </Box>
+      <Box sx={styles.chipsContainer}>
         {chips}
-      </div>
-      <div className={classes.chipsContainer}>
+      </Box>
+      <Box sx={styles.chipsContainer}>
         <Link to='/make' style={{ textDecoration: 'none' }}>
           <Button sx={ styles.nextButton } variant='contained' color='primary' onClick={handleLoadoutMetadataSubmit}>Set</Button>
         </Link>
-      </div>
+      </Box>
     </div>
   )
 };

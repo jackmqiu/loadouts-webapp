@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import { makeStyles } from '@mui/styles';
 import { Link } from 'react-router-dom';
 import ItemCard from './ItemCard';
 import IgLayoutTable from '../../IgLayoutTable';
@@ -17,10 +16,6 @@ import InputBase from '@mui/material/InputBase';
 import Avatar from '@mui/material/Avatar';
 import PersonIcon from '@mui/icons-material/Person';
 import Box from '@mui/material/Box';
-
-const useStyles = makeStyles(() => ({
-  
-}));
 
 const styles = {
   loadoutGroup: {
@@ -105,8 +100,8 @@ const LoadoutGrid = ({
   toggleMoreDrawer,
   addComment,
   sendLike,
+  loggedInUser,
 }) => {
-  const classes = useStyles({ screenWidth });
   const [commenting, toggleCommenting] = useState(false);
   const [commentText, setCommentText] = useState('');
   const [liked, setLiked] = useState(0);
@@ -252,7 +247,7 @@ const LoadoutGrid = ({
         <Avatar sx={styles.avatar}>
           <PersonIcon/>
         </Avatar>
-        <Typography color='primary' variant="subtitle2" sx={styles.userName}> anonymous </Typography>
+        <Typography color='primary' variant="subtitle2" sx={styles.userName}> {igLoadoutState?.username || 'anonymous'} </Typography>
       </Box>
       <Link to={`/${igLoadoutState._id}`}>
         <Grid container sx={styles.grid} spacing={1}>
