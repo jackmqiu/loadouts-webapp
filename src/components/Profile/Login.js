@@ -41,6 +41,7 @@ const Login = ({
 }) => {
   const [usernameText, setUsernameText] = useState('');
   const [passwordText, setPasswordText] = useState('');
+  const [emailText, setEmailText] = useState('');
 
   const handleUsernameTextChange = (event) => {
     setUsernameText(event.target.value);
@@ -48,11 +49,14 @@ const Login = ({
   const handlePasswordTextChange = (event) => {
     setPasswordText(event.target.value);
   };
-  
+  const handleEmailTextChange = (event) => {
+    setEmailText(event.target.value);
+  }
+
   const submitLogin = () => {
-    if (usernameText && passwordText) {
+    if (emailText && passwordText) {
       axiosInstance.post('/login/password', {
-        username: usernameText,
+        username: emailText,
         password: passwordText,
       })
       .then((res) => {
@@ -70,12 +74,12 @@ const Login = ({
     }
   }
 
-  const handleSubmitSignUp = () => {
-    if (usernameText && passwordText) {
+  const submitSignUp = () => {
+    if (usernameText && passwordText && emailText) {
       axiosInstance.post('/users/new', {
         username: usernameText,
         password: passwordText,
-        email: usernameText
+        email: emailText
       })
       .then((res) => {
         if (res.data.acknowledged) {
@@ -85,14 +89,22 @@ const Login = ({
     }
   }
 
+  const handleSubmitSignUp = (event) => {
+    if (event.key === 'Enter') {
+      submitSignUp();
+      event.preventDefault();
+    }
+  }
+
   return (
     <div>
       <Typography color='primary' variant='h5' sx={styles.LoginTitle}> Welcome! </Typography>
       <Box sx={styles.LoginContainer}>
-        <TextField autoFocus={true} sx={styles.TextField} value={usernameText}  margin="dense" label="Username" variant="outlined" onChange={handleUsernameTextChange} onKeyPress={handleSubmitLogin} />
+        <TextField autoFocus={true} sx={styles.TextField} value={emailText}  margin="dense" label="Email" variant="outlined" onChange={handleEmailTextChange} onKeyPress={handleSubmitLogin} />
         <TextField autoFocus={true} sx={styles.TextField} value={passwordText}  margin="dense" label="Password" type='password' variant="outlined" onChange={handlePasswordTextChange} onKeyPress={handleSubmitLogin} />
+        <TextField autoFocus={true} sx={styles.TextField} value={usernameText}  margin="dense" label="Username (for sign up)" variant="outlined" onChange={handleUsernameTextChange} onKeyPress={handleSubmitSignUp} />
         <Button onClick={() => { submitLogin() }} sx={styles.Login} variant='contained' color='primary'> Log In </Button>
-        <Button onClick={() => { handleSubmitSignUp() }} sx={styles.Login} variant='contained' color='primary'> Sign Up </Button>
+        <Button onClick={() => { submitSignUp() }} sx={styles.Login} variant='contained' color='primary'> Sign Up </Button>
       </Box>
     </div>
   )

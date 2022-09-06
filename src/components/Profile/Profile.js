@@ -38,7 +38,6 @@ const Profile = ({
   setLoggedInUser
 }) => {
   const handleLogout = () => {
-    console.log('handleLogout')
     axiosInstance.post('/logout')
     .then((res) => {
       if (res.data.success) {
