@@ -50,7 +50,7 @@ const Feed = ({
   const [page, setPage] = useState(0);
   let feedClass = useLocation().pathname.split('/')[2];
   if (useLocation().pathname === '/') {
-    feedClass = null;
+    feedClass = 'all';
   }
   const { loading, error, feedLoadouts, hasMore } = useAxiosFetch('airsoft', feedClass, page); // for infinite scroll
 
