@@ -122,11 +122,12 @@ const App = (props) => {
     setNewLoadoutFormOpen(!newLoadoutFormOpen);
   };
 
-  const updateLoadoutMetadata = ({ loadoutName }) => {
+  const updateLoadoutMetadata = ({ loadoutName, loadoutClass }) => {
     setIgLoadoutState({
       ...igLoadoutState,
       title: loadoutName,
       category: loadoutCategory,
+      class: loadoutClass,
       hashtags: loadoutHashtags[loadoutCategory],
     })
   }

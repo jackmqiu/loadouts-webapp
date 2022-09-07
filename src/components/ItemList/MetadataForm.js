@@ -14,7 +14,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormHelperText from '@mui/material/FormHelperText';
 import FormControl from '@mui/material/FormControl';
-import { hashtagTable, categoriesList } from '../../constants';
+import { hashtagTable, categoriesList, buildClasses } from '../../constants';
 
 const styles = {
   modal: {
@@ -76,6 +76,7 @@ const MetadataForm = ({
   loggedInUser,
 }) => {
   const [loadoutNameText, setNameText] = useState(igLoadoutState.title);
+  const [loadoutClass, setLoadoutClass] = useState(Object.keys(buildClasses)[1]);
   const history = useHistory();
   const directToMakeLoadout = useCallback(() => history.push('/make'), [history]);
   const handleTextChange = (event) => {
@@ -85,6 +86,9 @@ const MetadataForm = ({
     setLoadoutCategory(event.target.value);
     setLoadoutHashtags(hashtagTable);
   }
+  const handleClassSelect = (event) => {
+    setLoadoutClass(event.target.value);
+  }
   //loadout Name
   //chips
   const handleLoadoutMetadataSubmit = () => {
@@ -93,7 +97,8 @@ const MetadataForm = ({
       {"handleMetadataSubmit": `${loadoutNameText}`}
     );
     updateLoadoutMetadata({
-      loadoutName: loadoutNameText
+      loadoutName: loadoutNameText,
+      loadoutClass: loadoutClass,
     });
     toggleNewLoadoutFormOpen();
   }
@@ -136,10 +141,18 @@ const MetadataForm = ({
       )
     }
   })
+  const classChoices = [];
+  Object.keys(buildClasses).forEach((key) => {
+    if (key !== 'all') {
+      classChoices.push(
+        <MenuItem value={key}>{ key }</MenuItem>
+      )
+    }
+  })
   return (
     <div>
       <Box sx={styles.fieldsContainer}>
-        <FormControl variant="outlined" margin="dense" sx={styles.select}>
+        <FormControl disabled variant="outlined" margin="dense" sx={styles.select}>
           <InputLabel>Category</InputLabel>
           <Select
             value={loadoutCategory}
@@ -147,6 +160,16 @@ const MetadataForm = ({
             label="Category"
           >
             { categoryChoices }
+          </Select>
+        </FormControl>
+        <FormControl variant="outlined" margin="dense" sx={styles.select}>
+          <InputLabel>Class</InputLabel>
+          <Select
+              value={loadoutClass}
+              onChange={handleClassSelect}
+              label="Class"
+            >
+              { classChoices }
           </Select>
         </FormControl>
         <TextField autoFocus={true} sx={styles.select} value={loadoutNameText}  margin="dense" label="Loadout Title" variant="outlined" onChange={handleTextChange} onKeyPress={handleSubmitTitle} />
