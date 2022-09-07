@@ -1,4 +1,7 @@
 const buildClasses = {
+    all: {
+        all: 'all',
+    },
     assault: {
         text: 'assault',
     },

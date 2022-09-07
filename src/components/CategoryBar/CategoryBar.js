@@ -52,28 +52,28 @@ const CategoryBar = ({
     );
   };
   const buttons = [];
-  let feedCategory = useLocation().pathname.split('/')[2];
+  let feedClass = useLocation().pathname.split('/')[2];
   if (useLocation().pathname === '/') {
-    feedCategory = Object.keys(buildClasses)[0];
+    feedClass = Object.keys(buildClasses)[0];
   }
 
-  Object.keys(buildClasses).forEach((category) => {
+  Object.keys(buildClasses).forEach((loadoutClass) => {
     buttons.push({
-      category: category,
-      color: (category === feedCategory) ? 'primary' : 'primary',
-      match: category === feedCategory,
+      loadoutClass: loadoutClass,
+      color: (loadoutClass === feedClass) ? 'primary' : 'primary',
+      match: loadoutClass === feedClass,
     });
   })
   return (
     <Box sx={styles.root}>
     <Box sx={styles.breadcrumbs}>
       {
-        buttons.map(({ category, color, match }) => {
+        buttons.map(({ loadoutClass, color, match }) => {
           if (match) {
-            return <Chip sizeSmall={true} sx={styles.chip} label={category} color={color} href={`/${category}`} onClick={() => { handleClick(category) }}/>
+            return <Chip sizeSmall={true} sx={styles.chip} label={loadoutClass} color={color} href={`/${loadoutClass}`} onClick={() => { handleClick(loadoutClass) }}/>
           } else {
-            return <Link sx={styles.links} color={color} href={`/l/${category}`} onClick={() => { handleClick(category) }}>
-              {category}
+            return <Link sx={styles.links} color={color} href={`/l/${loadoutClass}`} onClick={() => { handleClick(loadoutClass) }}>
+              {loadoutClass}
               </Link>
           }
         }

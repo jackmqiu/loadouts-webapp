@@ -5,6 +5,8 @@ import { makeStyles } from '@mui/styles';
 import LoadoutGrid from '../igLoadout';
 import axiosInstance from '../../API/axiosBase';
 import useAxiosFetch from '../../API/useAxiosFetch';
+import { useLocation } from 'react-router-dom';
+import { buildClasses } from '../../constants';
 
 const styles = {
   root: {
@@ -46,12 +48,15 @@ const Feed = ({
     limitedScreenWidth = screenWidth;
   }
   const [page, setPage] = useState(0);
-  const { loading, error, feedLoadouts, hasMore } = useAxiosFetch('airsoft', page);
+  let feedClass = useLocation().pathname.split('/')[2];
+  if (useLocation().pathname === '/') {
+    feedClass = null;
+  }
+  const { loading, error, feedLoadouts, hasMore } = useAxiosFetch('airsoft', feedClass, page); // for infinite scroll
 
-  const observer = useRef(); // (*)
+  const observer = useRef(); // INFINITE SCROLL
   const lastLoadoutElementRef = useCallback(  // (*)
     (node) => {
-      console.log('node', node)
       if (loading) return;
       if (observer.current) observer.current.disconnect();
       observer.current = new IntersectionObserver((entries) => {
