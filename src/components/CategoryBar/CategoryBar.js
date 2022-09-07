@@ -72,7 +72,7 @@ const CategoryBar = ({
           if (match) {
             return <Chip sizeSmall={true} sx={styles.chip} label={category} color={color} href={`/${category}`} onClick={() => { handleClick(category) }}/>
           } else {
-            return <Link sx={styles.links} color={color} href={`/feed/${category}`} onClick={() => { handleClick(category) }}>
+            return <Link sx={styles.links} color={color} href={`/l/${category}`} onClick={() => { handleClick(category) }}>
               {category}
               </Link>
           }

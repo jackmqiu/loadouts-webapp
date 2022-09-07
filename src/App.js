@@ -399,7 +399,7 @@ const App = (props) => {
             />
 
           </Route>
-          <Route path='/feed/:category'>
+          <Route path='/l/:category'>
             {/* <div> */}
               <CategoryBar 
                 mixpanel={mixpanel} 
