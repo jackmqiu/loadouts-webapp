@@ -23,6 +23,9 @@ const theme = createTheme({
     tertiary: {
       main: '#ECEFE9',
     },
+    highlight: {
+      main: '#FC25DA'
+    }
   },
 });
 

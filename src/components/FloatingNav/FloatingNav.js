@@ -1,6 +1,7 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import { makeStyles } from '@mui/styles';
 import Fab from '@mui/material/Fab';
+import Box from '@mui/material/Box';
 import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -12,30 +13,26 @@ import PublishIcon from '@mui/icons-material/Publish';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { Link, useLocation, useHistory } from 'react-router-dom';
 
-const useStyles = makeStyles((theme) => ({
+const styles = {
   rootNav: {
-    '& > *': {
-      margin: theme.spacing(1),
-    },
+    margin: 2,
     position: 'fixed',
     bottom: 5,
-    left: '50%',
-    marginLeft: -90,
+    left: '39%',
   },
   fab: {
     width: 200,
-
-  },
-  extendedIcon: {
-    marginRight: theme.spacing(1),
   },
   insideIconButton: {
     width: 10,
     height: 25,
     borderRadius: '50%',
-    padding: 5,
+    padding: 0.5,
+  },
+  button: {
+    padding: 1,
   }
-}));
+};
 
 export default function FloatingNav({
   mixpanel,
@@ -48,7 +45,6 @@ export default function FloatingNav({
   toggleNewLoadoutFormOpen,
   newLoadoutFormOpen,
 }) {
-  const classes = useStyles();
   const location = useLocation().pathname;
   const [floatingNavDisplay, setFloatingNavDisplay] = useState(true);
   const [scrollPosition, setScrollPosition] = useState(window.pageYOffset);
@@ -82,56 +78,28 @@ export default function FloatingNav({
     }
   });
   return (
-    <div className={classes.rootNav}>
-      {/*
-        <Slide direction="right" in={displayState === 'Make Loadout' && floatingNavDisplay} mountOnEnter unmountOnExit>
-        <Fab color="primary" aria-label="add" onClick={() => { setDisplayState('feed')}}>
-        <HomeIcon />
-        </Fab>
-        </Slide>
-
-        <Slide direction="up" in={floatingNavDisplay && location !== '/make' && !newLoadoutFormOpen} mountOnEnter unmountOnExit>
-          <Fab color="primary" aria-label="add" onClick={() => {toggleNewLoadoutFormOpen()}}>
-            <AddIcon />
-          </Fab>
-        </Slide>
-      */}
-
+    <Box sx={styles.rootNav}>
       <Slide direction="up" in={floatingNavDisplay} mountOnEnter unmountOnExit>
-        <Fab variant='extended' aria-label="add" disableRipple={true} className={classes.fab}>
-          <IconButton component="span" disableFocusRipple={true} className={classes.inside} onClick={() => {handleClick('/')}}>
-            <HomeIcon color={(location === '/') ? 'primary' : 'disabled'}/>
+        <Fab variant='extended' aria-label="add" disableRipple={true} sx={styles.fab}>
+          <IconButton component="span" disableFocusRipple={true} onClick={() => {handleClick('/')}}>
+            <HomeIcon color={(location === '/') ? 'primary' : 'secondary'}/>
           </IconButton>
           { (location !== '/make') ?
-            <IconButton className={classes.button} disableFocusRipple={true} onClick={() => { toggleNewLoadoutFormOpen(); track('add loadout'); handleClick('/make') }}>
-              <AddIcon color={(location === '/make') ? 'primary' : 'disabled'}/>
+            <IconButton disableFocusRipple={true} onClick={() => { toggleNewLoadoutFormOpen(); track('add loadout'); handleClick('/make') }}>
+              <AddIcon color={(location === '/make') ? 'primary' : 'secondary'}/>
             </IconButton> :
-            <IconButton className={classes.button} disableFocusRipple={true} onClick={() => {setIdFormOpen(true); toggleIgLoadoutForm(); track('publish loadout')}}>
-              <PublishIcon color={(location === '/make') ? 'secondary' : 'disabled'}/>
+            <IconButton disableFocusRipple={true} onClick={() => {setIdFormOpen(true); toggleIgLoadoutForm(); track('publish loadout')}}>
+              <PublishIcon color={(location === '/make') ? 'highlight' : 'secondary'}/>
             </IconButton>
           }
-          <IconButton className={classes.button} onClick={() => {handleClick('/discover')}}>
-            <ViewCarouselIcon color={(location === '/discover') ? 'primary' : 'disabled'}/>
+          <IconButton onClick={() => {handleClick('/discover')}}>
+            <ViewCarouselIcon color={(location === '/discover') ? 'primary' : 'secondary'}/>
           </IconButton>
-          <IconButton className={classes.button} onClick={() => {handleClick('/profile')}}>
-            <AccountCircleIcon color={(location === '/discover') ? 'primary' : 'disabled'}/>
+          <IconButton onClick={() => {handleClick('/profile')}}>
+            <AccountCircleIcon color={(location === '/profile') ? 'primary' : 'secondary'}/>
           </IconButton>
         </Fab>
       </Slide>
-
-      {/*
-        <Slide direction="up" in={displayPublish} mountOnEnter unmountOnExit>
-          <Fab variant="extended" onClick={() => {setIdFormOpen(true); toggleIgLoadoutForm();}}>
-            Publish
-          </Fab>
-        </Slide>
-
-        <Slide direction="up" in={floatingNavDisplay && displayDiscover} mountOnEnter unmountOnExit>
-          <Fab variant="extended" onClick={handleDiscoverClick}>
-            <ViewCarouselIcon />
-          </Fab>
-        </Slide>
-      */}
-    </div>
+    </Box>
   );
 }
