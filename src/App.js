@@ -33,6 +33,9 @@ import IgLoadout from './components/igLoadout';
 import FloatingNav from './components/FloatingNav';
 import Drawer from './components/Drawer';
 import axiosInstance from './API/axiosBase';
+import {
+  buildClasses,
+} from './constants';
 
 const useStyles = makeStyles(({ height }) => ({
   root: {
@@ -88,7 +91,6 @@ const App = (props) => {
   const [newLoadoutFormOpen, setNewLoadoutFormOpen] = useState(false);
   const [discoverUI, setDiscoverUI] = useState({});
   const [moreDrawer, toggleMoreDrawer] = useState(false);
-
 
   const classes = useStyles({ height });
   const scrollToTop = () => {
@@ -397,22 +399,45 @@ const App = (props) => {
             />
 
           </Route>
-          <Route path='/:id'>
-            <ItemList
-              mixpanel={mixpanel}
-              igLoadoutState={viewLoadoutState}
-              addIgLoadoutItem={addIgLoadoutItem}
-              toggleIgLoadoutForm={toggleIgLoadoutForm}
-              colorScheme={colorScheme}
-              toggleNewLoadoutFormOpen={toggleNewLoadoutFormOpen}
-              canEdit={false}
-              loadoutCategory={loadoutCategory}
-              screenWidth={width}
-            />
-          </Route>
-          <Route path='/'>
+          <Route path='/feed/:category'>
             {/* <div> */}
-              <CategoryBar mixpanel={mixpanel} loadoutCategory={loadoutCategory} />
+              <CategoryBar 
+                mixpanel={mixpanel} 
+                loadoutCategory={loadoutCategory} 
+              />
+              <Feed
+                feedLoadouts={feedLoadouts}
+                setIgLoadoutState={setIgLoadoutState}
+                colorScheme={colorScheme}
+                displayState={displayState}
+                screenWidth={width}
+                height={height}
+                scrollToTop={scrollToTop}
+                toggleMoreDrawer={toggleMoreDrawer}
+                addComment={addComment}
+                sendLike={sendLike}
+                loggedInUser={loggedInUser}
+              />
+            {/* </div> */}
+        </Route>
+        <Route path='/:id'>
+          <ItemList
+            mixpanel={mixpanel}
+            igLoadoutState={viewLoadoutState}
+            addIgLoadoutItem={addIgLoadoutItem}
+            toggleIgLoadoutForm={toggleIgLoadoutForm}
+            colorScheme={colorScheme}
+            toggleNewLoadoutFormOpen={toggleNewLoadoutFormOpen}
+            canEdit={false}
+            loadoutCategory={loadoutCategory}
+            screenWidth={width}
+          />
+        </Route>
+        <Route path='/'>
+            {/* <div> */}
+              <CategoryBar 
+                mixpanel={mixpanel} 
+              />
               <Feed
                 feedLoadouts={feedLoadouts}
                 setIgLoadoutState={setIgLoadoutState}

@@ -1,26 +1,28 @@
 import React from 'react';
 import Chip from '@mui/material/Chip';
-import { makeStyles } from '@mui/styles';
+import Box from '@mui/material/Box';
 import {
   hashtagTable,
+  buildClasses,
   nonCategories,
 } from '../../constants';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Link from '@mui/material/Link';
+import { useLocation } from 'react-router-dom';
 
-const useStyles = makeStyles(theme => ({
+const styles = {
   root: {
     overflow: 'hidden',
     height: 50,
   },
   breadcrumbs: {
-    marginLeft: 12,
-    marginRight: 30,
-    paddingTop: 11,
+    marginLeft: 1.5,
+    marginRight: 4,
+    paddingTop: 1,
     overflow: 'scroll',
     whiteSpace: 'nowrap',
     height: 50,
-    paddingBottom: 10,
+    paddingBottom: 1,
   },
   scrollable:{
     overflowX: 'auto',
@@ -29,12 +31,9 @@ const useStyles = makeStyles(theme => ({
     height: 24,
     width: 400,
   },
-}));
-
-const styles = {
   links: {
     marginLeft: 1,
-    marginRight: 2,
+    marginRight: 1,
     fontWeight: 500,
   },
   chip: {
@@ -45,7 +44,6 @@ const styles = {
 
 const CategoryBar = ({
   mixpanel,
-  loadoutCategory,
 }) => {
   const handleClick = (category) => {
     mixpanel.track(
@@ -54,32 +52,34 @@ const CategoryBar = ({
     );
   };
   const buttons = [];
-  Object.keys(hashtagTable).forEach((category) => {
-    if (!nonCategories[category]) {
-      buttons.push({
-        category: category,
-        color: (category === loadoutCategory) ? 'primary' : 'primary',
-        match: category === loadoutCategory,
-      });
-    }
+  let feedCategory = useLocation().pathname.split('/')[2];
+  if (useLocation().pathname === '/') {
+    feedCategory = Object.keys(buildClasses)[0];
+  }
+
+  Object.keys(buildClasses).forEach((category) => {
+    buttons.push({
+      category: category,
+      color: (category === feedCategory) ? 'primary' : 'primary',
+      match: category === feedCategory,
+    });
   })
-  const classes = useStyles();
   return (
-    <div className={classes.root}>
-    <div className={classes.breadcrumbs}>
+    <Box sx={styles.root}>
+    <Box sx={styles.breadcrumbs}>
       {
         buttons.map(({ category, color, match }) => {
           if (match) {
             return <Chip sizeSmall={true} sx={styles.chip} label={category} color={color} href={`/${category}`} onClick={() => { handleClick(category) }}/>
           } else {
-            return <Link sx={styles.links} color={color} href={`/${category}`} onClick={() => { handleClick(category) }}>
+            return <Link sx={styles.links} color={color} href={`/feed/${category}`} onClick={() => { handleClick(category) }}>
               {category}
               </Link>
           }
         }
       )}
-    </div>
-    </div>
+    </Box>
+    </Box>
   )
 }
 
