@@ -124,9 +124,9 @@ const LoadoutGrid = ({
     toggleCommenting(!commenting);
   }
   let numCards = Object.keys(igLoadoutState.items).length;
-  // if (igLoadoutState.itemKeyTable) {
-  //   numCards = Object.keys(igLoadoutState.itemKeyTable).length;
-  // }
+  if (igLoadoutState.itemKeyTable) {
+    numCards = Object.keys(igLoadoutState.itemKeyTable).length;
+  }
   let numDisplayCards = numCards;
   if (numCards > 6) { // keep it to 2 rows
     numDisplayCards = 6;
@@ -135,23 +135,23 @@ const LoadoutGrid = ({
     const loadoutGridSubItems = [];
     gridLayoutTable[numDisplayCards][subGridIndex].items.forEach((item, i) => {
       const gridHeight = screenWidth*item.gridItemHeight/12*.95;
-      // if (igLoadoutState.itemKeyTable) {
-      //   loadoutGridSubItems.push(
-      //     <Grid key={subGridIndex+i} sx={styles.gridItem} item xs={item.xs} style={{height: gridHeight}}>
-      //       <ItemCard
-      //         height={item.gridItemHeight}
-      //         itemDetails={igLoadoutState.items[igLoadoutState.itemKeyTable[subGridIndex+i]]}
-      //         openModal={handleOpen}
-      //         closeModal={handleClose}
-      //         color={colorScheme[i%2]}
-      //         toggleIgLoadoutForm={toggleIgLoadoutForm}
-      //         displayState={displayState}
-      //         screenWidth={screenWidth}
-      //         rows={IgLayoutTable[numDisplayCards].rows}
-      //       />
-      //     </Grid>
-      //   )
-      // } else {
+      if (igLoadoutState.itemKeyTable) {
+        loadoutGridSubItems.push(
+          <Grid key={subGridIndex+i} sx={styles.gridItem} item xs={item.xs} style={{height: gridHeight}}>
+            <ItemCard
+              height={item.gridItemHeight}
+              itemDetails={igLoadoutState.items[igLoadoutState.itemKeyTable[subGridIndex+i]]}
+              openModal={handleOpen}
+              closeModal={handleClose}
+              color={colorScheme[i%2]}
+              toggleIgLoadoutForm={toggleIgLoadoutForm}
+              displayState={displayState}
+              screenWidth={screenWidth}
+              rows={IgLayoutTable[numDisplayCards].rows}
+            />
+          </Grid>
+        )
+      } else {
         loadoutGridSubItems.push(
           <Grid key={subGridIndex+i} sx={styles.gridItem} item xs={item.xs} style={{height: gridHeight}}>
             <ItemCard
@@ -167,7 +167,7 @@ const LoadoutGrid = ({
             />
           </Grid>
         )
-      // }
+      }
     });
     return loadoutGridSubItems;
   }
@@ -195,24 +195,24 @@ const LoadoutGrid = ({
       i += (gridLayoutTable[numDisplayCards][i].items.length - 1);
     } else {
       const gridHeight = screenWidth*gridLayoutTable[numDisplayCards][i].gridItemHeight/12*.95;
-      // if (igLoadoutState.itemKeyTable) {
-      //   loadoutGridItems.push(
-      //     <Grid key={i} item xs={gridLayoutTable[numDisplayCards][i].xs} sx={styles.gridItem} style={{height: gridHeight}}>
-      //       <ItemCard
-      //         id={i}
-      //         height={gridLayoutTable[numDisplayCards][i].gridItemHeight}
-      //         itemDetails={igLoadoutState.items[igLoadoutState.itemKeyTable[i]]}
-      //         openModal={handleOpen}
-      //         closeModal={handleClose}
-      //         color={colorScheme[i%2]}
-      //         toggleIgLoadoutForm={toggleIgLoadoutForm}
-      //         displayState={displayState}
-      //         screenWidth={screenWidth}
-      //         rows={IgLayoutTable[numDisplayCards].rows}
-      //       />
-      //     </Grid>
-      //   )
-      // } else {
+      if (igLoadoutState.itemKeyTable) {
+        loadoutGridItems.push(
+          <Grid key={i} item xs={gridLayoutTable[numDisplayCards][i].xs} sx={styles.gridItem} style={{height: gridHeight}}>
+            <ItemCard
+              id={i}
+              height={gridLayoutTable[numDisplayCards][i].gridItemHeight}
+              itemDetails={igLoadoutState.items[igLoadoutState.itemKeyTable[i]]}
+              openModal={handleOpen}
+              closeModal={handleClose}
+              color={colorScheme[i%2]}
+              toggleIgLoadoutForm={toggleIgLoadoutForm}
+              displayState={displayState}
+              screenWidth={screenWidth}
+              rows={IgLayoutTable[numDisplayCards].rows}
+            />
+          </Grid>
+        )
+      } else {
         loadoutGridItems.push(
           <Grid key={i} item xs={gridLayoutTable[numDisplayCards][i].xs} sx={styles.gridItem} style={{height: gridHeight}}>
             <ItemCard
@@ -229,7 +229,7 @@ const LoadoutGrid = ({
             />
           </Grid>
         )
-      // }
+      }
     }
   };
   const comments = [];

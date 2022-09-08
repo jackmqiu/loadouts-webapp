@@ -209,6 +209,8 @@ const App = (props) => {
   }
   const deleteIgLoadoutItem = () => {
     const newLoadout = {};
+    const newItemKeyTable = {};
+    console.log('keytable before delete', igLoadoutState.itemKeyTable)
     for (let i = 0; i < Object.keys(igLoadoutState.items).length; i++) {
       if (i < activeIgLoadoutCard){
         newLoadout[i] = igLoadoutState.items[i];
@@ -216,9 +218,17 @@ const App = (props) => {
         newLoadout[i-1] = igLoadoutState.items[i];
       }
     }
-    setIgLoadoutState({
+    for (let i = 0; i < Object.keys(igLoadoutState.itemKeyTable).length; i++) {
+      if (igLoadoutState.itemKeyTable[i] < activeIgLoadoutCard) {
+        newItemKeyTable[i] = igLoadoutState.itemKeyTable[i];
+      } else if (igLoadoutState.itemKeyTable[i] > activeIgLoadoutCard){
+        newItemKeyTable[i-1] = igLoadoutState.itemKeyTable[i] - 1;
+      }
+    }
+    setIgLoadoutState                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ({
       ...igLoadoutState,
       items: newLoadout,
+      itemKeyTable: newItemKeyTable,
     });
   }
   const queryGoogle = (text) => {
