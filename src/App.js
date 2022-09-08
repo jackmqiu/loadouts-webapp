@@ -210,7 +210,6 @@ const App = (props) => {
   const deleteIgLoadoutItem = () => {
     const newLoadout = {};
     const newItemKeyTable = {};
-    console.log('keytable before delete', igLoadoutState.itemKeyTable)
     for (let i = 0; i < Object.keys(igLoadoutState.items).length; i++) {
       if (i < activeIgLoadoutCard){
         newLoadout[i] = igLoadoutState.items[i];
