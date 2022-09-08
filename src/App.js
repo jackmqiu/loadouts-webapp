@@ -319,6 +319,7 @@ const App = (props) => {
         axiosInstance.post(`/make`, {
           ...igLoadoutState,
           username: loggedInUser?.username,
+          email: loggedInUser?.email,
           _id: id,
         })
         .then(response => {
