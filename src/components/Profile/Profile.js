@@ -43,6 +43,7 @@ const Profile = ({
     .then((res) => {
       if (res.data.success) {
         setLoggedInUser({});
+        localStorage.clear();
       }
     }) 
   }

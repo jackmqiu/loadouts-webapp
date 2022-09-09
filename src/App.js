@@ -292,7 +292,14 @@ const App = (props) => {
   const [email, setEmail] = useState('');
   const [userData, setUserData] = useState(null); // DB data
   const [loggedInUser, setLoggedInUser] = useState({});
-
+  useEffect(() => {
+    if (localStorage.getItem('username') && localStorage.getItem('email')) {
+      setLoggedInUser({
+        username: localStorage.getItem('username'),
+        email: localStorage.getItem('email')
+      })
+    }
+  }, []);
   const getUser = () => {
     axiosInstance.get(`/users/${email}`)
     .then(response => {

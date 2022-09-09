@@ -62,6 +62,8 @@ const Login = ({
       .then((res) => {
         if (res.data.success) {
           setLoggedInUser(res.data.success);
+          localStorage.setItem('email', res.data.success.email)
+          localStorage.setItem('username', res.data.success.username)
         }
       })
     }
