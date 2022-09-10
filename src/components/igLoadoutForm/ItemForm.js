@@ -7,22 +7,46 @@ import {
   ImageListItem,
   ImageListItemBar,
   Typography,
+  Box,
 } from '@mui/material';
 import { useState } from 'react';
-import { makeStyles } from '@mui/styles';
 import IdLoadoutForm from './IdLoadoutForm';
 import IconButton from "@mui/material/IconButton";
 import InputAdornment from "@mui/material/InputAdornment";
 import SearchIcon from "@mui/icons-material/Search";
 
-const useStyles = makeStyles((theme) => ({
+const styles = {
+  modal: {
+    marginRight: 'auto',
+    marginLeft: 'auto',
+    maxWidth: 600,
+    minWidth: 120,
+    padding: 0.5,
+    marginBottom: '10%',
+    marginTop: 3,
+  },
+  formTitle: {
+    marginLeft: '10%',
+    paddingTop: 1,
+    paddingBottom: 1,
+  },
+  searchButton: {
+    padding: 0,
+  },
+  textField: {
+    width: '80%',
+    marginLeft: '10%',
+    marginRight: '10%',
+    padding: 0,
+  },
+  nextButton: {
+    marginBottom: 1,
+    marginRight: 1,
+  },
   paper: {
     position: 'absolute',
     width: 400,
-    backgroundColor: theme.palette.background.paper,
     border: '2px solid #000',
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
   },
   grid: {
     margin: 1,
@@ -41,49 +65,19 @@ const useStyles = makeStyles((theme) => ({
     marginRight: '10%',
   },
   fieldsContainer: {
-    paddingTop: 30,
-    paddingBottom: 30,
+    paddingTop: 4,
+    paddingBottom: 4,
   },
   buttonContainer: {
     width: '80%',
     marginLeft: '10%',
     marginRight: '10%',
-    marginBottom: 30,
+    marginBottom: 0.5,
   },
-  resultsWindow: ({ height }) => ({
+  resultsWindow: {
     overflow: 'scroll',
-    marginBottom: 10,
-    height: height*.61,
-    marginLeft: 2,
-  }),
-}));
-
-const styles = {
-  modal: {
-    marginRight: 'auto',
-    marginLeft: 'auto',
-    maxWidth: 600,
-    minWidth: 120,
-    padding: 4,
-    marginBottom: '10%',
-  },
-  formTitle: {
-    marginLeft: '10%',
-    paddingTop: 5,
-    paddingBottom: 5,
-  },
-  searchButton: {
-    padding: 0,
-  },
-  textField: {
-    width: '80%',
-    marginLeft: '10%',
-    marginRight: '10%',
-    padding: 0,
-  },
-  nextButton: {
-    marginBottom: 5,
-    marginRight: 5,
+    marginBottom: 1,
+    marginLeft: 0.5,
   },
 }
 
@@ -102,10 +96,7 @@ const ItemForm = ({
   editIgLoadout,
   deleteIgLoadoutItem,
   closeIgLoadoutForm,
-  height,
-  width,
 }) => {
-  const classes = useStyles({ height });
   const [searchText, setSearchText] = useState('');
   const [productNameText, setProductNameText] = useState(igLoadoutState.items[activeIgLoadoutCard] && igLoadoutState.items[activeIgLoadoutCard].productName);
   const [imageLink, setImageLink] = useState(igLoadoutState.items[activeIgLoadoutCard] && igLoadoutState.items[activeIgLoadoutCard].imageLink);
@@ -224,11 +215,11 @@ const ItemForm = ({
             mixpanel={mixpanel}
             submitLoadout={submitLoadout}
           /> :
-          <div>
-            <div className={classes.fieldsContainer}>
+          <Box>
+            <Box sx={styles.fieldsContainer}>
               <Typography variant='h5' sx={styles.formTitle}>Find Item</Typography>
               <TextField
-                className={classes.textField}
+                sx={styles.textField}
                 margin="dense"
                 label="Search"
                 variant="outlined"
@@ -247,41 +238,48 @@ const ItemForm = ({
                 }}
               />
               { googleResults &&
-                <div className={classes.resultsWindow}>
-                  <ImageList className={classes.grid}>
+                <Box sx={{
+                  ...styles.resultsWindow,
+                  height: window.innerHeight*.61,
+                }}>
+                  <ImageList sx={styles.grid}>
                     {
                       googleResults.map((item, i) =>
-                      <ImageListItem key={i} id={i} onClick={() => {handleSelect(item, i)}}>
-                        { item.pagemap && item.pagemap.cse_thumbnail &&
-                          <img alt='' src={item.pagemap.cse_thumbnail[0].src}/>
-                        }
-                        <ImageListItemBar
-                          title={item.title}
-                          titlePosition="top"
-                          sx={styles.titleBar}
-                          />
-                      </ImageListItem>
-                    )
-                  }
+                        <ImageListItem key={i} id={i} onClick={() => {handleSelect(item, i)}}>
+                          {
+                            <img alt='' src={
+                              item?.pagemap?.cse_thumbnail?.[0]?.src || 
+                              item?.pagemap?.thumbnail?.[0]?.src ||
+                              item?.pagemap?.cse_image?.[0]?.src ||
+                              "https://i.imgur.com/9hwwjP6.jpg"
+                            }/>
+                          }
+                          <ImageListItemBar
+                            title={item.title}
+                            titlePosition="top"
+                            />
+                        </ImageListItem>
+                      )
+                    }
                 </ImageList>
-                </div>
+                </Box>
               }
               { !googleResults && igLoadoutState.items[activeIgLoadoutCard] &&
-                <div>
+                <Box>
                   <Typography variant='h5' sx={styles.formTitle}>Customize</Typography>
                   <TextField margin="dense" error={hasSubmitted && !productNameText} helperText={hasSubmitted && !productNameText && 'Add Item Name'} defaultValue={igLoadoutState.items[activeIgLoadoutCard] && igLoadoutState.items[activeIgLoadoutCard].productName} sx={styles.textField} label="Product" variant="outlined" onChange={handleProductNameTextChange} onKeyPress={handleTextFieldSubmit}/>
                   <TextField margin="dense" error={hasSubmitted && !imageLink} helperText={hasSubmitted && !imageLink && 'Add Image Link'} defaultValue={igLoadoutState.items[activeIgLoadoutCard] && igLoadoutState.items[activeIgLoadoutCard].imageLink} sx={styles.textField} label="Image URL" variant="outlined" onChange={handleImageLinkTextChange} onKeyPress={handleTextFieldSubmit}/>
                   <TextField margin="dense" error={hasSubmitted && !productLink} helperText={hasSubmitted && !productLink && 'Add Item Link'} defaultValue={igLoadoutState.items[activeIgLoadoutCard] && igLoadoutState.items[activeIgLoadoutCard].productLink} sx={styles.textField} label="Product URL" variant="outlined" onChange={handleProductLinkTextChange} onKeyPress={handleTextFieldSubmit}/>
-                </div>
+                </Box>
               }
-            </div>
+            </Box>
             { !googleResults && igLoadoutState.items[activeIgLoadoutCard] &&
-              <div className={classes.buttonContainer}>
+              <Box sx={styles.buttonContainer}>
                 <Button sx={styles.nextButton} variant='contained' color='primary' onClick={() => {handleSubmitLoadout()}}>Submit</Button>
                 <Button sx={styles.nextButton} variant='contained' color='secondary' onClick={() => {handleDeleteCard()}}>Delete</Button>
-              </div>
+              </Box>
             }
-          </div>
+          </Box>
         }
         </Paper>
       </Modal>

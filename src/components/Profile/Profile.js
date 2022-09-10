@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
+import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import axiosInstance from '../../API/axiosBase';
@@ -34,7 +35,7 @@ const styles = {
     marginTop: 50,
   },
   Loadouts: {
-    display: 'block',
+    margin: 2,
   }
 }
 
@@ -58,7 +59,9 @@ const Profile = ({
       <Link
         href={`/${loadout._id}`}
       >
-        {loadout.title}
+        <Paper sx={styles.Loadouts}>
+          {loadout.title}
+        </Paper>
       </Link>
     )
   })
