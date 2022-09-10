@@ -108,7 +108,11 @@ const MetadataForm = ({
       directToMakeLoadout();
       event.preventDefault();
     }
-    if ((event.charCode < 97 || event.charCode > 122) && event.charCode !== 32) {
+    if (
+      (event.charCode < 97 || event.charCode > 122) && 
+      event.charCode !== 32 &&
+      (event.charCode < 48 || event.charCode > 57)
+    ) {
       event.preventDefault();
     }
   }
