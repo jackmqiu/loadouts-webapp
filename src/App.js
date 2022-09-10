@@ -4,7 +4,6 @@ import React, { useState, createRef, useEffect } from "react";
 import ReactGA from 'react-ga';
 import { useLocation } from "react-router-dom";
 import axios from 'axios';
-import { useAuth0 } from "@auth0/auth0-react";
 import { makeStyles } from '@mui/styles';
 
 import useWindowDimensions from './useWindowDimensions';
