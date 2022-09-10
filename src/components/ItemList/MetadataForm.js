@@ -108,6 +108,9 @@ const MetadataForm = ({
       directToMakeLoadout();
       event.preventDefault();
     }
+    if ((event.charCode < 97 || event.charCode > 122) && event.charCode !== 32) {
+      event.preventDefault();
+    }
   }
   const chips = [];
   const loadoutHashtagsObject = loadoutHashtags[loadoutCategory]

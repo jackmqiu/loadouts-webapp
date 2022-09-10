@@ -214,6 +214,7 @@ const ItemForm = ({
           <IdLoadoutForm
             mixpanel={mixpanel}
             submitLoadout={submitLoadout}
+            title={igLoadoutState.title}
           /> :
           <Box>
             <Box sx={styles.fieldsContainer}>

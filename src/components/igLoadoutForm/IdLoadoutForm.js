@@ -72,11 +72,14 @@ const styles = {
 
 const IdLoadoutForm = ({
   mixpanel,
-  submitLoadout
+  submitLoadout,
+  title,
 }) => {
-  const [itemText, setItemText] = useState('');
+  const [itemText, setItemText] = useState(title.replace(' ', '').concat(Math.floor(Math.random()*8999 + 1000)));
   const handleTextChange = (event) => {
-    setItemText(event.target.value.toLowerCase());
+    if (event.keyCode >= 65 && event.keyCode <= 90) {
+      setItemText(event.target.value.toLowerCase());
+    }
   };
   const handleItemSubmit = (event) => {
     if (event.key === 'Enter') {
@@ -94,8 +97,8 @@ const IdLoadoutForm = ({
   return (
     <div>
       <Box sx={styles.fieldsContainer}>
-        <Typography variant='h5' sx={styles.formTitle}> Enter Loadout Id</Typography>
-        <TextField sx={styles.textField} value={itemText} label="Product" variant="outlined" onChange={handleTextChange} onKeyPress={handleItemSubmit}/>
+        <Typography variant='h5' sx={styles.formTitle}> Your LoadoutID</Typography>
+        <TextField disabled sx={styles.textField} value={itemText} variant="outlined" onChange={handleTextChange} onKeyPress={handleItemSubmit}/>
         <Typography sx={styles.guideText} variant='subtitle2'>{`Your loadout will be available at loadouts.me/${itemText}`}</Typography>
       </Box>
       <Box sx={styles.buttonContainer}>
