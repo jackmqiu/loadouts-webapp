@@ -362,23 +362,10 @@ const App = (props) => {
             />
           </Route>
           <Route path='/discover'>
-            <div>
-              <DiscoverPage
-                discoverUI={discoverUI}
-                mixpanel={mixpanel}
-              />
-              <Form
-                mixpanel={mixpanel}
-                igLoadoutState={igLoadoutState}
-                toggleNewLoadoutFormOpen={toggleNewLoadoutFormOpen}
-                newLoadoutFormOpen={newLoadoutFormOpen}
-                loadoutHashtags={loadoutHashtags}
-                setLoadoutHashtags={setLoadoutHashtags}
-                updateLoadoutMetadata={updateLoadoutMetadata}
-                loadoutCategory={loadoutCategory}
-                setLoadoutCategory={setLoadoutCategory}
-              />
-            </div>
+            <DiscoverPage
+              discoverUI={discoverUI}
+              mixpanel={mixpanel}
+            />
           </Route>
           <Route path='/make'>
             <ItemList
