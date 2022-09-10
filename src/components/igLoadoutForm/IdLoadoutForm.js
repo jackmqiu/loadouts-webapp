@@ -1,17 +1,15 @@
 import { useState } from 'react';
 import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { makeStyles } from '@mui/styles';
 import Button from '@mui/material/Button';
 
-const useStyles = makeStyles((theme) => ({
+const styles = {
   paper: {
     position: 'absolute',
     width: 400,
-    backgroundColor: theme.palette.background.paper,
     border: '2px solid #000',
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
   },
   grid: {
     margin: 1,
@@ -23,13 +21,13 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: 'auto',
     maxWidth: 600,
     minWidth: 120,
-    padding: 20,
+    padding: 3,
     marginBottom: '10%',
   },
   formTitle: {
     marginLeft: '10%',
-    paddingTop: 30,
-    paddingBottom: 10,
+    paddingTop: 4,
+    paddingBottom: 1,
   },
   select: {
     margin: '0px 5px 0px 5px',
@@ -49,34 +47,33 @@ const useStyles = makeStyles((theme) => ({
     marginRight: '10%',
   },
   fieldsContainer: {
-    paddingTop: 30,
-    paddingBottom: 30,
+    paddingTop: 4,
+    paddingBottom: 4,
   },
   guideText: {
     marginLeft: '10%',
     marginRight: '10%',
-    marginTop: 5,
+    marginTop: 0.5,
   },
   buttonContainer: {
     width: '80%',
     marginLeft: '10%',
     marginRight: '10%',
-    marginBottom: 30,
+    marginBottom: 4,
   },
   nextButton: {
-    marginBottom: 30,
-    marginRight: 10,
+    marginBottom: 4,
+    marginRight: 1,
   },
   searchButton: {
     padding: 0,
   },
-}));
+};
 
 const IdLoadoutForm = ({
   mixpanel,
   submitLoadout
 }) => {
-  const classes = useStyles();
   const [itemText, setItemText] = useState('');
   const handleTextChange = (event) => {
     setItemText(event.target.value.toLowerCase());
@@ -96,14 +93,14 @@ const IdLoadoutForm = ({
   }
   return (
     <div>
-      <div className={classes.fieldsContainer}>
-        <Typography variant='h5' className={classes.formTitle}> Enter Loadout Id</Typography>
-        <TextField className={classes.textField} value={itemText} label="Product" variant="outlined" onChange={handleTextChange} onKeyPress={handleItemSubmit}/>
-        <Typography className={classes.guideText} variant='subtitle2'>{`Your loadout will be available at loadouts.me/${itemText}`}</Typography>
-      </div>
-      <div className={classes.buttonContainer}>
-        <Button variant='contained' color='primary' className={classes.nextButton} onClick={handleClick}> Submit </Button>
-      </div>
+      <Box sx={styles.fieldsContainer}>
+        <Typography variant='h5' sx={styles.formTitle}> Enter Loadout Id</Typography>
+        <TextField sx={styles.textField} value={itemText} label="Product" variant="outlined" onChange={handleTextChange} onKeyPress={handleItemSubmit}/>
+        <Typography sx={styles.guideText} variant='subtitle2'>{`Your loadout will be available at loadouts.me/${itemText}`}</Typography>
+      </Box>
+      <Box sx={styles.buttonContainer}>
+        <Button variant='contained' color='primary' sx={styles.nextButton} onClick={handleClick}> Submit </Button>
+      </Box>
     </div>
   )
 }
