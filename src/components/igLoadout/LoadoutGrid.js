@@ -301,7 +301,7 @@ const LoadoutGrid = ({
           }
           {
             !commenting && commentText && <Box sx={styles.commentRow}>
-              <Typography color='primary' sx={styles.commentUser} variant='subtitle2'>{'anonymous'}</Typography>
+              <Typography color='primary' sx={styles.commentUser} variant='subtitle2'>{loggedInUser?.username}</Typography>
               <Typography color='primary' variant='body2'>{commentText}</Typography>
             </Box>
           }

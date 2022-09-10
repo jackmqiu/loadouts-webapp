@@ -72,7 +72,7 @@ const Feed = ({
     // with the `grid` that we created in the constructor
   const loadouts = [];
   for (let i = 0; i < feedLoadouts.length; i++) {
-    if (i === feedLoadouts.length - 1) {
+    if (i === feedLoadouts.length - 1) { // adds ref for infinite scroll
       loadouts.push(
         <Box key={i} ref={lastLoadoutElementRef}>
           <LoadoutGrid
@@ -104,6 +104,7 @@ const Feed = ({
             addComment={addComment}
             sendLike={sendLike}
             mixpanel={mixpanel}
+            loggedInUser={loggedInUser}
           />
         </Box>
     )

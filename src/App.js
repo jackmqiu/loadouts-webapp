@@ -192,21 +192,7 @@ const App = (props) => {
       }
     });
   }
-  const addComment = (comment, id) => {
-    axiosInstance.put(`/comments/${id}`, {
-      name: 'anonymous',
-      comment: comment,
-      avatar: null,
-    })
-    .then(response => {
-    })
-  }
-  const sendLike = (id) => {
-    axiosInstance.post(`/likes/${id}`)
-    .then(response => {
 
-    })
-  }
   const deleteIgLoadoutItem = () => {
     const newLoadout = {};
     const newItemKeyTable = {};
@@ -346,6 +332,23 @@ const App = (props) => {
       }
     })
   }
+
+  const addComment = (comment, id) => {
+    axiosInstance.put(`/comments/${id}`, {
+      name: loggedInUser.username || 'anonymous',
+      comment: comment,
+      avatar: null,
+    })
+    .then(response => {
+    })
+  }
+  const sendLike = (id) => {
+    axiosInstance.post(`/likes/${id}`)
+    .then(response => {
+
+    })
+  }
+
   return (
     <div className="App">
       <div className={classes.root}>
