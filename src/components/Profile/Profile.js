@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
+import Link from '@mui/material/Link';
+import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import axiosInstance from '../../API/axiosBase';
 
@@ -30,6 +32,9 @@ const styles = {
   Login: {
     width: '100%',
     marginTop: 50,
+  },
+  Loadouts: {
+    display: 'block',
   }
 }
 
@@ -47,11 +52,42 @@ const Profile = ({
       }
     }) 
   }
+  const userLoadouts = [];
+  loggedInUser?.loadouts?.forEach((loadout) => {
+    userLoadouts.push(
+      <Link
+        href={`/${loadout._id}`}
+      >
+        {loadout.title}
+      </Link>
+    )
+  })
+
+  useEffect(() => {
+    axiosInstance.get('/users/find', {
+      params: {
+        email: loggedInUser.email,
+      }
+    })
+    .then((res) => {
+      if (res.data) {
+        setLoggedInUser(res.data);
+      }
+    })
+  }, [])
   return (
     <div>
       Profile
       <Box>{loggedInUser.username}</Box>
       <Box>{loggedInUser.email}</Box>
+      <Box>
+        <Typography> Loadouts </Typography>
+        <Stack>
+        {
+          userLoadouts
+        }
+        </Stack>
+      </Box>
       <Button onClick={() => {handleLogout()}} sx={styles.Login} variant='contained' color='primary'> Log Out </Button>
     </div>
   )
